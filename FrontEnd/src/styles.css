@@ -25,27 +25,32 @@ body{
 }
 
 h1 {
+  color: var(--gray);
+  font-weight: 700;
   font-size: 3rem !important;
 }
 
 h2{
+  color: var(--gray);
+  font-weight: 600;
   font-size: 2rem !important;
 }
 
 h3{
+  color: var(--gray);
+  font-weight: 400;
   font-size: 1.5rem !important;
 }
 
 p{
+  font-weight: 400;
   font-size: 1rem !important;
 }
 
 @media (min-width: 576px) { 
-  
   html{
     font-size: 50%;
   }
-
  }
 
 @media (min-width: 768px) { 
