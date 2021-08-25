@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
   --gray: #2f2f2f;
-  --backround-color: #fefee3;
+  --white-yellow: #fefee3;
   --primary-green: #2c6e49;
   --secondary-green: #4c956c;
   --secondary-orange: #d68c45;
@@ -36,7 +36,7 @@ h3{
 }
 
 p{
-  font-size: 1.3rem !important;
+  font-size: 1.5rem !important;
 }
 
 button {
@@ -50,7 +50,7 @@ button.btn-outline-primary{
 }
 
 button.btn-outline-primary:hover, button.btn-outline-primary:active{
-  color: var(--backround-color) !important;
+  color: var(--white-yellow) !important;
   background-color: var(--primary-green)!important;
 }
 
@@ -68,12 +68,12 @@ button.btn-outline-danger{
 }
 
 button.btn-outline-danger:hover, button.btn-outline-danger:active{
-  color: var(--backround-color) !important;
+  color: var(--white-yellow) !important;
   background-color: var(--secondary-orange)!important;
 }
 
 button.btn-primary{
-  color: var(--backround-color) !important;
+  color: var(--white-yellow) !important;
   border: 2px solid var(--primary-green) !important;
   background-color: var(--primary-green)!important;
 }
