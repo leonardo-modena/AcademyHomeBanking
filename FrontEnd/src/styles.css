@@ -1,7 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  --gray: #2f2f2f;
+  --backround-color: #fefee3;
+  --primary-green: #2c6e49;
+  --secondary-green: #4c956c;
+  --secondary-orange: #d68c45;
+}
+
+html{
+  font-size: 16px;
+}
 
 html, body{
   height: 100%;
+  
 }
 
 body{
@@ -11,3 +23,45 @@ body{
 * {
   font-family: 'Urbanist', sans-serif;
 }
+
+h1 {
+  font-size: 3rem !important;
+}
+
+h2{
+  font-size: 2rem !important;
+}
+
+h3{
+  font-size: 1.5rem !important;
+}
+
+p{
+  font-size: 1rem !important;
+}
+
+@media (min-width: 576px) { 
+  
+  html{
+    font-size: 50%;
+  }
+
+ }
+
+@media (min-width: 768px) { 
+  html{
+    font-size: 60%;
+  }
+ }
+
+@media (min-width: 992px) { 
+  html{
+    font-size: 80%;
+  }
+ }
+
+@media (min-width: 1200px) { 
+  html{
+    font-size: 100%;
+  }
+ }
