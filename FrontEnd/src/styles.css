@@ -8,12 +8,11 @@
 }
 
 html{
-  font-size: 16px;
+  font-size: 12px;
 }
 
 html, body{
   height: 100%;
-  
 }
 
 body{
@@ -25,43 +24,99 @@ body{
 }
 
 h1 {
-  font-size: 3rem !important;
+  font-size: 3.3rem !important;
 }
 
 h2{
-  font-size: 2rem !important;
+  font-size: 2.3rem !important;
 }
 
 h3{
-  font-size: 1.5rem !important;
+  font-size: 1.8rem !important;
 }
 
 p{
-  font-size: 1rem !important;
+  font-size: 1.3rem !important;
 }
 
-@media (min-width: 576px) { 
-  
-  html{
-    font-size: 50%;
-  }
+button {
+  font-size: 1.5rem!important;
+  padding: 0.5rem 1.5rem!important;
+}
 
+button.btn-outline-primary{
+  color: var(--primary-green) !important;
+  border: 2px solid var(--primary-green) !important;
+}
+
+button.btn-outline-primary:hover, button.btn-outline-primary:active{
+  color: var(--backround-color) !important;
+  background-color: var(--primary-green)!important;
+}
+
+
+button.btn-outline-primary[disabled],  button.btn-outline-danger[disabled]{
+  color: #c2c2c2;
+  border: 1px solid #888888;
+  cursor: not-allowed;
+  width: 90%;
+}
+
+button.btn-outline-danger{
+  color: var(--secondary-orange) !important;
+  border: 2px solid var(--secondary-orange) !important;
+}
+
+button.btn-outline-danger:hover, button.btn-outline-danger:active{
+  color: var(--backround-color) !important;
+  background-color: var(--secondary-orange)!important;
+}
+
+button.btn-primary{
+  color: var(--backround-color) !important;
+  border: 2px solid var(--primary-green) !important;
+  background-color: var(--primary-green)!important;
+}
+
+button.btn-primary:hover{
+  color: var(--primary-green) !important;
+  background-color: transparent!important
+}
+
+button:focus, textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+  box-shadow: none!important;
+}
+
+@media (min-width: 576px) {
+
+  html{
+    font-size: 85%;
+  }
  }
 
-@media (min-width: 768px) { 
-  html{
-    font-size: 60%;
-  }
- }
-
-@media (min-width: 992px) { 
+@media (min-width: 768px) {
   html{
     font-size: 80%;
   }
  }
 
-@media (min-width: 1200px) { 
+@media (min-width: 992px) {
   html{
-    font-size: 100%;
+    font-size: 70%;
   }
+ }
+
+@media (min-width: 1200px) {
+
  }
