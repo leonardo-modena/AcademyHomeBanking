@@ -8,19 +8,15 @@ import {animate, style, transition, trigger} from "@angular/animations";
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
   animations: [
-    trigger(
-      'inOutAnimation',
-      [
-        transition(
-          ':enter',
-          [
-            style({ height: 0, opacity: 0 }),
-            animate('0.4s',
-              style({ height: 65, opacity: 1 }))
-          ]
-        ),
-      ]
-    )
+    trigger('fade', [
+      transition('void => *', [
+        style({opacity: 0}),
+        animate(500, style({opacity: 1}))
+      ]),
+      transition('* => void', [
+        animate(1500, style({opacity: 0}))
+      ])
+    ])
   ]
 })
 export class RegistrationComponent implements OnInit {
