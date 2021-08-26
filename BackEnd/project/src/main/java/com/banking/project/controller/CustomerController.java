@@ -1,6 +1,5 @@
 package com.banking.project.controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -23,70 +22,57 @@ import com.banking.project.exception.UserNotFoundException;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/home")
 public class CustomerController {
-	
+
 	@Autowired
-	private CustomerRepository customerRepository; 
-	
+	private CustomerRepository customerRepository;
+
 	/**
 	 * Metodo che ritorna la lista di dipendenti e clienti
 	 */
 	@GetMapping("/users")
-	public List<Customer> findAll(){
+	public List<Customer> findAll() {
 		return customerRepository.findAll();
 	}
-	
+
+	/**
+	 * Metodo che fornisce un utente indicando l'id
+	 */
 	@GetMapping("/users/{customerId}")
 	public Optional<Customer> getCustomer(@PathVariable int customerId) {
-		
+
 		Optional<Customer> theCustomer = customerRepository.findById(customerId);
 		if (theCustomer == null) {
 			throw new UserNotFoundException("Cliente non trovato - " + customerId);
 		}
-		
+
 		return theCustomer;
 	}
-	
-//	 add mapping for POST /employees - add new employee
-//	
+
+	/**
+	 * Registrazione di un nuovo utente
+	 */
 	@PostMapping("/users/signup")
 	public Customer addCustomer(@RequestBody Customer theCustomer) {
-		
-		// also just in case they pass an id in JSON ... set id to 0
-		// this is to force a save of new item ... instead of update
-		
+
 		theCustomer.setId(0);
-		
+
 		customerRepository.save(theCustomer);
-		
+
 		return theCustomer;
 	}
-	
-//	// add mapping for PUT /employees - update existing employee
-//	
-//	@PutMapping("/employees")
-//	public Employee updateEmployee(@RequestBody Employee theEmployee) {
-//		
-//		employeeService.save(theEmployee);
-//		
-//		return theEmployee;
-//	}
-//	
-//	// add mapping for DELETE /employees/{employeeId} - delete employee
-//	
-//	@DeleteMapping("/employees/{employeeId}")
-//	public String deleteEmployee(@PathVariable int employeeId) {
-//		
-//		Employee tempEmployee = employeeService.findById(employeeId);
-//		
-//		// throw exception if null
-//		
-//		if (tempEmployee == null) {
-//			throw new RuntimeException("Employee id not found - " + employeeId);
-//		}
-//		
-//		employeeService.deleteById(employeeId);
-//		
-//		return "Deleted employee id - " + employeeId;
-//	}
-//	
+
+	/**
+	 * Cancella un utente dato un id
+	 */
+	@DeleteMapping("/deletions/{customerId}")
+	public String deleteEmployee(@PathVariable int customerId) {
+		Optional<Customer> theCustomer = customerRepository.findById(customerId);
+		if (theCustomer == null) {
+			throw new UserNotFoundException("Cliente non trovato - " + customerId);
+		}
+		customerRepository.deleteById(customerId);
+
+		return "Cliente con id: " + customerId + " rimosso";
+	}
+
 }
