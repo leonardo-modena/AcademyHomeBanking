@@ -16,7 +16,7 @@
       <input type="text"
              [ngClass]="numberNameError == false ? 'form-control' : 'form-control is-invalid'"
              id="username" name="username" required ngModel minlength="4" pattern="^\s*\S+\s*$">
-      <p [@fade] *ngIf="numberNameError == true" style="font-weight: bold" class="text-danger"> Inserisci un nome valido! </p>
+      <div [@fade] *ngIf="numberNameError" style="font-weight: bold" class="alert-danger"> Inserisci un nome valido! </div>
     </div>
 
     <div class="col-md-6 form-group">
@@ -24,7 +24,7 @@
       <input type="text"
              [ngClass]="numberCognomeError == false ? 'form-control' : 'form-control is-invalid'"
              class="form-control" id="cognome" name="cognome" required ngModel minlength="4">
-      <p [@fade] *ngIf="numberCognomeError == true" style="font-weight: bold" class="text-danger"> Inserisci un cognome valido! </p>
+      <div [@fade] *ngIf="numberCognomeError" style="font-weight: bold" class="alert-danger"> Inserisci un cognome valido! </div>
     </div>
     <div class="col-12 form-group">
       <label for="email" class="form-label">Email</label>
@@ -34,15 +34,15 @@
     <div class="col-12 form-group">
       <label for="date">Inserisci la tua data di nascita</label>
       <input class="dp" type="date" id="date" name="date"
-             value="{{today}}" required ngModel>
+             value="{{today}}" required ngModel max="2003-01-01" min="1941-01-01">
     </div>
 
-    <div class="col-12 form-group">
+    <div class="col-md-6 form-group">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required ngModel
+      <input type="password" class="form-control" id="password" name="password" required #password ngModel
       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
       (input)="setTouch()">
-        <div *ngIf="touch && !form.valid" [@fade] class="alert-info transition">
+        <div *ngIf="touch" [@fade] class="alert-info">
           <ul>
             <li>Minimo 8 caratteri</li>
             <li>Almeno una lettera maiuscola</li>
@@ -52,9 +52,16 @@
         </div>
     </div>
 
+    <div class="col-md-6 form-group">
+      <label for="confermaPassword" class="form-label">Conferma Password</label>
+      <input type="password" class="form-control" id="confermaPassword" name="confermaPassword" required ngModel
+             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+      <div [@fade] *ngIf="!passwordError" style="font-weight: bold" class="alert-danger"> Le password non coincidono! </div>
+    </div>
+
 
     <div class="col-12 mt-4">
-      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Sign in</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Crea il tuo conto</button>
     </div>
 
     </form>

@@ -24,6 +24,7 @@ export class RegistrationComponent implements OnInit {
   touch: boolean = false;
   numberNameError: boolean = false;
   numberCognomeError: boolean = false;
+  passwordError: boolean = true;
   today!:string;
 
   constructor() {}
@@ -37,7 +38,7 @@ export class RegistrationComponent implements OnInit {
     }
 
   onSubmit(form: NgForm){
-
+    this.touch = false;
     let nameContainNumber = /\d/.test(form.value.username);
     let cognomeContainNumber = /\d/.test(form.value.cognome);
 
@@ -56,11 +57,18 @@ export class RegistrationComponent implements OnInit {
     const cognome = form.value.cognome;
     this.numberCognomeError = false;
 
-  const email = form.value.email;
-  let date = form.value.date;
-  const password = form.value.password;
-  let ms = Date.parse(date);
+    const email = form.value.email;
+    const password = form.value.password;
+    const confermaPassword = form.value.confermaPassword;
 
+    if(password != confermaPassword ){
+      this.passwordError = false;
+      return;
+    }
+    this.passwordError = true;
+
+    let date = form.value.date;
+    let ms = Date.parse(date);
 
   }
 
