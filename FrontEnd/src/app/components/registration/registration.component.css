@@ -10,3 +10,11 @@ label {
 .dp{
   padding: 5px 5px 5px 5px;
 }
+@media (min-width: 992px) {
+
+  .width{
+    width: 50%;
+  }
+
+}
+
