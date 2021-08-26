@@ -19,6 +19,7 @@ import { OperationsComponent } from './components/user/operations/operations.com
 import { ListComponent } from './components/Shared/list/list.component';
 import { ListItemComponent } from './components/Shared/List/list-item/list-item.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { NotFoundComponent } from './layout/not-found/not-found.component';
     NotFoundComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
