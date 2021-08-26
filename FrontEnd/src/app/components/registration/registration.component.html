@@ -42,7 +42,7 @@
       <input type="password" class="form-control" id="password" name="password" required ngModel
       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
       (input)="setTouch()">
-        <div *ngIf="touch" class="alert-info transition">
+        <div *ngIf="touch && !form.valid" class="alert-info transition">
           <ul>
             <li>Minimo 8 caratteri</li>
             <li>Almeno una lettera maiuscola</li>
