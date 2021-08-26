@@ -10,14 +10,22 @@ label {
 .dp{
   padding: 5px 5px 5px 5px;
 }
-@media (min-width: 992px) {
 
+@media (min-width: 992px) {
   .width{
     width: 50%;
     background-color: #4c956c;
     border-radius: 5px;
     color: white;
   }
-
 }
 
+.btn{
+  background-color: #173A27 !important;
+  border-radius: 5px !important;
+
+}
+.hover:hover{
+color: white !important;
+background-color: #0C1D14 !important;
+}
