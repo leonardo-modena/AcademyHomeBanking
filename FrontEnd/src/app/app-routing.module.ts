@@ -14,11 +14,7 @@ const routes: Routes = [
   {path: 'registrazione', component: RegistrationComponent },
   {path: 'login', component: LoginComponent},
 
-  { path: 'user', component: UserComponent,
-    children:
-      [{path: 'profilo', component: ProfileComponent },
-      { path: 'operazioni', component: OperationsComponent}],
-  },
+  { path: 'user', component: UserComponent, loadChildren: () => import('./module/user-module/user.module').then(m => m.UserModule)  },
   { path: 'admin', component: AdminComponent },
   {path: '**', component: NotFoundComponent}
 ];

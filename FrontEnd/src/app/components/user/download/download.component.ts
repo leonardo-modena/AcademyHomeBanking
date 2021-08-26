@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-download',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DownloadComponent implements OnInit {
 
+  @Input() downloadData!:any;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  // Scarica in formato pdf l'elenco dei movimenti selezionati
+  download(): void {
+    console.log('Downloading...')
+  }
 }

@@ -1,1 +1,56 @@
-<p>profile works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 m-auto">
+      <h2>Dati personali</h2>
+      <table class="table table-borderless table-fit">
+        <tbody>
+        <tr>
+          <th scope="row">Nome</th>
+          <td>{{user.nome}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Cognome</th>
+          <td>{{user.cognome}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Data di nascita</th>
+          <td>{{dataDiNascita.getDay()}}/{{dataDiNascita.getMonth()}}/{{dataDiNascita.getFullYear()}}</td>
+        </tr>
+        <tr>
+          <th scope="row">E-mail</th>
+          <td>{{user.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6 m-auto">
+      <h2>Aggiungi un nuovo conto</h2>
+
+      <form (ngSubmit)="onNewBill(form)" #form="ngForm" class="row g-3" >
+        <div class="form-group">
+          <select required class="form-select" aria-label="Seleziona il conto" [(ngModel)]="selectedBill" name="selectedBill" (change)="maxAmount=bills[selectedBill].amount">
+            <option *ngFor="let bill of bills; let i = index" [value]="i" [selected]="selectedBill === i">{{bill.billNumber}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="amount" class="form-label">Importo iniziale</label>
+          <div class="input-group">
+
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">€</span>
+            </div>
+            <input type="number" class="form-control" id="amount" name="amount" required min="0" [max]="maxAmount" ngModel>
+          </div>
+
+        </div>
+
+        <div class="col-12 mt-4">
+          <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Crea nuovo conto</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
