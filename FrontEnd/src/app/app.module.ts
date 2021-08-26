@@ -28,50 +28,55 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
+import {UserModule} from "./module/user-module/user.module";
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ButtonComponent,
-    NavbarComponent,
-    HomepageComponent,
-    LoginComponent,
-    RegistrationComponent,
-    UserComponent,
-    AdminComponent,
-    FooterComponent,
-    SpinnerComponent,
-    DownloadComponent,
-    ProfileComponent,
-    OperationsComponent,
-    ListComponent,
-    ListItemComponent,
-    NotFoundComponent,
-    ErrorComponent
-  ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatTabsModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: EncryptInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ButtonComponent,
+        NavbarComponent,
+        HomepageComponent,
+        LoginComponent,
+        RegistrationComponent,
+        UserComponent,
+        AdminComponent,
+        FooterComponent,
+        SpinnerComponent,
+        DownloadComponent,
+        ProfileComponent,
+        OperationsComponent,
+        ListComponent,
+        ListItemComponent,
+        NotFoundComponent,
+        ErrorComponent
+    ],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatTabsModule,
+        UserModule
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ErrorInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: EncryptInterceptor,
+            multi: true
+        }
+    ],
+    exports: [
+        ErrorComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
 
