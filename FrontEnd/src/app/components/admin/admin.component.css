@@ -1,0 +1,6 @@
+.container-list{
+    width: 100%;
+    height: 46rem;
+    padding: 1rem 1.6rem;
+    background-color: var(--white-yellow);
+}
