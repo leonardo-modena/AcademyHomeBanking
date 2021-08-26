@@ -35,7 +35,7 @@ public class CustomerController {
 		return customerRepository.findAll();
 	}
 	
-	@GetMapping("/customers/{customerId}")
+	@GetMapping("/users/{customerId}")
 	public Optional<Customer> getCustomer(@PathVariable int customerId) {
 		
 		Optional<Customer> theCustomer = customerRepository.findById(customerId);
@@ -46,21 +46,21 @@ public class CustomerController {
 		return theCustomer;
 	}
 	
-//	// add mapping for POST /employees - add new employee
+//	 add mapping for POST /employees - add new employee
 //	
-//	@PostMapping("/employees")
-//	public Employee addEmployee(@RequestBody Employee theEmployee) {
-//		
-//		// also just in case they pass an id in JSON ... set id to 0
-//		// this is to force a save of new item ... instead of update
-//		
-//		theEmployee.setId(0);
-//		
-//		employeeService.save(theEmployee);
-//		
-//		return theEmployee;
-//	}
-//	
+	@PostMapping("/users/signup")
+	public Customer addCustomer(@RequestBody Customer theCustomer) {
+		
+		// also just in case they pass an id in JSON ... set id to 0
+		// this is to force a save of new item ... instead of update
+		
+		theCustomer.setId(0);
+		
+		customerRepository.save(theCustomer);
+		
+		return theCustomer;
+	}
+	
 //	// add mapping for PUT /employees - update existing employee
 //	
 //	@PutMapping("/employees")
