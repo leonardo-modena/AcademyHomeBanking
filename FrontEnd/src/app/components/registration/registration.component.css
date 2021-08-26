@@ -7,6 +7,12 @@ label {
   margin: .4rem 0;
 }
 
+.width{
+  background-color: #4c956c;
+  border-radius: 5px;
+  color: white;
+}
+
 .dp{
   padding: 5px 5px 5px 5px;
 }
