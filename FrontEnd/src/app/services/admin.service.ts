@@ -38,6 +38,17 @@ export class AdminService {
 
 
   //post request
-  
+
+  confirmNewUser(userSelected: User): Observable<User>{
+    return this.httpService.post<User>(`${apiUrl}user/activateUser`, {
+      id: userSelected.id
+    })
+  }
+
+  confirmDeleteAccount(accountSelected: Account): Observable<Account>{
+    return this.httpService.post<Account>(`${apiUrl}account/deleteAccount`, {
+      id: accountSelected.id
+    })
+  }
 
 }
