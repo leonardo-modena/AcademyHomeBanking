@@ -13,26 +13,45 @@
   <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="row g-3" >
     <div class="col-md-6 form-group">
       <label for="username" class="form-label">Nome</label>
-      <input type="text" class="form-control" id="username" name="username" required ngModel>
+      <input type="text"
+             [ngClass]="numberNameError == false ? 'form-control' : 'form-control is-invalid'"
+             id="username" name="username" required ngModel minlength="4" pattern="^\s*\S+\s*$">
+      <p *ngIf="numberNameError == true" style="font-weight: bold" class="text-danger"> Inserisci un nome valido! </p>
     </div>
+
     <div class="col-md-6 form-group">
       <label for="cognome" class="form-label">Cognome</label>
-      <input type="text" class="form-control" id="cognome" name="cognome" required ngModel>
+      <input type="text"
+             [ngClass]="numberCognomeError == false ? 'form-control' : 'form-control is-invalid'"
+             class="form-control" id="cognome" name="cognome" required ngModel minlength="4">
+      <p *ngIf="numberCognomeError == true" style="font-weight: bold" class="text-danger"> Inserisci un cognome valido! </p>
     </div>
     <div class="col-12 form-group">
       <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="email@email.it" required ngModel>
-    </div>
-    <div class="col-12 form-group">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required ngModel>
+      <input type="email" class="form-control" id="email" name="email" placeholder="email@email.it" required ngModel pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
     </div>
 
     <div class="col-12 form-group">
       <label for="date">Inserisci la tua data di nascita</label>
-      <input type="date" id="date" name="date"
+      <input class="dp" type="date" id="date" name="date"
              value="{{today}}" required ngModel>
     </div>
+
+    <div class="col-12 form-group">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required ngModel
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+      (input)="setTouch()">
+        <div *ngIf="touch" class="alert-info transition">
+          <ul>
+            <li>Minimo 8 caratteri</li>
+            <li>Almeno una lettera maiuscola</li>
+            <li>Almeno un numero</li>
+            <li>Almeno un carattere speciale: # ? ! </li>
+          </ul>
+        </div>
+    </div>
+
 
     <div class="col-12 mt-4">
       <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Sign in</button>
@@ -40,7 +59,5 @@
 
     </form>
 
+
 </div>
-
-
-

@@ -21,7 +21,7 @@ import { OperationsComponent } from './components/user/operations/operations.com
 import { ListComponent } from './components/Shared/list/list.component';
 import { ListItemComponent } from './components/Shared/list/list-item/list-item.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
@@ -49,6 +49,7 @@ import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
