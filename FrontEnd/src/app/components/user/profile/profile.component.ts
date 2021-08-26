@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  @Input() user!: {nome: string, cognome: string, dataDiNascita: number, email: string, id: string};
+  dataDiNascita!: Date;
 
-  ngOnInit(): void {
+  bills = [
+    {billNumber: 235433, amount: 642.45, userId: 'C232'},
+    {billNumber: 235432, amount: 12.45, userId: 'C232'}
+  ];
+
+  selectedBill: number = 0;
+  maxAmount = this.bills[this.selectedBill].amount;
+  constructor() {
+
   }
 
+  ngOnInit(): void {
+    this.dataDiNascita = new Date(this.user.dataDiNascita);
+  }
+
+  onNewBill(form: NgForm): void{
+    console.log(form.form.value);
+  }
 }

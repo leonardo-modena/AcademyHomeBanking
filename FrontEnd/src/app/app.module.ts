@@ -19,7 +19,8 @@ import { OperationsComponent } from './components/user/operations/operations.com
 import { ListComponent } from './components/Shared/list/list.component';
 import { ListItemComponent } from './components/Shared/List/list-item/list-item.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -38,13 +39,14 @@ import {FormsModule} from "@angular/forms";
     OperationsComponent,
     ListComponent,
     ListItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
-    FormsModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
