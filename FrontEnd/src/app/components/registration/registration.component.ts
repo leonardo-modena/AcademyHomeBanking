@@ -9,14 +9,18 @@ import {NgForm} from "@angular/forms";
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  today!:string;
+
+  constructor() {}
 
   ngOnInit(): void {
+    this.today = new Date().toLocaleDateString();
+
   }
 
   onSubmit(form: NgForm){
 
-    console.log(form);
+  console.log(form.value);
 
   }
 

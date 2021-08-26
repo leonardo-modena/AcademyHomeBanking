@@ -8,38 +8,6 @@
   </div>
 </div>
 
-
-<!--<div class="container mt-5">-->
-<!--  <div class="row align-items-start">-->
-
-<!--    <form (ngSubmit)="onSubmit()">-->
-<!--&lt;!&ndash;  nome cognome datanascita email password&ndash;&gt;-->
-<!--      <div class="col-12 text-center">-->
-<!--          <label for="username">Nome</label>-->
-<!--          <input-->
-
-<!--            type="text"-->
-<!--            id="username"-->
-<!--            class="form-control"-->
-<!--            ngModel-->
-<!--            name="username"-->
-<!--            required>-->
-<!--      </div>-->
-<!--      <div class="col-12 text-center mt-4">-->
-<!--          <label for="username">Cognome</label>-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            id="usercognome"-->
-<!--            class="form-control"-->
-<!--            ngModel-->
-<!--            name="usercognome"-->
-<!--            required>-->
-<!--      </div>-->
-
-<!--    </form>-->
-<!--  </div>-->
-<!--</div>-->
-
 <div class="container">
 
   <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="row g-3" >
@@ -58,6 +26,12 @@
     <div class="col-12 form-group">
       <label for="password" class="form-label">Password</label>
       <input type="password" class="form-control" id="password" name="password" required ngModel>
+    </div>
+
+    <div class="col-12 form-group">
+      <label for="date">Inserisci la tua data di nascita</label>
+      <input type="date" id="date" name="date"
+             value="{{today}}" required ngModel>
     </div>
 
     <div class="col-12 mt-4">

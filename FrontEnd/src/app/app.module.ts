@@ -38,15 +38,18 @@ import {FormsModule} from "@angular/forms";
     OperationsComponent,
     ListComponent,
     ListItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
