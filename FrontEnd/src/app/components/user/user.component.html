@@ -1,14 +1,12 @@
 <div *ngIf=" routeUrl === '/user'" class="container">
   <div class="row">
-    <div class="col-12 col-md-8 col-lg-7 m-auto" *ngIf="user">
-
+    <div class="col-12 m-auto" *ngIf="user">
       <h2>Benvenuto, {{user.nome}}</h2>
       <h3>Il tuo saldo: {{balance}}€</h3>
       <app-filter></app-filter>
-      <app-list data-list="list"></app-list>
+      <!-- <app-list fruits="list"></app-list> -->
       <app-download downloadData="list"></app-download>
     </div>
   </div>
 </div>
-
 <router-outlet></router-outlet>
