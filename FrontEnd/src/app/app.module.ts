@@ -17,8 +17,11 @@ import { DownloadComponent } from './components/user/download/download.component
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { OperationsComponent } from './components/user/operations/operations.component';
 import { ListComponent } from './components/Shared/list/list.component';
-import { ListItemComponent } from './components/Shared/List/list-item/list-item.component';
+import { ListItemComponent } from './components/Shared/list/list-item/list-item.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from './interceptor/error.interceptor';
+import { ErrorComponent } from './components/Shared/error/error.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +40,21 @@ import { NotFoundComponent } from './layout/not-found/not-found.component';
     OperationsComponent,
     ListComponent,
     ListItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
