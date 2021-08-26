@@ -9,6 +9,9 @@ import {NgForm} from "@angular/forms";
 })
 export class RegistrationComponent implements OnInit {
 
+  touch: boolean = false;
+  numberNameError: boolean = false;
+  numberCognomeError: boolean = false;
   today!:string;
 
   constructor() {}
@@ -17,10 +20,34 @@ export class RegistrationComponent implements OnInit {
     this.today = new Date().toLocaleDateString();
 
   }
-
+    setTouch(){
+    this.touch = true;
+    }
   onSubmit(form: NgForm){
 
-  console.log(form.value);
+    let nameContainNumber = /\d/.test(form.value.username);
+    let cognomeContainNumber = /\d/.test(form.value.cognome);
+
+    if (nameContainNumber){
+      this.numberNameError = true;
+      return;
+    }
+      const username = form.value.username;
+      this.numberNameError = false;
+
+
+    if (cognomeContainNumber){
+      this.numberCognomeError = true;
+      return;
+    }
+    const cognome = form.value.cognome;
+    this.numberCognomeError = false;
+
+  const email = form.value.email;
+  let date = form.value.date;
+  const password = form.value.password;
+  let ms = Date.parse(date);
+
 
   }
 
