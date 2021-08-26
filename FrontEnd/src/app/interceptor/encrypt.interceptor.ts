@@ -18,14 +18,14 @@ export class EncryptInterceptor implements HttpInterceptor {
 
     let pswNotEncrypted;
     let usrNotEncrypted;
-    
+
     let pswEncrypted;
     let usrEncrypted
 
     if (request.body) {
 
       let body: any = request.body;
-  
+
       pswNotEncrypted = body.psw;
       usrNotEncrypted = body.usr;
 

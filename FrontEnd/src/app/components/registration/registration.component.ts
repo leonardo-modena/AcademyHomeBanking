@@ -23,6 +23,7 @@ export class RegistrationComponent implements OnInit {
     setTouch(){
     this.touch = true;
     }
+
   onSubmit(form: NgForm){
 
     let nameContainNumber = /\d/.test(form.value.username);
