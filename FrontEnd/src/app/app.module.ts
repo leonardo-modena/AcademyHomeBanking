@@ -20,6 +20,7 @@ import { ListComponent } from './components/Shared/list/list.component';
 import { ListItemComponent } from './components/Shared/List/list-item/list-item.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { NotFoundComponent } from './layout/not-found/not-found.component';
     OperationsComponent,
     ListComponent,
     ListItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    
   ],
   imports: [
     BrowserModule,
