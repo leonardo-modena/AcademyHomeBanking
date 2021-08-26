@@ -27,6 +27,7 @@ import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent,
