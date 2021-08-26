@@ -98,6 +98,15 @@ input[type=number]:focus,
   box-shadow: none!important;
 }
 
+/* UTILITY CLASS START */
+.justify-center{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+/* UTILITY CLASS END  */
+
+
 /* MODIFICHE ANGULAR MATERIAL START */
 
 .mat-tab-labels {
