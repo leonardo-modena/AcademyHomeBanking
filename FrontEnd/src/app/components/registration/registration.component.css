@@ -1,0 +1,19 @@
+label {
+  display: block;
+}
+
+input,
+label {
+  margin: .4rem 0;
+}
+
+.dp{
+  padding: 5px 5px 5px 5px;
+}
+
+.transition{
+  transition-property: width;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 1s;
+}
