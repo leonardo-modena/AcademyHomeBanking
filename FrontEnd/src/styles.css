@@ -98,6 +98,19 @@ input[type=number]:focus,
   box-shadow: none!important;
 }
 
+/* MODIFICHE ANGULAR MATERIAL START */
+
+.mat-tab-labels {
+  justify-content: center !important;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: var(--secondary-green);
+}
+
+/* MODIFICHE ANGULAR MATERIAL END */
+
+
 @media (min-width: 576px) {
 
   html{
