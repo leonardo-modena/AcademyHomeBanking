@@ -24,18 +24,18 @@ public class Customer {
     private String password;
 
     @Column (name = "ruolo")
-    private com.banking.project.ENUM.ruolo ruolo ;
+    private String ruolo ;
 
     public Customer(){
 
     }
 
-    public Customer(String firstName, String lastName, String email,String password, Enum ruolo) {
+    public Customer(String firstName, String lastName, String email,String password,String ruolo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password=password;
-        this.ruolo= com.banking.project.ENUM.ruolo.C;
+        this.ruolo= ruolo;
     }
 
     public int getId() {
@@ -78,11 +78,19 @@ public class Customer {
         this.password = password;
     }
 
-    public com.banking.project.ENUM.ruolo getRuolo() {
+    public String getRuolo() {
         return ruolo;
     }
 
-    public void setRuolo(com.banking.project.ENUM.ruolo ruolo) {
+    public void setRuolo(String ruolo) {
         this.ruolo = ruolo;
     }
+
+	@Override
+	public String toString() {
+		return "{id:" + id + ", nome:" + firstName + ", cognome:" + lastName + ", email:" + email + ", password:"
+				+ password + ", ruolo:" + ruolo + "}";
+	}
+    
+    
 }
