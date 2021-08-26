@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup, NgForm} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from "@angular/forms";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-profile',
@@ -8,7 +9,7 @@ import {FormGroup, NgForm} from "@angular/forms";
 })
 export class ProfileComponent implements OnInit {
 
-  @Input() user!: {nome: string, cognome: string, dataDiNascita: number, email: string, id: string};
+  user!: {nome: string, cognome: string, dataDiNascita: number, email: string, id: string};
   dataDiNascita!: Date;
 
   bills = [
@@ -18,12 +19,15 @@ export class ProfileComponent implements OnInit {
 
   selectedBill: number = 0;
   maxAmount = this.bills[this.selectedBill].amount;
-  constructor() {
+  constructor(private userService: UserService) {
 
   }
 
   ngOnInit(): void {
-    this.dataDiNascita = new Date(this.user.dataDiNascita);
+    this.userService.user.subscribe((user) => {
+      this.user = user;
+      this.dataDiNascita = new Date(this.user.dataDiNascita);
+    });
   }
 
   onNewBill(form: NgForm): void{

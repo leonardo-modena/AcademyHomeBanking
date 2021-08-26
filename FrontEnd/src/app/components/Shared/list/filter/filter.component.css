@@ -1,0 +1,8 @@
+.form-inline {
+  background-color: var(--white-yellow);
+}
+
+.error {
+  padding: 10px 5px;
+  color: var(--secondary-orange)
+}
