@@ -4,16 +4,25 @@ import {FilterComponent} from "../../components/Shared/list/filter/filter.compon
 import {ProfileComponent} from "../../components/user/profile/profile.component";
 import {OperationsComponent} from "../../components/user/operations/operations.component";
 import {RouterModule} from "@angular/router";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     FilterComponent
   ],
+
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild([
       {path: 'profilo', component: ProfileComponent},
-      { path: 'operazioni', component: OperationsComponent}])
-  ]
+      {path: 'operazioni', component: OperationsComponent}]),
+    MatDatepickerModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    FilterComponent
+  ],
 })
 export class UserModule { }
