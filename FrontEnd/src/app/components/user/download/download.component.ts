@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-download',
@@ -16,6 +19,14 @@ export class DownloadComponent implements OnInit {
 
   // Scarica in formato pdf l'elenco dei movimenti selezionati
   download(): void {
-    console.log('Downloading...')
+    console.log('Downloading...');
+
+
+    let docDefinition = {
+      header: 'C#Corner PDF Header',
+      content: "sdjfdsf"
+      }
+    pdfMake.createPdf(docDefinition).download('transazione.pdf');
   }
 }
+

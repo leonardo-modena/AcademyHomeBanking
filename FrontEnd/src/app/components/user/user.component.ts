@@ -38,7 +38,6 @@ export class UserComponent implements OnInit {
     this.routeUrl = this.router.url;
     this.userService.user.subscribe((user: { nome: string, cognome: string, dataDiNascita: number, email: string, id: string }) => {
       this.user = user;
-      console.log(this.user);
     });
 
     // this.userService.getSaldo(billNumber).subscribe((balance) => {
@@ -46,5 +45,4 @@ export class UserComponent implements OnInit {
     // })
     this.balance = this.userService.getBalance();
   }
-
 }
