@@ -26,6 +26,7 @@
              class="form-control" id="cognome" name="cognome" required ngModel minlength="4">
       <div [@fade] *ngIf="numberCognomeError" style="font-weight: bold" class="alert-danger"> Inserisci un cognome valido! </div>
     </div>
+
     <div class="col-12 form-group mt-3">
       <label for="email" class="form-label">Email</label>
       <input type="email" class="form-control" id="email" name="email" placeholder="email@email.it" required ngModel pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
@@ -42,7 +43,7 @@
       <input type="password" class="form-control" id="password" name="password" required ngModel
       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
       (input)="setTouch()">
-        <div *ngIf="touch" [@fade] class="alert-info">
+        <div *ngIf="touch" [@fade] class="alert-warning">
           <ul>
             <li>Minimo 8 caratteri</li>
             <li>Almeno una lettera maiuscola</li>
@@ -65,6 +66,4 @@
     </div>
 
     </form>
-
-
 </div>
