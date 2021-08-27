@@ -5,24 +5,60 @@
       <br />
       <h4>{{ adminInfo.nome | titlecase }}</h4>
     </div>
+  </div>
+  <div class="row mt-5">
     <div class="col-12 col-md-6 m-auto">
-      <div class="container-list">
-        <mat-tab-group>
-          <mat-tab label="First"> <app-user-list [newUsersMode]="false"></app-user-list> </mat-tab>
-        </mat-tab-group>
+      <div class="list-container">
+        <div class="list-header">
+          <span class="list-title">Lista Correntisti</span>
+        </div>
+        <div class="list-content">
+  
+
+                <div class="list-items">
+                  <div class="list-items-title">
+                    <div class="item-title"> <span>Nome</span> </div>
+                    <div class="item-title"> <span>Cognome</span> </div>
+                    <div class="item-title"> <span>E-Mail</span> </div>
+                  </div>
+                   <app-user-list [newUsersMode]="false"></app-user-list> 
+                </div>
+
+        </div>
       </div>
     </div>
     <div class="col-12 col-md-6 m-auto">
-      <div class="container-list">
-        <mat-tab-group>
-          <mat-tab label="First">
-            <app-user-list [newUsersMode]="true"></app-user-list>
-          </mat-tab>
-          <mat-tab label="Second">
-            <app-account-list></app-account-list>
-          </mat-tab>
-        </mat-tab-group>
+      <div class="list-container">
+        <div class="list-header">
+            <span class="list-title">Operazioni</span>
+        </div>
+        <div class="list-content">
+          <mat-tab-group>
+            <mat-tab label="First">
+              <div class="list-items">
+                <div class="list-items-title">
+                  <div class="item-title"> <span>Nome</span> </div>
+                  <div class="item-title"> <span>Cognome</span> </div>
+                  <div class="item-title"> <span>E-Mail</span> </div>
+                </div>
+                <app-user-list [newUsersMode]="true"></app-user-list>
+              </div>
+              
+            </mat-tab>
+            <mat-tab label="Second">
+              <div class="list-items">
+                <div class="list-items-title">
+                  <div class="item-title"> <span>Nome</span> </div>
+                  <div class="item-title"> <span>Cognome</span> </div>
+                  <div class="item-title"> <span>E-Mail</span> </div>
+                </div>
+              <app-account-list></app-account-list>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
       </div>
+        
     </div>
   </div>
 </div>

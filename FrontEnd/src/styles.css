@@ -7,6 +7,29 @@
   --secondary-orange: #d68c45;
 }
 
+/* ===== Scrollbar CSS credit: https://codepen.io/stephenpaton-tech/full/JjRvGmY===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: var(--gray) #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--gray);
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }
+
+
 html{
   font-size: 12px;
 }
@@ -98,12 +121,61 @@ input[type=number]:focus,
   box-shadow: none!important;
 }
 
+/*LIST UI START*/
+
+.list-container{
+  width: 100%;
+  overflow: hidden;
+  border-radius: .25rem;
+
+  box-shadow: 0px 0px 22px -10px var(--primary-green);
+  background-color: rgb(236, 236, 236);
+}
+
+.list-header{
+  padding: 1rem 3rem;
+  background-color: var(--secondary-green);
+}
+
+.list-title{
+  font-size: 1.8rem;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.list-content{
+  padding: 1rem 3rem;
+}
+
+.list-items-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 1rem 0;
+  padding-bottom: .5rem;
+  border-bottom: 0.4px solid #44444459;
+}
+
+.list-item, .item-title{
+  width: 12rem;
+}
+
+.item-title span{
+  color: #444444;
+  font-size: 1.2rem;
+}
+
+/*LIST UI END*/
+
 /* UTILITY CLASS START */
 .justify-center{
   display: flex;
   justify-content: center;
   align-content: center;
 }
+
+
 /* UTILITY CLASS END  */
 
 
@@ -118,11 +190,14 @@ input[type=number]:focus,
 }
 
 .mat-tab-body-content {
-  height: 100%;
-  overflow: hidden !important;
+  height: 35rem !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
 /* MODIFICHE ANGULAR MATERIAL END */
+
+
 
 
 @media (min-width: 576px) {
