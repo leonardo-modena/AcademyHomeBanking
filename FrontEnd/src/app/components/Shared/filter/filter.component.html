@@ -3,19 +3,20 @@
       (submit)="onSubmit()"
       (change)="onChangeVisualization()"
       [formGroup]="filterForm">
+
   <div class="form-group col-12 col-md-6">
     <label>Seleziona quali operazioni visualizzare</label>
     <select (change)="onChangeChoice($event)" class="form-control" formControlName="selectedChoice">
       <option *ngFor="let c of selectionChoicesValues" [ngValue]="c.value" [id]="c.value">{{c.description}}</option>
     </select>
   </div>
-  <div *ngIf="dateSelection" class="col-6">
+  <div *ngIf="dateSelection" class="col-12 col-md-6">
     <div class="row">
-      <div class="col-6 col-md-6 form-group">
+      <div class="col-8 col-md-6 form-group">
         <label for="start-date">Data di inizio</label>
         <input class="form-control" formControlName="startDate" type="date" id="start-date" name="start-date">
       </div>
-      <div class="col-6 col-md-6 form-group">
+      <div class="col-8 col-md-6 form-group">
         <label for="end-date">Data di fine</label>
         <input class="form-control" formControlName="endDate" type="date" id="end-date" name="end-date">
       </div>
