@@ -23,7 +23,7 @@
 > http://localhost:4200/registrazione = Registrazione/NuovoConto.
 > http://localhost:4200/login = Accesso area riservata.
 > http://localhost:4200/user = Area utente.
-> > http://localhost:4200/user/profilo = Profilo utente.
-> > http://localhost:4200/user/operazioni = Pagina operazioni.
+> http://localhost:4200/user/profilo = Profilo utente.
+> http://localhost:4200/user/operazioni = Pagina operazioni.
 > http://localhost:4200/admin = Area dipendente.
 > http://localhost:4200/** = Qualsiasi route che non coincide con le precedenti => page 404
