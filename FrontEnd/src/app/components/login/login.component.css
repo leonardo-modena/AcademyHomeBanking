@@ -1,7 +1,10 @@
 .btn{
   background-color: #173A27 !important;
   border-radius: 5px !important;
+}
 
+.borderRadius{
+  border-radius: 5px !important;
 }
 .hover:hover{
   color: white !important;
@@ -28,3 +31,5 @@
   }
 
 }
+
+
