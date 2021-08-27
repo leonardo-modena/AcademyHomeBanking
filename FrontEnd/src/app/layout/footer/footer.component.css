@@ -1,9 +1,9 @@
 .footer{
-    position:fixed;
-    bottom:0px;
+    width: 100%;
+    margin-top: 3rem;
     background-color: #333333;
     padding: 1rem 5rem;
-  color: white;
+    color: white;
 }
 
 .footer-logo{
