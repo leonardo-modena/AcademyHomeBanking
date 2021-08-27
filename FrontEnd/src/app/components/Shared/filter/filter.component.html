@@ -1,5 +1,5 @@
 <h5>Filtra i tuoi documenti</h5>
-<form [class]="'form-inline row mb-4 p-4 align-items-lg-start ' + (!invalidDate ? 'align-items-end' : 'align-items-start')" (change)="onChangeVisualization()" [formGroup]="filterForm">
+<form [class]="'form-inline row gx-5 mb-4 p-4 align-items-lg-start ' + (!invalidDate ? 'align-items-end' : 'align-items-start')" (change)="onChangeVisualization()" [formGroup]="filterForm">
   <div class="form-group col-12 col-md-6">
     <label>Seleziona quali operazioni visualizzare</label>
     <select (change)="onChangeChoice($event)" class="form-control" formControlName="selectedChoice">
@@ -20,8 +20,5 @@
       </div>
       <div class="col-12 error" *ngIf="invalidDate">La data finale deve essere posteriore alla data iniziale</div>
     </div>
-
   </div>
-
-
 </form>
