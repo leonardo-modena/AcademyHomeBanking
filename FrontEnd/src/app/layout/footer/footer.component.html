@@ -1,1 +1,17 @@
-<p>footer works!</p>
+<div class="footer container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-7 justify-center">
+            <img class=" img-fluid footer-logo" src="../../../assets/img/logo/logo_footer-small.png" alt="">
+        </div>
+        <div class="col-12 col-md-5 ">
+            <div class="footer-list">
+                <div class="footer-list-item" [routerLink]="['/']" ><span>Home.</span></div>
+                <div class="footer-list-item" [routerLink]="['/login']"><span>Accedi all'area riservata.</span></div>
+                <div class="footer-list-item" [routerLink]="['/registrazione']"><span>Apri il conto online.</span></div>
+            </div>
+        </div>
+        <div class="col-12 col-md-12 text-center mt-3">
+            © 2021-2021 AcademyBank - Tutti i diritti riservati
+        </div>
+    </div>
+</div>
