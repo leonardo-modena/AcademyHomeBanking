@@ -1,8 +1,9 @@
 .footer{
     position:fixed;
     bottom:0px;
-    background-color: var(--light-gray);
+    background-color: #333333;
     padding: 1rem 5rem;
+  color: white;
 }
 
 .footer-logo{
@@ -17,10 +18,17 @@
     justify-content: space-evenly;
 }
 
-.footer-list-item{
+.footer-title{
+  color: #C1C1AA;
     font-size: 1.2rem;
     letter-spacing: 1px;
     font-weight: 900;
     text-transform: uppercase;
     cursor: pointer;
+     border-bottom: white 1px solid;
+}
+
+.footer-item{
+  font-size: 12px !important;
+  color: #6F7F84;
 }

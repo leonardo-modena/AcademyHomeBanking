@@ -71,7 +71,7 @@ export class RegistrationComponent implements OnInit {
     let ms = Date.parse(date);
     const sex = form.value.sesso;
 
-    
+
 
   }
 
