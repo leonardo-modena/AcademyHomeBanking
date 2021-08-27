@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
-import {ActivatedRouteSnapshot, Router} from "@angular/router";
+import { Router} from "@angular/router";
 import {Operation} from "../../model/operation";
 
 @Component({
@@ -26,9 +26,9 @@ export class UserComponent implements OnInit {
       type: 'versamento',
       importo: 403.46,
       dataPrelievo: 1622277132000,
-      causale: 'Vendita ',
-      beneficiario: 'Ospedale di Piombino',
-      mittente: ''
+      causale: 'Vendita mobile',
+      beneficiario: '',
+      mittente: 'Tizio Caio'
     }
   ];
 

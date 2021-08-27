@@ -1,0 +1,14 @@
+.taking {
+  color: var(--secondary-orange);
+  text-align: right;
+}
+
+.deposit {
+  color: var(--secondary-green);
+  text-align: right;
+}
+
+div.d-flex {
+  border: 1px solid var(--primary-green);
+  padding: 10px
+}

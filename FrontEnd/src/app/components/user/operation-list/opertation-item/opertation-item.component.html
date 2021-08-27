@@ -1,1 +1,11 @@
-<p>opertation-item works!</p>
+<div class="d-flex justify-content-sm-between mb-2 rounded p-2">
+  <div>
+    <h3>{{operation.causale}}</h3>
+    <span>{{(operation.type === 'prelievo' ? operation.beneficiario : operation.mittente)}}</span>
+  </div>
+
+  <div>
+    <p [class]="'text-right ' + (operation.type === 'prelievo' ? 'taking' : 'deposit')">{{(operation.type === 'prelievo' ? '-' : '') + operation.importo}}</p>
+    <a>Maggiori dettagli</a>
+  </div>
+</div>
