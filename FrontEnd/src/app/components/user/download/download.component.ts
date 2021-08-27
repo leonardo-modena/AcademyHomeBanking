@@ -21,19 +21,6 @@ export class DownloadComponent implements OnInit {
   // Scarica in formato pdf l'elenco dei movimenti selezionati
   download(): void {
     console.log('Downloading...');
-    // let content = [];
-    // content.push({text:'Academy Bank', style:'h1'});
-    // content.push({text:'paragrafo con la descrizione', style: 'p'})
-    //
-    // let docDefinition = {
-    //   content: [content],
-    //   styles: {
-    //     'h1': {
-    //       fontSize: 30,
-    //       color: '#2f2f2f',
-    //     },
-    //   }
-    // }
 
     let html = `
       <div>
@@ -51,7 +38,7 @@ export class DownloadComponent implements OnInit {
       ],
     };
 
-    pdfMake.createPdf(docDefinition).download('transazione.pdf');
+    pdfMake.createPdf(docDefinition).download('documento.pdf');
   }
 }
 

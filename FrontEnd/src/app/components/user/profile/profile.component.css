@@ -18,3 +18,10 @@ mat-form-field.mat-form-field-wrapper.mat-form-field-appearance-fill mat-form-fi
   background-color: var(--primary-green) !important;
   color: red;
 }
+
+.green-background {
+  background-color: var(--secondary-green);
+  border-radius: 5px;
+  color: var(--white-yellow);
+
+}
