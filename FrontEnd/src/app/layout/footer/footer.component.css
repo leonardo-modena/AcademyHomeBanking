@@ -1,13 +1,13 @@
 .footer{
-    position:fixed;
-    bottom:0px;
+    width: 100%;
+    margin-top: 3rem;
     background-color: #333333;
     padding: 1rem 5rem;
-  color: white;
+    color: white;
 }
 
 .footer-logo{
-    width: 20rem;
+    width: 15rem;
 }
 
 .footer-list{
@@ -24,7 +24,6 @@
     letter-spacing: 1px;
     font-weight: 900;
     text-transform: uppercase;
-    cursor: pointer;
      border-bottom: white 1px solid;
 }
 

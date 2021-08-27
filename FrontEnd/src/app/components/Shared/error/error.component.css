@@ -1,0 +1,14 @@
+.error{
+    background-color: var(--secondary-orange);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    border-radius: .25rem;
+}
+
+.error p{
+    text-align: center;
+    font-family: monospace;
+    text-transform: capitalize;
+    font-weight: 400;
+    color: white;
+}

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12 col-md-12">
          <app-account-list-item 
-            *ngFor="let account of accounts; let i as index"
+            *ngFor="let account of accounts; index as i"
             [account]="account"
             [index]="i"
          ></app-account-list-item>
