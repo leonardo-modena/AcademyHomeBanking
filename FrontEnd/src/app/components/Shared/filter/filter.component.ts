@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-filter',
@@ -23,15 +23,14 @@ export class FilterComponent implements OnInit {
 
   filterForm!:FormGroup;
 
-
-
   constructor() { }
 
   ngOnInit(): void {
+   const stringToday = this.today.getFullYear() + '-' + (this.today.getMonth() + 1).toString().padStart(2, '0') + '-' + this.today.getDate().toString().padStart(2, '0');
     this.filterForm = new FormGroup({
       'selectedChoice': new FormControl(this.selectedChoice),
-      'startDate': new FormControl(this.today),
-      'endDate': new FormControl(this.today, /*filterDateValidator(this.startDate)*/)
+      'startDate': new FormControl(stringToday),
+      'endDate': new FormControl(stringToday)
     });
   }
 
@@ -47,20 +46,30 @@ export class FilterComponent implements OnInit {
       this.dateSelection = true;
       if(new Date(this.filterForm.controls.startDate.value) <= new Date(this.filterForm.controls.endDate.value)) {
         this.invalidDate = false;
-        //GET BETWEEN DATES
       }
       else {
         this.invalidDate = true;
       }
     }
     else {
+      this.invalidDate = false;
       this.dateSelection = false;
-      if (selectedChoiceValue.value === 'last10') {
-        //GET LAST 10
-      }
-      else {
-        //GET LAST 3 MONTH
-      }
+      this.filterForm.controls.startDate.reset();
+      this.filterForm.controls.endDate.reset();
+    }
+  }
+
+  onSubmit() {
+
+    const selectedChoiceValue = this.filterForm.controls.selectedChoice;
+    if (selectedChoiceValue.value === 'dateSelection' && !this.invalidDate) {
+      //Get between dates
+    }
+    else if(selectedChoiceValue.value === 'last3') {
+      //get last 3 months
+    }
+    else { // selectedChoiceValue.value === 'last10'
+      //get last 10 operations
     }
   }
 }
