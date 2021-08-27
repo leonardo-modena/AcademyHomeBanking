@@ -35,9 +35,7 @@ public class Customer {
 	@Column(name = "role")
 	private String role;
 
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "users",
-			cascade = {CascadeType.PERSIST,CascadeType.DETACH,
-					CascadeType.MERGE,CascadeType.REFRESH})
+	@OneToMany(mappedBy = "holder")
 	private List<BankAccount> bankAccounts;
 
 	public Customer() {

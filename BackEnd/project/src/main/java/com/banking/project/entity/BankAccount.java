@@ -18,11 +18,11 @@ public class BankAccount {
     private BigDecimal balance;
 
     @Column(name = "account_status")
-    private Account_Status account_status;
+    private String account_status;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH,
-            CascadeType.MERGE,CascadeType.REFRESH})
-    @JoinColumn(name = "holder")
+    @ManyToOne()
+    @JoinColumn(name = "holder",nullable=false)
+
     private Customer holder;
 
 
@@ -30,7 +30,7 @@ public class BankAccount {
 
     }
 
-    public BankAccount(int id, BigDecimal balance, Account_Status account_status, Customer holder) {
+    public BankAccount(int id, BigDecimal balance, String account_status, Customer holder) {
         this.id = id;
         this.balance = balance;
         this.account_status = account_status;
@@ -53,11 +53,11 @@ public class BankAccount {
         this.balance = balance;
     }
 
-    public Account_Status getAccount_status() {
+    public String getAccount_status() {
         return account_status;
     }
 
-    public void setAccount_status(Account_Status account_status) {
+    public void setAccount_status(String account_status) {
         this.account_status = account_status;
     }
 
