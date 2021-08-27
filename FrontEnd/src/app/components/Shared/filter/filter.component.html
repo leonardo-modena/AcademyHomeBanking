@@ -1,30 +1,32 @@
-<h5>Filtra i tuoi documenti</h5>
-<form [class]="'form-inline row gx-5 mb-4 p-4 align-items-lg-start ' + (!invalidDate ? 'align-items-end' : 'align-items-start')"
-      (submit)="onSubmit()"
-      (change)="onChangeVisualization()"
-      [formGroup]="filterForm">
+<div class="container mb-4 p-4">
+  <h5>Filtra i tuoi documenti</h5>
+  <form [class]="'form-inline row gx-5  align-items-lg-start ' + (!invalidDate ? 'align-items-end' : 'align-items-start')"
+        (submit)="onSubmit()"
+        (change)="onChangeVisualization()"
+        [formGroup]="filterForm">
 
-  <div class="form-group col-12 col-md-6">
-    <label>Seleziona quali operazioni visualizzare</label>
-    <select (change)="onChangeChoice($event)" class="form-control" formControlName="selectedChoice">
-      <option *ngFor="let c of selectionChoicesValues" [ngValue]="c.value" [id]="c.value">{{c.description}}</option>
-    </select>
-  </div>
-  <div *ngIf="dateSelection" class="col-12 col-md-6">
-    <div class="row">
-      <div class="col-8 col-md-6 form-group">
-        <label for="start-date">Data di inizio</label>
-        <input class="form-control" formControlName="startDate" type="date" id="start-date" name="start-date">
-      </div>
-      <div class="col-8 col-md-6 form-group">
-        <label for="end-date">Data di fine</label>
-        <input class="form-control" formControlName="endDate" type="date" id="end-date" name="end-date">
-      </div>
-      <div class="col-12 error" *ngIf="invalidDate">La data finale deve essere posteriore alla data iniziale</div>
+    <div class="form-group col-12 col-md-6">
+      <label>Seleziona quali operazioni visualizzare</label>
+      <select (change)="onChangeChoice($event)" class="form-control" formControlName="selectedChoice">
+        <option *ngFor="let c of selectionChoicesValues" [ngValue]="c.value" [id]="c.value">{{c.description}}</option>
+      </select>
     </div>
+    <div *ngIf="dateSelection" class="col-12 col-md-6">
+      <div class="row">
+        <div class="col-8 col-md-6 form-group">
+          <label for="start-date">Data di inizio</label>
+          <input class="form-control" formControlName="startDate" type="date" id="start-date" name="start-date">
+        </div>
+        <div class="col-8 col-md-6 form-group">
+          <label for="end-date">Data di fine</label>
+          <input class="form-control" formControlName="endDate" type="date" id="end-date" name="end-date">
+        </div>
+        <div class="col-12 error" *ngIf="invalidDate">La data finale deve essere posteriore alla data iniziale</div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-2">
+      <button class="btn btn-outline-primary" *ngIf="!filterForm.invalid && !invalidDate">Cerca</button>
+    </div>
+  </form>
 
-  </div>
-  <div class="d-flex justify-content-end mt-2">
-    <button class="btn btn-outline-primary" *ngIf="!filterForm.invalid && !invalidDate">Cerca</button>
-  </div>
-</form>
+</div>

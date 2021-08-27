@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 m-auto">
+    <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Dati personali</h2>
       <table class="table table-borderless table-fit">
         <tbody>
@@ -25,30 +25,32 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-md-6 m-auto">
+    <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Aggiungi un nuovo conto</h2>
-
-      <form (ngSubmit)="onNewBill(form)" #form="ngForm" class="row gx-5" >
-        <div class="form-group">
-          <label for="selectedBill">Seleziona il conto</label>
-          <select id="selectedBill" required class="form-select" aria-label="Seleziona il conto" [(ngModel)]="selectedBill" name="selectedBill" (change)="maxAmount=bills[selectedBill].amount">
-            <option *ngFor="let bill of bills; let i = index" [value]="i" [selected]="selectedBill === i">{{bill.billNumber}}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="amount" class="form-label">Importo iniziale</label>
-          <div class="input-group">
-
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">€</span>
-            </div>
-            <input type="number" class="form-control" id="amount" name="amount" required min="0" [max]="maxAmount" ngModel>
+      <div class="container my-3">
+        <form (ngSubmit)="onNewBill(form)" #form="ngForm" class="row gx-5 green-background p-3">
+          <div class="form-group col-12 col-md-6">
+            <label class="form-label" for="selectedBill">Seleziona il conto</label>
+            <select id="selectedBill" required class="form-select" aria-label="Seleziona il conto" [(ngModel)]="selectedBill" name="selectedBill" (change)="maxAmount=bills[selectedBill].amount">
+              <option *ngFor="let bill of bills; let i = index" [value]="i" [selected]="selectedBill === i">{{bill.billNumber}}</option>
+            </select>
           </div>
-        </div>
-        <div class="col-12 mt-4">
-          <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Crea nuovo conto</button>
-        </div>
-      </form>
+          <div class="form-group col-12 col-md-6">
+            <label for="amount" class="form-label">Importo iniziale</label>
+            <div class="input-group">
+
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">€</span>
+              </div>
+              <input type="number" class="form-control" id="amount" name="amount" required min="0" [max]="maxAmount" ngModel>
+            </div>
+          </div>
+          <div class="col-12 mt-4 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Crea nuovo conto</button>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
