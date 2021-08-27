@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {MatTabsModule} from '@angular/material/tabs';
-
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +11,6 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { UserComponent } from './components/user/user.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { SpinnerComponent } from './components/Shared/spinner/spinner.component';
 import { DownloadComponent } from './components/user/download/download.component';
@@ -29,10 +25,8 @@ import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
 import {UserModule} from "./module/user-module/user.module";
-import { UserListComponent } from './components/admin/user-list/user-list.component';
-import { UserListItemComponent } from './components/admin/user-list/user-list-item/user-list-item.component';
-import { AccountListComponent } from './components/admin/account-list/account-list.component';
-import { AccountListItemComponent } from './components/admin/account-list/account-list-item/account-list-item.component';
+import { AdminModule } from './module/admin/admin.module';
+
 
 
 @NgModule({
@@ -44,7 +38,6 @@ import { AccountListItemComponent } from './components/admin/account-list/accoun
         LoginComponent,
         RegistrationComponent,
         UserComponent,
-        AdminComponent,
         FooterComponent,
         SpinnerComponent,
         DownloadComponent,
@@ -54,10 +47,6 @@ import { AccountListItemComponent } from './components/admin/account-list/accoun
         ListItemComponent,
         NotFoundComponent,
         ErrorComponent,
-        UserListComponent,
-        UserListItemComponent,
-        AccountListComponent,
-        AccountListItemComponent
     ],
     imports: [
         FormsModule,
@@ -66,8 +55,8 @@ import { AccountListItemComponent } from './components/admin/account-list/accoun
         AppRoutingModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        MatTabsModule,
-        UserModule
+        UserModule,
+        AdminModule
     ],
     providers: [
         {
