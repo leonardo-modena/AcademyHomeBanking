@@ -54,7 +54,7 @@ export class RegistrationComponent implements OnInit {
       this.numberCognomeError = true;
       return;
     }
-    const cognome = form.value.cognome;
+    const lastName = form.value.cognome;
     this.numberCognomeError = false;
 
     const email = form.value.email;
@@ -69,6 +69,9 @@ export class RegistrationComponent implements OnInit {
 
     let date = form.value.date;
     let ms = Date.parse(date);
+    const sex = form.value.sesso;
+
+    
 
   }
 
