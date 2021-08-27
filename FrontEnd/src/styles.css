@@ -66,15 +66,18 @@ p, table {
 button {
   font-size: 1.5rem!important;
   padding: 0.5rem 1.5rem!important;
+  cursor: pointer !important;
 }
 
 button.btn-outline-primary{
   color: var(--primary-green) !important;
   border: 2px solid var(--primary-green) !important;
+  cursor: pointer !important;
 }
 
 button.btn-outline-primary:hover, button.btn-outline-primary:active{
   color: var(--white-yellow) !important;
+  cursor: pointer !important;
   background-color: var(--primary-green)!important;
 }
 
@@ -88,21 +91,26 @@ button.btn-outline-primary[disabled],  button.btn-outline-danger[disabled]{
 
 button.btn-outline-danger{
   color: var(--secondary-orange) !important;
+  cursor: pointer !important;
   border: 2px solid var(--secondary-orange) !important;
 }
 
 button.btn-outline-danger:hover, button.btn-outline-danger:active{
   color: var(--white-yellow) !important;
+  cursor: pointer !important;
   background-color: var(--secondary-orange)!important;
 }
 
 button.btn-primary{
+  cursor: pointer !important;
+
   color: var(--white-yellow) !important;
   border: 2px solid var(--primary-green) !important;
   background-color: var(--primary-green)!important;
 }
 
 button.btn-primary:hover{
+  cursor: pointer !important;
   color: var(--primary-green) !important;
   background-color: transparent!important
 }

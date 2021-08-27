@@ -1,6 +1,7 @@
 
     <app-user-list-item
-      *ngFor="let user of users"
+      *ngFor="let user of users; index as i"
       [user]="user"
       [pendingUser]="newUsersMode"
+      [index] = "i"
     ></app-user-list-item>
