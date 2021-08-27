@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AccountListItemComponent implements OnInit {
 
   @Input() account!: string;
-  @Input() index!: string;
+  @Input() index!: number;
   constructor() { }
 
   ngOnInit(): void {
