@@ -1,16 +1,19 @@
-<div class="container">
+<div class="container mt-4">
   <div class="row">
     <div class="col-12 col-md-12 m-auto">
-      <span>Pannello amministrativo di:</span>
-      <br />
-      <h4>{{ adminInfo.nome | titlecase }}</h4>
+      <h2>DASHBOARD AMMINISTRATIVA</h2>
+      <span class="inline" >Accesso effettuato da: </span> <h4 class="inline">{{ adminInfo.nome | titlecase }}</h4>
     </div>
   </div>
+  <div class="smartphone-section-selector" *ngIf="sectionSelector">
+    <i class="bi bi-people-fill" [ngClass]="{'active': userSection}" (click)="userSectionClick()"></i>
+    <i class="bi bi-check2-square" [ngClass]="{'active': operationSection}" (click)="operationSectionClick()"></i>
+  </div>
   <div class="row mt-5">
-    <div class="col-12 col-md-6 m-auto">
+    <div class="col-12 col-md-6 m-auto" *ngIf="userSection">
       <app-list [operation]="false"></app-list>
     </div>
-    <div class="col-12 col-md-6 m-auto">
+    <div class="col-12 col-md-6 m-auto" *ngIf="operationSection">
       <app-list [operation]="true"></app-list>
     </div>
   </div>
