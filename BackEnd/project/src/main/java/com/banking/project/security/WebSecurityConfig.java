@@ -41,11 +41,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .anyRequest().authenticated()
-            .and()
-            .formLogin().permitAll()
-            .and()
-            .logout().permitAll();
-    }
+    	http.authorizeRequests()
+		//.antMatchers("/home/users").permitAll()
+		.antMatchers("/home/users/**").hasRole("C")
+		.and()
+		.formLogin().permitAll()
+//			.loginPage("/login")
+//			.loginProcessingUrl("/registrazione")
+//			.permitAll()
+		.and()
+		.logout().permitAll()
+		.and()
+		.exceptionHandling().accessDeniedPage("/admin");
+	
+}
 }
