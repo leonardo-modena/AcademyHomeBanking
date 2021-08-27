@@ -25,8 +25,17 @@ import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
 import {UserModule} from "./module/user-module/user.module";
+<<<<<<< Updated upstream
 import { AdminModule } from './module/admin/admin.module';
 
+=======
+import { UserListComponent } from './components/admin/user-list/user-list.component';
+import { UserListItemComponent } from './components/admin/user-list/user-list-item/user-list-item.component';
+import { AccountListComponent } from './components/admin/account-list/account-list.component';
+import { AccountListItemComponent } from './components/admin/account-list/account-list-item/account-list-item.component';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+>>>>>>> Stashed changes
 
 
 @NgModule({
@@ -48,6 +57,7 @@ import { AdminModule } from './module/admin/admin.module';
         NotFoundComponent,
         ErrorComponent,
     ],
+<<<<<<< Updated upstream
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -58,6 +68,20 @@ import { AdminModule } from './module/admin/admin.module';
         UserModule,
         AdminModule
     ],
+=======
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatTabsModule,
+    UserModule,
+    MatIconModule,
+    MatButtonModule
+  ],
+>>>>>>> Stashed changes
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

@@ -1,0 +1,30 @@
+.btn{
+  background-color: #173A27 !important;
+  border-radius: 5px !important;
+
+}
+.hover:hover{
+  color: white !important;
+  background-color: #0C1D14 !important;
+}
+
+.bgc{
+  background-color: #2c6e49;
+  height: 50rem !important;
+}
+
+@media (max-width: 765px) {
+
+  .ct{
+    margin-left: 25% !important;
+  }
+
+}
+
+@media (min-width: 768px) {
+
+  .mtt{
+    margin-top: 25% !important;
+  }
+
+}

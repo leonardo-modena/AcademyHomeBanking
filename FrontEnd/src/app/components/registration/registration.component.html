@@ -31,15 +31,15 @@
       <input type="email" class="form-control" id="email" name="email" placeholder="email@email.it" required ngModel pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
     </div>
 
-    <div class="col-12 form-group mt-3">
+    <div class="col-12 form-group mt-3 ">
       <label for="date">Inserisci la tua data di nascita</label>
-      <input class="dp" type="date" id="date" name="date"
+      <input class="dp form-control" type="date" id="date" name="date"
              value="{{today}}" required ngModel max="2003-01-01" min="1941-01-01">
     </div>
 
     <div class="col-md-6 form-group mt-3">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required #password ngModel
+      <input type="password" class="form-control" id="password" name="password" required ngModel
       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
       (input)="setTouch()">
         <div *ngIf="touch" [@fade] class="alert-info">
@@ -61,7 +61,7 @@
 
 
     <div class="col-12 mt-4 mb-4">
-      <button type="submit" class="btn btn-primary hover">Crea il tuo conto</button>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary hover">Crea il tuo conto</button>
     </div>
 
     </form>
