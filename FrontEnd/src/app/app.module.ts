@@ -29,6 +29,10 @@ import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
 import {UserModule} from "./module/user-module/user.module";
+import { UserListComponent } from './components/admin/user-list/user-list.component';
+import { UserListItemComponent } from './components/admin/user-list/user-list-item/user-list-item.component';
+import { AccountListComponent } from './components/admin/account-list/account-list.component';
+import { AccountListItemComponent } from './components/admin/account-list/account-list-item/account-list-item.component';
 
 
 @NgModule({
@@ -49,7 +53,11 @@ import {UserModule} from "./module/user-module/user.module";
         ListComponent,
         ListItemComponent,
         NotFoundComponent,
-        ErrorComponent
+        ErrorComponent,
+        UserListComponent,
+        UserListItemComponent,
+        AccountListComponent,
+        AccountListItemComponent
     ],
     imports: [
         FormsModule,
