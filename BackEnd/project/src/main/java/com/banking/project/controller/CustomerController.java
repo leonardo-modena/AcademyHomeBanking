@@ -75,7 +75,7 @@ public class CustomerController {
 		return "Cliente con id: " + customerId + " rimosso";
 	}
 
-	@GetMapping(value = "/users/ruolo")
+	@GetMapping(value = "/users/role")
 	public Customer getUser(){
 		return customerRepository.findAllByRolename("C");
 	}

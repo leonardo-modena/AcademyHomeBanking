@@ -14,9 +14,9 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer,Integer> {
 
 
-    @Query(value = "select * from utenti  where ruolo = :ruolo", nativeQuery = true)
-    Customer findAllByRolename(String ruolo);
+    @Query(value = "select * from users where role = :role", nativeQuery = true)
+    Customer findAllByRolename(String role);
 
-    @Query(value="select * from utenti where email= :email",nativeQuery = true)
+    @Query(value="select * from users where email= :email",nativeQuery = true)
     public Customer getUserByEmail(@Param("email") String email);
 }
