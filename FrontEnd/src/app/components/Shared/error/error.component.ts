@@ -4,42 +4,38 @@ import { ErrorService } from 'src/app/services/error.service';
 @Component({
   selector: 'app-error',
   templateUrl: './error.component.html',
-  styleUrls: ['./error.component.css']
+  styleUrls: ['./error.component.css'],
 })
 export class ErrorComponent implements OnInit, OnDestroy {
-
-
-
   errorMessage!: string;
   visible: boolean = false;
 
   visibilityTimeout!: any;
 
-  constructor(private errorService: ErrorService) { }
+  constructor(private errorService: ErrorService) {}
 
   ngOnInit(): void {
-    this.errorService.error.subscribe(
-      (incomingError: string) => {
+    this.errorService.error.subscribe((incomingError: string) => {
+      if (incomingError) {
         this.errorMessage = incomingError;
         this.showMessage();
       }
-    )
+    });
   }
 
-  showMessage(): void{
-    this.visible = true
+  showMessage(): void {
+    this.visible = true;
     this.visibilityTimeout = setTimeout(() => {
-      this.visible = false
+      this.visible = false;
     }, 10000);
   }
 
-  exitClick(): void{
+  exitClick(): void {
     clearTimeout(this.visibilityTimeout);
     this.visible = false;
   }
 
-  ngOnDestroy(): void{
-    clearTimeout(this.visibilityTimeout)
+  ngOnDestroy(): void {
+    clearTimeout(this.visibilityTimeout);
   }
-
 }
