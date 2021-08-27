@@ -9,7 +9,7 @@ export class UserListItemComponent implements OnInit {
 
   @Input() user!:string;
   @Input() pendingUser!:boolean;
-
+  @Input() index!:number;
 
   constructor() { }
 
