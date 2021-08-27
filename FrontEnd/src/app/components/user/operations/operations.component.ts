@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OperationsComponent implements OnInit {
 
+  operations: any[] = [];
+
   constructor() { }
 
   ngOnInit(): void {

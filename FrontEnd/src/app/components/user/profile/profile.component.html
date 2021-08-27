@@ -28,7 +28,7 @@
     <div class="col-12 col-md-6 m-auto">
       <h2>Aggiungi un nuovo conto</h2>
 
-      <form (ngSubmit)="onNewBill(form)" #form="ngForm" class="row g-3" >
+      <form (ngSubmit)="onNewBill(form)" #form="ngForm" class="row gx-5" >
         <div class="form-group">
           <label for="selectedBill">Seleziona il conto</label>
           <select id="selectedBill" required class="form-select" aria-label="Seleziona il conto" [(ngModel)]="selectedBill" name="selectedBill" (change)="maxAmount=bills[selectedBill].amount">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {ActivatedRouteSnapshot, Router} from "@angular/router";
+import {Operation} from "../../model/operation";
 
 @Component({
   selector: 'app-user',
@@ -12,6 +13,24 @@ export class UserComponent implements OnInit {
   user!: {nome: string, cognome: string, dataDiNascita: number, email: string, id: string};
   balance: number = 0;
   routeUrl: string = '';
+  operations: Operation[] = [
+    {
+      type: 'prelievo',
+      importo: 234.54,
+      dataPrelievo: 1628763225000,
+      causale: 'Spese mediche',
+      beneficiario: 'Ospedale di Piombino',
+      mittente: ''
+    },
+    {
+      type: 'versamento',
+      importo: 403.46,
+      dataPrelievo: 1622277132000,
+      causale: 'Vendita ',
+      beneficiario: 'Ospedale di Piombino',
+      mittente: ''
+    }
+  ];
 
   constructor(private userService: UserService, private router: Router) {  }
 

@@ -4,10 +4,9 @@
       <h2>Benvenuto, {{user.nome}}</h2>
       <h3>Il tuo saldo: {{balance}}€</h3>
       <app-filter></app-filter>
-      <!-- <app-list fruits="list"></app-list> -->
-      <app-download downloadData="list"></app-download>
+      <app-operation-list [operationsList]="operations"></app-operation-list>
+      <app-download [downloadData]="operations"></app-download>
     </div>
   </div>
 </div>
-<app-spinner></app-spinner>
 <router-outlet></router-outlet>
