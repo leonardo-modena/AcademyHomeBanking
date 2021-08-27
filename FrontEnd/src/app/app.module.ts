@@ -16,8 +16,6 @@ import { SpinnerComponent } from './components/Shared/spinner/spinner.component'
 import { DownloadComponent } from './components/user/download/download.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { OperationsComponent } from './components/user/operations/operations.component';
-import { ListComponent } from './components/Shared/list/list.component';
-import { ListItemComponent } from './components/Shared/list/list-item/list-item.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
@@ -25,10 +23,6 @@ import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
 import {UserModule} from "./module/user-module/user.module";
-import { UserListComponent } from './components/admin/user-list/user-list.component';
-import { UserListItemComponent } from './components/admin/user-list/user-list-item/user-list-item.component';
-import { AccountListComponent } from './components/admin/account-list/account-list.component';
-import { AccountListItemComponent } from './components/admin/account-list/account-list-item/account-list-item.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -48,8 +42,6 @@ import {MatTabsModule} from "@angular/material/tabs";
         DownloadComponent,
         ProfileComponent,
         OperationsComponent,
-        ListComponent,
-        ListItemComponent,
         NotFoundComponent,
         ErrorComponent,
     ],
