@@ -8,57 +8,10 @@
   </div>
   <div class="row mt-5">
     <div class="col-12 col-md-6 m-auto">
-      <div class="list-container">
-        <div class="list-header">
-          <span class="list-title">Lista Correntisti</span>
-        </div>
-        <div class="list-content">
-  
-
-                <div class="list-items">
-                  <div class="list-items-title">
-                    <div class="item-title"> <span>Nome</span> </div>
-                    <div class="item-title"> <span>Cognome</span> </div>
-                    <div class="item-title"> <span>E-Mail</span> </div>
-                  </div>
-                   <app-user-list [newUsersMode]="false"></app-user-list> 
-                </div>
-
-        </div>
-      </div>
+      <app-list [operation]="false"></app-list>
     </div>
     <div class="col-12 col-md-6 m-auto">
-      <div class="list-container">
-        <div class="list-header">
-            <span class="list-title">Operazioni</span>
-        </div>
-        <div class="list-content">
-          <mat-tab-group>
-            <mat-tab label="First">
-              <div class="list-items">
-                <div class="list-items-title">
-                  <div class="item-title"> <span>Nome</span> </div>
-                  <div class="item-title"> <span>Cognome</span> </div>
-                  <div class="item-title"> <span>E-Mail</span> </div>
-                </div>
-                <app-user-list [newUsersMode]="true"></app-user-list>
-              </div>
-              
-            </mat-tab>
-            <mat-tab label="Second">
-              <div class="list-items">
-                <div class="list-items-title">
-                  <div class="item-title"> <span>Nome</span> </div>
-                  <div class="item-title"> <span>Cognome</span> </div>
-                  <div class="item-title"> <span>E-Mail</span> </div>
-                </div>
-              <app-account-list></app-account-list>
-              </div>
-            </mat-tab>
-          </mat-tab-group>
-        </div>
-      </div>
-        
+      <app-list [operation]="true"></app-list>
     </div>
   </div>
 </div>

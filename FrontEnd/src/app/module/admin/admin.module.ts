@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { AdminComponent } from 'src/app/components/admin/admin.component';
+import { ListComponent } from 'src/app/components/admin/list/list.component';
 import { UserListComponent } from 'src/app/components/admin/user-list/user-list.component';
 import { UserListItemComponent } from 'src/app/components/admin/user-list/user-list-item/user-list-item.component';
 import { AccountListComponent } from 'src/app/components/admin/account-list/account-list.component';
@@ -14,10 +15,12 @@ import { AccountListItemComponent } from 'src/app/components/admin/account-list/
 @NgModule({
   declarations: [
     AdminComponent,
+    ListComponent,
     UserListComponent,
     UserListItemComponent,
     AccountListComponent,
-    AccountListItemComponent
+    AccountListItemComponent,
+
   ],
   imports: [
     CommonModule,
