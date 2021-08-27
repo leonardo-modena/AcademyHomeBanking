@@ -1,6 +1,7 @@
 package com.banking.project.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -33,6 +34,11 @@ public class Customer {
 
 	@Column(name = "role")
 	private String role;
+
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "users",
+			cascade = {CascadeType.PERSIST,CascadeType.DETACH,
+					CascadeType.MERGE,CascadeType.REFRESH})
+	private List<BankAccount> bankAccounts;
 
 	public Customer() {
 
