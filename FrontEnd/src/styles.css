@@ -176,6 +176,10 @@ input[type=number]:focus,
   align-content: center;
 }
 
+.inline{
+  display: inline;
+}
+
 
 /* UTILITY CLASS END  */
 

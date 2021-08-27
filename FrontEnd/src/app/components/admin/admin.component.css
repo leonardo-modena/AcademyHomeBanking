@@ -1,0 +1,18 @@
+.smartphone-section-selector{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.smartphone-section-selector i{
+    color: var(--gray);
+    font-size: 2rem;
+    transform: scale(1);
+    transition: all 0.2s ease;
+}
+
+
+.active{
+    transform: scale(1.4) !important;
+    color: var(--secondary-orange) !important;
+}
