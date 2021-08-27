@@ -117,6 +117,11 @@ input[type=number]:focus,
   background-color: var(--secondary-green);
 }
 
+.mat-tab-body-content {
+  height: 100%;
+  overflow: hidden !important;
+}
+
 /* MODIFICHE ANGULAR MATERIAL END */
 
 
