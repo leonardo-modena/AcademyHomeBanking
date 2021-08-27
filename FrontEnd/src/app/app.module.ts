@@ -31,6 +31,7 @@ import { AccountListComponent } from './components/admin/account-list/account-li
 import { AccountListItemComponent } from './components/admin/account-list/account-list-item/account-list-item.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 @NgModule({
