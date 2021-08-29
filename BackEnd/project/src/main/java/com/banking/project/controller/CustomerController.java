@@ -74,10 +74,13 @@ public class CustomerController {
 
 		return "Cliente con id: " + customerId + " rimosso";
 	}
-
+	/**
+	 * Ritorna la lista di correntisti
+	 * @return
+	 */
 	@GetMapping(value = "/users/role")
-	public Customer getUser(){
-		return customerRepository.findAllByRolename("C");
+	public List<Customer> getUsersByRole(){
+		return customerRepository.findAllByRolename("ROLE_C");
 	}
 
 }

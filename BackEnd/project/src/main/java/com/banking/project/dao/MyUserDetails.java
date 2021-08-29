@@ -1,13 +1,15 @@
 package com.banking.project.dao;
 
 import com.banking.project.entity.Customer;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Collection;
-
 public class MyUserDetails implements UserDetails {
  
 	private static final long serialVersionUID = 1L;
@@ -32,8 +34,12 @@ public class MyUserDetails implements UserDetails {
     public String getUsername() {
         return user.getEmail();
     }
- 
-    @Override
+    
+    public int getUserId() {
+		return user.getId();
+	}
+
+	@Override
     public boolean isAccountNonExpired() {
         return true;
     }

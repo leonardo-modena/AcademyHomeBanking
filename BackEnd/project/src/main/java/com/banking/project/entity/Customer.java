@@ -1,9 +1,13 @@
 package com.banking.project.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.FilterJoinTable;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "users")
@@ -34,18 +38,30 @@ public class Customer {
 
 	@Column(name = "role")
 	private String role;
-
+	
 	@OneToMany(mappedBy = "holder")
-	private List<BankAccount> bankAccounts;
+	private List <BankAccount> bankAccounts;
+
+	/**
+	 * Metodo per estrarre l'id filtrando così i dati che non servono del conto corrente
+	 * @return
+	 */
+	public List<Integer> bankAccounts_id(){
+		List<Integer> bAccounts = new ArrayList<>();
+		for(BankAccount b: bankAccounts) {
+			bAccounts.add(b.getId());
+		}
+		return bAccounts;
+	};
 
 	public Customer() {
 
 	}
-
-
-	public Customer(String firstName, String lastName, String email, String password, Date dateOfBirth, String gender,
-			String role) {
-		
+	
+	public Customer(int id, String firstName, String lastName, String email, String password, Date dateOfBirth,
+			String gender, String role, List<BankAccount> bankAccounts) {
+		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -53,8 +69,8 @@ public class Customer {
 		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
 		this.role = role;
+		this.bankAccounts = bankAccounts;
 	}
-
 
 	public int getId() {
 		return id;
@@ -119,5 +135,15 @@ public class Customer {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+
+	public List<Integer> getBankAccounts() {
+		return bankAccounts_id();
+
+	}
+	public void setBankAccounts(List<BankAccount> bankAccounts) {
+		this.bankAccounts = bankAccounts;
+	}
+	
 
 }
