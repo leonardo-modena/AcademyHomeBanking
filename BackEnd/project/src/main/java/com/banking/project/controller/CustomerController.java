@@ -20,7 +20,6 @@ import com.banking.project.exception.UserNotFoundException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/home")
 public class CustomerController {
 
 	@Autowired
@@ -51,7 +50,7 @@ public class CustomerController {
 	/**
 	 * Registrazione di un nuovo utente
 	 */
-	@PostMapping("/users/signup")
+	@PostMapping("/registrazione")
 	public Customer addCustomer(@RequestBody Customer theCustomer) {
 
 		theCustomer.setId(0);

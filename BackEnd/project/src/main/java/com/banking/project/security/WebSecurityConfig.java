@@ -42,22 +42,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	http.authorizeRequests()
-		//.antMatchers("/").permitAll()
-		.antMatchers("/home/users/**").hasRole("C")
+		.antMatchers("/").permitAll()
+		.antMatchers("/user").hasRole("C")
+		.antMatchers("/admin").hasRole("D")
         .antMatchers("/home/bankAccount/accounts/**").hasRole("D")
         .antMatchers("/home/bankAccount/accounts/inactive").hasRole("D")
         .antMatchers("/home/bankAccount/accounts/closing").hasRole("D")
         .antMatchers("/home/bankAccount/myAccount/**").hasRole("C")
         .antMatchers("/account/**").hasAnyRole("D","C")
 		.and()
-		.formLogin().permitAll()
+		.formLogin().permitAll();
 			//.loginPage("/login")
 			//.loginProcessingUrl("")
 //			.permitAll()
-		.and()
-		.logout().permitAll()
-		.and()
-		.exceptionHandling().accessDeniedPage("/admin");
+		//.and()
+		//.logout().permitAll()
+		//.and()
+		//.exceptionHandling().accessDeniedPage(""");
 	
 }
 }
