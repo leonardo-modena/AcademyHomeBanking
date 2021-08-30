@@ -65,6 +65,9 @@ h3{
 p, table {
   font-size: 1.5rem !important;
 }
+label {
+  font-size: 1.4rem;
+}
 
 button {
   font-size: 1.5rem!important;
@@ -85,11 +88,10 @@ button.btn-outline-primary:hover, button.btn-outline-primary:active{
 }
 
 
-button.btn-outline-primary[disabled],  button.btn-outline-danger[disabled]{
+button.btn-outline-primary[disabled],  button.btn-outline-danger[disabled], button.btn-primary[disabled]{
   color: #c2c2c2;
   border: 1px solid #888888;
   cursor: not-allowed;
-  width: 90%;
 }
 
 button.btn-outline-danger{
@@ -107,9 +109,9 @@ button.btn-outline-danger:hover, button.btn-outline-danger:active{
 button.btn-primary{
   cursor: pointer !important;
 
-  color: var(--white-yellow) !important;
-  border: 2px solid var(--primary-green) !important;
-  background-color: var(--primary-green)!important;
+  background-color: var(--white-yellow) !important;
+  border-color: var(--white-yellow) !important;
+  color: var(--gray) !important;
 }
 
 button.btn-primary:hover{
@@ -134,23 +136,6 @@ input[type=number]:focus,
 }
 
 
-
-/* UTILITY CLASS START */
-.justify-center{
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-.inline{
-  display: inline;
-}
-
-.serif-font{
-  font-family: 'Kaisei HarunoUmi', serif;
-}
-
-/* UTILITY CLASS END  */
 
 /*LIST UI START*/
 
@@ -195,6 +180,31 @@ input[type=number]:focus,
 }
 
 /*LIST UI END*/
+
+/* UTILITY CLASS START */
+.justify-center{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.inline{
+  display: inline;
+}
+
+.green-background {
+  background-color:  var(--secondary-green);
+  border-radius: 5px;
+  color: var(--white-yellow);
+}
+
+.serif-font{
+  font-family: 'Kaisei HarunoUmi', serif;
+}
+
+
+/* UTILITY CLASS END  */
+
 
 /* MODIFICHE ANGULAR MATERIAL START */
 
