@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+/*serif font*/
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi:wght@400;500;700&display=swap');
+
+
 :root{
   --gray: #2f2f2f;
   --light-gray: rgb(232, 232, 232);
@@ -130,20 +133,36 @@ input[type=number]:focus,
   box-shadow: none!important;
 }
 
+
+
+/* UTILITY CLASS START */
+.justify-center{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.inline{
+  display: inline;
+}
+
+.serif-font{
+  font-family: 'Kaisei HarunoUmi', serif;
+}
+
+/* UTILITY CLASS END  */
+
 /*LIST UI START*/
 
 .list-container{
   width: 100%;
   overflow: hidden;
-  border-radius: .25rem;
-
-  box-shadow: 0px 0px 22px -10px var(--primary-green);
   background-color: var(--light-gray);
 }
 
 .list-header{
-  padding: 1rem 3rem;
   background-color: var(--secondary-green);
+  padding-bottom: 1.5rem;
 }
 
 .list-title{
@@ -177,21 +196,6 @@ input[type=number]:focus,
 
 /*LIST UI END*/
 
-/* UTILITY CLASS START */
-.justify-center{
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-.inline{
-  display: inline;
-}
-
-
-/* UTILITY CLASS END  */
-
-
 /* MODIFICHE ANGULAR MATERIAL START */
 
 .mat-tab-labels {
@@ -222,7 +226,7 @@ input[type=number]:focus,
 
 @media (min-width: 768px) {
   html{
-    font-size: 80%;
+    font-size: 80% !important;
   }
  }
 

@@ -1,20 +1,28 @@
-<div class="container mt-4">
+<div class="container-fluid mt-4 mb-lg-5">
   <div class="row">
-    <div class="col-12 col-md-12 m-auto">
-      <h2>DASHBOARD AMMINISTRATIVA</h2>
+    <div class="col-12 col-md-12 m-auto px-4">
+      <h2 class="serif-font">DASHBOARD AMMINISTRATIVA</h2>
       <span class="inline" >Accesso effettuato da: </span> <h4 class="inline">{{ adminInfo.nome | titlecase }}</h4>
     </div>
   </div>
-  <div class="smartphone-section-selector" *ngIf="sectionSelector">
-    <i class="bi bi-people-fill" [ngClass]="{'active': userSection}" (click)="userSectionClick()"></i>
-    <i class="bi bi-check2-square" [ngClass]="{'active': operationSection}" (click)="operationSectionClick()"></i>
-  </div>
-  <div class="row mt-5">
-    <div class="col-12 col-md-6 m-auto" *ngIf="userSection">
-      <app-list [operation]="false"></app-list>
+  <div class="row mt-5" [ngClass]="{'responsive-admin-card': responsive}">
+ 
+    <div class="smartphone-section-selector" *ngIf="responsive">
+      <i class="bi bi-people-fill" [ngClass]="{'active': userSection}" (click)="userSectionClick()"></i>
+      <i class="bi bi-check2-square" [ngClass]="{'active': operationSection}" (click)="operationSectionClick()"></i>
+    
     </div>
-    <div class="col-12 col-md-6 m-auto" *ngIf="operationSection">
-      <app-list [operation]="true"></app-list>
-    </div>
+    
+      <div class="col-12 col-md-9 col-lg-6 col-xl-5 m-auto" *ngIf="userSection">
+        <div class="admin-card">
+          <app-list class="admin-list" [operation]="false"></app-list>
+        </div>
+        
+      </div>
+      <div class="col-12 col-md-9 col-lg-6 col-xl-5 m-auto" *ngIf="operationSection">
+        <div class="admin-card">
+          <app-list class="admin-list" [operation]="true"></app-list>
+        </div>
+        </div>
   </div>
 </div>

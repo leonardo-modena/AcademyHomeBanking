@@ -12,7 +12,7 @@ export class AdminComponent implements OnInit {
   userSection!: boolean;
   operationSection!: boolean;
 
-  sectionSelector!: boolean;
+  responsive!: boolean;
 
   constructor(private adminService: AdminService) {
     this.responsiveSection();
@@ -38,14 +38,14 @@ export class AdminComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   responsiveSection(event?: any) {
     let screenWidth = window.innerWidth;
-    if (screenWidth > 767) {
+    if (screenWidth > 995) {
       this.userSection = true;
       this.operationSection = true;
-      this.sectionSelector = false;
+      this.responsive = false;
     } else {
       this.userSection = true;
       this.operationSection = false;
-      this.sectionSelector = true;
+      this.responsive = true;
     }
   }
 }
