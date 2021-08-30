@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand">
     <img
-      style="max-width: 200px; margin-top: -7px"
+    [routerLink]="['/']"
+    class="navbar-img pointer"
       src="../../../assets/img/logo/logo_small.png"
     />
   </a>
@@ -18,12 +19,12 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav ms-auto">
       <li class="nav-item active">
-        <a class="nav-link">Accedi <span class="sr-only">(current)</span></a>
+        <a class="nav-link pointer">Accedi <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link">Nuovo Conto</a>
+        <a class="nav-link pointer">Nuovo Conto</a>
       </li>
     </ul>
   </div>

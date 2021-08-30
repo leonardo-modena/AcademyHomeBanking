@@ -1,0 +1,8 @@
+nav{
+    padding: 1rem 2rem !important;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.navbar-img{
+    width: 14rem;
+}

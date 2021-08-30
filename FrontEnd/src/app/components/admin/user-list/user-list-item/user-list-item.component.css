@@ -4,11 +4,27 @@
     color: var(--gray);
     cursor: pointer;
     transition: all 0.3s ease;
-    transform: scale(1);
-    transform-origin: center;
+}
+
+.action-button{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0.3rem;
+}
+
+.action-icon .action-button__desc{
+    font-size: 0rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: var(--gray);
+    transform-origin: right;
+}
+.action-icon:hover .action-button__desc{
+    opacity: 1;
+    font-size: 1rem;
+    color: var(--gray);
 }
 
 .action-icon:hover{
-    transform: scale(1.1);
     color: var(--secondary-orange);
 }

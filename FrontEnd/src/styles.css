@@ -142,11 +142,9 @@ input[type=number]:focus,
 .list-container{
   width: 100%;
   overflow: hidden;
-  background-color: var(--light-gray);
 }
 
 .list-header{
-  background-color: var(--secondary-green);
   padding-bottom: 1.5rem;
 }
 
@@ -158,6 +156,8 @@ input[type=number]:focus,
 }
 
 .list-content{
+  background-color: var(--light-gray);
+  height: 43rem;
   padding: 1rem 3rem;
 }
 
@@ -200,6 +200,10 @@ input[type=number]:focus,
 
 .serif-font{
   font-family: 'Kaisei HarunoUmi', serif;
+}
+
+.pointer{
+  cursor: pointer;
 }
 
 
