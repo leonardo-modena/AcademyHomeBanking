@@ -1,13 +1,31 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+
+  url: string = "http://localhost:8080";
   isAuth: boolean = false;
   isUser: boolean = false;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  registerUser(username: string, lastname: string, email: string, password: string,msDate: number,sex: string){
+
+    return this.http.post<object>(this.url + "/registrazione",{
+    username,
+      lastname,
+      email,
+      password,
+      msDate,
+      sex
+    })
+  }
+
+
+
 
 }

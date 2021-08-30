@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {AuthService} from "../../services/auth.service";
 
 
 @Component({
@@ -27,7 +28,7 @@ export class RegistrationComponent implements OnInit {
   passwordError: boolean = true;
   today!:string;
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
     this.today = new Date().toLocaleDateString();
@@ -68,10 +69,12 @@ export class RegistrationComponent implements OnInit {
     this.passwordError = true;
 
     let date = form.value.date;
-    let ms = Date.parse(date);
+    let msDate = Date.parse(date);
     const sex = form.value.sesso;
 
-
+    this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {
+      console.log(resData)
+    });
 
   }
 
