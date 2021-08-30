@@ -35,9 +35,10 @@ public class MyUserDetails implements UserDetails {
         return user.getEmail();
     }
     
-    public int getUserId() {
-		return user.getId();
+    public Customer getDetails() {
+		return user;
 	}
+    
 
 	@Override
     public boolean isAccountNonExpired() {

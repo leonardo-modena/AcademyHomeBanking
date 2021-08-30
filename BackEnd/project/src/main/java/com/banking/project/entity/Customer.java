@@ -39,7 +39,7 @@ public class Customer {
 	@Column(name = "role")
 	private String role;
 	
-	@OneToMany(mappedBy = "holder")
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "holder")
 	private List <BankAccount> bankAccounts;
 
 	/**
@@ -60,7 +60,6 @@ public class Customer {
 	
 	public Customer(int id, String firstName, String lastName, String email, String password, Date dateOfBirth,
 			String gender, String role, List<BankAccount> bankAccounts) {
-		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
