@@ -26,6 +26,7 @@ import {UserModule} from "./module/user-module/user.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
+import { OperationFormComponent } from './components/user/operations/operation-form/operation-form.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {MatTabsModule} from "@angular/material/tabs";
         OperationsComponent,
         NotFoundComponent,
         ErrorComponent,
+        OperationFormComponent,
     ],
   imports: [
     FormsModule,
