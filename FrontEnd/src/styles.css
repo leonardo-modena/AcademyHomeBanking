@@ -198,6 +198,12 @@ input[type=number]:focus,
   color: var(--white-yellow);
 }
 
+.orange-background {
+  background-color:  var(--secondary-orange);
+  border-radius: 5px;
+  color: var(--gray);
+}
+
 .serif-font{
   font-family: 'Kaisei HarunoUmi', serif;
 }

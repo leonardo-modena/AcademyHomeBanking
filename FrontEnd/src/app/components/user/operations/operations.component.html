@@ -1,4 +1,22 @@
-<div>
-
-
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Versamento" >
+          <h4>Per fare un versamento compila il form sottostante</h4>
+          <div class="container green-background p-4">
+            <h4 class="text-center">Versamento</h4>
+            <app-operation-form></app-operation-form>
+          </div>
+        </mat-tab>
+        <mat-tab label="Prelievo">
+          <h4>Per fare un prelievo compila il form sottostante</h4>
+          <div class="container orange-background p-4">
+            <h4 class="text-center">Prelievo</h4>
+            <app-operation-form></app-operation-form>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
 </div>
