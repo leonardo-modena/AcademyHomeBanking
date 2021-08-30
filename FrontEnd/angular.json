@@ -75,11 +75,9 @@
           "configurations": {
             "production": {
               "browserTarget": "HomeBanking:build:production",
-              "proxyConfig": "proxy.conf.js"
             },
             "development": {
               "browserTarget": "HomeBanking:build:development",
-              "proxyConfig": "proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
