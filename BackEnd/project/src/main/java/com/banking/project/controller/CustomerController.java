@@ -3,6 +3,7 @@ package com.banking.project.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.banking.project.dao.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,11 +21,15 @@ import com.banking.project.exception.UserNotFoundException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/home")
 public class CustomerController {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+
+	@Autowired
+	private BankAccountRepository bankAccountRepository;
+
+
 
 	/**
 	 * Metodo che ritorna la lista di dipendenti e clienti
@@ -51,12 +56,13 @@ public class CustomerController {
 	/**
 	 * Registrazione di un nuovo utente
 	 */
-	@PostMapping("/users/signup")
+	@PostMapping("/registrazione")
 	public Customer addCustomer(@RequestBody Customer theCustomer) {
 
 		theCustomer.setId(0);
-
+ 		//theCustomer.setBankAccounts(null);
 		customerRepository.save(theCustomer);
+//		bankAccountRepository.insertFirstAccount(theCustomer.getId());
 
 		return theCustomer;
 	}
@@ -74,10 +80,13 @@ public class CustomerController {
 
 		return "Cliente con id: " + customerId + " rimosso";
 	}
-
-	@GetMapping(value = "/users/ruolo")
-	public Customer getUser(){
-		return customerRepository.findAllByRolename("C");
+	/**
+	 * Ritorna la lista di correntisti
+	 * @return
+	 */
+	@GetMapping(value = "/users/role")
+	public List<Customer> getUsersByRole(){
+		return customerRepository.findAllByRolename("ROLE_C");
 	}
 
 }

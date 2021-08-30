@@ -25,15 +25,15 @@ export class AdminService {
   //get request
 
   getAllUser(): Observable<User[]>{
-    return this.httpService.get<User[]>(`${apiUrl}user/getAll`)
+    return this.httpService.get<User[]>(`${apiUrl}users/role`)
   }
 
   getNewUser(): Observable<User[]>{
-    return this.httpService.get<User[]>(`${apiUrl}user/getNewUser`)
+    return this.httpService.get<User[]>(`${apiUrl}accounts/inactive`)
   }
 
   getPendingAccount(): Observable<Account[]>{
-    return this.httpService.get<Account[]>(`${apiUrl}accout/pendingToDelete`)
+    return this.httpService.get<Account[]>(`${apiUrl}accounts/closing`)
   }
 
 

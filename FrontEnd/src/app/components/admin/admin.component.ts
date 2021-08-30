@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Account } from 'src/app/model/account';
+import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -9,12 +11,25 @@ import { AdminService } from 'src/app/services/admin.service';
 export class AdminComponent implements OnInit {
   adminInfo!: { nome: string; cognome: string };
 
+  allUsers!: User[];
+  allNewUsers!: User[];
+  allToDeleteAccounts!: Account[];
+
   userSection!: boolean;
   operationSection!: boolean;
 
   responsive!: boolean;
 
   constructor(private adminService: AdminService) {
+    this.adminService.getAllUser().subscribe( (allUsers) => {
+      this.allUsers = allUsers;
+    })
+    this.adminService.getNewUser().subscribe( (newUsers) => {
+      this.allNewUsers = newUsers;
+    })
+    this.adminService.getPendingAccount().subscribe( (toDeleteAccount) => {
+      this.allToDeleteAccounts = toDeleteAccount;
+    })
     this.responsiveSection();
   }
 

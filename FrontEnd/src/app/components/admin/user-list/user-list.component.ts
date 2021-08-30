@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-user-list',
@@ -8,6 +9,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class UserListComponent implements OnInit {
 
   @Input() newUsersMode: boolean = false;
+  @Input() userList!: User[];
+
 
   users:string[]=["mela","pera","banana","uva","melone","anguria","arancia","mandarino","limone","pompelmo"];
 

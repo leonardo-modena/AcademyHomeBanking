@@ -9,7 +9,7 @@
           <div class="item-title"><span>Cognome</span></div>
           <div class="item-title"><span>E-Mail</span></div>
         </div>
-        <app-user-list [newUsersMode]="false"></app-user-list>
+        <app-user-list [userList]='allUsers' [newUsersMode]="false"></app-user-list>
       </div>
     </div>
     <div *ngIf="operation" class="list-content">
@@ -21,7 +21,7 @@
                   <div class="item-title"><span>Cognome</span></div>
                   <div class="item-title"><span>E-Mail</span></div>
                 </div>
-                <app-user-list [newUsersMode]="true"></app-user-list>
+                <app-user-list [userList]='newUsers' [newUsersMode]="true"></app-user-list>
               </div>
             </mat-tab>
             <mat-tab label="Conti da Eliminare">
@@ -31,7 +31,7 @@
                   <div class="item-title"><span>Cognome</span></div>
                   <div class="item-title"><span>E-Mail</span></div>
                 </div>
-                <app-account-list></app-account-list>
+                <app-account-list [accountList]='toDeleteAccounts'></app-account-list>
               </div>
             </mat-tab>
           </mat-tab-group>
