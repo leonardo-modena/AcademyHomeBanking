@@ -59,7 +59,7 @@ public class Customer {
 	}
 	
 	public Customer(int id, String firstName, String lastName, String email, String password, Date dateOfBirth,
-			String gender, String role, List<BankAccount> bankAccounts) {
+			String gender, String role) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -68,7 +68,6 @@ public class Customer {
 		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
 		this.role = role;
-		this.bankAccounts = bankAccounts;
 	}
 
 	public int getId() {

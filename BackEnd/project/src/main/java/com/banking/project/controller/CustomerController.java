@@ -3,6 +3,7 @@ package com.banking.project.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.banking.project.dao.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +25,11 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+
+	@Autowired
+	private BankAccountRepository bankAccountRepository;
+
+
 
 	/**
 	 * Metodo che ritorna la lista di dipendenti e clienti
@@ -54,10 +60,9 @@ public class CustomerController {
 	public Customer addCustomer(@RequestBody Customer theCustomer) {
 
 		theCustomer.setId(0);
-
+ 		//theCustomer.setBankAccounts(null);
 		customerRepository.save(theCustomer);
-		
-		
+//		bankAccountRepository.insertFirstAccount(theCustomer.getId());
 
 		return theCustomer;
 	}
