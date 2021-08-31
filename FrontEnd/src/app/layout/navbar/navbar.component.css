@@ -19,7 +19,7 @@ nav{
     width: 30rem;
     height: 100vh;
     background-color: var(--primary-green);
-    z-index: 2;
+    z-index: 3;
     transform-origin: right;
 }
 
