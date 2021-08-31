@@ -16,22 +16,72 @@ nav{
     position: fixed;
     top: 0;
     right: 0;
-    width: 30rem;
+    width: 27rem;
     height: 100vh;
     background-color: var(--primary-green);
     z-index: 3;
     transform-origin: right;
+    transform: translateX(30rem);
+    box-shadow: none;
 }
 
 .sidenav-content{
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 0rem;
     display: flex;
     flex-direction: column;
 }
 
+.user-items{
+    transform: translateX(20px);
+    opacity: 0;
+    transition: transform 0.3s ease ,opacity 0.3s ease;
+    transition-delay: 0.4s;
+}
+
 .sidenav-close-icon i{
+    padding-right: 2rem;
     font-size: 1.5rem;
     color: var(--gray);
+}
+
+.sidenav-item{
+    padding: 1.5rem 2rem ;
+    color: var(--white-yellow);
+    text-align: start;
+}
+
+.sidenav-item:first-child{
+    margin-top: 4rem;
+}
+
+.sidenav-item span{
+    font-size: 1.5rem;
+    font-weight: 100;
+    letter-spacing: 3px;
+    text-transform: capitalize;
+}
+
+.sidenav-item i{
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+}
+
+.exit-button{
+    margin-top: 4rem;
+    transition: all 0.3s ease-out;
+}
+
+.sidenav-item:hover{
+    background-color: var(--secondary-green);
+}
+
+.exit-button:hover i{
+    color: var(--secondary-orange);
+}
+
+.slide{
+    transform: translateX(0px);
+    opacity: 1;
 }
 
 .backdrop{

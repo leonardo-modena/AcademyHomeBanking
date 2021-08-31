@@ -7,6 +7,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -30,13 +31,18 @@ import {
   ],
 })
 export class NavbarComponent implements OnInit {
-  sidenav: boolean;
+  sidenav: boolean = false;
 
-  constructor() {
-    this.sidenav = false;
+  authorized!: boolean;
+
+  userLogged!: boolean;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authorized =  this.authService.isAuth;
+    this.userLogged =  this.authService.isUser;
   }
-
-  ngOnInit(): void {}
 
   sidenavSwitch(): void {
     this.sidenav = !this.sidenav;
