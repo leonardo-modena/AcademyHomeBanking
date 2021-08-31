@@ -1,1 +1,4 @@
-<app-button [disabled]="downloadData.length === 0" text="Scarica" type="outline-primary" (click)="download()"></app-button>
+<div class="d-flex">
+  <button class="btn btn-outline-primary ms-auto" [disabled]="downloadData.length === 0" (click)="download()">Scarica</button>
+
+</div>
