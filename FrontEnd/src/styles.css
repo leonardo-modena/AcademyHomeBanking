@@ -233,6 +233,17 @@ input[type=number]:focus,
 
 /* MODIFICHE ANGULAR MATERIAL END */
 
+/* UI ELEMENT START */
+
+.horizontal-divider{
+  height: 0.5px;
+  background-color: rgb(215 215 215);
+  box-shadow: 0 1px 3px 0px #0000006e;
+  margin-top: 2rem !important;
+}
+
+
+/* UI ELEMENT EnD */
 
 
 
