@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   numberNameError: boolean = false;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -37,5 +38,11 @@ export class LoginComponent implements OnInit {
 
     const username = form.value.username;
     this.numberNameError = false;
+    const password = form.value.password;
+
+    this.auth.loginUser(username,password).subscribe(resData => {
+      console.log(resData);
+    })
   }
+
 }
