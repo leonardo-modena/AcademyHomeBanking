@@ -1,10 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition('void => *', [
+        style({opacity: 0}),
+        animate(1000, style({opacity: 1}))
+      ]),
+      transition('* => void', [
+        animate(500, style({opacity: 0}))
+      ])
+    ])
+  ]
 })
 export class FilterComponent implements OnInit {
 
@@ -60,8 +72,6 @@ export class FilterComponent implements OnInit {
     else {
       this.invalidDate = false;
       this.dateSelection = false;
-      this.filterForm.controls.startDate.reset();
-      this.filterForm.controls.endDate.reset();
     }
   }
 
