@@ -1,6 +1,4 @@
-
-  <div class="backdrop" (click)="sidenavSwitch()" *ngIf="sidenav"></div> 
-
+<div class="backdrop" (click)="sidenavSwitch()" *ngIf="sidenav"></div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand">
@@ -11,7 +9,11 @@
     />
   </a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div
+    class="collapse navbar-collapse"
+    id="navbarSupportedContent"
+    *ngIf="!authorized"
+  >
     <ul class="navbar-nav ms-auto">
       <li class="nav-item active">
         <a class="nav-link pointer"
@@ -21,18 +23,37 @@
       <li class="nav-item">
         <a class="nav-link pointer">Nuovo Conto</a>
       </li>
-      <li class="nav-item">
-        
-      </li>
+      <li class="nav-item"></li>
     </ul>
   </div>
 
-  <a class="nav-link pointer toggle-sidenav"><i  (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i></a>
+  <a class="nav-link pointer toggle-sidenav" *ngIf="authorized"
+    ><i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i
+  ></a>
 </nav>
 
-<div class="sidenav-container" [@triggerSidenav]="sidenav ? 'open' : 'closed'" >
+<div class="sidenav-container" [@triggerSidenav]="sidenav ? 'open' : 'closed'">
   <div class="sidenav-content">
-    <div class="sidenav-close-icon ms-auto"><i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i></div>
-    <div class="sidenav-item"></div>
+    <div class="sidenav-close-icon ms-auto">
+      <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
+    </div>
+    <span class="user-items" *ngIf="userLogged" [ngClass]="{'slide': sidenav}">
+      <div  class="sidenav-item pointer" >
+        <i class="bi bi-person"></i>
+        <span>Profilo</span>
+      </div>
+      <div class="sidenav-item pointer" >
+        <i class="bi bi-cash"></i>
+        <span>Operazioni</span>
+      </div>
+      <div class="sidenav-item pointer">
+        <i class="bi bi-credit-card-2-front"></i>
+        <span>Conto</span>
+      </div>
+    </span>
+    <div class="sidenav-item exit-button pointer">
+      <i class="bi bi-box-arrow-left"></i>
+      <span>Logout</span>
+    </div>
   </div>
 </div>
