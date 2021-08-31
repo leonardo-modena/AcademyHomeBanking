@@ -1,19 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 col-md-10 col-lg-8 m-auto">
       <mat-tab-group mat-align-tabs="start">
         <mat-tab label="Versamento" >
-          <h4>Per fare un versamento compila il form sottostante</h4>
-          <div class="container green-background p-4">
-            <h4 class="text-center">Versamento</h4>
-            <app-operation-form></app-operation-form>
+          <div class="container ">
+            <div class="row">
+              <h4 class="my-3 col-12 col-md-10 m-auto">Per fare un versamento compila il form sottostante.</h4>
+              <div class="col-12 col-md-10 green-background p-4 m-auto">
+                <h3 class="text-center">Versamento</h3>
+                <app-operation-form op_type="deposit"></app-operation-form>
+              </div>
+            </div>
           </div>
         </mat-tab>
-        <mat-tab label="Prelievo">
-          <h4>Per fare un prelievo compila il form sottostante</h4>
-          <div class="container orange-background p-4">
-            <h4 class="text-center">Prelievo</h4>
-            <app-operation-form></app-operation-form>
+        <mat-tab label="Prelievo" >
+          <div class="container ">
+            <div class="row">
+              <h4 class="my-3 col-12 col-md-10 m-auto">Per fare un prelievo compila il form sottostante.</h4>
+              <div class="col-12 col-md-10 orange-background p-4 m-auto">
+                <h3 class="text-center">Prelievo</h3>
+                <app-operation-form op_type="taking"></app-operation-form>
+              </div>
+            </div>
           </div>
         </mat-tab>
       </mat-tab-group>
