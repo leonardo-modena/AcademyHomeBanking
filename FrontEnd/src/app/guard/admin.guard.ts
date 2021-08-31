@@ -5,11 +5,16 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RoleGuardGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    if(sessionStorage.getItem('token') && sessionStorage.getItem('role') == 'admin'){
+
+    }
+
     return true;
   }
-  
+
 }
