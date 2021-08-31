@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   numberNameError: boolean = false;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private route: Router) { }
 
   ngOnInit(): void {
   }
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
 
     this.auth.loginUser(username,password).subscribe(resData => {
       console.log(resData);
+
     })
   }
 
