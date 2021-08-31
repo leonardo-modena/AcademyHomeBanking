@@ -27,7 +27,7 @@
     </ul>
   </div>
 
-  <a class="nav-link pointer toggle-sidenav" *ngIf="authorized"
+  <a class="nav-link pointer toggle-sidenav" *ngIf="!authorized"
     ><i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i
   ></a>
 </nav>
@@ -37,7 +37,7 @@
     <div class="sidenav-close-icon ms-auto">
       <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
     </div>
-    <span class="user-items" *ngIf="userLogged" [ngClass]="{'slide': sidenav}">
+    <span class="user-items" *ngIf="!userLogged" [ngClass]="{'slide': sidenav}">
       <div  class="sidenav-item pointer" >
         <i class="bi bi-person"></i>
         <span>Profilo</span>
