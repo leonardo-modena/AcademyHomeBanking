@@ -35,7 +35,7 @@ public class BankAccountController {
 	@PostMapping("/newBankAccount")
 	public BankAccount newAccount(@RequestBody BankAccount bankAccount){
 		bankAccount.setId(0);
-
+		
 		bankAccountRepository.save(bankAccount);
 
 		return bankAccount;

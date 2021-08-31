@@ -15,7 +15,7 @@ public interface BankAccountRepository extends JpaRepository<BankAccount,Integer
 	
 	@Query(value = "select * from bank_account where account_status = 'CLOSING'", nativeQuery = true)
     List<BankAccount> findClosing();
-	@Query(value = "INSERT INTO bank_account (balance, account_status, holder) values (0.0,'INACTIVE',?#{holder})",
-            nativeQuery = true)
-    BankAccount insertFirstAccount(@Param("holder") int holder);
+//	@Query(value = "INSERT INTO bank_account (id,balance, account_status, holder) values (0,0.0,'INACTIVE',:holder)",
+//            nativeQuery = true)
+//    BankAccount insertFirstAccount(int holder);
 }
