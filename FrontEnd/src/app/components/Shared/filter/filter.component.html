@@ -1,5 +1,5 @@
-<button class="btn btn-outline-secondary my-3" *ngIf="isVisible" (click)="toggleFilter()"><i class="bi bi-funnel"></i> Filtra</button>
-<div class="container mb-4 p-4" *ngIf="!isVisible">
+<button class="btn btn-secondary my-3" *ngIf="isVisible" (click)="toggleFilter()"><i class="bi bi-funnel"></i> Filtra</button>
+<div [@fadeIn] class="container mb-4 p-4" *ngIf="!isVisible">
   <div class="row justify-content-between">
     <h5 class="col-10">Filtra i tuoi documenti</h5>
     <p class="col-2 text-right" (click)="toggleFilter()"><i class="bi bi-x float-end"></i></p>

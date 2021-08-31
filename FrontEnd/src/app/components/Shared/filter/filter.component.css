@@ -10,4 +10,21 @@
 p > i  {
   color: var(--primary-green);
   cursor: pointer;
+  padding: 2px;
+  transition: font-size 0.5s;
+}
+
+p > i:hover {
+  font-size: 1.8rem;
+}
+
+
+.btn-secondary {
+  background: var(--white-yellow) !important;
+  color: #888888;
+  border: 1px solid var(--white-yellow);
+}
+
+.btn-secondary:hover {
+  border: 1px solid #888888;
 }

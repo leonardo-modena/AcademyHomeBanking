@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../services/auth.service";
+import { Router} from "@angular/router";
 
 
 @Component({
@@ -28,7 +29,7 @@ export class RegistrationComponent implements OnInit {
   passwordError: boolean = true;
   today!:string;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.today = new Date().toLocaleDateString();
@@ -73,7 +74,8 @@ export class RegistrationComponent implements OnInit {
     const sex = form.value.sesso;
 
     this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {
-      console.log(resData)
+      console.log(resData);
+      this.router.navigate(['/login']);
     });
 
   }

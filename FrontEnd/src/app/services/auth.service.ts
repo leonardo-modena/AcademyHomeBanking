@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,8 @@ export class AuthService {
   url: string = "http://localhost:8080";
   isAuth: boolean = false;
   isUser: boolean = false;
+  isAdmin: boolean = false;
+  token !: string;
 
   constructor(private http: HttpClient) { }
 
@@ -32,6 +34,16 @@ export class AuthService {
       password
     })
   }
+
+  logout(){
+    this.isAuth = false;
+    sessionStorage.removeItem('token');
+  }
+
+  autoLogout(){
+    setTimeout(this.logout,1000);
+  }
+
 
 
 }
