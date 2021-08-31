@@ -6,3 +6,42 @@ nav{
 .navbar-img{
     width: 14rem;
 }
+
+.toggle-sidenav i{
+    font-size: 1.5rem;
+    color: var(--gray);
+}
+
+.sidenav-container{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30rem;
+    height: 100vh;
+    background-color: var(--primary-green);
+    z-index: 2;
+    transform-origin: right;
+}
+
+.sidenav-content{
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav-close-icon i{
+    font-size: 1.5rem;
+    color: var(--gray);
+}
+
+.backdrop{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+    z-index: 1;
+}
+
+

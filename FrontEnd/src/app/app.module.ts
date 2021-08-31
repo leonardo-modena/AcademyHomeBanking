@@ -27,6 +27,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
 import { OperationFormComponent } from './components/user/operations/operation-form/operation-form.component';
+import { SidenavComponent } from './layout/sidenav/sidenav.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { OperationFormComponent } from './components/user/operations/operation-f
         NotFoundComponent,
         ErrorComponent,
         OperationFormComponent,
+        SidenavComponent,
     ],
   imports: [
     FormsModule,
