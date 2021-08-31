@@ -25,28 +25,28 @@ export class AdminService {
   //get request
 
   getAllUser(): Observable<User[]>{
-    return this.httpService.get<User[]>(`${apiUrl}users/role`)
+    return this.httpService.get<User[]>(`${apiUrl}/users/role`)
   }
 
   getNewUser(): Observable<User[]>{
-    return this.httpService.get<User[]>(`${apiUrl}accounts/inactive`)
+    return this.httpService.get<User[]>(`${apiUrl}/accounts/inactive`)
   }
 
   getPendingAccount(): Observable<Account[]>{
-    return this.httpService.get<Account[]>(`${apiUrl}accounts/closing`)
+    return this.httpService.get<Account[]>(`${apiUrl}/accounts/closing`)
   }
 
 
   //post request
 
   confirmNewUser(userSelected: User): Observable<User>{
-    return this.httpService.post<User>(`${apiUrl}user/activateUser`, {
+    return this.httpService.post<User>(`${apiUrl}/user/activateUser`, {
       id: userSelected.id
     })
   }
 
   confirmDeleteAccount(accountSelected: Account): Observable<Account>{
-    return this.httpService.post<Account>(`${apiUrl}account/deleteAccount`, {
+    return this.httpService.post<Account>(`${apiUrl}/account/deleteAccount`, {
       id: accountSelected.id
     })
   }

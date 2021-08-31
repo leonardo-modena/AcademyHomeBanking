@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
+import { environment } from "../../environments/environment";
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
 
-  url: string = "http://localhost:8080";
+  url: string = environment.api_url;
   isAuth: boolean = false;
   isUser: boolean = false;
   isAdmin: boolean = false;
