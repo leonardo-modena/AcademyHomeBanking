@@ -18,7 +18,7 @@ public class BankAccount {
 	@Column(name = "account_status")
 	private String account_status;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "holder", nullable = false)
 
 	private Customer holder;

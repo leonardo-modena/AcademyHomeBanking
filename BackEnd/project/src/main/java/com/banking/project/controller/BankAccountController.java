@@ -70,6 +70,12 @@ public class BankAccountController {
 		return bankAccountRepository.findInactive();
 	}
 
+	@PutMapping(value = "/accounts/inactive/{accountId}")
+	public void activeAccount(@PathVariable int accountId) {
+		bankAccountRepository.activeAccount(accountId);
+	}
+
+
 	/**
 	 * Metodo che ritorna tutti gli account che devono essere disattivati dal
 	 * dipendente
