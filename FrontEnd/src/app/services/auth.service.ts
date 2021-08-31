@@ -10,6 +10,7 @@ export class AuthService {
   url: string = "http://localhost:8080";
   isAuth: boolean = false;
   isUser: boolean = false;
+  isAdmin: boolean = false;
   token !: string;
 
   constructor(private http: HttpClient) { }
