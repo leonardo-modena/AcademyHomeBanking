@@ -1,7 +1,13 @@
 .container{
   background-color: var(--white-yellow);
+  border-radius: 5px;
 }
 
 .error {
   color: var(--secondary-orange)
+}
+
+p > i  {
+  color: var(--primary-green);
+  cursor: pointer;
 }

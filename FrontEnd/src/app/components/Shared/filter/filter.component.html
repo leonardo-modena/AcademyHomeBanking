@@ -1,6 +1,11 @@
-<div class="container mb-4 p-4">
-  <h5>Filtra i tuoi documenti</h5>
-  <form [class]="'form-inline row gx-5  align-items-lg-start ' + (!invalidDate ? 'align-items-end' : 'align-items-start')"
+<button class="btn btn-outline-secondary my-3" *ngIf="isVisible" (click)="toggleFilter()"><i class="bi bi-funnel"></i> Filtra</button>
+<div class="container mb-4 p-4" *ngIf="!isVisible">
+  <div class="row justify-content-between">
+    <h5 class="col-10">Filtra i tuoi documenti</h5>
+    <p class="col-2 text-right" (click)="toggleFilter()"><i class="bi bi-x float-end"></i></p>
+  </div>
+
+  <form [class]="'form-inline row gx-5 align-items-lg-start ' + (!invalidDate ? 'align-items-end' : 'align-items-start')"
         (submit)="onSubmit()"
         (change)="onChangeVisualization()"
         [formGroup]="filterForm">
@@ -25,7 +30,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-end mt-2">
-      <button class="btn btn-outline-primary" *ngIf="!filterForm.invalid && !invalidDate">Cerca</button>
+      <button class="btn btn-outline-primary" *ngIf="!filterForm.invalid && !invalidDate"><i class="bi-search"></i> Cerca</button>
     </div>
   </form>
 

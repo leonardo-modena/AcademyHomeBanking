@@ -22,6 +22,7 @@ export class FilterComponent implements OnInit {
   invalidDate = false;
 
   filterForm!:FormGroup;
+  isVisible = true;
 
   constructor() { }
 
@@ -33,6 +34,11 @@ export class FilterComponent implements OnInit {
       'endDate': new FormControl(stringToday)
     });
   }
+
+  toggleFilter() {
+    this.isVisible = !this.isVisible;
+  }
+
 
   onChangeChoice(event: any) {
     this.selectedChoice = event.target.value.substring(3);
