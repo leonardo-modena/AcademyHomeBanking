@@ -27,6 +27,7 @@
     "pdfmake": "^0.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
+    "xlsx": "^0.17.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
