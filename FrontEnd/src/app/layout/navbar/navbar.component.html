@@ -34,17 +34,25 @@
       <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
     </div>
     <span class="user-items" *ngIf="!userLogged" [ngClass]="{ slide: sidenav }">
-      <h2 class="ms-4 text-light">Ciao,</h2>
-      <h2 class="ms-4 mt-2 text-light">Nome e Cognome</h2>
-      <div class="sidenav-item pointer border-bottom mt-5">
+      <div class="sidenav-user-info">
+          <img class="sidenav-user-img img-fluid pointer" src="../../../assets/img/usr/usr1.jpg" alt="" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-user-img_active" [routerLinkActiveOptions]="{exact:
+            true}">
+          <div class="sidenav-user-text text-center">
+            <span>{{userInfo.nome}} - {{userInfo.cognome}}</span>
+          </div>
+      </div>
+      <div class="sidenav-item pointer" id="first-sidenav-item" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
         <i class="bi bi-person "></i>
-        <span>Profilo</span>
+        <span  >Profilo</span>
       </div>
-      <div class="sidenav-item pointer border-bottom">
+      <div class="sidenav-item pointer" [routerLink]="['/user/operazioni']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
         <i class="bi bi-cash"></i>
-        <span>Operazioni</span>
+        <span >Operazioni</span>
       </div>
-      <div class="sidenav-item pointer border-bottom">
+      <div class="sidenav-item pointer"  [routerLink]="['/user']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
         <i class="bi bi-credit-card-2-front"></i>
         <span>Conto</span>
       </div>

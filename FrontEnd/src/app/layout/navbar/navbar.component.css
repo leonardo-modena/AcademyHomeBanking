@@ -66,20 +66,56 @@ nav{
     transition-delay: 0.4s;
 }
 
+.sidenav-user-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+}
+
+.sidenav-user-img{
+    width: 12rem;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    transition: border 0.3s ease-out;
+}
+
+.sidenav-user-img:hover {
+    border: 2px solid var(--white-yellow);
+}
+
+.sidenav-user-img_active {
+    border: 2px solid var(--white-yellow);
+}
+
+.sidenav-user-text{
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--white-yellow);
+    font-weight: 100;
+    letter-spacing: .17rem;
+}
+
+
 .sidenav-close-icon i{
     padding-right: 2rem;
     font-size: 1.5rem;
-    color: white;
+    color: var(--white-yellow);
 }
 
 .sidenav-item{
     padding: 1.5rem 2rem ;
     color: var(--white-yellow);
     text-align: start;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.116);
+
 }
 
-.sidenav-item:first-child{
-    margin-top: 4rem;
+#first-sidenav-item {
+    margin-top: 4.2rem !important;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.116) !important;
 }
 
 .sidenav-item span{
@@ -89,9 +125,6 @@ nav{
     text-transform: capitalize;
 }
 
-.border-bottom{
-  border-bottom: 2px solid white;
-}
 
 .sidenav-item i{
     font-size: 2.5rem;
@@ -101,10 +134,17 @@ nav{
 .exit-button{
     margin-top: 4rem;
     transition: all 0.3s ease-out;
+    border: none !important;
 }
 
 .sidenav-item:hover{
     background-color: var(--secondary-green);
+    border-right: 2px solid var(--white-yellow);
+}
+
+.sidenav-item_active{
+    background-color: var(--secondary-green);
+    border-right: 2px solid var(--white-yellow);
 }
 
 .exit-button:hover i{
@@ -126,4 +166,6 @@ nav{
     z-index: 1;
 }
 
-
+.border-sidenav{
+    border-bottom: 0.5px solid var(--light-gray);
+}
