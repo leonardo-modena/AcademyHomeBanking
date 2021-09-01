@@ -38,7 +38,7 @@
           <img class="sidenav-user-img img-fluid pointer" src="../../../assets/img/usr/usr1.jpg" alt="" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-user-img_active" [routerLinkActiveOptions]="{exact:
             true}">
           <div class="sidenav-user-text text-center">
-            <span>{{userInfo.nome}} - {{userInfo.cognome}}</span>
+            <span>{{userInfo.nome | titlecase}} - {{userInfo.cognome | titlecase}}</span>
           </div>
       </div>
       <div class="sidenav-item pointer" id="first-sidenav-item" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
