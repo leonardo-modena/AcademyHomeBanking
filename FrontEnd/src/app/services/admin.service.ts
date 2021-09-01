@@ -39,10 +39,10 @@ export class AdminService {
 
   //post request
 
-  confirmNewUser(accountSelected: BankAccount): Observable<BankAccount>{
-    return this.httpService.post<BankAccount>(`${apiUrl}/user/activateUser`, {
-      id: accountSelected.id
-    })
+  confirmRegistration(accountSelected: BankAccount): void{
+    this.httpService.post<BankAccount>(`${apiUrl}/admin/activeAccount/${accountSelected.id}`, {}).subscribe( (res) => {
+      console.log(res)
+    } )
   }
 
   confirmDeleteAccount(accountSelected: BankAccount): Observable<BankAccount>{

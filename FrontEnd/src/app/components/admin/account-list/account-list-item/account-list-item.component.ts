@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BankAccount } from 'src/app/model/account';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-account-list-item',
@@ -12,9 +13,13 @@ export class AccountListItemComponent implements OnInit {
 
   @Input() account!: BankAccount;
   @Input() index!: number;
-  constructor() { }
+  constructor(private adminService: AdminService ) { }
 
   ngOnInit(): void {
   }
-
+  
+  activateClick(): void{
+      this.adminService.confirmRegistration(this.account);
+  
+    }
 }
