@@ -17,15 +17,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(username: string, lastname: string, email: string, password: string,msDate: number,sex: string){
+  registerUser(firstName: string, lastName: string, email: string, password: string,dateOfBirth: number,gender: string){
 
     return this.http.post(this.url + "/registrazione",{
-      username,
-      lastname,
+      firstName,
+      lastName,
       email,
       password,
-      msDate,
-      sex
+      dateOfBirth,
+      gender,
     })
   }
 
