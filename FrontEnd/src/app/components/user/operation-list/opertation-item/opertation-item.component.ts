@@ -25,7 +25,6 @@ export class OpertationItemComponent implements OnInit {
                         Data: ${operation_date.toLocaleString()}
                         </p>`;
     this.downloadService.downloadAsPDF(body);
-
   }
 
 }

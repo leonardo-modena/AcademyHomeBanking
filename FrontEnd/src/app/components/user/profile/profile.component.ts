@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +21,7 @@ export class ProfileComponent implements OnInit {
 
   selectedBill: number = 0;
   maxAmount = this.bills[this.selectedBill].amount;
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, public dialog: MatDialog) {
 
   }
 
@@ -32,5 +34,16 @@ export class ProfileComponent implements OnInit {
 
   onNewBill(form: NgForm): void{
     console.log(form.form.value);
+  }
+
+
+  onCloseBill() {
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // DELETE CONTO
+      }
+    });
   }
 }
