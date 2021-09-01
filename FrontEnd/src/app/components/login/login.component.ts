@@ -30,18 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    let nameContainNumber = /\d/.test(form.value.username);
 
-    if (nameContainNumber){
-      this.numberNameError = true;
-      return;
-    }
+    const email = form.value.email;
 
-    const username = form.value.username;
-    this.numberNameError = false;
     const password = form.value.password;
 
-    this.auth.loginUser(username,password).subscribe(resData => {
+    this.auth.loginUser(email,password).subscribe(resData => {
       console.log(resData);
 
     })

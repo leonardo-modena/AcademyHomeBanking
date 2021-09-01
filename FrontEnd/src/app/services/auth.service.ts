@@ -29,10 +29,10 @@ export class AuthService {
     })
   }
 
-  loginUser(username: string, password: string){
+  loginUser(email: string, password: string){
 
     return this.http.post(this.url + '/login',{
-      username,
+      email,
       password
     })
   }
