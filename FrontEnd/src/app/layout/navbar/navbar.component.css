@@ -1,3 +1,4 @@
+
 nav{
     padding: 1rem 2rem !important;
     border-bottom: 1px solid var(--light-gray);
@@ -5,6 +6,32 @@ nav{
 
 .navbar-img{
     width: 14rem;
+}
+
+.nav-item{
+    display: flex;
+    align-items: center;
+}
+
+.nav-link{
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+
+
+.newAccountLink{
+    transition: color 0.5s ease-out;
+}
+
+.newAccountLink i{
+    margin-right: .5rem;
+    font-size: 1.4rem;
+}
+
+.newAccountLink:hover {
+    color: var(--primary-green) !important;
 }
 
 .toggle-sidenav i{
