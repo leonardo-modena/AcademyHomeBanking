@@ -16,7 +16,7 @@
         <option *ngFor="let c of selectionChoicesValues" [ngValue]="c.value" [id]="c.value">{{c.description}}</option>
       </select>
     </div>
-    <div *ngIf="dateSelection" class="col-12 col-md-6">
+    <div *ngIf="dateSelection" class="col-12">
       <div class="row">
         <div class="col-8 col-md-6 form-group">
           <label for="start-date">Data di inizio</label>
@@ -33,5 +33,4 @@
       <button class="btn btn-outline-primary btn-small" *ngIf="!filterForm.invalid && !invalidDate"><i class="bi-search"></i> Cerca</button>
     </div>
   </form>
-
 </div>
