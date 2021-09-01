@@ -189,8 +189,13 @@ input[type=number]:focus,
 }
 
 .list-item, .item-title{
-  width: 12rem;
+  width: 25%;
 }
+
+.list-item{
+  font-size: 1.4rem !important;
+}
+
 
 .item-title span{
   color: #444444;
