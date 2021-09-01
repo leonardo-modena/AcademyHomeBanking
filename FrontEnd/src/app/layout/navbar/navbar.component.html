@@ -12,10 +12,10 @@
   <div class=" ms-auto" *ngIf="!authorized">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link pointer newAccountLink"><i class="fas fa-running"></i> Nuovo Conto</a>
+        <a class="nav-link pointer newAccountLink" [routerLink]="['/registrazione']"><i class="fas fa-running"></i> Nuovo Conto</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link pointer">
+        <a class="nav-link pointer" [routerLink]="['/login']">
           Accedi <span class="sr-only">(current)</span>
         </a>
       </li>
