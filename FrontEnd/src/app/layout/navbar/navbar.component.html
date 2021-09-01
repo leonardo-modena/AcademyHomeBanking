@@ -34,15 +34,17 @@
       <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
     </div>
     <span class="user-items" *ngIf="!userLogged" [ngClass]="{ slide: sidenav }">
-      <div class="sidenav-item pointer">
-        <i class="bi bi-person"></i>
+      <h2 class="ms-4 text-light">Ciao,</h2>
+      <h2 class="ms-4 mt-2 text-light">Nome e Cognome</h2>
+      <div class="sidenav-item pointer border-bottom mt-5">
+        <i class="bi bi-person "></i>
         <span>Profilo</span>
       </div>
-      <div class="sidenav-item pointer">
+      <div class="sidenav-item pointer border-bottom">
         <i class="bi bi-cash"></i>
         <span>Operazioni</span>
       </div>
-      <div class="sidenav-item pointer">
+      <div class="sidenav-item pointer border-bottom">
         <i class="bi bi-credit-card-2-front"></i>
         <span>Conto</span>
       </div>
