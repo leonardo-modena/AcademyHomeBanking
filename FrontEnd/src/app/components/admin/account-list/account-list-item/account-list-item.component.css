@@ -12,19 +12,6 @@
     margin-right: 0.3rem;
 }
 
-.action-icon .action-button__desc{
-    font-size: 0rem;
-    opacity: 0;
-    transition: all 0.3s ease;
-    color: var(--gray);
-    transform-origin: right;
-}
-.action-icon:hover .action-button__desc{
-    opacity: 1;
-    font-size: 1rem;
-    color: var(--gray);
-}
-
 .action-icon:hover{
-    color: var(--secondary-orange);
+    color: var(--primary-green);
 }

@@ -10,8 +10,6 @@ export class AccountListComponent implements OnInit {
 
   @Input() newRegistrationMode: boolean = false;
   @Input() accountList!: BankAccount[];
-
-  accounts:string[]=["mela","pera","banana","uva","melone","anguria","arancia","mandarino","limone","pompelmo"];
   
   constructor() { }
 
