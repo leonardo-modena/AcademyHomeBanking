@@ -27,6 +27,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
 import { OperationFormComponent } from './components/user/operations/operation-form/operation-form.component';
+import { AlertComponent } from './components/Shared/alert/alert.component';
+import { ConfirmDialogComponent } from './components/user/profile/confirm-dialog/confirm-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -46,20 +49,24 @@ import { OperationFormComponent } from './components/user/operations/operation-f
         NotFoundComponent,
         ErrorComponent,
         OperationFormComponent,
+        AlertComponent,
         
+        ConfirmDialogComponent,
+
     ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatTabsModule,
-    UserModule,
-    MatIconModule,
-    MatButtonModule
-  ],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatTabsModule,
+        UserModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
