@@ -6,7 +6,7 @@
 
   <div>
     <p [class]="'text-right ' + (operation.type === 'prelievo' ? 'taking' : 'deposit')">{{(operation.type === 'prelievo' ? '-' : '') + operation.importo}}</p>
-    <a style="color: var(--secondary-green)" [routerLink]="'operations/id'">Maggiori dettagli</a>
+    <button class="btn btn-secondary btn-small"  (click)="downloadItem()"><i class="bi-file-earmark-arrow-down"></i></button>
   </div>
 </div>
 
