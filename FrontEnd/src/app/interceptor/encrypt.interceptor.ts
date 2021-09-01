@@ -28,7 +28,7 @@ export class EncryptInterceptor implements HttpInterceptor {
         body: {
           password: sha256(pswNotEncrypted),
           firstName: body.firstName,
-          lastName: body.lastname,
+          lastName: body.lastName,
           email: body.email,
           dateOfBirth: body.dateOfBirth,
           gender: body.gender,
