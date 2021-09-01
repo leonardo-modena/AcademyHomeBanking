@@ -13,5 +13,9 @@ export class AlertService {
   newAllert(message: string): void {
     this.allertSubject.next(message);
   }
-  
+
+
+
+
+
 }
