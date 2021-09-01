@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AccountListItemComponent implements OnInit {
 
+  @Input() pendingRegistration!:boolean;
+
   @Input() account!: string;
   @Input() index!: number;
   constructor() { }

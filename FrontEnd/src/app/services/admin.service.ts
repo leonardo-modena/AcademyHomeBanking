@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { User } from '../model/user';
-import { Account } from '../model/account';
+import { BankAccount } from '../model/account';
 const apiUrl = environment.api_url;
 
 @Injectable({
@@ -28,25 +28,25 @@ export class AdminService {
     return this.httpService.get<User[]>(`${apiUrl}/users/role`)
   }
 
-  getNewUser(): Observable<User[]>{
-    return this.httpService.get<User[]>(`${apiUrl}/admin/listInactiveAccounts`)
+  getNewRegistration(): Observable<BankAccount[]>{
+    return this.httpService.get<BankAccount[]>(`${apiUrl}/admin/listInactiveAccounts`)
   }
 
-  getPendingAccount(): Observable<Account[]>{
-    return this.httpService.get<Account[]>(`${apiUrl}/accounts/closing`)
+  getPendingAccount(): Observable<BankAccount[]>{
+    return this.httpService.get<BankAccount[]>(`${apiUrl}/accounts/closing`)
   }
 
 
   //post request
 
-  confirmNewUser(userSelected: User): Observable<User>{
-    return this.httpService.post<User>(`${apiUrl}/user/activateUser`, {
-      id: userSelected.id
+  confirmNewUser(accountSelected: BankAccount): Observable<BankAccount>{
+    return this.httpService.post<BankAccount>(`${apiUrl}/user/activateUser`, {
+      id: accountSelected.id
     })
   }
 
-  confirmDeleteAccount(accountSelected: Account): Observable<Account>{
-    return this.httpService.post<Account>(`${apiUrl}/account/deleteAccount`, {
+  confirmDeleteAccount(accountSelected: BankAccount): Observable<BankAccount>{
+    return this.httpService.post<BankAccount>(`${apiUrl}/account/deleteAccount`, {
       id: accountSelected.id
     })
   }

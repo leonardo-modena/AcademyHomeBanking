@@ -8,7 +8,6 @@ import { User } from 'src/app/model/user';
 })
 export class UserListComponent implements OnInit {
 
-  @Input() newUsersMode: boolean = false;
   @Input() userList!: User[];
 
 

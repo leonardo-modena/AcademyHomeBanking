@@ -3,6 +3,7 @@
          <app-account-list-item 
             *ngFor="let account of accounts; index as i"
             [account]="account"
+            [pendingRegistration]="newRegistrationMode"
             [index]="i"
          ></app-account-list-item>
     </div>

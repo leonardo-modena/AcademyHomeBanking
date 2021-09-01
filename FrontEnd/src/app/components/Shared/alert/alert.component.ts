@@ -10,12 +10,28 @@ export class AlertComponent implements OnInit {
 
   allertMessage!: string;
 
+  visible: boolean = false;
+
+  visibilityTimeout!: any;
+
   constructor(private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.alertService.actualAllert.subscribe( (msg) => {
       this.allertMessage = msg;
+      this.showMessage()
     })
+  }
+
+  showMessage(): void {
+    this.visible = true;
+    this.visibilityTimeout = setTimeout(() => {
+      this.visible = false;
+    }, 10000);
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.visibilityTimeout);
   }
 
 }

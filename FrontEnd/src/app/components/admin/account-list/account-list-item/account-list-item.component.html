@@ -1,4 +1,5 @@
 <div class="d-flex">
     <p class="list-item">{{account}}</p>
-    <div class="action-button list-item "><i class="bi bi-check-square action-icon"><span class="action-button__desc">Autorizza</span></i></div>
+    <div class="action-button list-item "><i *ngIf="pendingRegistration" class="bi bi-check-square action-icon"><span class="action-button__desc">Autorizza</span></i></div>
+
 </div>

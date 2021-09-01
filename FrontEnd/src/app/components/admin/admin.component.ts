@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Account } from 'src/app/model/account';
+import { BankAccount } from 'src/app/model/account';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -12,8 +12,8 @@ export class AdminComponent implements OnInit {
   adminInfo!: { nome: string; cognome: string };
 
   allUsers!: User[];
-  allNewUsers!: User[];
-  allToDeleteAccounts!: Account[];
+  allNewRagistration!: BankAccount[];
+  allToDeleteAccounts!: BankAccount[];
 
   userSection!: boolean;
   operationSection!: boolean;
@@ -24,9 +24,9 @@ export class AdminComponent implements OnInit {
     // this.adminService.getAllUser().subscribe( (allUsers) => {
     //   this.allUsers = allUsers;
     // })
-    this.adminService.getNewUser().subscribe( (newUsers) => {
-      this.allNewUsers = newUsers;
-      console.log(newUsers)
+    this.adminService.getNewRegistration().subscribe( (newRegistration) => {
+      this.allNewRagistration = newRegistration;
+      console.log(this.allNewRagistration)
     })
     // this.adminService.getPendingAccount().subscribe( (toDeleteAccount) => {
     //   this.allToDeleteAccounts = toDeleteAccount;
