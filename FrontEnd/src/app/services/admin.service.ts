@@ -29,7 +29,7 @@ export class AdminService {
   }
 
   getNewUser(): Observable<User[]>{
-    return this.httpService.get<User[]>(`${apiUrl}/accounts/inactive`)
+    return this.httpService.get<User[]>(`${apiUrl}/admin/listInactiveAccounts`)
   }
 
   getPendingAccount(): Observable<Account[]>{

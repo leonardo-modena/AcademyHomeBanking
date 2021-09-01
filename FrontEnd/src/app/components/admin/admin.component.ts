@@ -21,15 +21,16 @@ export class AdminComponent implements OnInit {
   responsive!: boolean;
 
   constructor(private adminService: AdminService) {
-    this.adminService.getAllUser().subscribe( (allUsers) => {
-      this.allUsers = allUsers;
-    })
+    // this.adminService.getAllUser().subscribe( (allUsers) => {
+    //   this.allUsers = allUsers;
+    // })
     this.adminService.getNewUser().subscribe( (newUsers) => {
       this.allNewUsers = newUsers;
+      console.log(newUsers)
     })
-    this.adminService.getPendingAccount().subscribe( (toDeleteAccount) => {
-      this.allToDeleteAccounts = toDeleteAccount;
-    })
+    // this.adminService.getPendingAccount().subscribe( (toDeleteAccount) => {
+    //   this.allToDeleteAccounts = toDeleteAccount;
+    // })
     this.responsiveSection();
   }
 
