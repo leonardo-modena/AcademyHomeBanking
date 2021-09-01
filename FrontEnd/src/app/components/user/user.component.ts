@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
 import { Router} from "@angular/router";
 import {Operation} from "../../model/operation";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-user',
@@ -32,6 +33,15 @@ export class UserComponent implements OnInit {
     }
   ];
 
+  isLoadingOperations: boolean = false;
+  isLoadingBalance = false;
+
+  selectedBill!: number;
+  bills = [1111, 2222];
+
+  selectBillForm!:FormGroup;
+
+
   constructor(private userService: UserService, private router: Router) {  }
 
   ngOnInit(): void {
@@ -40,9 +50,27 @@ export class UserComponent implements OnInit {
       this.user = user;
     });
 
-    // this.userService.getSaldo(billNumber).subscribe((balance) => {
-    //   this.balance = balance;
-    // })
+    this.selectedBill = this.bills[0];
+    this.selectBillForm = new FormGroup({
+      'selectedBill': new FormControl(this.selectedBill)
+      })
+
     this.balance = this.userService.getBalance();
+  }
+
+  onChangeBill(): void {
+    this.isLoadingBalance = true;
+
+    this.userService.getBalance(); // this.balance = balance - loading-spinner balance
+    this.onGetOperations();
+    console.log(this.selectedBill);
+  }
+
+  onGetOperations(): void {
+    this.userService.getOperationList({type: 'last10'}); // this.operations = operations - loading-spinner operations
+  }
+
+  onSearchFunction(b: boolean): void {
+    this.isLoadingOperations = b;
   }
 }

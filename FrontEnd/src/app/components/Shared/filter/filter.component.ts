@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-filter',
@@ -24,7 +25,9 @@ export class FilterComponent implements OnInit {
     {value: 'last10', description: 'Ultime 10 operazioni'},
     {value: 'last3', description: 'Ultimi 3 mesi'},
     {value: 'dateSelection', description: 'Dal ... al ...'}
-  ]
+  ];
+
+  @Input() onSearchFunction:any;
 
 
   dateSelection:boolean = false;
@@ -36,7 +39,7 @@ export class FilterComponent implements OnInit {
   filterForm!:FormGroup;
   isVisible = true;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
    const stringToday = this.today.getFullYear() + '-' + (this.today.getMonth() + 1).toString().padStart(2, '0') + '-' + this.today.getDate().toString().padStart(2, '0');
@@ -76,16 +79,14 @@ export class FilterComponent implements OnInit {
   }
 
   onSubmit() {
-
     const selectedChoiceValue = this.filterForm.controls.selectedChoice;
+    this.onSearchFunction(true);
     if (selectedChoiceValue.value === 'dateSelection' && !this.invalidDate) {
       //Get between dates
+      this.userService.getOperationList({type: 'dateSelection', startDate: this.filterForm.controls.startDate.value, endDate: this.filterForm.controls.endDate.value});
     }
-    else if(selectedChoiceValue.value === 'last3') {
-      //get last 3 months
-    }
-    else { // selectedChoiceValue.value === 'last10'
-      //get last 10 operations
+    else {
+      this.userService.getOperationList({type: selectedChoiceValue.value})
     }
   }
 }
