@@ -30,6 +30,7 @@ import { OperationFormComponent } from './components/user/operations/operation-f
 import { AlertComponent } from './components/Shared/alert/alert.component';
 import { ConfirmDialogComponent } from './components/user/profile/confirm-dialog/confirm-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { BankAccountComponent } from './components/user/bank-account/bank-account.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import {MatDialogModule} from "@angular/material/dialog";
         AlertComponent,
         
         ConfirmDialogComponent,
+                  BankAccountComponent,
 
     ],
     imports: [
