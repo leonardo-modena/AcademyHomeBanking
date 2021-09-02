@@ -20,7 +20,7 @@ export class EncryptInterceptor implements HttpInterceptor {
 
     let body: any = request.body;
 
-    if (request.url === "http://localhost:4200/api/registrazione") {
+    if (request.url.includes('registrazione')) {
 
       pswNotEncrypted = body.password;
 
@@ -33,15 +33,14 @@ export class EncryptInterceptor implements HttpInterceptor {
           dateOfBirth: body.dateOfBirth,
           gender: body.gender,
         }
-      })
+      })      
 
       return next.handle(cloneReq)
     }
 
-    if (request.url === "http://localhost:4200/api/auth/signin"){
+    else if (request.url.includes('signin')){
 
       pswNotEncrypted = body.password;
-      console.log(pswNotEncrypted)
       let cloneReq = request.clone({
         body: {
           username: body.username,
