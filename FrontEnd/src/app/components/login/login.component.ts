@@ -3,9 +3,7 @@ import {NgForm} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
-import {isObservable, observable} from "rxjs/internal-compatibility";
 import {AlertService} from "../../services/alert.service";
-import {subscriptionLogsToBeFn} from "rxjs/internal/testing/TestScheduler";
 
 @Component({
   selector: 'app-login',
