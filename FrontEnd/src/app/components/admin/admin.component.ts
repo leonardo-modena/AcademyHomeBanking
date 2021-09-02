@@ -64,4 +64,16 @@ export class AdminComponent implements OnInit {
       this.responsive = true;
     }
   }
+
+  confirmAccountEventCallback(): void{
+    this.adminService.getNewRegistration().subscribe( (registrationsUpdate)  => {
+      this.allNewRagistration = registrationsUpdate;
+    })
+  }
+
+  confirmDeleteEventCallback(): void{
+    this.adminService.getPendingAccount().subscribe( (deleteAccountsUpdate) => {
+      this.allToDeleteAccounts = deleteAccountsUpdate;
+    } )
+  }
 }

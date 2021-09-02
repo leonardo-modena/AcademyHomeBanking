@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { BankAccount } from 'src/app/model/account';
 
 @Component({
@@ -11,9 +11,22 @@ export class AccountListComponent implements OnInit {
   @Input() newRegistrationMode: boolean = false;
   @Input() accountList!: BankAccount[];
   
+
+  @Output() confirmAcountEvent = new EventEmitter()
+  @Output() confirmDeleteEvent = new EventEmitter()
+
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  passConfirmAccountEvent(): void {
+    this.confirmAcountEvent.emit()
+   }
+
+   passConfirmDeleteEvent(): void {
+    this.confirmDeleteEvent.emit()
+   }
 
 }
