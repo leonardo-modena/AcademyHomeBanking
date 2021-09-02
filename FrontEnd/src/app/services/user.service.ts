@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
+import {environment} from "../../environments/environment";
+
+const apiUrl = environment.api_url;
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,10 @@ export class UserService {
   }
 
   // GET REQUESTS
+
+  getUser(id: number) {
+    //get
+  }
 
   //Restituisce il saldo del cliente
   getBalance(/*bill: number*/)/*: Observable<number>*/ {

@@ -9,13 +9,12 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { UserComponent } from './components/user/user.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
 import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
-import { UserModule } from "./module/user-module/user.module";
+import { UserModule } from "./module/user/user.module";
 import { AlertComponent } from './components/Shared/alert/alert.component';
 import { AdminModule } from "./module/admin/admin.module";
 import { SharedModule } from "./module/shared/shared.module";
@@ -28,7 +27,6 @@ import { SharedModule } from "./module/shared/shared.module";
     HomepageComponent,
     LoginComponent,
     RegistrationComponent,
-    UserComponent,
     FooterComponent,
     NotFoundComponent,
     ErrorComponent,
@@ -36,9 +34,9 @@ import { SharedModule } from "./module/shared/shared.module";
   ],
   imports: [
     SharedModule,
+    BrowserModule,
     AdminModule,
     UserModule,
-    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule
