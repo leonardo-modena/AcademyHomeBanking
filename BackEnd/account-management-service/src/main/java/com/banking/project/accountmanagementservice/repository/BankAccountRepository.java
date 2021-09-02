@@ -31,4 +31,10 @@ public interface BankAccountRepository extends JpaRepository<BankAccount,Integer
     @Query("delete BankAccount b where b.id=:accountId and b.account_status='CLOSING'")
     void deleteAccount(@Param("accountId")int accountId);
 
+    @Transactional 
+    @Modifying(clearAutomatically = true)
+    @Query("update BankAccount b set b.account_status= 'CLOSING' where b.id=:accountId")
+    void closingRequest(@Param("accountId")int accountId);
+
+
 }
