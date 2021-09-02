@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { BankAccount } from 'src/app/model/account';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
@@ -8,7 +8,7 @@ import { AdminService } from 'src/app/services/admin.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, AfterContentChecked {
   adminInfo!: { nome: string; cognome: string };
 
   allUsers!: User[];
@@ -18,12 +18,18 @@ export class AdminComponent implements OnInit {
   userSection!: boolean;
   operationSection!: boolean;
 
+  pageLoading!: boolean;
   responsive!: boolean;
 
   constructor(private adminService: AdminService) {
     // this.adminService.getAllUser().subscribe( (allUsers) => {
     //   this.allUsers = allUsers;
     // })
+    this.responsiveSection();
+  }
+
+  ngOnInit(): void { 
+    this.pageLoading = true;
     this.adminService.getNewRegistration().subscribe( (newRegistration) => {
       this.allNewRagistration = newRegistration;
       console.log(this.allNewRagistration)
@@ -31,13 +37,17 @@ export class AdminComponent implements OnInit {
     this.adminService.getPendingAccount().subscribe( (toDeleteAccount) => {
       this.allToDeleteAccounts = toDeleteAccount;
     })
-    this.responsiveSection();
-  }
-
-  ngOnInit(): void {
     this.adminService.actualAdmin.subscribe((admin) => {
       this.adminInfo = admin;
     });
+  }
+
+  ngAfterContentChecked(): void{
+    if (this.pageLoading){
+      setTimeout(() => {
+        this.pageLoading = false
+      }, 2000);
+    }    
   }
 
   userSectionClick(): void {

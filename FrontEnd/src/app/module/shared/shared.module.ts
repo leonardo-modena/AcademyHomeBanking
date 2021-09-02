@@ -5,10 +5,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { LoadingPageComponent } from 'src/app/components/Shared/loading-page/loading-page.component';
 
 @NgModule({
   declarations: [
     SpinnerComponent,
+    LoadingPageComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { MatButtonModule } from "@angular/material/button";
   ],
   exports: [
     SpinnerComponent,
+    LoadingPageComponent,
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule
