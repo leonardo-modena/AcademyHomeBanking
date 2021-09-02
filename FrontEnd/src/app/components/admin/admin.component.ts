@@ -27,7 +27,7 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void { 
-    this.pageLoading = false;
+    this.pageLoading = true;
     this.adminService.changeLoadingState(true)
     this.adminService.getAllUser().subscribe( 
       (allUsers) => {
@@ -62,7 +62,7 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   ngAfterContentChecked(): void{
     if (this.pageLoading){
       setTimeout(() => {
-        //this.pageLoading = false
+        this.pageLoading = false
       }, 2000);
     }    
   }
