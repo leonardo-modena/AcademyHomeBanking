@@ -31,5 +31,4 @@ public interface BankAccountRepository extends JpaRepository<BankAccount,Integer
     @Query("delete BankAccount b where b.id=:accountId and b.account_status='CLOSING'")
     void deleteAccount(@Param("accountId")int accountId);
 
-
 }

@@ -34,7 +34,7 @@ public class RegisterServiceController {
     @PostMapping ("/registrazione")
     public Customer registerCustomer(@RequestBody Customer theCustomer) {
 
-        logger.info("Register Customer ");
+        logger.info("Register Customer");
 
        /* if(customerRepository.findCustomerByEmail(theCustomer.getEmail())){
             throw new CustomerAlreadyExsistException("There is an account with that email address: "
