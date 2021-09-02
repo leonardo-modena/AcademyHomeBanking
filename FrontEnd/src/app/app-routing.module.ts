@@ -11,13 +11,13 @@ const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
   { path: 'registrazione', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'user', component: UserComponent, loadChildren: () => import('./module/user-module/user.module').then(m => m.UserModule)  },
+  { path: 'user', loadChildren: () => import('./module/user-module/user.module').then(m => m.UserModule)  },
   { path: 'admin', component: AdminComponent, loadChildren: () => import('./module/admin/admin.module').then(m => m.AdminModule) },
   { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),],
   exports: [RouterModule]
 })
 

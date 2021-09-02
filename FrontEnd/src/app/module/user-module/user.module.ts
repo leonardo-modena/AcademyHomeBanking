@@ -12,6 +12,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { DownloadComponent } from "../../components/user/download/download.component";
 import { OperationFormComponent } from "../../components/user/operations/operation-form/operation-form.component";
 import { SharedModule } from "../shared/shared.module";
+import { UserComponent } from 'src/app/components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +31,11 @@ import { SharedModule } from "../shared/shared.module";
     SharedModule,
     MatDialogModule,
     RouterModule.forChild([
-      { path: '', redirectTo: 'conto', pathMatch: 'full' },
-      { path: 'conto', component: BankAccountComponent },
-      { path: 'profilo', component: ProfileComponent },
-      { path: 'operazioni', component: OperationsComponent }
+      { path: 'user', component: UserComponent, children: [
+        { path: '', component: BankAccountComponent, },
+        { path: 'profilo', component: ProfileComponent,  },
+        { path: 'operazioni', component: OperationsComponent,  }
+      ]}
     ]),
   ],
 })

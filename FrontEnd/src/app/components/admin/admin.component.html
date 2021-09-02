@@ -1,4 +1,5 @@
-<div class="container-fluid mt-4 mb-lg-5">
+<app-loading-page *ngIf="pageLoading" [imageUrl]="'../../../assets/img/Illustration/Admin-bro.png'"></app-loading-page>
+<div *ngIf="!pageLoading" class="container-fluid mt-4 mb-lg-5">
   <div class="row">
     <div class="col-11 col-md-11 m-auto px-4">
       <h2 class="serif-font">Dashboard Amministrativa</h2>

@@ -32,7 +32,7 @@ import { SharedModule } from "./module/shared/shared.module";
     FooterComponent,
     NotFoundComponent,
     ErrorComponent,
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     SharedModule,
