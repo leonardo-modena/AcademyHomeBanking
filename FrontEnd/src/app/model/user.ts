@@ -4,6 +4,8 @@ export interface User {
   lastName: string;
   email: string;
   password: string;
-  ruolo: string;
   dateOfBirth: number;
+  gender: string;
+  role: string;
+  bankAccounts: [];
 }

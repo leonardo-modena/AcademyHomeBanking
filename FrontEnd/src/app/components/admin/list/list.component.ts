@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { BankAccount } from 'src/app/model/account';
 import { User } from 'src/app/model/user';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-list',
@@ -20,9 +21,14 @@ export class ListComponent implements OnInit {
   @Output() confirmAccountEventList = new EventEmitter();
   @Output() confirmDeleteEventList = new EventEmitter();
 
-  constructor() { }
+
+  loading!:boolean;
+
+  constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
+    this.adminService.loadingState.subscribe( (state) => {
+    })
   }
 
   passConfirmAccountList(): void{

@@ -22,21 +22,38 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   responsive!: boolean;
 
   constructor(private adminService: AdminService) {
-    // this.adminService.getAllUser().subscribe( (allUsers) => {
-    //   this.allUsers = allUsers;
-    // })
+    
     this.responsiveSection();
   }
 
   ngOnInit(): void { 
-    this.pageLoading = true;
-    this.adminService.getNewRegistration().subscribe( (newRegistration) => {
+    this.pageLoading = false;
+    this.adminService.changeLoadingState(true)
+    this.adminService.getAllUser().subscribe( 
+      (allUsers) => {
+      this.allUsers = allUsers;
+      this.adminService.changeLoadingState(false)},
+      (err) => {
+        this.adminService.changeLoadingState(false)}
+      )
+    this.adminService.getNewRegistration().subscribe( 
+      (newRegistration) => {
       this.allNewRagistration = newRegistration;
-      console.log(this.allNewRagistration)
-    })
-    this.adminService.getPendingAccount().subscribe( (toDeleteAccount) => {
+      this.adminService.changeLoadingState(false)
+      },
+      (err) => {
+        this.adminService.changeLoadingState(false)
+      }
+    )
+    this.adminService.getPendingAccount().subscribe( 
+      (toDeleteAccount) => {
       this.allToDeleteAccounts = toDeleteAccount;
-    })
+      this.adminService.changeLoadingState(false)
+      },
+      (err) => {
+        this.adminService.changeLoadingState(false)
+      }
+    )
     this.adminService.actualAdmin.subscribe((admin) => {
       this.adminInfo = admin;
     });
@@ -45,7 +62,7 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   ngAfterContentChecked(): void{
     if (this.pageLoading){
       setTimeout(() => {
-        this.pageLoading = false
+        //this.pageLoading = false
       }, 2000);
     }    
   }
@@ -76,14 +93,27 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   }
 
   confirmAccountEventCallback(): void{
+    this.adminService.changeLoadingState(true)
     this.adminService.getNewRegistration().subscribe( (registrationsUpdate)  => {
       this.allNewRagistration = registrationsUpdate;
-    })
+      this.adminService.changeLoadingState(false)
+      },
+      (err) => {
+        this.adminService.changeLoadingState(false)
+      }
+    )
   }
 
   confirmDeleteEventCallback(): void{
+    this.adminService.changeLoadingState(true)
+
     this.adminService.getPendingAccount().subscribe( (deleteAccountsUpdate) => {
       this.allToDeleteAccounts = deleteAccountsUpdate;
-    } )
+      this.adminService.changeLoadingState(false)
+      },
+      (err) => {
+        this.adminService.changeLoadingState(false)
+      }
+    )
   }
 }

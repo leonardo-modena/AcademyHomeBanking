@@ -10,9 +10,6 @@ export class UserListComponent implements OnInit {
 
   @Input() userList!: User[];
 
-
-  users:string[]=["mela","pera","banana","uva","melone","anguria","arancia","mandarino","limone","pompelmo"];
-
   constructor() { }
 
   ngOnInit(): void {

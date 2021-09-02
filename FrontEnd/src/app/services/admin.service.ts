@@ -16,6 +16,8 @@ export class AdminService {
   private adminSubject = new BehaviorSubject<{nome: string, cognome: string}>({nome: 'mario', cognome: 'rossi'});
   actualAdmin = this.adminSubject.asObservable();
   
+  private loadingSubject = new BehaviorSubject<boolean>(true);
+  loadingState = this.loadingSubject.asObservable();
 
   constructor(private httpService: HttpClient) { }
 
@@ -23,10 +25,14 @@ export class AdminService {
     this.adminSubject.next(admin)
   }
 
+  changeLoadingState(state: boolean): void{
+    this.loadingSubject.next(state)
+  }
+
   //get request
 
   getAllUser(): Observable<User[]>{
-    return this.httpService.get<User[]>(`${apiUrl}/users/role`)
+    return this.httpService.get<User[]>(`${apiUrl}/admin/listSortedCustomer`)
   }
 
   getNewRegistration(): Observable<BankAccount[]>{
