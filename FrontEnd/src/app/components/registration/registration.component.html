@@ -68,7 +68,10 @@
       <div [@fade] *ngIf="!passwordError" style="font-weight: bold" class="alert-danger"> Le password non coincidono! </div>
     </div>
 
-
+    <hr class="mt-3">
+    <div>Esprimi la preferenza per:</div>
+    <div>il trattamento dei miei dati a fini di ricerche di mercato, informazione commerciale, offerte dirette di prodotti o servizi della Banca e/o del Gruppo Banco BPM</div>
+    <input type="checkbox">
     <div class="col-12 mt-4 mb-4">
       <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Crea il tuo conto</button>
     </div>
