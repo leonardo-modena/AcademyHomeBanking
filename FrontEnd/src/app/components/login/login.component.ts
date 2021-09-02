@@ -33,11 +33,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm){
 
-    const email = form.value.email;
-
+    const username = form.value.email;
     const password = form.value.password;
-
-    this.auth.loginUser(email,password).subscribe(resData => {
+    console.log(username, password);
+    this.auth.loginUser(username,password).subscribe(resData => {
       console.log(resData);
 
     })
