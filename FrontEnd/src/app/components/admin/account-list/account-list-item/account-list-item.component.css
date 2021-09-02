@@ -12,6 +12,10 @@
     margin-right: 0.3rem;
 }
 
-.action-icon:hover{
+#activate-button:hover{
     color: var(--primary-green);
+}
+
+#delete-button:hover{
+    color: var(--secondary-orange);
 }

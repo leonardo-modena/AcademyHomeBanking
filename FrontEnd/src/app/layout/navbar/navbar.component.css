@@ -11,7 +11,7 @@ nav{
 .nav-item{
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .nav-link{
@@ -86,6 +86,10 @@ nav{
     border: 2px solid var(--white-yellow);
 }
 
+.sidenav-user-img:focus{
+    outline: none !important;
+}
+
 .sidenav-user-img_active {
     border: 2px solid var(--white-yellow);
 }
@@ -140,6 +144,10 @@ nav{
 .sidenav-item:hover{
     background-color: var(--secondary-green);
     border-right: 2px solid var(--white-yellow);
+}
+
+.sidenav-item:focus{
+    outline: none !important;
 }
 
 .sidenav-item_active{
