@@ -10,7 +10,9 @@ import javax.persistence.OrderBy;
 import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+
 	@Query(value = "SELECT c from Customer c order by c.firstName , c.lastName  ")
 	List<Customer> listSortCustomer();
+
 
 }
