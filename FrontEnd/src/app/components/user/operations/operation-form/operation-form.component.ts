@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -12,6 +12,8 @@ export class OperationFormComponent implements OnInit {
   operation_ok = false;
   operationForm!:FormGroup;
 
+  @Output() isLoading = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -24,6 +26,7 @@ export class OperationFormComponent implements OnInit {
   }
 
   private onSubmitDeposit() {
+
     this.operation_ok = true;
     setTimeout(() => {
       this.operation_ok = false;
@@ -41,6 +44,8 @@ export class OperationFormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.operationForm.value);
+    this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
+
     if (this.op_type === 'deposit') {
       this.onSubmitDeposit();
     }

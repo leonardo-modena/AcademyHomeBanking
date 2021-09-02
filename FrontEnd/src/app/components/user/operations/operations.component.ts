@@ -9,9 +9,13 @@ export class OperationsComponent implements OnInit {
 
   operations: any[] = [];
 
+  isLoading: boolean = false;
+
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

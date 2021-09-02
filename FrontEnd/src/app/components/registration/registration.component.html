@@ -2,13 +2,15 @@
   <div class="row">
 
     <div class="col-12">
-      <h2 class="text-center">Apertura nuovo conto</h2>
+      <h2 class="text-center">
+          Pronto a diventare cliente? In pochi minuti puoi fare tutto online!
+      </h2>
     </div>
 
   </div>
 </div>
 
-<div class="container shadow-sm width mt-5">
+<div class="container shadow-sm width mt-2">
 
   <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="row gx-5" >
     <div class="col-md-6 form-group mt-3">
@@ -68,7 +70,11 @@
       <div [@fade] *ngIf="!passwordError" style="font-weight: bold" class="alert-danger"> Le password non coincidono! </div>
     </div>
 
-
+    <hr class="mt-2">
+    <div>Avvertenza
+      Ti ricordiamo che anche in un secondo momento puoi valutare quale conto si adatti meglio alle tue esigenze
+      (ad esempio, se preferisci operare anche attraverso altri canali come cartaceo o telefono)
+      contattando un Family Banker Office, dove potrai sottoscrivere altre tipologie di conto corrente.</div>
     <div class="col-12 mt-4 mb-4">
       <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Crea il tuo conto</button>
     </div>
