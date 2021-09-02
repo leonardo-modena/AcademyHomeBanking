@@ -28,9 +28,9 @@ export class AdminComponent implements OnInit {
       this.allNewRagistration = newRegistration;
       console.log(this.allNewRagistration)
     })
-    // this.adminService.getPendingAccount().subscribe( (toDeleteAccount) => {
-    //   this.allToDeleteAccounts = toDeleteAccount;
-    // })
+    this.adminService.getPendingAccount().subscribe( (toDeleteAccount) => {
+      this.allToDeleteAccounts = toDeleteAccount;
+    })
     this.responsiveSection();
   }
 

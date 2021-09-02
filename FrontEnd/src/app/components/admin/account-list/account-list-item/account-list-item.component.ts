@@ -22,4 +22,9 @@ export class AccountListItemComponent implements OnInit {
       this.adminService.confirmRegistration(this.account);
   
     }
+
+    deleteClick(): void{
+      this.adminService.confirmDeleteAccount(this.account);
+  
+    }
 }

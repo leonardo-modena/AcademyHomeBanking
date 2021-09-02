@@ -33,22 +33,20 @@ export class AdminService {
   }
 
   getPendingAccount(): Observable<BankAccount[]>{
-    return this.httpService.get<BankAccount[]>(`${apiUrl}/accounts/closing`)
+    return this.httpService.get<BankAccount[]>(`${apiUrl}/admin/listClosingAccounts`)
   }
 
 
-  //post request
+  //put request
 
-  confirmRegistration(accountSelected: BankAccount): void{
-    this.httpService.post<BankAccount>(`${apiUrl}/admin/activeAccount/${accountSelected.id}`, {}).subscribe( (res) => {
-      console.log(res)
-    } )
+  confirmRegistration(accountSelected: BankAccount): Observable<BankAccount>{
+    return this.httpService.put<BankAccount>(`${apiUrl}/admin/activeAccount/${accountSelected.id}`, {})
   }
+
+  //delete request
 
   confirmDeleteAccount(accountSelected: BankAccount): Observable<BankAccount>{
-    return this.httpService.post<BankAccount>(`${apiUrl}/account/deleteAccount`, {
-      id: accountSelected.id
-    })
+    return this.httpService.delete<BankAccount>(`${apiUrl}/admin/close/${accountSelected.id}`, {})
   }
 
 }
