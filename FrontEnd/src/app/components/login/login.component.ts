@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     console.log(username, password);
     this.auth.loginUser(username,password).subscribe(resData => {
-      console.log(resData);
+      console.log(resData)
 
     })
   }
