@@ -20,12 +20,12 @@
 @media (min-width: 768px) {
 
   .mtt{
-    margin-top: 25% !important;
+    margin-top: 20% !important;
   }
 
 }
 
-@media (max-width: 762px){
+@media (max-width: 768px){
   .img-not{
     display: none;
   }
@@ -37,4 +37,21 @@
   }
 }
 
+@media (min-width: 990px) {
+
+  .form-w{
+    width: 25rem;
+    margin-left: -50px !important;
+  }
+
+}
+
+@media (min-width: 771px) {
+
+  .form-w{
+    width: 20rem;
+    margin-left: -80px;
+  }
+
+}
 
