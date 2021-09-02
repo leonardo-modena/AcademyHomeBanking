@@ -30,10 +30,10 @@ import { SharedModule } from "../shared/shared.module";
     SharedModule,
     MatDialogModule,
     RouterModule.forChild([
-      {path: '', redirectTo: 'conto', pathMatch: 'full'},
-      {path: 'conto', component: BankAccountComponent},
-      {path: 'profilo', component: ProfileComponent},
-      {path: 'operazioni', component: OperationsComponent}
+      { path: '', redirectTo: 'conto', pathMatch: 'full' },
+      { path: 'conto', component: BankAccountComponent },
+      { path: 'profilo', component: ProfileComponent },
+      { path: 'operazioni', component: OperationsComponent }
     ]),
   ],
 })

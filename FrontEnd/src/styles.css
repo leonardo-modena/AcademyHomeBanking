@@ -227,6 +227,10 @@ input[type=number]:focus,
   color: var(--gray);
 }
 
+.light-green-background {
+  background-color: var(--light-green)
+}
+
 .serif-font{
   font-family: 'Kaisei HarunoUmi', serif;
 }
