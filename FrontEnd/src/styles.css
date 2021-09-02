@@ -121,6 +121,23 @@ button.btn-primary:hover{
   background-color: transparent!important
 }
 
+
+
+.btn-secondary {
+  background: var(--white-yellow) !important;
+  color: #888888;
+  border: 1px solid var(--white-yellow);
+}
+
+.btn-secondary:hover {
+  border: 1px solid #888888;
+  color: #888888
+}
+
+.btn-small {
+  font-size: 1.2rem!important;
+}
+
 button:focus, textarea:focus,
 textarea.form-control:focus,
 input.form-control:focus,
@@ -172,8 +189,13 @@ input[type=number]:focus,
 }
 
 .list-item, .item-title{
-  width: 12rem;
+  width: 25%;
 }
+
+.list-item{
+  font-size: 1.4rem !important;
+}
+
 
 .item-title span{
   color: #444444;
@@ -239,7 +261,7 @@ input[type=number]:focus,
 .horizontal-divider{
   height: 0.5px;
   background-color: rgb(215 215 215);
-  box-shadow: 0 1px 3px 0px #0000006e;
+  box-shadow: 0 1px 3px 0 #0000006e;
   margin-top: 2rem !important;
 }
 

@@ -17,19 +17,21 @@ export class EncryptInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     let pswNotEncrypted;
-    let usrNotEncrypted;
 
     let body: any = request.body;
 
-    if (body && body.psw && body.usr) {
+    if (body && body.password) {
 
-      pswNotEncrypted = body.psw;
-      usrNotEncrypted = body.usr;
+      pswNotEncrypted = body.password;
 
       let cloneReq = request.clone({
         body: {
-          psw: sha256(pswNotEncrypted),
-          usr: sha256(usrNotEncrypted)
+          password: sha256(pswNotEncrypted),
+          firstName: body.firstName,
+          lastName: body.lastName,
+          email: body.email,
+          dateOfBirth: body.dateOfBirth,
+          gender: body.gender,
         }
       })
 

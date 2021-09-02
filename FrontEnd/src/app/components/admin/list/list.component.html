@@ -9,29 +9,29 @@
           <div class="item-title"><span>Cognome</span></div>
           <div class="item-title"><span>E-Mail</span></div>
         </div>
-        <app-user-list [userList]='allUsers' [newUsersMode]="false"></app-user-list>
+        <app-user-list [userList]='allUsers'></app-user-list>
       </div>
     </div>
     <div *ngIf="operation" class="list-content">
         <mat-tab-group>
-            <mat-tab label="Utenti da Approvare">
+            <mat-tab label="Nuove Registrazioni">
               <div class="list-items">
                 <div class="list-items-title">
+                  <div class="item-title"><span>N. conto</span></div>
                   <div class="item-title"><span>Nome</span></div>
                   <div class="item-title"><span>Cognome</span></div>
-                  <div class="item-title"><span>E-Mail</span></div>
                 </div>
-                <app-user-list [userList]='newUsers' [newUsersMode]="true"></app-user-list>
+                <app-account-list [accountList]='newRegistration' [newRegistrationMode]="true"></app-account-list>
               </div>
             </mat-tab>
             <mat-tab label="Conti da Eliminare">
               <div class="list-items">
                 <div class="list-items-title">
+                  <div class="item-title"><span>N. conto</span></div>
                   <div class="item-title"><span>Nome</span></div>
                   <div class="item-title"><span>Cognome</span></div>
-                  <div class="item-title"><span>E-Mail</span></div>
                 </div>
-                <app-account-list [accountList]='toDeleteAccounts'></app-account-list>
+                <app-account-list [accountList]='toDeleteAccounts'  [newRegistrationMode]="false"></app-account-list>
               </div>
             </mat-tab>
           </mat-tab-group>

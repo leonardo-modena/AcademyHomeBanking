@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Account } from 'src/app/model/account';
+import { BankAccount } from 'src/app/model/account';
 
 @Component({
   selector: 'app-account-list',
@@ -8,9 +8,8 @@ import { Account } from 'src/app/model/account';
 })
 export class AccountListComponent implements OnInit {
 
-  @Input() accountList!: Account[];
-
-  accounts:string[]=["mela","pera","banana","uva","melone","anguria","arancia","mandarino","limone","pompelmo"];
+  @Input() newRegistrationMode: boolean = false;
+  @Input() accountList!: BankAccount[];
   
   constructor() { }
 

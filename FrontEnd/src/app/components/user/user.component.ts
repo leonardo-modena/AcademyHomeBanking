@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
 import { Router} from "@angular/router";
 import {Operation} from "../../model/operation";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-user',
@@ -10,39 +11,7 @@ import {Operation} from "../../model/operation";
 })
 export class UserComponent implements OnInit {
 
-  user!: {nome: string, cognome: string, dataDiNascita: number, email: string, id: string};
-  balance: number = 0;
-  routeUrl: string = '';
-  operations: Operation[] = [
-    {
-      type: 'prelievo',
-      importo: 234.54,
-      dataPrelievo: 1628763225000,
-      causale: 'Spese mediche',
-      beneficiario: 'Ospedale di Piombino',
-      mittente: ''
-    },
-    {
-      type: 'versamento',
-      importo: 403.46,
-      dataPrelievo: 1622277132000,
-      causale: 'Vendita mobile',
-      beneficiario: '',
-      mittente: 'Tizio Caio'
-    }
-  ];
+  constructor() { }
 
-  constructor(private userService: UserService, private router: Router) {  }
-
-  ngOnInit(): void {
-    this.routeUrl = this.router.url;
-    this.userService.user.subscribe((user: { nome: string, cognome: string, dataDiNascita: number, email: string, id: string }) => {
-      this.user = user;
-    });
-
-    // this.userService.getSaldo(billNumber).subscribe((balance) => {
-    //   this.balance = balance;
-    // })
-    this.balance = this.userService.getBalance();
-  }
+  ngOnInit() {}
 }

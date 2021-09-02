@@ -1,3 +1,4 @@
+
 nav{
     padding: 1rem 2rem !important;
     border-bottom: 1px solid var(--light-gray);
@@ -5,6 +6,33 @@ nav{
 
 .navbar-img{
     width: 14rem;
+}
+
+.nav-item{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav-link{
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+
+
+.newAccountLink{
+    transition: color 0.5s ease-out;
+}
+
+.newAccountLink i{
+    margin-right: .5rem;
+    font-size: 1.4rem;
+}
+
+.newAccountLink:hover {
+    color: var(--primary-green) !important;
 }
 
 .toggle-sidenav i{
@@ -38,28 +66,69 @@ nav{
     transition-delay: 0.4s;
 }
 
+.sidenav-user-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+}
+
+.sidenav-user-img{
+    width: 12rem;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    transition: border 0.3s ease-out;
+}
+
+.sidenav-user-img:hover {
+    border: 2px solid var(--white-yellow);
+}
+
+.sidenav-user-img:focus{
+    outline: none !important;
+}
+
+.sidenav-user-img_active {
+    border: 2px solid var(--white-yellow);
+}
+
+.sidenav-user-text{
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--white-yellow);
+    font-weight: 100;
+    letter-spacing: .17rem;
+}
+
+
 .sidenav-close-icon i{
     padding-right: 2rem;
     font-size: 1.5rem;
-    color: var(--gray);
+    color: var(--white-yellow);
 }
 
 .sidenav-item{
     padding: 1.5rem 2rem ;
     color: var(--white-yellow);
     text-align: start;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.116);
+
 }
 
-.sidenav-item:first-child{
-    margin-top: 4rem;
+#first-sidenav-item {
+    margin-top: 4.2rem !important;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.116) !important;
 }
 
 .sidenav-item span{
-    font-size: 1.5rem;
-    font-weight: 100;
-    letter-spacing: 3px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 2px;
     text-transform: capitalize;
 }
+
 
 .sidenav-item i{
     font-size: 2.5rem;
@@ -69,10 +138,21 @@ nav{
 .exit-button{
     margin-top: 4rem;
     transition: all 0.3s ease-out;
+    border: none !important;
 }
 
 .sidenav-item:hover{
     background-color: var(--secondary-green);
+    border-right: 2px solid var(--white-yellow);
+}
+
+.sidenav-item:focus{
+    outline: none !important;
+}
+
+.sidenav-item_active{
+    background-color: var(--secondary-green);
+    border-right: 2px solid var(--white-yellow);
 }
 
 .exit-button:hover i{
@@ -94,4 +174,6 @@ nav{
     z-index: 1;
 }
 
-
+.border-sidenav{
+    border-bottom: 0.5px solid var(--light-gray);
+}

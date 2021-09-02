@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Account } from 'src/app/model/account';
+import { BankAccount } from 'src/app/model/account';
 import { User } from 'src/app/model/user';
 
 @Component({
@@ -11,11 +11,11 @@ export class ListComponent implements OnInit {
 
   @Input() operation!: boolean;
 
-  @Input() toDeleteAccounts!: Account[];
+  @Input() toDeleteAccounts!: BankAccount[];
 
   @Input() allUsers!: User[];
 
-  @Input() newUsers!: User[];
+  @Input() newRegistration!: BankAccount[];
   
   constructor() { }
 

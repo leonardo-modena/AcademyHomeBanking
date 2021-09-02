@@ -1,6 +1,6 @@
 <div class="backdrop" (click)="sidenavSwitch()" *ngIf="sidenav"></div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
   <a class="navbar-brand">
     <img
       [routerLink]="['/']"
@@ -9,27 +9,23 @@
     />
   </a>
 
-  <div
-    class="collapse navbar-collapse"
-    id="navbarSupportedContent"
-    *ngIf="!authorized"
-  >
-    <ul class="navbar-nav ms-auto">
+  <div class=" ms-auto" *ngIf="!authorized">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link pointer newAccountLink" [routerLink]="['/registrazione']"><i class="fas fa-running"></i> Nuovo Conto</a>
+      </li>
       <li class="nav-item active">
-        <a class="nav-link pointer"
-          >Accedi <span class="sr-only">(current)</span></a
-        >
+        <a class="nav-link pointer" [routerLink]="['/login']">
+          Accedi <span class="sr-only">(current)</span>
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link pointer">Nuovo Conto</a>
+        <a class="nav-link pointer toggle-sidenav" *ngIf="!authorized">
+          <i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i>
+        </a>
       </li>
-      <li class="nav-item"></li>
     </ul>
   </div>
-
-  <a class="nav-link pointer toggle-sidenav" *ngIf="!authorized"
-    ><i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i
-  ></a>
 </nav>
 
 <div class="sidenav-container" [@triggerSidenav]="sidenav ? 'open' : 'closed'">
@@ -37,16 +33,26 @@
     <div class="sidenav-close-icon ms-auto">
       <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
     </div>
-    <span class="user-items" *ngIf="!userLogged" [ngClass]="{'slide': sidenav}">
-      <div  class="sidenav-item pointer" >
-        <i class="bi bi-person"></i>
-        <span>Profilo</span>
+    <span class="user-items" *ngIf="!userLogged" [ngClass]="{ slide: sidenav } " >
+      <div class="sidenav-user-info" >
+          <img (click)="sidenavSwitch()" class="sidenav-user-img img-fluid pointer" src="../../../assets/img/usr/usr1.jpg" alt="" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-user-img_active" [routerLinkActiveOptions]="{exact:
+            true}">
+          <div class="sidenav-user-text text-center">
+            <span>{{userInfo.nome | titlecase}} - {{userInfo.cognome | titlecase}}</span>
+          </div>
       </div>
-      <div class="sidenav-item pointer" >
+      <div class="sidenav-item pointer" id="first-sidenav-item" (click)="sidenavSwitch()" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
+        <i class="bi bi-person "></i>
+        <span  >Profilo</span>
+      </div>
+      <div class="sidenav-item pointer" (click)="sidenavSwitch()" [routerLink]="['/user/operazioni']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
         <i class="bi bi-cash"></i>
-        <span>Operazioni</span>
+        <span >Operazioni</span>
       </div>
-      <div class="sidenav-item pointer">
+      <div class="sidenav-item pointer" (click)="sidenavSwitch()" [routerLink]="['/user/conto']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
         <i class="bi bi-credit-card-2-front"></i>
         <span>Conto</span>
       </div>

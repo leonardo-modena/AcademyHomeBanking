@@ -1,13 +1,2 @@
-<div *ngIf=" routeUrl === '/user'" class="container">
-  <div class="row">
-    <div class="col-12 m-auto" *ngIf="user">
-      <h2>Benvenuto, {{user.nome}}</h2>
-      <h3>Il tuo saldo: {{balance}}€</h3>
-      <app-filter></app-filter>
-      <app-operation-list [operationsList]="operations"></app-operation-list>
-      <app-download  *ngIf="operations.length !== 0" [downloadData]="operations"></app-download>
-      <p *ngIf="operations.length === 0">Nessuna operazione effettuata nel periodo selezionato.</p>
-    </div>
-  </div>
-</div>
+
 <router-outlet></router-outlet>

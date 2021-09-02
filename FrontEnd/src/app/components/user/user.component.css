@@ -1,0 +1,14 @@
+.prova {
+  border: 2px solid var(--secondary-green);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+img.big-img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.light-green-background {
+  background-color: var(--light-green) !important;
+}

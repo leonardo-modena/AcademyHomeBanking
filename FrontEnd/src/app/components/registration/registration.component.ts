@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../services/auth.service";
 import { Router} from "@angular/router";
+import {AlertService} from "../../services/alert.service";
 
 
 @Component({
@@ -29,7 +30,7 @@ export class RegistrationComponent implements OnInit {
   passwordError: boolean = true;
   today!:string;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router, private alert: AlertService) {}
 
   ngOnInit(): void {
     this.today = new Date().toLocaleDateString();
@@ -76,6 +77,7 @@ export class RegistrationComponent implements OnInit {
     this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {
       console.log(resData);
       this.router.navigate(['/login']);
+      this.alert.newAllert('Registrazione effettuata con successo! Procedi col login.')
     });
 
   }

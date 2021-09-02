@@ -1,4 +1,7 @@
 <div class="d-flex">
-    <p class="list-item">{{account}}</p>
-    <div class="action-button list-item "><i class="bi bi-check-square action-icon"><span class="action-button__desc">Autorizza</span></i></div>
+    <p class="list-item">{{account.id}}</p>
+    <p class="list-item">{{account.holder.firstName}}</p>
+    <p class="list-item">{{account.holder.lastName}}</p>
+    <div class="action-button list-item "*ngIf="pendingRegistration"><i  class="bi bi-check-square action-icon" id="activate-button" (click)="activateClick()"></i></div>
+    <div class="action-button list-item "*ngIf="!pendingRegistration" ><i class="bi bi-check-square action-icon" id="delete-button" (click)="deleteClick()"></i></div>
 </div>

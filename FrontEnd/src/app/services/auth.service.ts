@@ -17,21 +17,21 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(username: string, lastname: string, email: string, password: string,msDate: number,sex: string){
+  registerUser(firstName: string, lastName: string, email: string, password: string,dateOfBirth: number,gender: string){
 
     return this.http.post(this.url + "/registrazione",{
-      username,
-      lastname,
+      firstName,
+      lastName,
       email,
       password,
-      msDate,
-      sex
+      dateOfBirth,
+      gender,
     })
   }
 
   loginUser(username: string, password: string){
 
-    return this.http.post(this.url + '/login',{
+    return this.http.post(this.url + '/auth/signin',{
       username,
       password
     })

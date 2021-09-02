@@ -8,6 +8,8 @@ import {
   transition,
 } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/model/user';
+import { MatRippleModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-navbar',
@@ -36,6 +38,8 @@ export class NavbarComponent implements OnInit {
   authorized!: boolean;
 
   userLogged!: boolean;
+
+  userInfo = {nome: 'Mario', cognome: 'Rossi'};
 
   constructor(private authService: AuthService) {}
 
