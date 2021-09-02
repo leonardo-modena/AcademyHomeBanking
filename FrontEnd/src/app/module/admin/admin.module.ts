@@ -9,6 +9,7 @@ import { UserListComponent } from 'src/app/components/admin/user-list/user-list.
 import { UserListItemComponent } from 'src/app/components/admin/user-list/user-list-item/user-list-item.component';
 import { AccountListComponent } from 'src/app/components/admin/account-list/account-list.component';
 import { AccountListItemComponent } from 'src/app/components/admin/account-list/account-list-item/account-list-item.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -20,11 +21,10 @@ import { AccountListItemComponent } from 'src/app/components/admin/account-list/
     UserListItemComponent,
     AccountListComponent,
     AccountListItemComponent,
-
   ],
   imports: [
     CommonModule,
-    MatTabsModule
+    SharedModule
   ]
 })
 export class AdminModule { }
