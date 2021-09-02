@@ -5,6 +5,8 @@
             [account]="account"
             [pendingRegistration]="newRegistrationMode"
             [index]="i"
+            (confirmAccountClick)="passConfirmAccountEvent()"
+            (confirmDeleteClick)="passConfirmDeleteEvent()"
          ></app-account-list-item>
     </div>
 </div>
