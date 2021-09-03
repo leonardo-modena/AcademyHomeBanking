@@ -7,5 +7,5 @@ export interface User {
   dateOfBirth: number;
   gender: string;
   role: string;
-  bankAccounts: [];
+  bankAccounts: number[];
 }

@@ -4,6 +4,7 @@ import {UserService} from "../../../services/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component";
 import {ErrorService} from "../../../services/error.service";
+import {User} from "../../../model/user";
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import {ErrorService} from "../../../services/error.service";
 })
 export class ProfileComponent implements OnInit {
 
-  user!: {nome: string, cognome: string, dataDiNascita: number, email: string, id: string};
+  user!: User;
   dataDiNascita!: Date;
   isDeleting = false;
   isCreatingNew = false;
@@ -29,23 +30,23 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.user.subscribe((user) => {
+    this.userService.user.subscribe((user: User) => {
       this.user = user;
-      this.dataDiNascita = new Date(this.user.dataDiNascita);
+      console.log(this.user);
+      this.dataDiNascita = new Date(this.user.dateOfBirth);
     });
   }
 
   onNewBill(form: NgForm): void{
     this.isCreatingNew = true;
-    this.userService.createNewBill(parseInt(form.controls.amount.value), form.controls.selectedBill.value).subscribe((resData) => {
+    console.log(form.controls.selectedBill.value);
+    this.userService.createNewBill(form.controls.amount.value, form.controls.selectedBill.value).subscribe((resData) => {
       console.log(resData);
-
       this.isCreatingNew = false;
-    }, (errorMessage) => {
+    }, (error) => {
       this.errorService.newError('Non è stato possibile creare il nuovo conto. Riprova.');
       this.isCreatingNew = false;
     });
-    console.log(form.form.value);
   }
 
   onCloseBill() {

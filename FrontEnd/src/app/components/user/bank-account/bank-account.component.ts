@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Operation} from "../../../model/operation";
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
+import {User} from "../../../model/user";
 
 @Component({
   selector: 'app-bank-account',
@@ -11,7 +12,7 @@ import {UserService} from "../../../services/user.service";
 export class BankAccountComponent implements OnInit {
 
 
-  user!: { nome: string, cognome: string, dataDiNascita: number, email: string, id: string };
+  user!: User;
   balance: number = 0;
   operations: Operation[] = [
     {
@@ -53,7 +54,7 @@ export class BankAccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userService.user.subscribe((user: { nome: string, cognome: string, dataDiNascita: number, email: string, id: string }) => {
+    this.userService.user.subscribe((user) => {
       this.user = user;
     });
 
@@ -68,6 +69,7 @@ export class BankAccountComponent implements OnInit {
 
   onChangeBill(): void {
     this.onGetBalance();
+    this.userService.getBillInformation(this.selectedBill);
     this.onGetOperations();
   }
 

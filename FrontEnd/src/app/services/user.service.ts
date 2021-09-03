@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../model/user";
 import {Operation} from "../model/operation";
@@ -13,15 +13,21 @@ import {environment} from "../../environments/environment";
 export class UserService {
   apiUrl =`${environment.api_url}/customer`;
 
-  user = new BehaviorSubject<{nome: string, cognome: string, dataDiNascita: number, email: string, id: string}>({nome: 'Samuel', cognome: 'Monti', dataDiNascita: 756428400000, email: 'samuelmonti@gmail.com', id: 'C1'});
+  user = new BehaviorSubject<User>({password: 'djkfsdjf!4', firstName: 'Samuel', lastName: 'Caio', gender: 'M', role: 'ROLE_C', dateOfBirth: 1126389600000, email: 'samuelcaio@gmail.com', id: '1', bankAccounts: [1, 2]});
 
   userBills!: any[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+     this.getUser(2);
+  }
 
   // GET REQUESTS
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/id`);
+  getUser(id: number) {
+    // this.user.next({password: 'djkfsdjf!4', firstName: 'Samuel', lastName: 'Caio', gender: 'M', role: 'ROLE_C', dateOfBirth: 1126389600000, email: 'samuelcaio@gmail.com', id: '1', bankAccounts: [1, 2]});
+    this.http.get<User>(`${this.apiUrl}/profile/${id}`).subscribe((user) => {
+      console.log(user);
+      this.user.next(user);
+    });
   }
 
   //Restituisce il saldo del cliente
@@ -45,15 +51,20 @@ export class UserService {
 
   // Restituisce i dati del conto
   getBillInformation(bill: number) {
-    return this.http.get<Operation[]>(`${this.apiUrl}/...`);
+    return this.http.get<Operation[]>(`${this.apiUrl}/profile/bankAccount/${bill}`).subscribe((resData) => {
+      console.log(resData);
+    });
   }
 
   //POST REQUESTS
 
   //Creazione di un nuovo conto
   createNewBill(initialAmount: number, startBillNumber: number) {
-    return this.http.post<BankAccount>(`${this.apiUrl}/new`, {startBill: startBillNumber, initialAmount: 12});
+    console.log(startBillNumber);
+    return this.http.post<BankAccount>(`${this.apiUrl}/new/${startBillNumber}/${initialAmount}`, {});
   }
+
+
 
   // Versamento sul conto
   doDeposit(bill: number, operation: Operation) {

@@ -6,11 +6,11 @@
         <tbody>
         <tr>
           <th scope="row">Nome</th>
-          <td>{{user.nome}}</td>
+          <td>{{user.firstName}}</td>
         </tr>
         <tr>
           <th scope="row">Cognome</th>
-          <td>{{user.cognome}}</td>
+          <td>{{user.lastName}}</td>
         </tr>
         <tr>
           <th scope="row">Data di nascita</th>
@@ -29,7 +29,7 @@
         <form class="form">
           <label class="form-label">Seleziona il conto da eliminare</label>
           <select class="form-select">
-            <option>Conto 1</option>
+            <option *ngFor="let bill of user.bankAccounts" [value]="bill">{{bill | number: '6.0' | noComma }}</option>
           </select>
           <div class="error mt-2">Attenzione! È presente un solo conto, dopo la chiusura l'account verrà eliminato.</div> <!-- Solo se vi è un conto solo -->
           <div class="d-flex justify-content-end">
@@ -50,7 +50,7 @@
           <div class="form-group col-12 col-md-6">
             <label class="form-label" for="selectedBill">Seleziona il conto</label>
             <select id="selectedBill" required class="form-select" aria-label="Seleziona il conto" [(ngModel)]="selectedBill" name="selectedBill" (change)="maxAmount=bills[selectedBill].amount">
-              <option *ngFor="let bill of bills; let i = index" [value]="i" [selected]="selectedBill === i">{{bill.billNumber}}</option>
+              <option *ngFor="let bill of user.bankAccounts; let i = index" [value]="i" [selected]="selectedBill === i">{{bill | number: '6.0' | noComma }}</option>
             </select>
           </div>
           <div class="form-group col-12 col-md-6">
