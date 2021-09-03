@@ -21,7 +21,6 @@ export class UserService {
   // GET REQUESTS
 
   getUser(id: number): Observable<User> {
-    //get
     return this.http.get<User>(`${this.apiUrl}/id`);
   }
 
@@ -52,20 +51,23 @@ export class UserService {
   //POST REQUESTS
 
   //Creazione di un nuovo conto
-  createNewBill() {
-    return this.http.post<BankAccount>(`${this.apiUrl}/...`, {});
+  createNewBill(initialAmount: number, startBillNumber: number) {
+    return this.http.post<BankAccount>(`${this.apiUrl}/new`, {startBill: startBillNumber, initialAmount: 12});
   }
 
+  // Versamento sul conto
   doDeposit(bill: number, operation: Operation) {
-    return this.http.post<Operation[]>(`${this.apiUrl}/...`, {});
+    return this.http.post<Operation[]>(`${this.apiUrl}/...`, {bill, operation});
   }
 
+  // Prelievo dal conto
   doTaking(bill: number, operation: Operation) {
-    return this.http.post<Operation[]>(`${this.apiUrl}/...`, {});
+    return this.http.post<Operation[]>(`${this.apiUrl}/...`, {bill, operation});
   }
 
   //DELETE REQUESTS
 
+  // Cancellazione del conto
   deleteBill(bill: number): Observable<void> {
     return this.http.put<void>(`${environment.api_url}/closingRequest/1`, {});
   }
