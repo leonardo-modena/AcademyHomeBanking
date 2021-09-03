@@ -5,14 +5,15 @@ import { RegistrationComponent } from "./components/registration/registration.co
 import { LoginComponent } from "./components/login/login.component";
 import { AdminComponent } from "./components/admin/admin.component";
 import { NotFoundComponent } from "./layout/not-found/not-found.component";
-import {UserComponent} from "./components/user/user.component";
+import {AdminGuard} from "./guard/admin.guard";
+
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
   { path: 'registrazione', component: RegistrationComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'user', loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},
-  { path: 'admin', component: AdminComponent, loadChildren: () => import('./module/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'user',  loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] ,loadChildren: () => import('./module/admin/admin.module').then(m => m.AdminModule) },
   { path: '**', component: NotFoundComponent }
 ];
 
