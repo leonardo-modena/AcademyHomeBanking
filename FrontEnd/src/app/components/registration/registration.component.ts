@@ -72,6 +72,7 @@ export class RegistrationComponent implements OnInit {
 
     let date = form.value.date;
     let msDate = Date.parse(date); //SOSTITUIRE CON new Date(date) E PROVARE
+    console.log(msDate)
     const sex = form.value.sesso;
 
     this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {

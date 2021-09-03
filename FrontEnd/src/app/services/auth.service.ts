@@ -32,7 +32,7 @@ export class AuthService {
 
   loginUser(username: string, password: string){
 
-    return this.http.post<any>( this.url + '/api/auth/signin',{
+    return this.http.post<any>( this.url + '/auth/signin',{
       username,
       password
     })
