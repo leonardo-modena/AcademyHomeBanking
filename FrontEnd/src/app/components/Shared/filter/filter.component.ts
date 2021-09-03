@@ -80,13 +80,12 @@ export class FilterComponent implements OnInit {
 
   onSubmit() {
     const selectedChoiceValue = this.filterForm.controls.selectedChoice;
-    this.onSearchFunction(true);
     if (selectedChoiceValue.value === 'dateSelection' && !this.invalidDate) {
       //Get between dates
-      this.userService.getOperationList({type: 'dateSelection', startDate: this.filterForm.controls.startDate.value, endDate: this.filterForm.controls.endDate.value});
+      this.onSearchFunction({type: 'dateSelection', startDate: this.filterForm.controls.startDate.value, endDate: this.filterForm.controls.endDate.value})
     }
     else {
-      this.userService.getOperationList({type: selectedChoiceValue.value})
+      this.onSearchFunction({type: 'dateSelection'});
     }
   }
 }
