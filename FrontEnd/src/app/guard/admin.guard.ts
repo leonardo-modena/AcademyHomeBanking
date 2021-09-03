@@ -13,7 +13,10 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if(sessionStorage.getItem('token') && this.auth.isAdmin){
+    let isAdmin;
+    this.auth.actualAdmin.subscribe(state => { isAdmin = state})
+
+    if(sessionStorage.getItem('token') && isAdmin ){
       return true;
     }
 
