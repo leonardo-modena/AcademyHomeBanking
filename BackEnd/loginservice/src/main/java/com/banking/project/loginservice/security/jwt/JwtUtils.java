@@ -1,6 +1,8 @@
 package com.banking.project.loginservice.security.jwt;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +26,11 @@ public class JwtUtils {
 
 	public String generateJwtToken(Authentication authentication) {
 
-		MyUserDetails userPrincipal = (MyUserDetails) authentication.getPrincipal();
-
-		return Jwts.builder().setSubject((String.valueOf(userPrincipal.getId()))).setIssuedAt(new Date())
-				.setExpiration(new Date((new Date()).getTime() + expirationMs))
+		MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
+		//non mi serve la lista di ruoli ma solo il primo
+		String role = roles.get(0);
+		return Jwts.builder().claim("id", userDetails.getId()).claim("role",role).claim("expiration",expirationMs)
 				.signWith(SignatureAlgorithm.HS512, secret).compact();
 	}
 
