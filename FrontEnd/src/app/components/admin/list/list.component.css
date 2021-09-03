@@ -4,3 +4,12 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.103);
 }
+
+#print-icon{
+    font-size: 1.5rem;
+}
+
+#print-icon:hover{
+    color: var(--primary-green) !important;
+
+}

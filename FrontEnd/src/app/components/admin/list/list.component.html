@@ -1,7 +1,7 @@
 
 <div class="list-container">
   <div class="list-header">
-    <span class="list-title">{{ !operation ? 'lista correntisti' : 'operazioni' | titlecase}}</span>
+    <span class="list-title">{{ !operation ? 'lista correntisti' : 'operazioni' | titlecase}}</span><i id="print-icon" *ngIf="allUsers" class="pointer " [class]="fillIcon ? 'bi bi-printer-fill' : 'bi bi-printer'" (mouseenter)="iconSwitch()" (mouseleave)="iconSwitch()" (click)="downloadExcel()"></i>
   </div>
   <div *ngIf="!operation" class="list-content">
         <app-spinner *ngIf="loading"></app-spinner>

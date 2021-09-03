@@ -67,12 +67,7 @@ export class AdminComponent implements OnInit{
   confirmDeleteEventCallback(): void{
     this.adminService.getAllData()
   }
-
-  downloadUserExcel(): void{
-    let downloadData: {firstName: string, lastName: string, email: string}[] = this.allUsers;
-    this.downloadService.downloadAsXLSX(downloadData);
-  }
-
+  
   @HostListener('window:resize', ['$event'])
   responsiveSection(event?: any) {
     let screenWidth = window.innerWidth;
