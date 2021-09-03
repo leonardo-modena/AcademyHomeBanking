@@ -1,5 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UserService} from "../../../../services/user.service";
+import {ErrorService} from "../../../../services/error.service";
 
 @Component({
   selector: 'app-operation-form',
@@ -14,7 +16,7 @@ export class OperationFormComponent implements OnInit {
 
   @Output() isLoading = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private userService: UserService, private errorService: ErrorService) { }
 
   ngOnInit(): void {
     this.operationForm = new FormGroup({
@@ -46,11 +48,28 @@ export class OperationFormComponent implements OnInit {
     console.log(this.operationForm.value);
     this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
 
+    this.userService.doDeposit(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value ).subscribe((resData) => {
+      this.isLoading.emit(false);
+    }, (error) => {
+      this.isLoading.emit(false);
+      this.errorService.newError('L\'operazione non è andata a buon fine. Riprova')
+    });
+
     if (this.op_type === 'deposit') {
-      this.onSubmitDeposit();
+      this.userService.doDeposit(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value ).subscribe((resData) => {
+        this.isLoading.emit(false);
+      }, (error) => {
+        this.isLoading.emit(false);
+        this.errorService.newError('L\'operazione non è andata a buon fine. Riprova');
+      });
     }
     else {
-      this.onSubmitTaking();
+      this.userService.doTaking(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value ).subscribe((resData) => {
+        this.isLoading.emit(false);
+      }, (error) => {
+        this.isLoading.emit(false);
+        this.errorService.newError('L\'operazione non è andata a buon fine. Riprova');
+      });
     }
   }
 
