@@ -12,13 +12,13 @@ const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
   { path: 'registrazione', component: RegistrationComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'user',  loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},
-  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] ,loadChildren: () => import('./module/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'user', pathMatch: 'full' ,  loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},
+  { path: 'admin',pathMatch: 'full', component: AdminComponent, canActivate: [AdminGuard], loadChildren: () => import('./module/admin/admin.module').then(m => m.AdminModule) },
   { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 
