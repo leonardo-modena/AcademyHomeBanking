@@ -15,7 +15,7 @@ export class UserGuard implements CanActivate {
     if(sessionStorage.getItem('token') && this.auth.isUser){
       return true;
     }
-    return this.route.navigate(['**']);
+    return this.route.navigate(['/login']);
   }
 
 }
