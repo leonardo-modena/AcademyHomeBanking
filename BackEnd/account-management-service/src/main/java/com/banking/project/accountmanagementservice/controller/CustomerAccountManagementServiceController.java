@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +16,6 @@ import com.banking.project.accountmanagementservice.entity.Customer;
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 
-import javassist.NotFoundException;
 
 @RestController
 @RequestMapping("/customer")
@@ -41,7 +39,7 @@ public class CustomerAccountManagementServiceController {
 	}
 
 	/**
-	 * Metodo per recuperare le informazioni di un conto con l'id
+	 * Metodo per recuperare le informazioni di un utente
 	 * 
 	 * @param
 	 * @return
@@ -53,7 +51,11 @@ public class CustomerAccountManagementServiceController {
 		return customerRepository.findById(customerId);
 
 	}
-
+	/**
+	 * Metodo che consente di recuperare le informazioni del proprio conto dato l'id
+	 * @param myBankAccount
+	 * @return
+	 */
 	@GetMapping("/profile/bankAccount/{myBankAccount}")
 	public Optional<BankAccount> getMyBankAccount(@PathVariable int myBankAccount) {
 
@@ -62,17 +64,23 @@ public class CustomerAccountManagementServiceController {
 		return theBankAccount;
 	}
 
-	// da terminare
+	/**
+	 * Metodo che consente l'apertura di un nuovo conto che non sia il primo
+	 * @param id
+	 * @param balance
+	 * @return
+	 */
 	@PostMapping("/new/{id}/{balance}")
 	public String newAccount(@PathVariable int id, @PathVariable BigDecimal balance) {
 
 		BankAccount newBankAccount = new BankAccount();
 
-		if (bankAccountRepository.existsById(id)) {
+		if ((bankAccountRepository.existsById(id))) {
 
 			BankAccount bankAccount = bankAccountRepository.getById(id);
 
-			if (((bankAccount.getBalance().compareTo(balance))>=0) && bankAccount.getAccount_status() == "ACTIVE") {
+			if ((bankAccount.getBalance().compareTo(balance)) >= 0
+					&& bankAccount.getAccount_status().equals("ACTIVE")) {
 
 				BigDecimal newOldBalance = bankAccount.getBalance().subtract(balance);
 
