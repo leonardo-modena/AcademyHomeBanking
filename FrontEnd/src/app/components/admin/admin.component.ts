@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { BankAccount } from 'src/app/model/BankAccount';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
@@ -9,7 +9,7 @@ import { DownloadService } from 'src/app/services/download.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
 })
-export class AdminComponent implements OnInit, AfterContentChecked {
+export class AdminComponent implements OnInit{
   adminInfo!: { nome: string; cognome: string };
 
   allUsers!: User[];
@@ -20,52 +20,32 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   operationSection!: boolean;
 
   pageLoading!: boolean;
+  loadingTimeout!: any;
+
   responsive!: boolean;
 
   constructor(private adminService: AdminService, private downloadService: DownloadService) {
-    
     this.responsiveSection();
   }
 
   ngOnInit(): void { 
     this.pageLoading = true;
-    this.adminService.changeLoadingState(true)
-    this.adminService.getAllUser().subscribe( 
-      (allUsers) => {
-      this.allUsers = allUsers;
-      this.adminService.changeLoadingState(false)},
-      (err) => {
-        this.adminService.changeLoadingState(false)}
-      )
-    this.adminService.getNewRegistration().subscribe( 
-      (newRegistration) => {
-      this.allNewRagistration = newRegistration;
-      this.adminService.changeLoadingState(false)
-      },
-      (err) => {
-        this.adminService.changeLoadingState(false)
-      }
-    )
-    this.adminService.getPendingAccount().subscribe( 
-      (toDeleteAccount) => {
-      this.allToDeleteAccounts = toDeleteAccount;
-      this.adminService.changeLoadingState(false)
-      },
-      (err) => {
-        this.adminService.changeLoadingState(false)
-      }
-    )
     this.adminService.actualAdmin.subscribe((admin) => {
       this.adminInfo = admin;
     });
-  }
-
-  ngAfterContentChecked(): void{
-    if (this.pageLoading){
-      setTimeout(() => {
-        this.pageLoading = false
-      }, 2000);
-    }    
+    this.adminService.getAllData();
+    this.adminService.allNewRegistration.subscribe( (newRegistratios) => {
+      this.allNewRagistration = newRegistratios;
+    });
+    this.adminService.allUsers.subscribe( (users) => {
+      this.allUsers = users
+    } );
+    this.adminService.allToDeleteAccounts.subscribe( (toDelete) => {
+        this.allToDeleteAccounts = toDelete
+    });
+    this.adminService.loadingState.subscribe( (state) => {
+      this.pageLoading = state
+    })
   }
 
   userSectionClick(): void {
@@ -76,6 +56,21 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   operationSectionClick(): void {
     this.userSection = false;
     this.operationSection = true;
+  }
+
+  
+  confirmAccountEventCallback(): void{
+    this.adminService.getAllData()
+    
+  }
+  
+  confirmDeleteEventCallback(): void{
+    this.adminService.getAllData()
+  }
+
+  downloadUserExcel(): void{
+    let downloadData: {firstName: string, lastName: string, email: string}[] = this.allUsers;
+    this.downloadService.downloadAsXLSX(downloadData);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -92,33 +87,4 @@ export class AdminComponent implements OnInit, AfterContentChecked {
     }
   }
 
-  confirmAccountEventCallback(): void{
-    this.adminService.changeLoadingState(true)
-    this.adminService.getNewRegistration().subscribe( (registrationsUpdate)  => {
-      this.allNewRagistration = registrationsUpdate;
-      this.adminService.changeLoadingState(false)
-      },
-      (err) => {
-        this.adminService.changeLoadingState(false)
-      }
-    )
-  }
-
-  confirmDeleteEventCallback(): void{
-    this.adminService.changeLoadingState(true)
-
-    this.adminService.getPendingAccount().subscribe( (deleteAccountsUpdate) => {
-      this.allToDeleteAccounts = deleteAccountsUpdate;
-      this.adminService.changeLoadingState(false)
-      },
-      (err) => {
-        this.adminService.changeLoadingState(false)
-      }
-    )
-  }
-
-  downloadUserExcel(): void{
-    let downloadData: {firstName: string, lastName: string, email: string}[] = this.allUsers;
-    this.downloadService.downloadAsXLSX(downloadData);
-  }
 }
