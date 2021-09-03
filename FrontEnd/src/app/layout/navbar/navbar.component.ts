@@ -81,4 +81,9 @@ export class NavbarComponent implements OnInit {
       this.mobile = true;
     }
   }
+
+  logout(){
+    this.authService.logout()
+    location.reload();
+  }
 }
