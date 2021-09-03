@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Operation} from "../../../model/operation";
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
@@ -47,8 +47,8 @@ export class BankAccountComponent implements OnInit {
     this.userService.getBalance(this.selectedBill).subscribe((balance) => {
       this.balance = balance;
 
-    });
-    this.isLoadingBalance = false;
+    }, (errorMessage) => { this.isLoadingBalance = false;});
+
   }
 
   ngOnInit(): void {
@@ -66,9 +66,6 @@ export class BankAccountComponent implements OnInit {
     this.userService.getBalance(1);
   }
 
-
-
-
   onChangeBill(): void {
     this.onGetBalance();
     this.onGetOperations();
@@ -79,7 +76,7 @@ export class BankAccountComponent implements OnInit {
     this.userService.getOperationList(this.selectedBill, {type: 'last10'}).subscribe((operations) => {
       this.operations = operations;
       this.isLoadingOperations = false;
-    });
+    }, (errorMessage) => {this.isLoadingOperations = false});
   }
 
   onSearchFunction(filterValues: {type: 'dateSelection', startDate?: number, endDate?: number}): void {
@@ -88,7 +85,7 @@ export class BankAccountComponent implements OnInit {
     this.userService.getOperationList(this.selectedBill, filterValues).subscribe((operations) => {
       this.operations = operations;
       this.isLoadingOperations = false;
-    });
+    }, (errorMessage) => {this.isLoadingOperations = false});
 
   }
 }

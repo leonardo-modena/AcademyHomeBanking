@@ -31,10 +31,13 @@
           <select class="form-select">
             <option>Conto 1</option>
           </select>
+          <div class="error mt-2">Attenzione! È presente un solo conto, dopo la chiusura l'account verrà eliminato.</div> <!-- Solo se vi è un conto solo -->
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" (click)="onCloseBill()">Chiudi</button>
+          </div>
         </form>
-        <div class="error mt-2">Attenzione! È presente un solo conto, dopo la chiusura l'account verrà eliminato.</div> <!-- Solo se vi è un conto solo -->
-        <div class="d-flex justify-content-end">
-          <button class="btn btn-primary" (click)="onCloseBill()">Chiudi</button>
+        <div>
+          <app-spinner *ngIf="isDeleting"></app-spinner>
         </div>
       </div>
     </div>
@@ -43,7 +46,7 @@
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Aggiungi un nuovo conto</h2>
       <div class="container my-3">
-        <form (ngSubmit)="onNewBill(form)" #form="ngForm" class="row gx-5 green-background p-3">
+        <form (ngSubmit)="onNewBill(form)" #form="ngForm" [class]="'row gx-5 green-background p-3 ' + (isCreatingNew ? 'disabledForm' : '') ">
           <div class="form-group col-12 col-md-6">
             <label class="form-label" for="selectedBill">Seleziona il conto</label>
             <select id="selectedBill" required class="form-select" aria-label="Seleziona il conto" [(ngModel)]="selectedBill" name="selectedBill" (change)="maxAmount=bills[selectedBill].amount">
@@ -64,6 +67,9 @@
             <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Crea nuovo conto</button>
           </div>
         </form>
+        <div>
+          <app-spinner *ngIf="isCreatingNew"></app-spinner>
+        </div>
       </div>
     </div>
   </div>
