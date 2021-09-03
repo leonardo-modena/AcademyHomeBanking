@@ -1,4 +1,4 @@
-import {AfterContentChecked, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Operation} from "../../../model/operation";
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
@@ -8,8 +8,8 @@ import {UserService} from "../../../services/user.service";
   templateUrl: './bank-account.component.html',
   styleUrls: ['./bank-account.component.css']
 })
-export class BankAccountComponent implements OnInit, AfterContentChecked {
-  pageLoading = true;
+export class BankAccountComponent implements OnInit {
+
 
   user!: { nome: string, cognome: string, dataDiNascita: number, email: string, id: string };
   balance: number = 0;
@@ -46,8 +46,9 @@ export class BankAccountComponent implements OnInit, AfterContentChecked {
     this.isLoadingBalance = true;
     this.userService.getBalance(this.selectedBill).subscribe((balance) => {
       this.balance = balance;
-      this.isLoadingBalance = false;
+
     });
+    this.isLoadingBalance = false;
   }
 
   ngOnInit(): void {
@@ -65,13 +66,7 @@ export class BankAccountComponent implements OnInit, AfterContentChecked {
     this.userService.getBalance(1);
   }
 
-  ngAfterContentChecked(): void{
-    if (this.pageLoading){
-      setTimeout(() => {
-        this.pageLoading = false
-      }, 2000);
-    }
-  }
+
 
 
   onChangeBill(): void {

@@ -1,1 +1,2 @@
-<router-outlet></router-outlet>
+<app-loading-page *ngIf="pageLoading" [imageUrl]="'../../../assets/img/Illustration/User-loading-amico.png'"></app-loading-page>
+<router-outlet *ngIf="!pageLoading"></router-outlet>
