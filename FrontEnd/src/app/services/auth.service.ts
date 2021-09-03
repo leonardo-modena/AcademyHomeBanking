@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 import { environment } from "../../environments/environment";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private id = new BehaviorSubject(0);
+  actualId = this.id.asObservable();
 
   url: string = environment.api_url;
   isAuth: boolean = false;
@@ -15,6 +18,7 @@ export class AuthService {
   isAdmin: boolean = false;
   token !: string;
   tokenExpiration !: number;
+  roleUser !: string;
 
   constructor(private http: HttpClient) { }
 
@@ -40,14 +44,18 @@ export class AuthService {
 
   logout(){
     this.isAuth = false;
+    this.isAdmin = false;
+    this.isUser = false;
     sessionStorage.removeItem('token');
-    sessionStorage.removeItem('role');
   }
 
   autoLogout(){
     setTimeout(this.logout,this.tokenExpiration);
   }
 
+  passId(id: number){
+    this.id.next(id)
+  }
 
 
 }

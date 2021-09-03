@@ -35,7 +35,7 @@ import {AppModule} from "../../app.module";
     MatDialogModule,
     RouterModule.forChild([
       {
-        path: 'user', /* canActivate: [UserGuard],*/ component: UserComponent, children: [
+        path: 'user',  /* canActivate: [UserGuard],*/ component: UserComponent, children: [
           {path: '', component: BankAccountComponent, pathMatch: 'full'},
           {path: 'profilo', component: ProfileComponent, pathMatch: 'full'},
           {path: 'operazioni', component: OperationsComponent, pathMatch: 'full'}

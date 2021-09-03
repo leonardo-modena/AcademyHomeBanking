@@ -4,6 +4,8 @@ import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {AlertService} from "../../services/alert.service";
+import jwtDecode from "jwt-decode";
+
 
 @Component({
   selector: 'app-login',
@@ -23,38 +25,43 @@ import {AlertService} from "../../services/alert.service";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private route: Router, private alert: AlertService) { }
+  tokenDecoded!: any;
 
-  ngOnInit(): void {
+  constructor(private auth: AuthService, private route: Router, private alert: AlertService) {}
 
-  }
+  ngOnInit(): void {}
 
   onSubmit(form: NgForm){
 
     const username = form.value.email;
     const password = form.value.password;
-    console.log(username, password);
-    this.auth.loginUser(username,password).subscribe(resData => {
-      console.log(resData)
-      const token = resData.token;
-      this.auth.tokenExpiration = resData.tokenExpiration;
-      this.auth.token = token;
-      sessionStorage.setItem('token', token);
-      sessionStorage.setItem('role', resData.role);
 
-      this.auth.isAuth = true;
-      if (resData.role === "ROLE_C"){
+    this.auth.loginUser(username,password).subscribe(resData => {
+
+      this.tokenDecoded = jwtDecode(resData.token);
+
+      this.auth.token = resData.token;
+      sessionStorage.setItem('token', resData.token);
+
+      this.auth.tokenExpiration = this.tokenDecoded.expiration;
+      this.auth.roleUser = this.tokenDecoded.role;
+
+      this.auth.passId(this.tokenDecoded.id);
+
+      if (this.auth.roleUser === "ROLE_C"){
         this.route.navigate(['/user'])
+        this.auth.isAuth = true;
         this.auth.isUser = true;
       }
-      if(resData.role === "ROLE_D"){
+      if( this.auth.roleUser === "ROLE_D"){
         this.route.navigate(['/admin'])
+        this.auth.isAuth = true;
         this.auth.isAdmin = true;
       }
 
     })
 
   }
-  
+
 
 }
