@@ -1,5 +1,5 @@
-<app-loading-page *ngIf="pageLoading" [imageUrl]="'../../../assets/img/Illustration/User-loading-amico.png'"></app-loading-page>
-<div *ngIf="!pageLoading" class="container">
+
+<div  class="container">
   <div class="row gx-5">
     <div class="col-12 col-md-10 m-auto mb-4">
       <h1>Bentornato, Samuel</h1>
@@ -24,13 +24,13 @@
                   </div>
                   <div *ngIf="!isLoadingBalance" class="green-background mt-3 py-4 p-3">
                     <h1 class="text-end">1.234,34</h1>
-                    <span>Saldo del conto {{selectedBill}}</span>
+                    <span>Saldo del conto {{selectedBill |  number:'6.0' | noComma}}</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-12 mt-4">
-              <h3>Le operazioni del tuo conto {{selectedBill}}</h3>
+              <h3>Le operazioni del tuo conto {{selectedBill |  number:'6.0' | noComma}}</h3>
               <app-filter [onSearchFunction]="onSearchFunction"></app-filter>
 
               <div *ngIf="isLoadingOperations">
