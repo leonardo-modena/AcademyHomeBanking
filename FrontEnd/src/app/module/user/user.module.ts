@@ -14,6 +14,7 @@ import { OperationFormComponent } from "../../components/user/operations/operati
 import { SharedModule } from "../shared/shared.module";
 import {UserComponent} from "../../components/user/user.component";
 import {UserGuard} from "../../guard/user.guard";
+import {AppModule} from "../../app.module";
 
 @NgModule({
   declarations: [
@@ -33,11 +34,13 @@ import {UserGuard} from "../../guard/user.guard";
     SharedModule,
     MatDialogModule,
     RouterModule.forChild([
-      {path: 'user', canActivate: [UserGuard] , component: UserComponent, children: [
-          { path: '', component: BankAccountComponent, pathMatch: 'full'},
-          { path: 'profilo', component: ProfileComponent, pathMatch: 'full'},
-          { path: 'operazioni', component: OperationsComponent, pathMatch: 'full'}
-        ]}
+      {
+        path: 'user', /* canActivate: [UserGuard],*/ component: UserComponent, children: [
+          {path: '', component: BankAccountComponent, pathMatch: 'full'},
+          {path: 'profilo', component: ProfileComponent, pathMatch: 'full'},
+          {path: 'operazioni', component: OperationsComponent, pathMatch: 'full'}
+        ]
+      }
     ]),
   ],
   exports: [

@@ -18,6 +18,7 @@ import { UserModule } from "./module/user/user.module";
 import { AlertComponent } from './components/Shared/alert/alert.component';
 import { AdminModule } from "./module/admin/admin.module";
 import { SharedModule } from "./module/shared/shared.module";
+import { NoCommaPipe } from './pipes/no-comma.pipe';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { SharedModule } from "./module/shared/shared.module";
     FooterComponent,
     NotFoundComponent,
     ErrorComponent,
-    AlertComponent,
+    AlertComponent
   ],
   imports: [
     SharedModule,
@@ -54,7 +55,8 @@ import { SharedModule } from "./module/shared/shared.module";
     }
   ],
   exports: [
-    ErrorComponent
+    ErrorComponent,
+    NoCommaPipe
   ],
   bootstrap: [AppComponent]
 })

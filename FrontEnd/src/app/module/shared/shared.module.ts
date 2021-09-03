@@ -6,11 +6,13 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { LoadingPageComponent } from 'src/app/components/Shared/loading-page/loading-page.component';
+import {NoCommaPipe} from "../../pipes/no-comma.pipe";
 
 @NgModule({
   declarations: [
     SpinnerComponent,
-    LoadingPageComponent
+    LoadingPageComponent,
+    NoCommaPipe,
   ],
   imports: [
     CommonModule,
@@ -19,13 +21,15 @@ import { LoadingPageComponent } from 'src/app/components/Shared/loading-page/loa
     FormsModule,
     MatIconModule,
     MatButtonModule,
+
   ],
   exports: [
     SpinnerComponent,
     LoadingPageComponent,
     MatTabsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NoCommaPipe,
   ]
 })
 export class SharedModule { }
