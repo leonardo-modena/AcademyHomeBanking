@@ -177,3 +177,33 @@ nav{
 .border-sidenav{
     border-bottom: 0.5px solid var(--light-gray);
 }
+
+.hamburger-menu{
+    position: absolute;
+    background-color: var(--light-gray);
+    top: 110%;
+    right: 2rem;
+    padding: 1rem 1.2rem;
+}
+
+.hamburger-button i{
+    font-size: 1.8rem;
+}
+
+#hamburger-close{
+    font-size: 2rem;
+}
+
+
+@media (min-width: 992px) {
+    .hamburger-menu{
+      position: relative;
+      top: unset;
+      right: unset;
+      padding: unset;
+      background-color: transparent;
+    }
+    .hamburger-button{
+        display: none;
+    }
+   }

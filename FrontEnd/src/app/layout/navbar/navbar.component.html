@@ -9,22 +9,27 @@
     />
   </a>
 
-  <div class=" ms-auto" *ngIf="!authorized">
-    <ul class="navbar-nav">
+  <div class="ms-auto d-flex" *ngIf="!authorized">
+    
+    <ul class="navbar-nav hamburger-menu" *ngIf="mobile ? hamburger : true" [@fadeIn]>
       <li class="nav-item">
-        <a class="nav-link pointer newAccountLink" [routerLink]="['/registrazione']"><i class="fas fa-running"></i> Nuovo Conto</a>
+        <a class="nav-link pointer newAccountLink" [routerLink]="['/registrazione']" (click)="hamburgerClick()"><i class="fas fa-running"></i> Nuovo Conto</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link pointer" [routerLink]="['/login']">
+        <a class="nav-link pointer" [routerLink]="['/login']" (click)="hamburgerClick()">
           Accedi <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
+    </ul>
+    <div class="not-collapse d-flex">
+      <div class="nav-item">
         <a class="nav-link pointer toggle-sidenav" *ngIf="!authorized">
           <i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i>
         </a>
-      </li>
-    </ul>
+      </div>
+      <div class="nav-item hamburger-button pointer"><i *ngIf="hamburger" class="bi bi-x" id="hamburger-close" (click)="hamburgerClick()"></i><i *ngIf="!hamburger" class="bi bi-list" (click)="hamburgerClick()"></i></div>
+    </div>
+
   </div>
 </nav>
 

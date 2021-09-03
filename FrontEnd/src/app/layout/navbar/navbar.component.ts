@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 import {
   trigger,
@@ -30,10 +30,23 @@ import { MatRippleModule } from '@angular/material/core';
         animate('0.3s')
       ]),
     ]),
+    trigger('fadeIn', [
+      transition('void => *', [
+        style({opacity: 0}),
+        animate(300, style({opacity: 1}))
+      ]),
+      transition('* => void', [
+        animate(200, style({opacity: 0}))
+      ])
+    ]),
   ],
 })
 export class NavbarComponent implements OnInit {
   sidenav: boolean = false;
+
+  hamburger: boolean = false;
+
+  mobile!: boolean;
 
   authorized!: boolean;
 
@@ -41,7 +54,9 @@ export class NavbarComponent implements OnInit {
 
   userInfo = {nome: 'Mario', cognome: 'Rossi'};
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.hamburgerResponsive()
+  }
 
   ngOnInit(): void {
     this.authorized =  this.authService.isAuth;
@@ -51,5 +66,19 @@ export class NavbarComponent implements OnInit {
   sidenavSwitch(): void {
     this.sidenav = !this.sidenav;
     console.log(this.sidenav);
+  }
+
+  hamburgerClick() {
+    this.hamburger = !this.hamburger
+  }
+
+  @HostListener('window:resize', ['$event'])
+  hamburgerResponsive(event?: any) {
+    let screenWidth = window.innerWidth;
+    if (screenWidth > 992) {
+      this.mobile = false;
+    }else{
+      this.mobile = true;
+    }
   }
 }
