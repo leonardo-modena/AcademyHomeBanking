@@ -1,5 +1,5 @@
 <div class="d-flex">
-    <p class="list-item">{{user.id}}</p>
+    <p class="list-item">{{user.id | number:'6.0' | noComma}}</p>
     <p class="list-item">{{user.firstName}}</p>
     <p class="list-item">{{user.lastName}}</p>
     <a class="list-item email-item" href="mailto:{{user.email}}">{{user.email}}</a>
