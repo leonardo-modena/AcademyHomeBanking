@@ -14,7 +14,7 @@ export class DownloadService {
 
   constructor() { }
 
-  downloadAsXLSX(data: { name: string, surname: string}[]): void {
+  downloadAsXLSX(data: { firstName: string, lastName: string, email: string}[]): void {
     const filename = 'file';
 
     // let { sheetName, fileName } = XLSX.getFileName(name);

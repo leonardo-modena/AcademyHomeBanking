@@ -2,6 +2,7 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
 import { BankAccount } from 'src/app/model/BankAccount';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
+import { DownloadService } from 'src/app/services/download.service';
 
 @Component({
   selector: 'app-admin',
@@ -21,7 +22,7 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   pageLoading!: boolean;
   responsive!: boolean;
 
-  constructor(private adminService: AdminService) {
+  constructor(private adminService: AdminService, private downloadService: DownloadService) {
     
     this.responsiveSection();
   }
@@ -68,7 +69,6 @@ export class AdminComponent implements OnInit, AfterContentChecked {
   }
 
   userSectionClick(): void {
-    console.log('ciao');
     this.operationSection = false;
     this.userSection = true;
   }
@@ -115,5 +115,10 @@ export class AdminComponent implements OnInit, AfterContentChecked {
         this.adminService.changeLoadingState(false)
       }
     )
+  }
+
+  downloadUserExcel(): void{
+    let downloadData: {firstName: string, lastName: string, email: string}[] = this.allUsers;
+    this.downloadService.downloadAsXLSX(downloadData);
   }
 }
