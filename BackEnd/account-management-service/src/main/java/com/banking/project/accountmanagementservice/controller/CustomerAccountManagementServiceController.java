@@ -17,7 +17,7 @@ import com.banking.project.accountmanagementservice.entity.Customer;
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 
-import javassist.NotFoundException;
+
 
 @RestController
 @RequestMapping("/customer")
@@ -31,7 +31,7 @@ public class CustomerAccountManagementServiceController {
 	/**
 	 * Metodo che richiede la chiusura dell'account da parte dell'utente, setta lo
 	 * stato a "CLOSING"
-	 * 
+	 *
 	 * @param accountId
 	 */
 
@@ -42,7 +42,7 @@ public class CustomerAccountManagementServiceController {
 
 	/**
 	 * Metodo per recuperare le informazioni di un conto con l'id
-	 * 
+	 *
 	 * @param
 	 * @return
 	 */
@@ -71,8 +71,8 @@ public class CustomerAccountManagementServiceController {
 		if (bankAccountRepository.existsById(id)) {
 
 			BankAccount bankAccount = bankAccountRepository.getById(id);
-
-			if (((bankAccount.getBalance().compareTo(balance))>=0) && bankAccount.getAccount_status() == "ACTIVE") {
+			BigDecimal balanceOld=bankAccount.getBalance();
+			if (((balanceOld.compareTo(balance))>=0) && bankAccount.getAccount_status() == "ACTIVE") {
 
 				BigDecimal newOldBalance = bankAccount.getBalance().subtract(balance);
 

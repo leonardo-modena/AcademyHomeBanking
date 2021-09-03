@@ -1,7 +1,10 @@
 package com.banking.project.transactionservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "bank_account")
@@ -19,10 +22,17 @@ public class BankAccount {
 	private String account_status;
 
 
+	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name = "holder", nullable = false)
-
 	private Customer holder;
+
+
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "id_account")
+	private List<Transaction> transactions;
+
 
 	public BankAccount() {
 
