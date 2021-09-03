@@ -17,9 +17,11 @@ export class AuthService {
   private isAuth = new BehaviorSubject(false);
   actualAuth = this.isAuth.asObservable();
 
+  private isAdmin = new BehaviorSubject(false);
+  actualAdmin = this.isAdmin.asObservable();
+
   url: string = environment.api_url;
   isUser: boolean = false;
-  isAdmin: boolean = false;
   token !: string;
   tokenExpiration !: number;
   roleUser !: string;
@@ -67,7 +69,7 @@ export class AuthService {
       }
       if( this.roleUser === "ROLE_D"){
         this.route.navigate(['/admin'])
-        this.isAdmin = true;
+        this.nextAdmin(true);
       }
 
     })
@@ -75,7 +77,7 @@ export class AuthService {
 
   logout(){
     this.nextAuth(false);
-    this.isAdmin = false;
+    this.nextAdmin(false);
     this.isUser = false;
     sessionStorage.removeItem('token');
     this.route.navigate(['']);
@@ -93,5 +95,8 @@ export class AuthService {
     this.isAuth.next(state)
   }
 
+  nextAdmin(state: boolean){
+    this.isAdmin.next(state)
+  }
 
 }

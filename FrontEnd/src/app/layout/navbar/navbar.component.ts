@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
 
   authorized!: boolean;
 
-  userLogged!: boolean;
+  adminLogged!: boolean;
 
   userInfo = {nome: 'Mario', cognome: 'Rossi'};
 
@@ -68,7 +68,9 @@ export class NavbarComponent implements OnInit,OnDestroy {
       console.log(state)
     })
 
-    this.userLogged =  this.authService.isUser;
+    this.authService.actualAdmin.subscribe( (adminState) =>{
+      this.adminLogged = adminState;
+    } );
   }
 
   sidenavSwitch(): void {

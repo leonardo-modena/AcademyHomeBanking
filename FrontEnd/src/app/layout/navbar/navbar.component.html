@@ -28,8 +28,8 @@
 
   </div>
 
-  <div class="nav-item">
-    <a class="nav-link pointer toggle-sidenav" *ngIf="authorized">
+  <div class="nav-item ms-auto"  *ngIf="authorized">
+    <a class="nav-link pointer toggle-sidenav">
       <i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i>
     </a>
   </div>
@@ -40,7 +40,7 @@
     <div class="sidenav-close-icon ms-auto">
       <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
     </div>
-    <span class="user-items" *ngIf="authorized" [ngClass]="{ slide: sidenav } " >
+    <div class="user-items" *ngIf="!adminLogged" [ngClass]="{ slide: sidenav } " >
       <div class="sidenav-user-info" >
           <img (click)="sidenavSwitch()" class="sidenav-user-img img-fluid pointer" src="../../../assets/img/usr/usr1.jpg" alt="" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-user-img_active" [routerLinkActiveOptions]="{exact:
             true}">
@@ -63,10 +63,10 @@
         <i class="bi bi-credit-card-2-front"></i>
         <span>Conto</span>
       </div>
-    </span>
+    </div>
     <div class="sidenav-item exit-button pointer">
       <i class="bi bi-box-arrow-left"></i>
-      <span (click)="logout()">Logout</span>
+      <span (click)="logout(); sidenavSwitch()">Logout</span>
     </div>
   </div>
 </div>
