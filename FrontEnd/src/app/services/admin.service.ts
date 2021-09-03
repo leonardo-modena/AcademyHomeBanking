@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { User } from '../model/user';
-import { BankAccount } from '../model/account';
+import { BankAccount } from '../model/BankAccount';
+
 const apiUrl = environment.api_url;
 
 @Injectable({

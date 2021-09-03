@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { BankAccount } from 'src/app/model/account';
+import { BankAccount } from 'src/app/model/BankAccount';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
