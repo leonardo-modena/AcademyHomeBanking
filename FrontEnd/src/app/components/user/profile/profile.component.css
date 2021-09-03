@@ -23,3 +23,6 @@ table tr td {
   word-break: break-all
 }
 
+.disabledForm, .disabledDeleting {
+  opacity: 0.5;
+}

@@ -4,7 +4,7 @@
     <div class="col-12 col-md-10 m-auto mb-4">
       <h1>Bentornato, Samuel</h1>
       <p>In questa pagina puoi visualizzare i tuoi conti e le operazioni che sono state effettuate.<br>
-      Per poter gestire i propri conti, cancellarli o creare nuovi conti visitare il proprio <a routerLink="['user', ['profilo']">profilo</a>.</p>
+      Per poter gestire i propri conti, cancellarli o creare nuovi conti visitare il proprio <a routerLink="profilo">profilo</a>.</p>
     </div>
     <div class="col-12 col-md-10 m-auto mt-3">
       <div class="row gx-5">
@@ -14,7 +14,7 @@
               <form class="form-inline d-flex align-items-center" [formGroup]="selectBillForm">
                 <label class="form-label">Seleziona il conto:</label>
                 <select [(ngModel)]="selectedBill" [ngModelOptions]="{standalone: true}" (change)="onChangeBill()" class="ms-2 form-select w-auto" name="bill">
-                  <option *ngFor="let bill of bills"  [value]="bill">{{bill}}</option>
+                  <option *ngFor="let bill of bills"  [value]="bill">{{bill |  number:'6.0' | noComma}}</option>
                 </select>
               </form>
               <div class="row">
