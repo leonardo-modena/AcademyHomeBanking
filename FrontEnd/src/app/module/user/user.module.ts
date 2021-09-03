@@ -13,6 +13,7 @@ import { DownloadComponent } from "../../components/user/download/download.compo
 import { OperationFormComponent } from "../../components/user/operations/operation-form/operation-form.component";
 import { SharedModule } from "../shared/shared.module";
 import {UserComponent} from "../../components/user/user.component";
+import {UserGuard} from "../../guard/user.guard";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import {UserComponent} from "../../components/user/user.component";
     SharedModule,
     MatDialogModule,
     RouterModule.forChild([
-      {path: 'user', component: UserComponent, children: [
+      {path: 'user', canActivate: [UserGuard] , component: UserComponent, children: [
           { path: '', component: BankAccountComponent, pathMatch: 'full'},
           { path: 'profilo', component: ProfileComponent, pathMatch: 'full'},
           { path: 'operazioni', component: OperationsComponent, pathMatch: 'full'}

@@ -10,7 +10,7 @@
         (change)="onChangeVisualization()"
         [formGroup]="filterForm">
 
-    <div class="form-group col-12 col-md-6">
+    <div class="form-group col-12 col-lg-6">
       <label>Seleziona quali operazioni visualizzare</label>
       <select (change)="onChangeChoice($event)" class="form-control" formControlName="selectedChoice">
         <option *ngFor="let c of selectionChoicesValues" [ngValue]="c.value" [id]="c.value">{{c.description}}</option>

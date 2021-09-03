@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // DELETE CONTO
+        this.userService.deleteBill(1);
       }
     });
   }

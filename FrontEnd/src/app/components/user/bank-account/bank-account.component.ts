@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentChecked, Component, OnInit} from '@angular/core';
 import {Operation} from "../../../model/operation";
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
@@ -8,11 +8,11 @@ import {UserService} from "../../../services/user.service";
   templateUrl: './bank-account.component.html',
   styleUrls: ['./bank-account.component.css']
 })
-export class BankAccountComponent implements OnInit {
+export class BankAccountComponent implements OnInit, AfterContentChecked {
+  pageLoading = true;
 
   user!: { nome: string, cognome: string, dataDiNascita: number, email: string, id: string };
   balance: number = 0;
-  routeUrl: string = '';
   operations: Operation[] = [
     {
       type: 'prelievo',
@@ -36,12 +36,18 @@ export class BankAccountComponent implements OnInit {
   isLoadingBalance = false;
 
   selectedBill!: number;
-  bills = [1111, 2222];
+  bills = [1, 2];
 
   selectBillForm!: FormGroup;
 
+  constructor(private userService: UserService) { }
 
-  constructor(private userService: UserService,) {
+  private onGetBalance() {
+    this.isLoadingBalance = true;
+    this.userService.getBalance(this.selectedBill).subscribe((balance) => {
+      this.balance = balance;
+      this.isLoadingBalance = false;
+    });
   }
 
   ngOnInit(): void {
@@ -53,24 +59,41 @@ export class BankAccountComponent implements OnInit {
     this.selectedBill = this.bills[0];
     this.selectBillForm = new FormGroup({
       'selectedBill': new FormControl(this.selectedBill)
-    })
+    });
+    this.onGetBalance();
 
-    this.balance = this.userService.getBalance();
+    this.userService.getBalance(1);
   }
 
-  onChangeBill(): void {
-    // this.isLoadingBalance = true;
+  ngAfterContentChecked(): void{
+    if (this.pageLoading){
+      setTimeout(() => {
+        this.pageLoading = false
+      }, 2000);
+    }
+  }
 
-    this.userService.getBalance(); // this.balance = balance - loading-spinner balance
+
+  onChangeBill(): void {
+    this.onGetBalance();
     this.onGetOperations();
-    console.log(this.selectedBill);
   }
 
   onGetOperations(): void {
-    this.userService.getOperationList({type: 'last10'}); // this.operations = operations - loading-spinner operations
+    this.isLoadingOperations = true;
+    this.userService.getOperationList(this.selectedBill, {type: 'last10'}).subscribe((operations) => {
+      this.operations = operations;
+      this.isLoadingOperations = false;
+    });
   }
 
-  onSearchFunction(b: boolean): void {
-    this.isLoadingOperations = b;
+  onSearchFunction(filterValues: {type: 'dateSelection', startDate?: number, endDate?: number}): void {
+    this.isLoadingOperations = true;
+
+    this.userService.getOperationList(this.selectedBill, filterValues).subscribe((operations) => {
+      this.operations = operations;
+      this.isLoadingOperations = false;
+    });
+
   }
 }

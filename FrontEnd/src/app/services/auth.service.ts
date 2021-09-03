@@ -14,6 +14,7 @@ export class AuthService {
   isUser: boolean = false;
   isAdmin: boolean = false;
   token !: string;
+  tokenExpiration !: number;
 
   constructor(private http: HttpClient) { }
 
@@ -31,7 +32,7 @@ export class AuthService {
 
   loginUser(username: string, password: string){
 
-    return this.http.post( this.url + '/api/auth/signin',{
+    return this.http.post<any>( this.url + '/api/auth/signin',{
       username,
       password
     })
@@ -40,10 +41,11 @@ export class AuthService {
   logout(){
     this.isAuth = false;
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('role');
   }
 
   autoLogout(){
-    setTimeout(this.logout,1000);
+    setTimeout(this.logout,this.tokenExpiration);
   }
 
 

@@ -71,7 +71,7 @@ export class RegistrationComponent implements OnInit {
     this.passwordError = true;
 
     let date = form.value.date;
-    let msDate = Date.parse(date);
+    let msDate = Date.parse(date); //SOSTITUIRE CON new Date(date) E PROVARE
     const sex = form.value.sesso;
 
     this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {

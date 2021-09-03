@@ -36,8 +36,24 @@ export class LoginComponent implements OnInit {
     console.log(username, password);
     this.auth.loginUser(username,password).subscribe(resData => {
       console.log(resData)
+      const token = resData.token;
+      this.auth.tokenExpiration = resData.tokenExpiration;
+      this.auth.token = token;
+      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('role', resData.role);
+
+      this.auth.isAuth = true;
+      if (resData.role === "ROLE_C"){
+        this.route.navigate(['/user'])
+        this.auth.isUser = true;
+      }
+      if(resData.role === "ROLE_D"){
+        this.route.navigate(['/admin'])
+        this.auth.isAdmin = true;
+      }
 
     })
+
   }
 
 }
