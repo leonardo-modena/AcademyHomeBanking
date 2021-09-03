@@ -25,7 +25,6 @@ import jwtDecode from "jwt-decode";
 })
 export class LoginComponent implements OnInit {
 
-  tokenDecoded!: any;
 
   constructor(private auth: AuthService, private route: Router, private alert: AlertService) {}
 
@@ -36,30 +35,7 @@ export class LoginComponent implements OnInit {
     const username = form.value.email;
     const password = form.value.password;
 
-    this.auth.loginUser(username,password).subscribe(resData => {
-
-      this.tokenDecoded = jwtDecode(resData.token);
-
-      this.auth.token = resData.token;
-      sessionStorage.setItem('token', resData.token);
-
-      this.auth.tokenExpiration = this.tokenDecoded.expiration;
-      this.auth.roleUser = this.tokenDecoded.role;
-
-      this.auth.passId(this.tokenDecoded.id);
-
-      if (this.auth.roleUser === "ROLE_C"){
-        this.route.navigate(['/user'])
-        this.auth.isAuth = true;
-        this.auth.isUser = true;
-      }
-      if( this.auth.roleUser === "ROLE_D"){
-        this.route.navigate(['/admin'])
-        this.auth.isAuth = true;
-        this.auth.isAdmin = true;
-      }
-
-    })
+    this.auth.loginUser(username,password);
 
   }
 

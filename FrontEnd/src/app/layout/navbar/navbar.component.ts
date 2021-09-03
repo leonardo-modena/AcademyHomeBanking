@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 
 import {
   trigger,
@@ -10,6 +10,7 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/model/user';
 import { MatRippleModule } from '@angular/material/core';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-navbar',
@@ -41,10 +42,12 @@ import { MatRippleModule } from '@angular/material/core';
     ]),
   ],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit,OnDestroy {
   sidenav: boolean = false;
 
   hamburger: boolean = false;
+
+  authServiceSubscription!: Subscription;
 
   mobile!: boolean;
 
@@ -59,7 +62,12 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authorized =  this.authService.isAuth;
+
+    this.authServiceSubscription = this.authService.actualAuth.subscribe(state =>{
+      this.authorized = state;
+      console.log(state)
+    })
+
     this.userLogged =  this.authService.isUser;
   }
 
@@ -84,6 +92,9 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this.authService.logout()
-    location.reload();
+  }
+
+  ngOnDestroy() {
+    this.authServiceSubscription.unsubscribe()
   }
 }

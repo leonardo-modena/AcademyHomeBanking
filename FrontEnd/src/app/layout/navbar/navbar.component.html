@@ -22,14 +22,16 @@
       </li>
     </ul>
     <div class="not-collapse d-flex">
-      <div class="nav-item">
-        <a class="nav-link pointer toggle-sidenav" *ngIf="!authorized">
-          <i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i>
-        </a>
-      </div>
+
       <div class="nav-item hamburger-button pointer"><i *ngIf="hamburger" class="bi bi-x" id="hamburger-close" (click)="hamburgerClick()"></i><i *ngIf="!hamburger" class="bi bi-list" (click)="hamburgerClick()"></i></div>
     </div>
 
+  </div>
+
+  <div class="nav-item">
+    <a class="nav-link pointer toggle-sidenav" *ngIf="authorized">
+      <i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i>
+    </a>
   </div>
 </nav>
 
@@ -38,7 +40,7 @@
     <div class="sidenav-close-icon ms-auto">
       <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
     </div>
-    <span class="user-items" *ngIf="!userLogged" [ngClass]="{ slide: sidenav } " >
+    <span class="user-items" *ngIf="authorized" [ngClass]="{ slide: sidenav } " >
       <div class="sidenav-user-info" >
           <img (click)="sidenavSwitch()" class="sidenav-user-img img-fluid pointer" src="../../../assets/img/usr/usr1.jpg" alt="" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-user-img_active" [routerLinkActiveOptions]="{exact:
             true}">
