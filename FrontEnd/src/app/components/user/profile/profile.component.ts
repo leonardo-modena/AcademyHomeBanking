@@ -5,6 +5,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component";
 import {ErrorService} from "../../../services/error.service";
 import {User} from "../../../model/user";
+import {AuthService} from "../../../services/auth.service";
+import {BankAccount} from "../../../model/BankAccount";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-profile',
@@ -14,35 +17,50 @@ import {User} from "../../../model/user";
 export class ProfileComponent implements OnInit {
 
   user!: User;
+  bankAccounts!: BankAccount[];
   dataDiNascita!: Date;
   isDeleting = false;
   isCreatingNew = false;
 
-  bills = [
-    {billNumber: 235433, amount: 642.45, userId: 'C232'},
-    {billNumber: 235432, amount: 12.45, userId: 'C232'}
-  ];
-
   selectedBill: number = 0;
-  maxAmount = this.bills[this.selectedBill].amount;
-  constructor(private userService: UserService, public dialog: MatDialog, private errorService: ErrorService) {
+  deletingBill!: number;
 
+  maxAmount = 0;
+
+  constructor(private userService: UserService, private authService: AuthService, public dialog: MatDialog, private errorService: ErrorService) {
   }
 
   ngOnInit(): void {
     this.userService.user.subscribe((user: User) => {
       this.user = user;
-      console.log(this.user);
       this.dataDiNascita = new Date(this.user.dateOfBirth);
+      this.deletingBill = user.bankAccounts[0];
     });
+
+    this.userService.bankAccounts.subscribe((bankAccounts) => {
+      this.bankAccounts = bankAccounts;
+      console.log(this.selectedBill);
+      console.log(this.bankAccounts);
+      this.maxAmount = bankAccounts[this.selectedBill].balance;
+      console.log(this.bankAccounts);
+    })
+  }
+
+  changeBill() {
+    this.maxAmount = this.bankAccounts[this.selectedBill].balance;
+  }
+
+  changeFormValue(form: NgForm) {
+    // console.log(form.controls.amount.value);
+     //console.log(form.controls.selectedBill.value);
   }
 
   onNewBill(form: NgForm): void{
     this.isCreatingNew = true;
-    console.log(form.controls.selectedBill.value);
-    this.userService.createNewBill(form.controls.amount.value, form.controls.selectedBill.value).subscribe((resData) => {
-      console.log(resData);
+    console.log(this.bankAccounts[form.controls.selectedBill.value].id);
+    this.userService.createNewBill(form.controls.amount.value, this.bankAccounts[form.controls.selectedBill.value].id).subscribe((resData) => {
       this.isCreatingNew = false;
+      this.userService.getUser(parseInt(this.user.id));
     }, (error) => {
       this.errorService.newError('Non è stato possibile creare il nuovo conto. Riprova.');
       this.isCreatingNew = false;
@@ -55,7 +73,8 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.isDeleting = true;
-        this.userService.deleteBill(1).subscribe((resData) => {
+        this.userService.deleteBill(this.deletingBill).subscribe((resData) => {
+          this.userService.getUser(parseInt(this.user.id));
           this.isDeleting = false;
         }, (error) => {
           this.errorService.newError('Non è stato possibile cancellare il conto. Riprova.')

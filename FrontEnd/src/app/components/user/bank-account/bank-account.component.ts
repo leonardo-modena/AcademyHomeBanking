@@ -53,9 +53,9 @@ export class BankAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.userService.user.subscribe((user) => {
       this.user = user;
+      this.bills = user.bankAccounts;
     });
 
     this.selectedBill = this.bills[0];
@@ -65,29 +65,32 @@ export class BankAccountComponent implements OnInit {
     this.onGetBalance();
 
     this.userService.getBalance(1);
+    this.userService.getOperationList().subscribe((resData) => {
+      console.log(resData);
+    });
   }
 
   onChangeBill(): void {
     this.onGetBalance();
     this.userService.getBillInformation(this.selectedBill);
-    this.onGetOperations();
+    //this.onGetOperations();
   }
 
   onGetOperations(): void {
-    this.isLoadingOperations = true;
+    /*this.isLoadingOperations = true;
     this.userService.getOperationList(this.selectedBill, {type: 'last10'}).subscribe((operations) => {
       this.operations = operations;
       this.isLoadingOperations = false;
-    }, (errorMessage) => {this.isLoadingOperations = false});
+    }, (errorMessage) => {this.isLoadingOperations = false});*/
   }
 
   onSearchFunction(filterValues: {type: 'dateSelection', startDate?: number, endDate?: number}): void {
-    this.isLoadingOperations = true;
+    /*this.isLoadingOperations = true;
 
     this.userService.getOperationList(this.selectedBill, filterValues).subscribe((operations) => {
       this.operations = operations;
       this.isLoadingOperations = false;
-    }, (errorMessage) => {this.isLoadingOperations = false});
+    }, (errorMessage) => {this.isLoadingOperations = false});*/
 
   }
 }
