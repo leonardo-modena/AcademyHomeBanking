@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+
 
 @Entity
 @Table(name = "transactions")
@@ -13,23 +12,22 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_transaction")
+    @Column(name = "idtransaction")
     private int id;
 
     @Column(name = "type")
     private String type;
 
-    @Column(name = "date_transaction")
-    private Date  dateTransaction;
+    @Column(name = "datetransaction")
+    private long dateTransaction;
 
     @Column(name = "amount")
     private BigDecimal amount;
 
-
-
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idaccount",referencedColumnName = "id",nullable = false)
     @JsonIgnore
-    @ManyToOne()
-    @JoinColumn(name = "id_account",referencedColumnName = "id",nullable = false)
     private BankAccount idAccount;
 
 
@@ -53,11 +51,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public Date getDateTransaction() {
+    public long getDateTransaction() {
         return dateTransaction;
     }
 
-    public void setDateTransaction(Date dateTransaction) {
+    public void setDateTransaction(long dateTransaction) {
         this.dateTransaction = dateTransaction;
     }
 
@@ -68,7 +66,7 @@ public class Transaction {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-
+    @JsonIgnore
     public BankAccount getId_account() {
         return idAccount;
     }

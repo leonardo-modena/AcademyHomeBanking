@@ -29,7 +29,7 @@ public class BankAccount {
 
 
 
-	@JsonIgnore
+	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "idAccount")
 	private List<Transaction> transactions;
 
