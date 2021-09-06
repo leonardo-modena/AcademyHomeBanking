@@ -30,7 +30,7 @@ public class BankAccount {
 
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "id_account")
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "idAccount")
 	private List<Transaction> transactions;
 
 
@@ -76,6 +76,9 @@ public class BankAccount {
 		this.holder = holder;
 		holder.getId();
 	}
-	
+
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
 
 }

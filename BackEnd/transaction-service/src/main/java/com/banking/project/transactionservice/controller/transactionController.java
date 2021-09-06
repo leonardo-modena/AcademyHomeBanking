@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/customer")
@@ -31,17 +33,21 @@ public class transactionController {
     public BankAccount getBankAccount(@PathVariable int id){
         return bankAccountRepository.getById(id);
     }
+
+
     @PostMapping("/withdrawal/{amount}/{bankAccountId}")
     public  Boolean withDrawal( @PathVariable BigDecimal amount,@PathVariable int bankAccountId){
 
-        BankAccount bankAccount=new BankAccount();
         if(bankAccountRepository.existsById(bankAccountId)){
 
-            bankAccount=bankAccountRepository.getById(bankAccountId);
+           BankAccount bankAccount=bankAccountRepository.getById(bankAccountId);
 
-            if((bankAccount.getBalance().compareTo(amount)>=0 && bankAccount.getAccount_status().equals("ACTIVE"))){
+            if(((bankAccount.getBalance().compareTo(amount)>=0) && bankAccount.getAccount_status().equals("ACTIVE"))){
 
                 bankAccount.setBalance(bankAccount.getBalance().subtract(amount));
+                bankAccountRepository.save(bankAccount);
+                saveTransaction(amount,bankAccount);
+
                 return true;
             }
             else{
@@ -56,13 +62,25 @@ public class transactionController {
     }
 
 
+    private void saveTransaction(BigDecimal amount,BankAccount bankAccount){
+
+        Transaction transaction=new Transaction();
+
+        transaction.setId(0);
+        transaction.setAmount(amount);
+        transaction.setType("WITHDRAWAL");
+       transaction.setId_account(bankAccount);
+        Date date=new Date();
+        transaction.setDateTransaction(date);
+        transactionRepository.save(transaction);
+
+    }
 
 
+    @GetMapping("/transactions/{id}")
+    public List<Transaction> getTransaction(@PathVariable int id){
+        return transactionRepository.findTransactionById_account(id);
 
-    @GetMapping("/transactions")
-    public List<Transaction> getTransaction(){
-
-        return transactionRepository.findAll();
     }
 
 }

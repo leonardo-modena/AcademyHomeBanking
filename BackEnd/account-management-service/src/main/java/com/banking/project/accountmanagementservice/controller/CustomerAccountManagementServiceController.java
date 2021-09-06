@@ -72,7 +72,7 @@ public class CustomerAccountManagementServiceController {
 
 			BankAccount bankAccount = bankAccountRepository.getById(id);
 			BigDecimal balanceOld=bankAccount.getBalance();
-			if (((balanceOld.compareTo(balance))>=0) && bankAccount.getAccount_status() == "ACTIVE") {
+			if (((balanceOld.compareTo(balance))>=0) && bankAccount.getAccount_status().equals("ACTIVE")) {
 
 				BigDecimal newOldBalance = bankAccount.getBalance().subtract(balance);
 

@@ -26,10 +26,11 @@ public class Transaction {
     private BigDecimal amount;
 
 
+
     @JsonIgnore
     @ManyToOne()
-    @JoinColumn(name = "id_account",nullable = false)
-    private BankAccount id_account;
+    @JoinColumn(name = "id_account",referencedColumnName = "id",nullable = false)
+    private BankAccount idAccount;
 
 
     public Transaction(){
@@ -69,10 +70,11 @@ public class Transaction {
     }
 
     public BankAccount getId_account() {
-        return id_account;
+        return idAccount;
     }
 
-    public void setId_account(BankAccount id_account) {
-        this.id_account = id_account;
+    public void setId_account(BankAccount account) {
+        this.idAccount = account;
+        account.getId();
     }
 }
