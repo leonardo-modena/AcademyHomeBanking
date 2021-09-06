@@ -1,10 +1,12 @@
 package com.banking.project.transactionservice.controller;
 
+import com.banking.project.transactionservice.entity.Customer;
 import com.banking.project.transactionservice.exception.NotFoundException;
 import com.banking.project.transactionservice.exception.ApiBankException;
 import com.banking.project.transactionservice.entity.BankAccount;
 import com.banking.project.transactionservice.entity.Transaction;
 import com.banking.project.transactionservice.repository.BankAccountRepository;
+import com.banking.project.transactionservice.repository.CustomerRepository;
 import com.banking.project.transactionservice.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/customer")
@@ -25,6 +27,9 @@ public class transactionController {
 
 	@Autowired
 	TransactionRepository transactionRepository;
+
+	@Autowired
+	CustomerRepository customerRepository;
 
 	@GetMapping("/balance/{bankAccountId}")
 	public BigDecimal getBalance(@PathVariable int bankAccountId) {
@@ -106,8 +111,17 @@ public class transactionController {
 
 	@GetMapping("/transactions/{idAccount}")
 	public List<Transaction> getTransactionByIdAccount(@PathVariable int idAccount) {
-		return bankAccountRepository.findTransactionById_account(idAccount);
+		return bankAccountRepository.findTransactionByidAccount(idAccount);
 
 	}
+
+	@GetMapping("/operation/{idCustomer}")
+	public List<Transaction> getTransactionByIdCustomer(@PathVariable int idCustomer) {
+		Customer customer=customerRepository.getById(idCustomer);
+		return bankAccountRepository.findTransactionByIdCustomer(customer);
+
+	}
+
+
 
 }

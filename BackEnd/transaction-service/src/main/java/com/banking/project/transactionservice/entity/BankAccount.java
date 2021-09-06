@@ -22,7 +22,7 @@ public class BankAccount {
 	private String account_status;
 
 
-	@JsonIgnore
+
 	@ManyToOne()
 	@JoinColumn(name = "holder", nullable = false)
 	private Customer holder;
