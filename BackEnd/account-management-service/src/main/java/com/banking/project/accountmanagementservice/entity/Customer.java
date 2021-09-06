@@ -47,12 +47,12 @@ public class Customer {
 	 * 
 	 * @return
 	 */
-	public List<Integer> bankAccounts_id() {
-		List<Integer> bAccounts = new ArrayList<>();
+	public List<BankAccount> bankAccounts_modified() {
+		List<BankAccount> bAccounts = new ArrayList<>();
 		for (BankAccount b : bankAccounts) {
 			// non voglio che mi vengano mostrati i conti chiusi
 			if (!(b.getAccount_status().equals("CLOSING")))
-				bAccounts.add(b.getId());
+				bAccounts.add(b);
 		}
 		return bAccounts;
 	};
@@ -136,8 +136,8 @@ public class Customer {
 		this.role = role;
 	}
 
-	public List<Integer> getBankAccounts() {
-		return bankAccounts_id();
+	public List<BankAccount> getBankAccounts() {
+		return bankAccounts_modified();
 
 	}
 

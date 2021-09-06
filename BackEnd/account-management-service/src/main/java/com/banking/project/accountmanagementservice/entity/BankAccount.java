@@ -2,6 +2,9 @@ package com.banking.project.accountmanagementservice.entity;
 
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 @Entity
@@ -22,9 +25,8 @@ public class BankAccount {
 
 	@ManyToOne()
 	@JoinColumn(name = "holder", nullable = false)
-
+	@JsonIgnore
 	private Customer holder;
-
 	public BankAccount() {
 
 	}
