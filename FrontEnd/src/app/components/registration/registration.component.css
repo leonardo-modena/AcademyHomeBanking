@@ -17,11 +17,12 @@ label {
 
 .registration-card{
   padding: 1rem 2rem;
-  background-color: var(--secondary-green);
+  background-color: var(--primary-green);
 
 }
 
 .form-title{
+  color: white;
   font-family: 'Open Sans';
     font-weight: 100;
     letter-spacing: 2px;
