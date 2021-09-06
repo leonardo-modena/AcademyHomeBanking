@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { LoadingPageComponent } from 'src/app/components/Shared/loading-page/loading-page.component';
 import {NoCommaPipe} from "../../pipes/no-comma.pipe";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import {NoCommaPipe} from "../../pipes/no-comma.pipe";
     FormsModule,
     MatIconModule,
     MatButtonModule,
-
+    MatDialogModule
   ],
   exports: [
     SpinnerComponent,
@@ -30,6 +31,7 @@ import {NoCommaPipe} from "../../pipes/no-comma.pipe";
     FormsModule,
     ReactiveFormsModule,
     NoCommaPipe,
+    MatDialogModule
   ]
 })
 export class SharedModule { }
