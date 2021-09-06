@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/components/Shared/dialog/dialog.component';
 import { BankAccount } from 'src/app/model/BankAccount';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -18,22 +20,32 @@ export class AccountListItemComponent implements OnInit {
   @Output() confirmDeleteClick = new EventEmitter()
 
 
-  constructor(private adminService: AdminService ) { }
+  constructor(private adminService: AdminService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
   }
   
   activateClick(): void{
-      this.adminService.confirmRegistration(this.account).subscribe( (res) => {
-        this.confirmAccountClick.emit();
-      } )
+    this.dialog.open(DialogComponent, {closeOnNavigation: true , data: {message: `Confermare l'apertura dell' account n.${this.account.id}`}}).afterClosed().subscribe( data => {
+      if (data) {
+        this.adminService.confirmRegistration(this.account).subscribe( (res) => {
+          this.confirmAccountClick.emit();
+        } )
+      }
+    } )
   
     }
 
     deleteClick(): void{
-      this.adminService.confirmDeleteAccount(this.account).subscribe( (res) => {
-        this.confirmDeleteClick.emit();
-      } )
+      this.dialog.open(DialogComponent, {closeOnNavigation: true, data: { message: `confermare la chiusura dell' account n.${this.account.id}`}}).afterClosed().subscribe(
+        data => {
+          if (data) {            
+            this.adminService.confirmDeleteAccount(this.account).subscribe( (res) => {
+              this.confirmDeleteClick.emit();
+            } )
+          }
+        }
+      )
   
     }
 }

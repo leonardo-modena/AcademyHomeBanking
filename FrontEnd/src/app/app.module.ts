@@ -19,6 +19,7 @@ import { AlertComponent } from './components/Shared/alert/alert.component';
 import { AdminModule } from "./module/admin/admin.module";
 import { SharedModule } from "./module/shared/shared.module";
 import { NoCommaPipe } from './pipes/no-comma.pipe';
+import { DialogComponent } from './components/Shared/dialog/dialog.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NoCommaPipe } from './pipes/no-comma.pipe';
     FooterComponent,
     NotFoundComponent,
     ErrorComponent,
-    AlertComponent
+    AlertComponent,
+    DialogComponent
   ],
   imports: [
     SharedModule,

@@ -8,7 +8,6 @@ import { OperationListComponent } from "../../components/user/operation-list/ope
 import { OpertationItemComponent } from "../../components/user/operation-list/opertation-item/opertation-item.component";
 import { BankAccountComponent } from "../../components/user/bank-account/bank-account.component";
 import { ConfirmDialogComponent } from "../../components/user/profile/confirm-dialog/confirm-dialog.component";
-import { MatDialogModule } from "@angular/material/dialog";
 import { DownloadComponent } from "../../components/user/download/download.component";
 import { OperationFormComponent } from "../../components/user/operations/operation-form/operation-form.component";
 import { SharedModule } from "../shared/shared.module";
@@ -32,7 +31,6 @@ import {AppModule} from "../../app.module";
   imports: [
     CommonModule,
     SharedModule,
-    MatDialogModule,
     RouterModule.forChild([
       {
         path: 'user',  /* canActivate: [UserGuard],*/ component: UserComponent, children: [
