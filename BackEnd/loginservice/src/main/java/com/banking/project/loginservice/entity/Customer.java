@@ -1,7 +1,5 @@
 package com.banking.project.loginservice.entity;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Entity
@@ -26,7 +24,7 @@ public class Customer {
 	private String password;
 
 	@Column(name = "dateofbirth")
-	private Date dateOfBirth;
+	private int dateOfBirth;
 
 	@Column(name = "gender")
 	private String gender;
@@ -38,7 +36,7 @@ public class Customer {
 
 	}
 
-	public Customer(String firstName, String lastName, String email, String password, Date dateOfBirth, String gender,
+	public Customer(String firstName, String lastName, String email, String password, int dateOfBirth, String gender,
 			String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -89,11 +87,11 @@ public class Customer {
 		this.password = password;
 	}
 
-	public Date getDateOfBirth() {
+	public int getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(int dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
