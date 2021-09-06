@@ -2,6 +2,8 @@ package com.banking.project.loginservice.springjwt.payload.request;
 
 public class LoginRequest {
 	
+	//Rimossi @NotBlank su username e password in quanto danno errore sulla console del browser
+	
 	private String username;
 	
 	private String password;

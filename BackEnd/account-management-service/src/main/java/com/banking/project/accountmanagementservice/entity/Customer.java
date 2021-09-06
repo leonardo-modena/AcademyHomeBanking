@@ -29,31 +29,30 @@ public class Customer {
 	@Column(name = "password")
 	private String password;
 
-	@JsonIgnore
 	@Column(name = "dateofbirth")
-	private Date dateOfBirth;
+	private long dateOfBirth;
 
-	@JsonIgnore
 	@Column(name = "gender")
 	private String gender;
 
-	@JsonIgnore
 	@Column(name = "role")
 	private String role;
 
-
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "holder")
-	private List <BankAccount> bankAccounts;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "holder")
+	private List<BankAccount> bankAccounts;
 
 	/**
-	 * Metodo per estrarre l'id filtrando così i dati che non servono del conto corrente
+	 * Metodo per estrarre l'id filtrando così i dati che non servono del conto
+	 * corrente
+	 * 
 	 * @return
 	 */
-	public List<Integer> bankAccounts_id(){
+	public List<Integer> bankAccounts_id() {
 		List<Integer> bAccounts = new ArrayList<>();
-		for(BankAccount b: bankAccounts) {
-			bAccounts.add(b.getId());
+		for (BankAccount b : bankAccounts) {
+			// non voglio che mi vengano mostrati i conti chiusi
+			if (!(b.getAccount_status().equals("CLOSING")))
+				bAccounts.add(b.getId());
 		}
 		return bAccounts;
 	};
@@ -61,9 +60,9 @@ public class Customer {
 	public Customer() {
 
 	}
-	
-	public Customer(String firstName, String lastName, String email, String password, Date dateOfBirth,
-                    String gender, String role) {
+
+	public Customer(String firstName, String lastName, String email, String password, long dateOfBirth, String gender,
+			String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -113,11 +112,11 @@ public class Customer {
 		this.password = password;
 	}
 
-	public Date getDateOfBirth() {
+	public long getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(long dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -137,14 +136,13 @@ public class Customer {
 		this.role = role;
 	}
 
-
 	public List<Integer> getBankAccounts() {
 		return bankAccounts_id();
 
 	}
+
 	public void setBankAccounts(List<BankAccount> bankAccounts) {
 		this.bankAccounts = bankAccounts;
 	}
-	
 
 }

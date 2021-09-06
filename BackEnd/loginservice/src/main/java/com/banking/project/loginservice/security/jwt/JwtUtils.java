@@ -1,6 +1,5 @@
 package com.banking.project.loginservice.security.jwt;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +29,8 @@ public class JwtUtils {
 		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
 		//non mi serve la lista di ruoli ma solo il primo
 		String role = roles.get(0);
-		return Jwts.builder().claim("id", userDetails.getId()).claim("role",role).claim("expiration",expirationMs)
+		//codifico nel token l'id, il ruolo e la sua durata
+		return Jwts.builder().setSubject(userDetails.getUsername()).claim("id", userDetails.getId()).claim("role",role).claim("expiration",expirationMs)
 				.signWith(SignatureAlgorithm.HS512, secret).compact();
 	}
 

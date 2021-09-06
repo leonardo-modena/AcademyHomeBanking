@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public Sha256Encoder passwordEncoder() {
 		return new Sha256Encoder();
 	}
-// 
+	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	

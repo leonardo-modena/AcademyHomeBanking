@@ -15,7 +15,7 @@ public class LoginserviceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LoginserviceApplication.class, args);
 	}
-	
+	// per evitare l'errore di cors
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();

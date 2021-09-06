@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 
 public class MyUserDetails implements UserDetails {
 
@@ -20,7 +19,7 @@ public class MyUserDetails implements UserDetails {
 	private String username;
 	private String firstName;
 	private String lastName;
-	private Date dateOfBirth;
+	private long dateOfBirth;
 	private String gender;
 	@JsonIgnore
 	private String password;
@@ -28,7 +27,7 @@ public class MyUserDetails implements UserDetails {
 	private SimpleGrantedAuthority authority;
 
 	
-	public MyUserDetails(int id, String username, String password,String firstName, String lastName, Date dateOfBirth, String gender,
+	public MyUserDetails(int id, String username, String password,String firstName, String lastName, long dateOfBirth, String gender,
 			SimpleGrantedAuthority authority) {
 		this.id = id;
 		this.username = username;
@@ -43,7 +42,7 @@ public class MyUserDetails implements UserDetails {
 	/**
 	 * Metodo che crea un oggetto MyUserDetails con i dettagli dell'utente
 	 * @param user
-	 * @return
+	 * @return MyUserDetails con all'interno authority
 	 */
 	public static MyUserDetails build(Customer user) {
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
@@ -82,7 +81,7 @@ public class MyUserDetails implements UserDetails {
 		return lastName;
 	}
 
-	public Date getDateOfBirth() {
+	public long getDateOfBirth() {
 		return dateOfBirth;
 	}
 

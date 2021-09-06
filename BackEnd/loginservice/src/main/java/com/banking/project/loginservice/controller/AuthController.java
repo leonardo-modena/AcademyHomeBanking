@@ -28,7 +28,7 @@ public class AuthController {
 
 	@Autowired
 	CustomerRepository customerRepository;
-
+	//Encoder custom in quanto quello fornito da PasswordEncoder per la sha256 è deprecato
 	@Autowired
 	Sha256Encoder encoder;
 
@@ -44,6 +44,7 @@ public class AuthController {
 	 * @param loginRequest
 	 * @return JwtResponse
 	 */
+	//Rimosso @Valid prima di @RequestBody in quanto la validazione non è accettata sul browser
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
