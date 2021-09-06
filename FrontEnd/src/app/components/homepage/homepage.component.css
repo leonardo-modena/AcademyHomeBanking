@@ -1,0 +1,40 @@
+.bg-container{
+  background-color: #F8F9FA;
+}
+
+.bg-img{
+  background-color: #4c956c;
+  margin-top: -20px !important;
+}
+
+.tc{
+  color: #F8F9FA !important;
+}
+
+.bgc-second{
+  background-color: #F8F9FA;
+}
+
+.bg-grey{
+  background-color: #F2F2F2;
+}
+
+.p-format{
+  color: black;
+}
+.i-check{
+  color: #4c956c !important;
+  font-weight: bold;
+}
+.footermargin{
+  margin-bottom: -35px !important;
+  background-color: #F2F2F2;
+}
+
+.b{
+  font-weight: bold !important;
+}
+.linkstyle{
+  text-decoration: none !important;
+  font-size: 20px;
+}
