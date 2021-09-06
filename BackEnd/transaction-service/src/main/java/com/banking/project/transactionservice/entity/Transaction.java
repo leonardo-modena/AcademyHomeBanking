@@ -21,6 +21,9 @@ public class Transaction {
     @Column(name = "datetransaction")
     private long dateTransaction;
 
+    @Column(name = "causal")
+    private String causal;
+
     @Column(name = "amount")
     private BigDecimal amount;
 
@@ -66,7 +69,7 @@ public class Transaction {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-    @JsonIgnore
+
     public BankAccount getId_account() {
         return idAccount;
     }
@@ -74,5 +77,13 @@ public class Transaction {
     public void setId_account(BankAccount account) {
         this.idAccount = account;
         account.getId();
+    }
+
+    public String getCausal() {
+        return causal;
+    }
+
+    public void setCausal(String causal) {
+        this.causal = causal;
     }
 }

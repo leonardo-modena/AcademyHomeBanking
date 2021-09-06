@@ -13,12 +13,13 @@ import org.springframework.data.repository.query.Param;
 
 public interface BankAccountRepository extends JpaRepository<BankAccount,Integer> {
 	
-	@Query(value = "select b.transactions from BankAccount b where b.id=:idAccount")
+	@Query(value = " select b.transactions from BankAccount as b inner join Transaction as t on b.id=:idAccount order by t.dateTransaction")
     List<Transaction> findTransactionByidAccount(@Param("idAccount") int idAccount);
 
 
     @Query(value = "select b.transactions from BankAccount b where b.holder=:customer ")
     List<Transaction> findTransactionByIdCustomer(Customer customer);
+
 
 
 

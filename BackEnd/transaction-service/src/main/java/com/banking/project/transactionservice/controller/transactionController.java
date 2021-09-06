@@ -9,6 +9,8 @@ import com.banking.project.transactionservice.repository.BankAccountRepository;
 import com.banking.project.transactionservice.repository.CustomerRepository;
 import com.banking.project.transactionservice.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,18 +44,19 @@ public class transactionController {
 	}
 
 	@PostMapping("/withdrawal/{amount}/{bankAccountId}")
-	public ResponseEntity<BankAccount> withDrawal(@PathVariable BigDecimal amount, @PathVariable int bankAccountId) {
+	public ResponseEntity<BankAccount> withDrawal(@PathVariable String amount, @PathVariable int bankAccountId) {
 
+		BigDecimal bigDecimal=new BigDecimal(amount);
 		if (bankAccountRepository.existsById(bankAccountId)) {
 
 			BankAccount bankAccount = bankAccountRepository.findById(bankAccountId).get();
 
-			if (((bankAccount.getBalance().compareTo(amount) >= 0)
+			if (((bankAccount.getBalance().compareTo(bigDecimal) >= 0)
 					&& bankAccount.getAccount_status().equals("ACTIVE"))) {
 
-				bankAccount.setBalance(bankAccount.getBalance().subtract(amount));
+				bankAccount.setBalance(bankAccount.getBalance().subtract(bigDecimal));
 				bankAccountRepository.save(bankAccount);
-				saveTransaction(amount, bankAccount,0);
+				saveTransaction(bigDecimal, bankAccount,0);
 
 				return new ResponseEntity<>(bankAccount, HttpStatus.OK);
 			} else {
@@ -109,9 +112,27 @@ public class transactionController {
 
 	}
 
-	@GetMapping("/transactions/{idAccount}")
-	public List<Transaction> getTransactionByIdAccount(@PathVariable int idAccount) {
-		return bankAccountRepository.findTransactionByidAccount(idAccount);
+	@GetMapping("/transactions/{idAccount}/{type}/{startDate}/{endDate}")
+	public List<Transaction> getTransactionByIdAccount(@PathVariable int idAccount,@PathVariable String type,
+													   @PathVariable long startDate, @PathVariable long endDate) {
+
+		switch (type){
+			case "lastTen":
+				Pageable topTen = PageRequest.of(0, 10);
+				return transactionRepository.findTransactionByIdAccountLastTen(idAccount,topTen);
+
+			case "lastThreeMonths":
+				long value=System.currentTimeMillis()-7884000000l;
+				return transactionRepository.findAllByDateTransactionBetween(idAccount,System.currentTimeMillis(),value);
+
+
+			case "betweenTwoDates":
+					return transactionRepository.findAllByDateTransactionBetween(idAccount,startDate,endDate);
+
+		}
+
+		throw new NotFoundException("Errore di filtro date", HttpStatus.NOT_FOUND);
+
 
 	}
 
@@ -120,7 +141,9 @@ public class transactionController {
 		Customer customer=customerRepository.getById(idCustomer);
 		return bankAccountRepository.findTransactionByIdCustomer(customer);
 
+
 	}
+
 
 
 

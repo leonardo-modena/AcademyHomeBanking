@@ -23,13 +23,15 @@ public class BankAccount {
 
 
 
+	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name = "holder", nullable = false)
 	private Customer holder;
 
 
 
-	
+
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "idAccount")
 	private List<Transaction> transactions;
 
