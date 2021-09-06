@@ -20,7 +20,7 @@ public class Transaction {
     private String type;
 
     @Column(name = "date_transaction")
-    private Date  dateTransaction;
+    private Long  dateTransaction;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -53,11 +53,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public Date getDateTransaction() {
+    public Long getDateTransaction() {
         return dateTransaction;
     }
 
-    public void setDateTransaction(Date dateTransaction) {
+    public void setDateTransaction(Long dateTransaction) {
         this.dateTransaction = dateTransaction;
     }
 

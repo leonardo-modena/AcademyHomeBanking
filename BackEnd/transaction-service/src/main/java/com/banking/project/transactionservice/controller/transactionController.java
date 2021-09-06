@@ -71,7 +71,7 @@ public class transactionController {
         transaction.setType("WITHDRAWAL");
        transaction.setId_account(bankAccount);
         Date date=new Date();
-        transaction.setDateTransaction(date);
+        transaction.setDateTransaction(date.getTime());
         transactionRepository.save(transaction);
 
     }
