@@ -24,7 +24,7 @@ public class Customer {
 	private String password;
 
 	@Column(name = "dateofbirth")
-	private int dateOfBirth;
+	private long dateOfBirth;
 
 	@Column(name = "gender")
 	private String gender;
@@ -36,7 +36,7 @@ public class Customer {
 
 	}
 
-	public Customer(String firstName, String lastName, String email, String password, int dateOfBirth, String gender,
+	public Customer(String firstName, String lastName, String email, String password, long dateOfBirth, String gender,
 			String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -87,11 +87,11 @@ public class Customer {
 		this.password = password;
 	}
 
-	public int getDateOfBirth() {
+	public long getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(int dateOfBirth) {
+	public void setDateOfBirth(long dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

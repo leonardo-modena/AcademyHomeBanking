@@ -10,19 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.project.accountmanagementservice.entity.BankAccount;
 import com.banking.project.accountmanagementservice.entity.Customer;
 import com.banking.project.accountmanagementservice.exception.ApiBankException;
-import com.banking.project.accountmanagementservice.exception.ApiBankResponse;
 import com.banking.project.accountmanagementservice.exception.NotFoundException;
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
-
-
 
 @RestController
 @RequestMapping("/customer")
@@ -34,7 +30,7 @@ public class CustomerAccountManagementServiceController {
 	private CustomerRepository customerRepository;
 
 	/**
-	 * Metodo che richiede la chiusura dell'account da parte dell'utente, setta lo
+	 * Metodo che richiede la chiusura del conto da parte dell'utente, setta lo
 	 * stato a "CLOSING"
 	 *
 	 * @param accountId
@@ -46,7 +42,7 @@ public class CustomerAccountManagementServiceController {
 	}
 
 	/**
-	 * Metodo per recuperare le informazioni di un conto con l'id
+	 * Metodo per recuperare le informazioni di un cliente dato 'id
 	 *
 	 * @param
 	 * @return
