@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../../services/user.service";
 import {ErrorService} from "../../../../services/error.service";
+import {User} from "../../../../model/user";
 
 @Component({
   selector: 'app-operation-form',
@@ -9,6 +10,8 @@ import {ErrorService} from "../../../../services/error.service";
   styleUrls: ['./operation-form.component.css']
 })
 export class OperationFormComponent implements OnInit {
+
+  user!: User;
 
   @Input() op_type!: 'deposit' | 'taking';
   operation_ok = false;
@@ -19,44 +22,23 @@ export class OperationFormComponent implements OnInit {
   constructor(private userService: UserService, private errorService: ErrorService) { }
 
   ngOnInit(): void {
+
+    this.userService.user.subscribe((user) => {
+      this.user = user;
+    })
     this.operationForm = new FormGroup({
-      'bill': new FormControl('Conto 2', Validators.required),
+      'bill': new FormControl(this.user.bankAccounts[0], Validators.required),
       'amount': new FormControl('', Validators.required),
-      'reason': new FormControl('', Validators.required),
-      'category': new FormControl('Categoria 2', Validators.required)
+      'reason': new FormControl('', Validators.required)
     });
-  }
-
-  private onSubmitDeposit() {
-
-    this.operation_ok = true;
-    setTimeout(() => {
-      this.operation_ok = false;
-    }, 5000);
-
-    console.log({...this.operationForm.value, type: 'deposit'});
-  }
-
-  private onSubmitTaking() {
-    this.operation_ok = true;
-    setTimeout(() => {
-      this.operation_ok = false;
-    }, 5000);
   }
 
   onSubmit() {
     console.log(this.operationForm.value);
+    console.log(this.operationForm.value.bill);
     this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
-
-    this.userService.doDeposit(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value ).subscribe((resData) => {
-      this.isLoading.emit(false);
-    }, (error) => {
-      this.isLoading.emit(false);
-      this.errorService.newError('L\'operazione non è andata a buon fine. Riprova')
-    });
-
     if (this.op_type === 'deposit') {
-      this.userService.doDeposit(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value ).subscribe((resData) => {
+      this.userService.doDeposit(this.operationForm.value.bill, this.operationForm.value.amount ).subscribe((resData) => {
         this.isLoading.emit(false);
       }, (error) => {
         this.isLoading.emit(false);
@@ -64,7 +46,7 @@ export class OperationFormComponent implements OnInit {
       });
     }
     else {
-      this.userService.doTaking(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value ).subscribe((resData) => {
+      this.userService.doWithdrawal(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value ).subscribe((resData) => {
         this.isLoading.emit(false);
       }, (error) => {
         this.isLoading.emit(false);
