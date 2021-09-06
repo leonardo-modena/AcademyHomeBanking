@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.project.accountmanagementservice.entity.BankAccount;
 import com.banking.project.accountmanagementservice.entity.Customer;
+import com.banking.project.accountmanagementservice.exception.ApiBankException;
+import com.banking.project.accountmanagementservice.exception.ApiBankResponse;
+import com.banking.project.accountmanagementservice.exception.NotFoundException;
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 
@@ -62,9 +67,14 @@ public class CustomerAccountManagementServiceController {
 		return theBankAccount;
 	}
 
-	// da terminare
+	/**
+	 * Metodo che, dato un id conto e l'importo della ricarica da effettuare, permette di creare un secondo conto
+	 * @param id
+	 * @param balance
+	 * @return
+	 */
 	@PostMapping("/new/{id}/{balance}")
-	public String newAccount(@PathVariable int id, @PathVariable BigDecimal balance) {
+	public ResponseEntity<BankAccount> newAccount(@PathVariable int id, @PathVariable BigDecimal balance) {
 
 		BankAccount newBankAccount = new BankAccount();
 
@@ -87,17 +97,18 @@ public class CustomerAccountManagementServiceController {
 				newBankAccount.setHolder(bankAccount.getHolder());
 
 				bankAccountRepository.save(newBankAccount);
+				
 			} else {
 
-				return "Operazione negata";
+				throw new ApiBankException("Disponibilità terminata sul conto n."+id,HttpStatus.BAD_REQUEST);
 			}
 
 		} else {
 
-			return "Conto non trovato";
+			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
 		}
 
-		return "Creazione nuovo conto";
+		return new ResponseEntity<>(newBankAccount,HttpStatus.OK);
 	}
 
 }
