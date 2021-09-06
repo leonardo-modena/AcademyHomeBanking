@@ -3,25 +3,16 @@
   <div class="form-group col-12 col-md-6 mt-3">
     <label class="form-label">Conto</label>
     <select class="form-select" formControlName="bill">
-      <option>Conto 1</option>
-      <option>Conto 2</option>
+      <option *ngFor="let bill of user.bankAccounts" [value]="bill">{{bill | number:'6.0' | noComma}}</option>
     </select>
   </div>
   <div class="form-group col-12 col-md-6 mt-3">
     <label class="form-label">Importo</label>
-    <input class="form-control" type="number" min="0.01" [max]="(op_type === 'taking' ? '123' : '')"  step="0.01" formControlName="amount">
+    <input class="form-control" type="number" min="0.01" [max]="(op_type === 'taking' ? '123' : '5000')"  step="0.01" formControlName="amount">
   </div>
   <div class="form-group col-12 mt-3">
     <label class="form-label">Causale</label>
     <input class="form-control" type="text" formControlName="reason">
-  </div>
-  <div class="form-group col-12 col-md-6 mt-3">
-    <label class="form-label">Categoria</label>
-    <select class="form-select" formControlName="category">
-      <option>Categoria 1</option>
-      <option>Categoria 2</option>
-      <option>Categoria 3</option>
-    </select>
   </div>
   <div class="form-group col-12 mt-3 d-flex">
     <button class="btn btn-primary ms-auto" [disabled]="!operationForm.valid">Conferma</button>
