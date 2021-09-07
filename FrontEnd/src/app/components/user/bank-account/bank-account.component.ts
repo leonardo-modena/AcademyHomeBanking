@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Operation} from "../../../model/operation";
-import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../model/user";
+import {BankAccount} from "../../../model/BankAccount";
 
 @Component({
   selector: 'app-bank-account',
@@ -13,84 +13,47 @@ export class BankAccountComponent implements OnInit {
 
 
   user!: User;
+  bankAccounts!: BankAccount[];
   balance: number = 0;
-  operations: Operation[] = [
-    {
-      type: 'prelievo',
-      importo: 234.54,
-      dataPrelievo: 1628763225000,
-      causale: 'Spese mediche',
-      beneficiario: 'Ospedale di Piombino',
-      mittente: ''
-    },
-    {
-      type: 'versamento',
-      importo: 403.46,
-      dataPrelievo: 1622277132000,
-      causale: 'Vendita mobile',
-      beneficiario: '',
-      mittente: 'Tizio Caio'
-    }
-  ];
+  operations!: Operation[];
 
-  isLoadingOperations: boolean = false;
+  isLoadingOperations: boolean = true;
   isLoadingBalance = false;
 
-  selectedBill!: number;
-  bills = [1, 2];
-
-  selectBillForm!: FormGroup;
+  selectedBill: number = 0;
 
   constructor(private userService: UserService) { }
 
   private onGetBalance() {
-    this.isLoadingBalance = true;
+    this.isLoadingBalance = false;
     this.userService.getBalance(this.selectedBill).subscribe((balance) => {
       this.balance = balance;
-
     }, (errorMessage) => { this.isLoadingBalance = false;});
-
   }
 
   ngOnInit(): void {
+
     this.userService.user.subscribe((user) => {
       this.user = user;
-      this.bills = user.bankAccounts;
     });
-
-    this.selectedBill = this.bills[0];
-    this.selectBillForm = new FormGroup({
-      'selectedBill': new FormControl(this.selectedBill)
+    this.userService.bankAccounts.subscribe((bankAccounts) => {
+      this.bankAccounts = bankAccounts;
     });
-    this.onGetBalance();
-
-    this.userService.getBalance(1);
-    this.userService.getOperationList().subscribe((resData) => {
-      console.log(resData);
-    });
-  }
-
-  onChangeBill(): void {
-    this.onGetBalance();
-    this.userService.getBillInformation(this.selectedBill);
-    //this.onGetOperations();
-  }
-
-  onGetOperations(): void {
-    /*this.isLoadingOperations = true;
-    this.userService.getOperationList(this.selectedBill, {type: 'last10'}).subscribe((operations) => {
+    this.isLoadingOperations = true;
+    this.userService.operations.subscribe((operations) => {
+      console.log(this.isLoadingOperations);
+      setTimeout(() => {
+        console.log(this.isLoadingOperations);
+        this.isLoadingOperations = false;
+        }, 5000)
+      //this.isLoadingOperations = false;
       this.operations = operations;
-      this.isLoadingOperations = false;
-    }, (errorMessage) => {this.isLoadingOperations = false});*/
+    });
   }
 
-  onSearchFunction(filterValues: {type: 'dateSelection', startDate?: number, endDate?: number}): void {
-    /*this.isLoadingOperations = true;
-
-    this.userService.getOperationList(this.selectedBill, filterValues).subscribe((operations) => {
-      this.operations = operations;
-      this.isLoadingOperations = false;
-    }, (errorMessage) => {this.isLoadingOperations = false});*/
-
+  onSearchFunction(filterValues: {type: 'lastTen' | 'lastThreeMonths' | 'betweenTwoDates', startDate: number, endDate: number}): void {
+    this.isLoadingOperations = true;
+    console.log(this.isLoadingOperations);
+    this.userService.getOperationList(this.selectedBill, filterValues);
   }
 }

@@ -1,8 +1,8 @@
 export interface Operation {
-  type: 'prelievo' | 'versamento',
-  importo: number;
-  dataPrelievo: number;
-  causale: string;
-  beneficiario: string;
-  mittente: string;
+  idTransaction: number;
+  type: 'WITHDRAWAL' | 'DEPOSIT',
+  amount: number;
+  dateTransaction: number;
+  causal: string;
+  idAccount: number;
 }
