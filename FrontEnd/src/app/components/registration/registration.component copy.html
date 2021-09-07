@@ -1,0 +1,90 @@
+<div class="background-row ">
+  <img id="first-illustration" class="registration-illustration" src="../../../assets/img/Illustration/Savings-bro.png" alt="">
+  <img id="second-illustration" class="registration-illustration" src="../../../assets/img/Illustration/CashPayment-bro.png" alt="">
+</div>
+
+
+<div class="title-content">
+  <h4 class="text-center registration-title">
+      Pronto a diventare cliente? In pochi minuti puoi fare tutto online!
+  </h4>
+</div>
+
+<div class="container-fluid shadow-sm mt-2">
+
+  <div class="row">
+  <div class="registration-card rounded col-sm-12 col-md-6 m-auto">
+    <h4 class="text-center form-title">INSERISCI QUI I TUOI DATI</h4>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="row gx-5" >
+      <div class="col-md-6 form-group mt-3">
+        <label for="username" class="form-label">Nome</label>
+        <input type="text"
+               [ngClass]="numberNameError == false ? 'form-control' : 'form-control is-invalid'"
+               id="username" name="username" required ngModel minlength="4" pattern="^\s*\S+\s*$">
+        <div [@fade] *ngIf="numberNameError" style="font-weight: bold" class="alert-danger"> Inserisci un nome valido! </div>
+      </div>
+  
+      <div class="col-md-6 mt-3 form-group">
+        <label for="cognome" class="form-label">Cognome</label>
+        <input type="text"
+               [ngClass]="numberCognomeError == false ? 'form-control' : 'form-control is-invalid'"
+               class="form-control" id="cognome" name="cognome" required ngModel minlength="4">
+        <div [@fade] *ngIf="numberCognomeError" style="font-weight: bold" class="alert-danger"> Inserisci un cognome valido! </div>
+      </div>
+  
+      <div class="col-12 form-group mt-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="email@email.it" required ngModel pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+      </div>
+  
+      <div class="col-12 col-md-6 form-group mt-3 ">
+        <label for="date">Inserisci la tua data di nascita</label>
+        <input class="dp form-control" type="date" id="date" name="date"
+               value="{{today}}" required ngModel max="2003-01-01" min="1941-01-01">
+      </div>
+  
+      <div class="col-md-6 mt-3 form-group">
+        <label for="sesso">Seleziona sesso</label>
+        <select class="form-select" aria-label="Seleziona sesso" required ngModel id="sesso" name="sesso">
+          <option value="M">Maschio</option>
+          <option value="F">Femmina</option>
+        </select>
+      </div>
+  
+      <div class="col-md-6 form-group mt-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required ngModel
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        (input)="setTouch()">
+          <div *ngIf="touch" [@fade] class="alert-warning">
+            <ul>
+              <li>Minimo 8 caratteri</li>
+              <li>Almeno una lettera maiuscola</li>
+              <li>Almeno un numero</li>
+              <li>Almeno un carattere speciale: # ? ! </li>
+            </ul>
+          </div>
+      </div>
+  
+      <div class="col-md-6 form-group mt-3">
+        <label for="confermaPassword" class="form-label">Conferma Password</label>
+        <input type="password" class="form-control" id="confermaPassword" name="confermaPassword" required ngModel
+               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+        <div [@fade] *ngIf="!passwordError" style="font-weight: bold" class="alert-danger"> Le password non coincidono! </div>
+      </div>
+  
+      <hr class="mt-2">
+      <div>Avvertenza
+        Ti ricordiamo che anche in un secondo momento puoi valutare quale conto si adatti meglio alle tue esigenze
+        (ad esempio, se preferisci operare anche attraverso altri canali come cartaceo o telefono)
+        contattando un Family Banker Office, dove potrai sottoscrivere altre tipologie di conto corrente.</div>
+      <div class="col-12 mt-4 mb-4">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Crea il tuo conto</button>
+      </div>
+  
+      </form>
+  </div>
+
+</div>
+
+</div>

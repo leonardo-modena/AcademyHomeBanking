@@ -12,6 +12,7 @@
   --secondary-green: #4c956c;
   --light-green: #d2e8db;
   --secondary-orange: #d68c45;
+  --secondary-red: #6E312C;
 }
 
 /* ===== Scrollbar CSS credit: https://codepen.io/stephenpaton-tech/full/JjRvGmY===== */
@@ -132,8 +133,6 @@ button.btn-primary:hover{
   background-color: transparent!important
 }
 
-
-
 .btn-secondary {
   background: var(--white-yellow) !important;
   color: #888888;
@@ -143,6 +142,18 @@ button.btn-primary:hover{
 .btn-secondary:hover {
   border: 1px solid #888888;
   color: #888888
+}
+
+button.btn-danger{
+  cursor: pointer !important;
+
+  background-color: var(--secondary-orange) !important;
+  border-color: var(--secondary-orange) !important;
+  color: var(--white-yellow) !important;
+}
+
+button.btn-danger:hover{
+  border: 1px solid #888888 !important;
 }
 
 .btn-small {
@@ -251,6 +262,11 @@ input[type=number]:focus,
 
 .pointer{
   cursor: pointer;
+}
+
+.transparent-button{
+  border: none;
+  background-color: transparent;
 }
 
 

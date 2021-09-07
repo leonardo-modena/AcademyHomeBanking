@@ -30,13 +30,16 @@ export class RegistrationComponent implements OnInit {
   numberCognomeError: boolean = false;
   passwordError: boolean = true;
   today!:string;
+  showText: boolean = true;
+  spinner: boolean = false;
+  showForm: boolean = false;
 
   constructor(private auth: AuthService, private router: Router, private alert: AlertService, private titleService: Title) {}
 
   ngOnInit(): void {
     //set Title
     this.titleService.setTitle(`AcademyBank | Apertura-Conto`)
-    
+
     this.today = new Date().toLocaleDateString();
   }
     setTouch(){
@@ -86,4 +89,14 @@ export class RegistrationComponent implements OnInit {
 
   }
 
+  showLoader(){
+    this.showText = false;
+    this.spinner = true;
+    setTimeout(()=>{this.setSpinner()},3000)
+  }
+
+  setSpinner(){
+    this.spinner = false;
+    this.showForm = true;
+  }
 }

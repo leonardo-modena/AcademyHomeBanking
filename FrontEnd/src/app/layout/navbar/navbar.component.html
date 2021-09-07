@@ -1,11 +1,12 @@
 <div class="backdrop" (click)="sidenavSwitch()" *ngIf="sidenav"></div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand">
     <img
       [routerLink]="['/']"
       class="navbar-img pointer"
       src="../../../assets/img/logo/logo_small.png"
+      alt="AcademyBank Logo"
     />
   </a>
 
@@ -42,7 +43,7 @@
     </div>
     <div class="user-items" *ngIf="!adminLogged" [ngClass]="{ slide: sidenav } " >
       <div class="sidenav-user-info" >
-          <img (click)="sidenavSwitch()" class="sidenav-user-img img-fluid pointer" src="../../../assets/img/usr/usr1.jpg" alt="" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-user-img_active" [routerLinkActiveOptions]="{exact:
+          <img (click)="sidenavSwitch()" class="sidenav-user-img img-fluid pointer" src="../../../assets/img/usr/usr1.jpg" alt="Immagine profilo utente" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-user-img_active" [routerLinkActiveOptions]="{exact:
             true}">
           <div class="sidenav-user-text text-center">
             <span>{{userInfo.nome | titlecase}} - {{userInfo.cognome | titlecase}}</span>
