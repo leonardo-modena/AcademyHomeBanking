@@ -253,6 +253,11 @@ input[type=number]:focus,
   cursor: pointer;
 }
 
+.transparent-button{
+  border: none;
+  background-color: transparent;
+}
+
 
 /* UTILITY CLASS END  */
 
