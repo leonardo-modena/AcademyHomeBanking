@@ -39,8 +39,8 @@ public class transactionController {
 	}
 
 
-	@PostMapping("/withdrawal/{amount}/{bankAccountId}")
-	public ResponseEntity<BankAccount> withDrawal(@PathVariable String amount, @PathVariable int bankAccountId) {
+	@PostMapping("/withdrawal/{amount}/{causal}{bankAccountId}")
+	public ResponseEntity<BankAccount> withDrawal(@PathVariable String amount, @PathVariable String causal, @PathVariable int bankAccountId) {
 
 		BigDecimal bigDecimal=new BigDecimal(amount);
 		if (bankAccountRepository.existsById(bankAccountId)) {
@@ -52,7 +52,7 @@ public class transactionController {
 
 				bankAccount.setBalance(bankAccount.getBalance().subtract(bigDecimal));
 				bankAccountRepository.save(bankAccount);
-				saveTransaction(bigDecimal, bankAccount,0);
+				saveTransaction(bigDecimal, bankAccount,0,causal);
 
 				return new ResponseEntity<>(bankAccount, HttpStatus.OK);
 			} else {
@@ -66,10 +66,10 @@ public class transactionController {
 		}
 	}
 
-	private void saveTransaction(BigDecimal amount, BankAccount bankAccount, int op) {
+	private void saveTransaction(BigDecimal amount, BankAccount bankAccount, int op, String causal) {
 
 		Transaction transaction = new Transaction();
-
+		transaction.setCausal(causal);
 		transaction.setId(0);
 		transaction.setAmount(amount);
 		if(op==0)
@@ -82,8 +82,8 @@ public class transactionController {
 		transactionRepository.save(transaction);
 	}
 
-	@PostMapping("/deposit/{amount}/{bankAccountId}")
-	public ResponseEntity<BankAccount> deposit(@PathVariable BigDecimal amount, @PathVariable int bankAccountId) {
+	@PostMapping("/deposit/{amount}/{causal}{bankAccountId}")
+	public ResponseEntity<BankAccount> deposit(@PathVariable BigDecimal amount, @PathVariable String causal, @PathVariable int bankAccountId) {
 
 		if (bankAccountRepository.existsById(bankAccountId)) {
 
@@ -94,7 +94,7 @@ public class transactionController {
 
 				bankAccount.setBalance(bankAccount.getBalance().add(amount));
 				bankAccountRepository.save(bankAccount);
-				saveTransaction(amount, bankAccount,1);
+				saveTransaction(amount, bankAccount,1,causal);
 
 				return new ResponseEntity<>(bankAccount, HttpStatus.OK);
 			} else {
