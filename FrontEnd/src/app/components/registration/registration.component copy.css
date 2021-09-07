@@ -1,0 +1,103 @@
+label {
+  display: block;
+}
+
+input,
+label {
+  margin: .4rem 0;
+}
+
+.width{
+  color: white;
+}
+
+.dp{
+  padding: 5px 5px 5px 5px;
+}
+
+.registration-card{
+  padding: 1rem 2rem;
+  background-color: var(--primary-green);
+
+}
+
+.form-title{
+  color: white;
+  font-family: 'Open Sans';
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.background-row{
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 35rem;
+  transform: translate(0%,-50%)!important;
+  background-color: var(--light-gray);
+  z-index: -5;
+  transition: all 0.6s ease-out;
+}
+
+.title-content{
+  position: relative;
+  padding: 1.5rem 2rem;
+}
+
+.title-content::before{
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-image: url(../../../assets/img/immagini/bank.jpg);
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+  
+}
+
+.registration-title{
+  position: relative;
+  font-size: 2.4rem;
+  font-weight: bolder;
+  color: var(--gray);
+  text-shadow: -4px 2px 3px #ffffffa8;
+}
+
+.registration-illustration{
+  width: 32rem;
+  position: absolute;
+
+}
+#first-illustration{
+  top: 2rem;
+  left: .5rem;
+}
+
+#second-illustration{
+  top: 2rem;
+  right: .5rem;
+}
+
+
+@media (min-width: 992px) {
+  .width{
+    width: 50%;
+    border-radius: 5px;
+    color: white;
+  }
+}
+
+@media (min-width: 768px) {
+  .background-row{
+    opacity: 1;
+  }
+ }
+
+
+
