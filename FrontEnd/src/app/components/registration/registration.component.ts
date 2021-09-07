@@ -4,6 +4,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../services/auth.service";
 import { Router} from "@angular/router";
 import {AlertService} from "../../services/alert.service";
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -30,11 +31,13 @@ export class RegistrationComponent implements OnInit {
   passwordError: boolean = true;
   today!:string;
 
-  constructor(private auth: AuthService, private router: Router, private alert: AlertService) {}
+  constructor(private auth: AuthService, private router: Router, private alert: AlertService, private titleService: Title) {}
 
   ngOnInit(): void {
+    //set Title
+    this.titleService.setTitle(`AcademyBank | Apertura-Conto`)
+    
     this.today = new Date().toLocaleDateString();
-
   }
     setTouch(){
     this.touch = true;
