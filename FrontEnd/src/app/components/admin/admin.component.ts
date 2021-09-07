@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { BankAccount } from 'src/app/model/BankAccount';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
@@ -24,14 +25,16 @@ export class AdminComponent implements OnInit{
 
   responsive!: boolean;
 
-  constructor(private adminService: AdminService, private downloadService: DownloadService) {
+  constructor(private adminService: AdminService, private downloadService: DownloadService, private titleService: Title) {
     this.responsiveSection();
   }
 
   ngOnInit(): void { 
+    
     this.pageLoading = true;
     this.adminService.actualAdmin.subscribe((admin) => {
       this.adminInfo = admin;
+      this.titleService.setTitle(`${this.adminInfo.nome.toLocaleUpperCase()} | Admin-Dashboard`)
     });
     this.adminService.getAllData();
     this.adminService.allNewRegistration.subscribe( (newRegistratios) => {
