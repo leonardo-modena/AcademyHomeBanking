@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+   name: API-GATEWAY
+
+  cloud:
+    gateway:
+      routes:
+        - id: ACCOUNT-MANAGEMENT-SERVICE
+          uri: lb://ACCOUNT-MANAGEMENT-SERVICE
+          predicates:
+            - Path=/customer/**,/admin/**
+        - id: TRANSACTION-SERVICE
+          uri: lb://TRANSACTION-SERVICE
+          predicates:
+            - Path=/bankAccount/**
+        - id: LOGIN-SERVICE
+          uri: lb://LOGIN-SERVICE
+          predicates:
+            - Path=/auth/**
+        - id: SIGNUP-SERVICE
+          uri: lb://SIGNUP-SERVICE
+          predicates:
+            - Path=/signup
+
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
