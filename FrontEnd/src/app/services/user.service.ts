@@ -24,6 +24,9 @@ export class UserService {
   private operationsSubject = new BehaviorSubject<Operation[]>([]);
   operations = this.operationsSubject.asObservable();
 
+  private operationSpinnerSubject = new BehaviorSubject<boolean>(false);
+  operationsSpinner = this.operationSpinnerSubject.asObservable();
+
   constructor(private http: HttpClient) {
     this.getUser(2);
   }
@@ -62,12 +65,14 @@ export class UserService {
   // Restituisce la lista delle operazioni che
   // sono state fatte nel periodo specificato
   getOperationList(bill: number, filterInfo: {type: 'lastTen' | 'lastThreeMonths' | 'betweenTwoDates', startDate: number, endDate: number}) {
-    this.http.get<Operation[]>(`${this.apiUrlBankAccount}/transactions/${this.userSubject.getValue().id}/${filterInfo.type}/${filterInfo.startDate}/${filterInfo.endDate}`)
+    this.operationSpinnerSubject.next(true);
+    this.http.get<Operation[]>(`${this.apiUrlBankAccount}/transactions/${bill}/${filterInfo.type}/${filterInfo.startDate}/${filterInfo.endDate}`)
       .subscribe((operations) => {
-        console.log('Get operations done');
+        console.log(operations);
         this.operationsSubject.next(operations);
-      }, (error) => {
-        this.operationsSubject.next(this.operationsSubject.getValue());
+        this.operationSpinnerSubject.next(false);
+      }, () => {
+        this.operationSpinnerSubject.next(false);
       });
   }
 
@@ -86,13 +91,13 @@ export class UserService {
 
 
   // Versamento sul conto
-  doDeposit(bill: number, amount: number) {
-    return this.http.post<any>(`${this.apiUrlBankAccount}/deposit/${amount}/${bill}`, {});
+  doDeposit(bill: number, amount: number, causal: string) {
+    return this.http.post<any>(`${this.apiUrlBankAccount}/deposit/${amount}/${causal}/${bill}`, {});
   }
 
   // Prelievo dal conto
-  doWithdrawal(bill: number, amount: number) {
-    return this.http.post<any>(`${this.apiUrlBankAccount}/withdrawal/${amount}/${bill}`, {});
+  doWithdrawal(bill: number, amount: number, causal: string) {
+    return this.http.post<any>(`${this.apiUrlBankAccount}/withdrawal/${amount}/${causal}/${bill}`, {});
   }
 
   //DELETE REQUESTS

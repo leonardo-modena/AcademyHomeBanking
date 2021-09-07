@@ -38,17 +38,17 @@ export class OperationFormComponent implements OnInit {
     console.log(this.operationForm.value.bill);
     this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
     if (this.op_type === 'deposit') {
-      this.userService.doDeposit(this.operationForm.value.bill, this.operationForm.value.amount ).subscribe((resData) => {
+      this.userService.doDeposit(this.operationForm.value.bill, this.operationForm.value.amount, this.operationForm.controls.reason.value ).subscribe(() => {
         this.isLoading.emit(false);
-      }, (error) => {
+      }, () => {
         this.isLoading.emit(false);
         this.errorService.newError('L\'operazione non è andata a buon fine. Riprova');
       });
     }
     else {
-      this.userService.doWithdrawal(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value ).subscribe((resData) => {
+      this.userService.doWithdrawal(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value, this.operationForm.controls.reason.value ).subscribe(() => {
         this.isLoading.emit(false);
-      }, (error) => {
+      }, () => {
         this.isLoading.emit(false);
         this.errorService.newError('L\'operazione non è andata a buon fine. Riprova');
       });

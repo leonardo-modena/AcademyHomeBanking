@@ -1,7 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {UserService} from "../../../services/user.service";
+import {User} from "../../../model/user";
+import {BehaviorSubject, Subscription} from "rxjs";
+
 
 @Component({
   selector: 'app-filter',
@@ -19,7 +22,7 @@ import {UserService} from "../../../services/user.service";
     ])
   ]
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnInit, OnDestroy {
 
   selectionChoicesValues = [
     {value: 'lastTen', description: 'Ultime 10 operazioni'},
@@ -27,7 +30,12 @@ export class FilterComponent implements OnInit {
     {value: 'betweenTwoDates', description: 'Dal ... al ...'}
   ];
 
-  @Input() onSearchFunction:any;
+  user!: User;
+  userSubscription!: Subscription;
+
+  // @Input() onSearchFunction:any;
+  @Input() selectedBill: number = 0;
+  @Output() filterString = new EventEmitter<string>();
 
 
   dateSelection:boolean = false;
@@ -42,6 +50,10 @@ export class FilterComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userSubscription = this.userService.user.subscribe((user) => {
+      this.user = user;
+    });
+
    const stringToday = this.today.getFullYear() + '-' + (this.today.getMonth() + 1).toString().padStart(2, '0') + '-' + this.today.getDate().toString().padStart(2, '0');
     this.filterForm = new FormGroup({
       'selectedChoice': new FormControl(this.selectedChoice),
@@ -83,12 +95,29 @@ export class FilterComponent implements OnInit {
     const selectedChoiceValue = this.filterForm.controls.selectedChoice;
     if (selectedChoiceValue.value === 'betweenTwoDates' && !this.invalidDate) {
       //Get between dates
-      const startDateMillisec = (new Date(this.filterForm.controls.startDate.value)).getTime();
-      const endDateMillisec = (new Date(this.filterForm.controls.endDate.value)).getTime();
-      this.onSearchFunction({type: 'betweenTwoDates', startDate: startDateMillisec, endDate: endDateMillisec})
+
+      const startDate = new Date(this.filterForm.controls.startDate.value + ' 02:00:00');
+      const endDate = new Date(this.filterForm.controls.endDate.value + ' 02:00:00');
+      const startDateMillisec = startDate.getTime();
+      const endDateMillisec = endDate.getTime();
+
+      this.userService.getOperationList(this.user.bankAccounts[this.selectedBill], {type: 'betweenTwoDates', startDate: startDateMillisec, endDate: endDateMillisec});
+      this.filterString.emit(`Stai visualizzando le operazioni effettuate dal
+                                    ${startDate.getDate().toString().padStart(2, '0')}/${(startDate.getMonth() + 1).toString().padStart(2, '0')}/${startDate.getFullYear()}
+                                    al ${endDate.getDate().toString().padStart(2, '0')}/${(endDate.getMonth() + 1).toString().padStart(2, '0')}/${endDate.getFullYear()}.` )
     }
     else {
-      this.onSearchFunction({type: this.filterForm.controls.selectedChoice.value, startDate: 0, endDate: 0});
+      this.userService.getOperationList(this.user.bankAccounts[this.selectedBill], {type: selectedChoiceValue.value, startDate: 0, endDate: 0});
+      if (selectedChoiceValue.value === 'lastTen') {
+        this.filterString.emit('Stai visualizzando le ultime 10 operazioni.');
+      }
+      else {
+        this.filterString.emit('Stai visualizzando le operazioni degli ultimi 3 mesi.');
+      }
     }
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 }

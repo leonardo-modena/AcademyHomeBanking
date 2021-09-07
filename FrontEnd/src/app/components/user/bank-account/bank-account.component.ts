@@ -17,7 +17,10 @@ export class BankAccountComponent implements OnInit {
   balance: number = 0;
   operations!: Operation[];
 
-  isLoadingOperations: boolean = true;
+  operationString = 'Stai visualizzando le ultime 10 operazioni.'
+
+
+  isLoadingOperations: boolean = false;
   isLoadingBalance = false;
 
   selectedBill: number = 0;
@@ -28,7 +31,7 @@ export class BankAccountComponent implements OnInit {
     this.isLoadingBalance = false;
     this.userService.getBalance(this.selectedBill).subscribe((balance) => {
       this.balance = balance;
-    }, (errorMessage) => { this.isLoadingBalance = false;});
+    }, () => { this.isLoadingBalance = false;});
   }
 
   ngOnInit(): void {
@@ -41,19 +44,16 @@ export class BankAccountComponent implements OnInit {
     });
     this.isLoadingOperations = true;
     this.userService.operations.subscribe((operations) => {
-      console.log(this.isLoadingOperations);
-      setTimeout(() => {
-        console.log(this.isLoadingOperations);
-        this.isLoadingOperations = false;
-        }, 5000)
-      //this.isLoadingOperations = false;
       this.operations = operations;
     });
+
+    this.userService.operationsSpinner.subscribe((loading) => {
+      this.isLoadingOperations = loading;
+    })
+
   }
 
-  onSearchFunction(filterValues: {type: 'lastTen' | 'lastThreeMonths' | 'betweenTwoDates', startDate: number, endDate: number}): void {
-    this.isLoadingOperations = true;
-    console.log(this.isLoadingOperations);
-    this.userService.getOperationList(this.selectedBill, filterValues);
+  onSearchFunction(event: string) {
+    this.operationString = event;
   }
 }

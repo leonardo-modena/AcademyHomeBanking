@@ -17,7 +17,7 @@
                 </select>
               </form>
               <div class="row">
-                <div class="col-8 m-auto">
+                <div class="col-12 col-lg-8 m-auto">
                   <div *ngIf="isLoadingBalance">
                     <app-spinner></app-spinner>
                   </div>
@@ -30,13 +30,13 @@
             </div>
             <div class="col-12 mt-4">
               <h3>Le operazioni del tuo conto {{bankAccounts[selectedBill].id  |  number:'6.0' | noComma}}</h3>
-              <app-filter [onSearchFunction]="onSearchFunction"></app-filter>
+              <app-filter [selectedBill]="selectedBill" (filterString)="onSearchFunction($event)" ></app-filter>
 
               <div *ngIf="isLoadingOperations">
                 <app-spinner></app-spinner>
               </div>
               <div *ngIf="!isLoadingOperations">
-                <p>Sono visualizzate le operazioni degli ultimi 3 mesi.</p>
+                <p>{{operationString}}</p>
                 <app-operation-list *ngIf="operations.length !== 0" [operationsList]="operations"></app-operation-list>
                 <p *ngIf="operations.length === 0">Non sono presenti operazioni nel periodo indicato.<br>Seleziona un altro periodo.</p>
               </div>
