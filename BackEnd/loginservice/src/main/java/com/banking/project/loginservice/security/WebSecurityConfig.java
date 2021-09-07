@@ -20,21 +20,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
- 
+
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
+	@Autowired
 	private AuthEntryPointJwt unauthorizedHandler;
-    
-    @Autowired
-    Sha256Encoder encoder;
-    
-    @Bean
+
+	@Autowired
+	Sha256Encoder encoder;
+
+	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter();
-    }
-    @Override
+	}
+	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		authenticationManagerBuilder.userDetailsService(userDetailsService);
 	}
@@ -49,16 +49,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public Sha256Encoder passwordEncoder() {
 		return new Sha256Encoder();
 	}
-	
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-    	
-    	http.cors().and().csrf().disable()
-		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-		.authorizeRequests().antMatchers("/auth/**").permitAll()
-		.antMatchers("/test/**").permitAll()
-		.anyRequest().authenticated();
-    	http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+		http.cors().and().csrf().disable()
+				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.authorizeRequests().antMatchers("/auth/**").permitAll()
+				.antMatchers("/admin/**").permitAll()
+				.antMatchers("/bankAccount/**").permitAll()
+				.antMatchers("/customer/**").permitAll()
+				.antMatchers("/signup").permitAll()
+				.anyRequest().authenticated();
+		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+	}
+
 }

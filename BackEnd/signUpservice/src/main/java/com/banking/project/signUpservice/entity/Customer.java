@@ -32,7 +32,7 @@ public class Customer {
 	private String password;
 	
 	@Column(name = "dateofbirth")
-	private Date dateOfBirth;
+	private Long dateOfBirth;
 
 	@Column(name = "gender")
 	private String gender;
@@ -62,7 +62,7 @@ public class Customer {
 
 	}
 	
-	public Customer(String firstName, String lastName, String email, String password, Date dateOfBirth,
+	public Customer(String firstName, String lastName, String email, String password, Long dateOfBirth,
 			String gender, String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -113,11 +113,11 @@ public class Customer {
 		this.password = password;
 	}
 
-	public Date getDateOfBirth() {
+	public Long getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(Long dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
