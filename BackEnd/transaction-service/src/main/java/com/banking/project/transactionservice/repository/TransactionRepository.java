@@ -16,6 +16,9 @@ public interface TransactionRepository extends JpaRepository <Transaction, Integ
 
 
     @Query(value = "select t from Transaction t where t.idAccount.id=:idAccount and t.dateTransaction  BETWEEN :value2 AND :value1 order by t.dateTransaction DESC ")
+    List<Transaction> findTransactionByDateTransactionLastThreeMonths(@Param("idAccount") int idAccount, long value1, long value2);
+
+    @Query(value = "select t from Transaction t where t.idAccount.id=:idAccount and t.dateTransaction  BETWEEN :value1 AND :value2 order by t.dateTransaction DESC ")
     List<Transaction> findAllByDateTransactionBetween(@Param("idAccount") int idAccount, long value1, long value2);
 
 

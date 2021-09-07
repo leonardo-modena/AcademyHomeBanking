@@ -21,7 +21,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/bankAccount")
 public class transactionController {
 
 	@Autowired
@@ -38,10 +38,6 @@ public class transactionController {
 		return bankAccountRepository.getById(bankAccountId).getBalance();
 	}
 
-	@GetMapping("/prova/{id}")
-	public BankAccount getBankAccount(@PathVariable int id) {
-		return bankAccountRepository.getById(id);
-	}
 
 	@PostMapping("/withdrawal/{amount}/{bankAccountId}")
 	public ResponseEntity<BankAccount> withDrawal(@PathVariable String amount, @PathVariable int bankAccountId) {
@@ -123,7 +119,7 @@ public class transactionController {
 
 			case "lastThreeMonths":
 				long value=System.currentTimeMillis()-7884000000l;
-				return transactionRepository.findAllByDateTransactionBetween(idAccount,System.currentTimeMillis(),value);
+				return transactionRepository.findTransactionByDateTransactionLastThreeMonths(idAccount,System.currentTimeMillis(),value);
 
 
 			case "betweenTwoDates":
