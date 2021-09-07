@@ -91,7 +91,7 @@
   .description-img{
     display: block;
   }
-  
+
   .info-item{
     height: 20rem;
     flex-direction: column !important;
@@ -120,3 +120,11 @@
     font-size: 3rem;
   }
  }
+
+.form-container{
+  background-color: #4C956C;
+  color: white;
+  border-radius: 20px
+}
+
+
