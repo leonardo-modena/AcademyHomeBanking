@@ -92,7 +92,7 @@ export class RegistrationComponent implements OnInit {
   showLoader(){
     this.showText = false;
     this.spinner = true;
-    setTimeout(this.setSpinner,5000)
+    setTimeout(()=>{this.setSpinner()},3000)
   }
 
   setSpinner(){
