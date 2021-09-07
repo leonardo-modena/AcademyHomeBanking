@@ -39,7 +39,7 @@ public class transactionController {
 	}
 
 
-	@PostMapping("/withdrawal/{amount}/{causal}{bankAccountId}")
+	@PostMapping("/withdrawal/{amount}/{causal}/{bankAccountId}")
 	public ResponseEntity<BankAccount> withDrawal(@PathVariable String amount, @PathVariable String causal, @PathVariable int bankAccountId) {
 
 		BigDecimal bigDecimal=new BigDecimal(amount);
@@ -82,7 +82,7 @@ public class transactionController {
 		transactionRepository.save(transaction);
 	}
 
-	@PostMapping("/deposit/{amount}/{causal}{bankAccountId}")
+	@PostMapping("/deposit/{amount}/{causal}/{bankAccountId}")
 	public ResponseEntity<BankAccount> deposit(@PathVariable BigDecimal amount, @PathVariable String causal, @PathVariable int bankAccountId) {
 
 		if (bankAccountRepository.existsById(bankAccountId)) {
