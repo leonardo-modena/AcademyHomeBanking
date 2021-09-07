@@ -22,16 +22,16 @@ import {UserService} from "../../../services/user.service";
 export class FilterComponent implements OnInit {
 
   selectionChoicesValues = [
-    {value: 'last10', description: 'Ultime 10 operazioni'},
-    {value: 'last3', description: 'Ultimi 3 mesi'},
-    {value: 'dateSelection', description: 'Dal ... al ...'}
+    {value: 'lastTen', description: 'Ultime 10 operazioni'},
+    {value: 'lastThreeMonths', description: 'Ultimi 3 mesi'},
+    {value: 'betweenTwoDates', description: 'Dal ... al ...'}
   ];
 
   @Input() onSearchFunction:any;
 
 
   dateSelection:boolean = false;
-  selectedChoice = 'last10';
+  selectedChoice = this.selectionChoicesValues[0].value;
   today: Date = new Date();
 
   invalidDate = false;
@@ -56,6 +56,7 @@ export class FilterComponent implements OnInit {
 
 
   onChangeChoice(event: any) {
+    console.log(event.target.value);
     this.selectedChoice = event.target.value.substring(3);
   }
 
@@ -63,9 +64,9 @@ export class FilterComponent implements OnInit {
 
     const selectedChoiceValue = this.filterForm.controls.selectedChoice;
 
-    if (selectedChoiceValue.value === 'dateSelection') {
+    if (selectedChoiceValue.value === 'betweenTwoDates') {
       this.dateSelection = true;
-      if(new Date(this.filterForm.controls.startDate.value) <= new Date(this.filterForm.controls.endDate.value)) {
+      if (new Date(this.filterForm.controls.startDate.value) <= new Date(this.filterForm.controls.endDate.value)) {
         this.invalidDate = false;
       }
       else {
@@ -80,12 +81,14 @@ export class FilterComponent implements OnInit {
 
   onSubmit() {
     const selectedChoiceValue = this.filterForm.controls.selectedChoice;
-    if (selectedChoiceValue.value === 'dateSelection' && !this.invalidDate) {
+    if (selectedChoiceValue.value === 'betweenTwoDates' && !this.invalidDate) {
       //Get between dates
-      this.onSearchFunction({type: 'dateSelection', startDate: this.filterForm.controls.startDate.value, endDate: this.filterForm.controls.endDate.value})
+      const startDateMillisec = (new Date(this.filterForm.controls.startDate.value)).getTime();
+      const endDateMillisec = (new Date(this.filterForm.controls.endDate.value)).getTime();
+      this.onSearchFunction({type: 'betweenTwoDates', startDate: startDateMillisec, endDate: endDateMillisec})
     }
     else {
-      this.onSearchFunction({type: 'dateSelection'});
+      this.onSearchFunction({type: this.filterForm.controls.selectedChoice.value, startDate: 0, endDate: 0});
     }
   }
 }

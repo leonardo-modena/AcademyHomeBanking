@@ -23,15 +23,11 @@ export class ListComponent implements OnInit {
   @Output() confirmDeleteEventList = new EventEmitter();
 
 
-  loading!: boolean;
-
   fillIcon: boolean = false;
 
   constructor(private adminService: AdminService, private downloadService: DownloadService) { }
 
   ngOnInit(): void {
-    this.adminService.loadingState.subscribe( (state) => {
-    })
   }
 
   passConfirmAccountList(): void{

@@ -6,86 +6,99 @@ import {Operation} from "../model/operation";
 import {BankAccount} from "../model/BankAccount";
 
 import {environment} from "../../environments/environment";
-import {AuthService} from "./auth.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl =`${environment.api_url}/customer`;
+  apiUrlCustomer =`${environment.api_url}/customer`;
+  apiUrlBankAccount =`${environment.api_url}/bankAccount`;
 
-  private userSubject = new BehaviorSubject<User>({firstName: 'Nome', lastName: 'cognome', dateOfBirth: 1630936744610, email: 'prova@gmail.com', gender: 'F', id: '1', role: 'ROLE_C', bankAccounts: [], password: 'hdf' });
+  private userSubject = new BehaviorSubject<User>({firstName: 'Nome', lastName: 'Cognome', dateOfBirth: 1630936744610, email: 'prova@gmail.com', gender: 'F', id: '1', role: 'ROLE_C', bankAccounts: [], password: 'hdf' });
   user = this.userSubject.asObservable();
 
   private bankAccountsSubject = new BehaviorSubject<BankAccount[]>([]);
   bankAccounts = this.bankAccountsSubject.asObservable();
 
-  constructor(private http: HttpClient, private authService: AuthService) {
-     this.getUser(2);
+  private operationsSubject = new BehaviorSubject<Operation[]>([]);
+  operations = this.operationsSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.getUser(2);
   }
 
   // GET REQUESTS
 
   getUser(id: number) {
 
-    this.http.get<User>(`${this.apiUrl}/profile/${id}`).subscribe((user) => {
-      this.userSubject.next(user);
-      if (user.bankAccounts.length === 0) {
-        this.authService.logout();
-      }
+    this.http.get<{id: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      dateOfBirth: number;
+      gender: string;
+      role: string;
+      bankAccounts: BankAccount[]}>(`${this.apiUrlCustomer}/profile/${id}`).subscribe((userInfo) => {
+        console.log(userInfo);
+        const user: User = {id: userInfo.id, firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email, dateOfBirth: userInfo.dateOfBirth, role: userInfo.role, gender: userInfo.gender, bankAccounts: userInfo.bankAccounts.map((bill) => { return parseInt(bill.id)})  }
+
+        this.userSubject.next(user);
+
+        const bankAccounts: BankAccount[] = userInfo.bankAccounts.map((bill) => {
+          return {...bill, holder: user}
+      })
+      this.bankAccountsSubject.next(bankAccounts);
+
+      this.getOperationList(this.userSubject.getValue().bankAccounts[0], {type: 'lastTen', startDate: 0, endDate: 0})
     });
   }
 
   //Restituisce il saldo del cliente
   getBalance(bill: number): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/balance/${bill}`);
+    return this.http.get<number>(`${this.apiUrlBankAccount}/balance/${bill}`);
   }
 
   // Restituisce la lista delle operazioni che
   // sono state fatte nel periodo specificato
-  getOperationList(/*bill: number, filterInfo: {type: 'last3' | 'last10' | 'dateSelection', startDate?: number, endDate?: number}*/): Observable<any> {
-    return this.http.get(`${this.apiUrl}/operation/${2}`);
-
-    /*if (filterInfo.type === 'dateSelection') {
-      return this.http.get<Operation[]>(`${this.apiUrl}/...`);
-    }
-    else if (filterInfo.type === 'last3') {
-      return this.http.get<Operation[]>(`${this.apiUrl}/...`);
-    }
-    else {
-      return this.http.get<Operation[]>(`${this.apiUrl}/...`);
-    }*/
+  getOperationList(bill: number, filterInfo: {type: 'lastTen' | 'lastThreeMonths' | 'betweenTwoDates', startDate: number, endDate: number}) {
+    this.http.get<Operation[]>(`${this.apiUrlBankAccount}/transactions/${this.userSubject.getValue().id}/${filterInfo.type}/${filterInfo.startDate}/${filterInfo.endDate}`)
+      .subscribe((operations) => {
+        console.log('Get operations done');
+        this.operationsSubject.next(operations);
+      }, (error) => {
+        this.operationsSubject.next(this.operationsSubject.getValue());
+      });
   }
 
   // Restituisce i dati del conto
   getBillInformation(bill: number): Observable<BankAccount> {
-    return this.http.get<BankAccount>(`${this.apiUrl}/profile/bankAccount/${bill}`);
+    return this.http.get<BankAccount>(`${this.apiUrlCustomer}/profile/bankAccount/${bill}`);
   }
 
   //POST REQUESTS
 
   //Creazione di un nuovo conto
   createNewBill(initialAmount: number, startBillNumber: string) {
-    return this.http.post<BankAccount>(`${this.apiUrl}/new/${startBillNumber}/${initialAmount}`, {});
+    return this.http.post<BankAccount>(`${this.apiUrlCustomer}/new/${startBillNumber}/${initialAmount}`, {});
   }
 
 
 
   // Versamento sul conto
   doDeposit(bill: number, amount: number) {
-    return this.http.post<any>(`${this.apiUrl}/deposit/${amount}/${bill}`, {});
+    return this.http.post<any>(`${this.apiUrlBankAccount}/deposit/${amount}/${bill}`, {});
   }
 
   // Prelievo dal conto
   doWithdrawal(bill: number, amount: number) {
-    return this.http.post<any>(`${this.apiUrl}/withdrawal/${amount}/${bill}`, {});
+    return this.http.post<any>(`${this.apiUrlBankAccount}/withdrawal/${amount}/${bill}`, {});
   }
 
   //DELETE REQUESTS
 
   // Cancellazione del conto
   deleteBill(bill: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/closingRequest/${bill}`, {});
+    return this.http.put<any>(`${this.apiUrlCustomer}/closingRequest/${bill}`, {});
   }
 }

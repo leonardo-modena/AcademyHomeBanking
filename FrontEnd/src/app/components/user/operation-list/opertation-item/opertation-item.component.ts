@@ -18,10 +18,10 @@ export class OpertationItemComponent implements OnInit {
   }
 
   downloadItem() {
-  const operation_date = new Date(this.operation.dataPrelievo);
+  const operation_date = new Date(this.operation.dateTransaction);
     const body = `<p>Tipo di operazione: ${this.operation.type}<br>
-                        Operazione: ${this.operation.causale}<br>
-                        Importo: ${this.operation.type === 'prelievo' ? '-' : ''}${this.operation.importo}<br>
+                        Operazione: ${this.operation.causal}<br>
+                        Importo: ${this.operation.type === 'WITHDRAWAL' ? '-' : ''}${this.operation.amount}<br>
                         Data: ${operation_date.toLocaleString()}
                         </p>`;
     this.downloadService.downloadAsPDF(body);
