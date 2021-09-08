@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.titleService.setTitle(`AcademyBank | Login`)
   }
 
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm): void {
 
     const username = form.value.email;
     const password = form.value.password;
