@@ -1,5 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/app/model/BankAccount';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
@@ -10,7 +11,10 @@ import { DownloadService } from 'src/app/services/download.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
 })
-export class AdminComponent implements OnInit{
+export class AdminComponent implements OnInit, OnDestroy{
+
+  adminSubscription: Subscription[] = [];
+
   adminInfo!: { nome: string; cognome: string };
 
   allUsers!: User[];
@@ -30,27 +34,26 @@ export class AdminComponent implements OnInit{
   }
 
   ngOnInit(): void { 
-    
     this.pageLoading = true;
-    this.adminService.actualAdmin.subscribe((admin) => {
-      this.adminInfo = admin;
 
+    this.adminSubscription.push(this.adminService.actualAdmin.subscribe((admin) => {
+      this.adminInfo = admin;
       //set Title
       this.titleService.setTitle(`${this.adminInfo.nome.toLocaleUpperCase()} | Admin-Dashboard`)
-    });
+    }));
     this.adminService.getAllData();
-    this.adminService.allNewRegistration.subscribe( (newRegistratios) => {
+    this.adminSubscription.push(this.adminService.allNewRegistration.subscribe( (newRegistratios) => {
       this.allNewRagistration = newRegistratios;
-    });
-    this.adminService.allUsers.subscribe( (users) => {
+    }));
+    this.adminSubscription.push(this.adminService.allUsers.subscribe( (users) => {
       this.allUsers = users
-    } );
-    this.adminService.allToDeleteAccounts.subscribe( (toDelete) => {
+    } ));
+    this.adminSubscription.push(this.adminService.allToDeleteAccounts.subscribe( (toDelete) => {
         this.allToDeleteAccounts = toDelete
-    });
-    this.adminService.loadingState.subscribe( (state) => {
+    }));
+    this.adminSubscription.push(this.adminService.loadingState.subscribe( (state) => {
       this.pageLoading = state
-    })
+    }));
   }
 
   userSectionClick(): void {
@@ -74,7 +77,7 @@ export class AdminComponent implements OnInit{
   }
   
   @HostListener('window:resize', ['$event'])
-  responsiveSection(event?: any) {
+  responsiveSection(event?: any): void {
     let screenWidth = window.innerWidth;
     if (screenWidth > 995) {
       this.userSection = true;
@@ -84,6 +87,12 @@ export class AdminComponent implements OnInit{
       this.userSection = true;
       this.operationSection = false;
       this.responsive = true;
+    }
+  }
+
+  ngOnDestroy(): void{
+    if (this.adminSubscription.length > 0){
+      this.adminSubscription.forEach(subscription => subscription.unsubscribe());
     }
   }
 

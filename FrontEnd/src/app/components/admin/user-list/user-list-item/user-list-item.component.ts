@@ -9,7 +9,6 @@ import { User } from 'src/app/model/user';
 export class UserListItemComponent implements OnInit {
 
   @Input() user!:User;
-  @Input() index!:number;
 
   constructor() { }
 
