@@ -4,8 +4,9 @@
       <h1>Bentornat{{user.gender === 'M' ? 'o' : 'a'}}, {{user.firstName | titlecase}} {{user.lastName | titlecase}}</h1>
       <p>In questa pagina puoi visualizzare i tuoi conti e le operazioni che sono state effettuate.<br>
       Per poter gestire i tuoi conti, cancellarli o creare nuovi conti visita il tuo <a routerLink="profilo">profilo</a>.</p>
+      <app-inactive-message *ngIf="inactive"></app-inactive-message>
     </div>
-    <div class="col-12 col-lg-10 m-auto mt-3" *ngIf="bankAccounts">
+    <div [class]="'col-12 col-lg-10 m-auto mt-3 ' + (inactive ? 'inactive' : '')" *ngIf="bankAccounts">
       <div class="row gx-5">
         <div class="col-12 col-md-6 m-auto">
           <div class="row">

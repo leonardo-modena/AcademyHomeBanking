@@ -49,14 +49,11 @@ export class OperationFormComponent implements OnInit, OnDestroy {
 
   private getBalance() {
     this.userService.getBalance(this.selectedBill).subscribe((balance) => {
-      console.log(balance);
       this.maxAmount = balance;
     });
   }
 
   onSubmit() {
-    console.log(this.operationForm.value);
-    console.log(this.operationForm.value.bill);
     this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
     if (this.op_type === 'DEPOSIT') {
       this.userService.doDeposit(this.operationForm.value.bill, this.operationForm.value.amount, this.operationForm.controls.reason.value ).subscribe(() => {

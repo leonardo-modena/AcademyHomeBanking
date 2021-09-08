@@ -269,6 +269,11 @@ input[type=number]:focus,
   background-color: transparent;
 }
 
+.inactive {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
 
 /* UTILITY CLASS END  */
 
