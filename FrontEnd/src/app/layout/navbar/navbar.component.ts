@@ -85,7 +85,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
   @HostListener('window:resize', ['$event'])
   hamburgerResponsive(event?: any) {
     let screenWidth = window.innerWidth;
-    if (screenWidth > 768) {
+    if (screenWidth > 992) {
       this.mobile = false;
     }else{
       this.mobile = true;
