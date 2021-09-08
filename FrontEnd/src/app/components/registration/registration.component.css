@@ -35,6 +35,11 @@
   display: none;
 }
 
+.description-button{
+  background-color: var(--secondary-red) !important;
+  border-color: var(--secondary-red) !important;
+}
+
 .info-item{
   display: flex;
   flex-direction: row;
