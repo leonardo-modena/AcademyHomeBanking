@@ -12,3 +12,11 @@ div.d-flex {
   border: 1px solid var(--primary-green);
   padding: 10px
 }
+
+h3 {
+  word-break: break-all;
+}
+
+p {
+  white-space: nowrap;
+}

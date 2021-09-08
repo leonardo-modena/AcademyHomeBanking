@@ -20,9 +20,16 @@ mat-form-field.mat-form-field-wrapper.mat-form-field-appearance-fill mat-form-fi
 }
 
 table tr td {
-  word-break: break-all
+  word-break: break-all;
 }
 
 .disabledForm, .disabledDeleting {
   opacity: 0.5;
+}
+
+input.ng-valid + .error, input.ng-untouched + .error {
+  display: none;
+}
+input.ng-invalid.ng-touched + .error {
+  display: block;
 }

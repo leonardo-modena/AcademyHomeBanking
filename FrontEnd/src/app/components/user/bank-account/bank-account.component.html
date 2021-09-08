@@ -1,9 +1,9 @@
 <div  class="container">
   <div class="row gx-5">
-    <div class="col-12 col-md-10 m-auto mb-4">
-      <h1>Bentornato, {{user.firstName | titlecase}} {{user.lastName | titlecase}}</h1>
+    <div class="col-12 col-lg-10 m-auto mb-4">
+      <h1>Bentornat{{user.gender === 'M' ? 'o' : 'a'}}, {{user.firstName | titlecase}} {{user.lastName | titlecase}}</h1>
       <p>In questa pagina puoi visualizzare i tuoi conti e le operazioni che sono state effettuate.<br>
-      Per poter gestire i propri conti, cancellarli o creare nuovi conti visitare il proprio <a routerLink="profilo">profilo</a>.</p>
+      Per poter gestire i tuoi conti, cancellarli o creare nuovi conti visita il tuo <a routerLink="profilo">profilo</a>.</p>
     </div>
     <div class="col-12 col-md-10 m-auto mt-3" *ngIf="bankAccounts">
       <div class="row gx-5">
@@ -44,8 +44,10 @@
             </div>
           </div>
         </div>
-        <div class="d-none d-md-flex justify-content-center col-12 col-md-6 green-background p-0">
-          <img class="big-img" src="../../../../assets/img/Illustration/Finance%20app-rafiki.png" alt="Bank account">
+        <div class="d-none d-md-flex justify-content-center col-12 col-md-6  p-0">
+          <div class="img-container d-flex justify-content-center green-background">
+            <img class="big-img" src="../../../../assets/img/Illustration/Finance%20app-rafiki.png" alt="Bank account">
+          </div>
         </div>
       </div>
     </div>

@@ -43,7 +43,6 @@ export class UserService {
       gender: string;
       role: string;
       bankAccounts: BankAccount[]}>(`${this.apiUrlCustomer}/profile/${id}`).subscribe((userInfo) => {
-        console.log(userInfo);
         const user: User = {id: userInfo.id, firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email, dateOfBirth: userInfo.dateOfBirth, role: userInfo.role, gender: userInfo.gender, bankAccounts: userInfo.bankAccounts.map((bill) => { return parseInt(bill.id)})  }
 
         this.userSubject.next(user);
@@ -68,7 +67,6 @@ export class UserService {
     this.operationSpinnerSubject.next(true);
     this.http.get<Operation[]>(`${this.apiUrlBankAccount}/transactions/${bill}/${filterInfo.type}/${filterInfo.startDate}/${filterInfo.endDate}`)
       .subscribe((operations) => {
-        console.log(operations);
         this.operationsSubject.next(operations);
         this.operationSpinnerSubject.next(false);
       }, () => {
