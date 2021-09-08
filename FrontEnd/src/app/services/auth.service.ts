@@ -5,6 +5,7 @@ import { environment } from "../../environments/environment";
 import {BehaviorSubject} from "rxjs";
 import jwtDecode from "jwt-decode";
 import {Router} from "@angular/router";
+import {User} from "../model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class AuthService {
     })
   }
 
-  loginUser(username: string, password: string){
+  loginUser(username: string, password: string): void{
 
     this.http.post<any>( this.url + '/auth/signin',{
       username,
@@ -75,7 +76,7 @@ export class AuthService {
     })
   }
 
-  logout(){
+  logout(): void{
     this.nextAuth(false);
     this.nextAdmin(false);
     this.isUser = false;
@@ -83,19 +84,19 @@ export class AuthService {
     this.route.navigate(['']);
   }
 
-  autoLogout(){
+  autoLogout(): void{
     setTimeout(this.logout,this.tokenExpiration);
   }
 
-  passId(id: number){
+  passId(id: number): void{
     this.id.next(id)
   }
 
-  nextAuth(state: boolean){
+  nextAuth(state: boolean): void{
     this.isAuth.next(state)
   }
 
-  nextAdmin(state: boolean){
+  nextAdmin(state: boolean): void{
     this.isAdmin.next(state)
   }
 
