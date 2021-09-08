@@ -5,7 +5,7 @@
   </div>
 
   <div>
-    <p [class]="'text-right ' + (operation.type === 'DEPOSIT' ? 'deposit' : 'withdrawal')">{{(operation.type === 'WITHDRAWAL' ? '-' : '') + operation.amount}}</p>
+    <p [class]="'text-right ' + (operation.type === 'DEPOSIT' ? 'deposit' : 'withdrawal')">€ {{(operation.type === 'WITHDRAWAL' ? '-' : '') + (operation.amount | number: '.2')}}</p>
     <button class="btn btn-secondary btn-small"  (click)="downloadItem()"><i class="bi-file-earmark-arrow-down"></i></button>
   </div>
 </div>

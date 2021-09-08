@@ -13,9 +13,11 @@ export class OperationFormComponent implements OnInit {
 
   user!: User;
 
-  @Input() op_type!: 'deposit' | 'taking';
+  @Input() op_type!: 'DEPOSIT' | 'WITHDRAWAL';
   operation_ok = false;
   operationForm!:FormGroup;
+  maxAmount: number = 5000000;
+  selectedBill!: number;
 
   @Output() isLoading = new EventEmitter<boolean>();
 
@@ -25,11 +27,24 @@ export class OperationFormComponent implements OnInit {
 
     this.userService.user.subscribe((user) => {
       this.user = user;
+      this.selectedBill = this.user.bankAccounts[0];
+      this.getBalance();
     })
     this.operationForm = new FormGroup({
       'bill': new FormControl(this.user.bankAccounts[0], Validators.required),
       'amount': new FormControl('', Validators.required),
-      'reason': new FormControl('', Validators.required)
+      'reason': new FormControl('', [Validators.required, Validators.maxLength(100)])
+    });
+  }
+
+  onChangeBill() {
+   this.getBalance();
+  }
+
+  private getBalance() {
+    this.userService.getBalance(this.selectedBill).subscribe((balance) => {
+      console.log(balance);
+      this.maxAmount = balance;
     });
   }
 
@@ -37,7 +52,7 @@ export class OperationFormComponent implements OnInit {
     console.log(this.operationForm.value);
     console.log(this.operationForm.value.bill);
     this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
-    if (this.op_type === 'deposit') {
+    if (this.op_type === 'DEPOSIT') {
       this.userService.doDeposit(this.operationForm.value.bill, this.operationForm.value.amount, this.operationForm.controls.reason.value ).subscribe(() => {
         this.isLoading.emit(false);
       }, () => {

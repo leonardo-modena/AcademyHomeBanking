@@ -7,7 +7,6 @@ import {ErrorService} from "../../../services/error.service";
 import {User} from "../../../model/user";
 import {AuthService} from "../../../services/auth.service";
 import {BankAccount} from "../../../model/BankAccount";
-import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-profile',
@@ -35,34 +34,33 @@ export class ProfileComponent implements OnInit {
       this.user = user;
       this.dataDiNascita = new Date(this.user.dateOfBirth);
       this.deletingBill = user.bankAccounts[0];
+      this.userService.getBalance(this.user.bankAccounts[this.selectedBill]).subscribe((balance) => {
+        this.maxAmount = balance;
+      });
     });
 
-    this.userService.bankAccounts.subscribe((bankAccounts) => {
+    /*this.userService.bankAccounts.subscribe((bankAccounts) => {
       this.bankAccounts = bankAccounts;
       console.log(this.selectedBill);
       console.log(this.bankAccounts);
       this.maxAmount = bankAccounts[this.selectedBill].balance;
       console.log(this.bankAccounts);
-    })
+    })*/
   }
 
   changeBill() {
-    this.maxAmount = this.bankAccounts[this.selectedBill].balance;
-  }
-
-  changeFormValue(form: NgForm) {
-    // console.log(form.controls.amount.value);
-     //console.log(form.controls.selectedBill.value);
+    this.userService.getBalance(this.user.bankAccounts[this.selectedBill]).subscribe((balance) => {
+      this.maxAmount = balance;
+    });
   }
 
   onNewBill(form: NgForm): void{
     this.isCreatingNew = true;
     console.log(this.bankAccounts[form.controls.selectedBill.value].id);
-    this.userService.createNewBill(form.controls.amount.value, this.bankAccounts[form.controls.selectedBill.value].id).subscribe((resData) => {
+    this.userService.createNewBill(form.controls.amount.value, this.bankAccounts[form.controls.selectedBill.value].id).subscribe(() => {
       this.isCreatingNew = false;
       this.userService.getUser(parseInt(this.user.id));
-    }, (error) => {
-      this.errorService.newError('Non è stato possibile creare il nuovo conto. Riprova.');
+    }, () => {
       this.isCreatingNew = false;
     });
   }
@@ -73,10 +71,10 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.isDeleting = true;
-        this.userService.deleteBill(this.deletingBill).subscribe((resData) => {
+        this.userService.deleteBill(this.deletingBill).subscribe(() => {
           this.userService.getUser(parseInt(this.user.id));
           this.isDeleting = false;
-        }, (error) => {
+        }, () => {
           this.errorService.newError('Non è stato possibile cancellare il conto. Riprova.')
           this.isDeleting = false
         });

@@ -1,5 +1,9 @@
 img.big-img {
   width: 100%;
   object-fit: contain;
-  object-position: center;
+  object-position: center center;
+}
+
+.img-container {
+  max-height: 50vh;
 }
