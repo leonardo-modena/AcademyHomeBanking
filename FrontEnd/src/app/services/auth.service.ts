@@ -5,7 +5,6 @@ import { environment } from "../../environments/environment";
 import {BehaviorSubject} from "rxjs";
 import jwtDecode from "jwt-decode";
 import {Router} from "@angular/router";
-import {User} from "../model/user";
 
 @Injectable({
   providedIn: 'root'
