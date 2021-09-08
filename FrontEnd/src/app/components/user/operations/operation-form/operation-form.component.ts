@@ -1,17 +1,19 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../../services/user.service";
 import {ErrorService} from "../../../../services/error.service";
 import {User} from "../../../../model/user";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-operation-form',
   templateUrl: './operation-form.component.html',
   styleUrls: ['./operation-form.component.css']
 })
-export class OperationFormComponent implements OnInit {
+export class OperationFormComponent implements OnInit, OnDestroy {
 
   user!: User;
+  userSubscription!: Subscription;
 
   @Input() op_type!: 'DEPOSIT' | 'WITHDRAWAL';
   operation_ok = false;
@@ -25,16 +27,20 @@ export class OperationFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userService.user.subscribe((user) => {
+    this.userSubscription = this.userService.user.subscribe((user) => {
       this.user = user;
       this.selectedBill = this.user.bankAccounts[0];
       this.getBalance();
-    })
+    });
     this.operationForm = new FormGroup({
       'bill': new FormControl(this.user.bankAccounts[0], Validators.required),
       'amount': new FormControl('', Validators.required),
       'reason': new FormControl('', [Validators.required, Validators.maxLength(100)])
     });
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
   onChangeBill() {
