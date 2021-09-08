@@ -1,4 +1,4 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 
 import {
   trigger,
@@ -10,7 +10,7 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/model/user';
 import { MatRippleModule } from '@angular/material/core';
-import {Subscription} from "rxjs";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -18,31 +18,32 @@ import {Subscription} from "rxjs";
   styleUrls: ['./navbar.component.css'],
   animations: [
     trigger('triggerSidenav', [
-      state('open', style({
-        transform: 'translateX(0rem)',
-        boxShadow: '-3px 0px 7px 1px #00000069',
-
-      })),
-      state('closed', style({
-        transform: 'translateX(30rem)',
-        boxShadow: 'none',
-      })),
-      transition('* <=> *', [
-        animate('0.3s')
-      ]),
+      state(
+        'open',
+        style({
+          transform: 'translateX(0rem)',
+          boxShadow: '-3px 0px 7px 1px #00000069',
+        })
+      ),
+      state(
+        'closed',
+        style({
+          transform: 'translateX(30rem)',
+          boxShadow: 'none',
+        })
+      ),
+      transition('* <=> *', [animate('0.3s')]),
     ]),
     trigger('fadeIn', [
       transition('void => *', [
-        style({opacity: 0}),
-        animate(300, style({opacity: 1}))
+        style({ opacity: 0 }),
+        animate(300, style({ opacity: 1 })),
       ]),
-      transition('* => void', [
-        animate(200, style({opacity: 0}))
-      ])
+      transition('* => void', [animate(200, style({ opacity: 0 }))]),
     ]),
   ],
 })
-export class NavbarComponent implements OnInit,OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy {
   sidenav: boolean = false;
 
   hamburger: boolean = false;
@@ -55,22 +56,23 @@ export class NavbarComponent implements OnInit,OnDestroy {
 
   adminLogged!: boolean;
 
-  userInfo = {nome: 'Mario', cognome: 'Rossi'};
+  userInfo = { nome: 'Mario', cognome: 'Rossi' };
 
   constructor(private authService: AuthService) {
-    this.hamburgerResponsive()
+    this.hamburgerResponsive();
   }
 
   ngOnInit(): void {
+    this.authServiceSubscription = this.authService.actualAuth.subscribe(
+      (state) => {
+        this.authorized = state;
+        console.log(state);
+      }
+    );
 
-    this.authServiceSubscription = this.authService.actualAuth.subscribe(state =>{
-      this.authorized = state;
-      console.log(state)
-    })
-
-    this.authService.actualAdmin.subscribe( (adminState) =>{
+    this.authService.actualAdmin.subscribe((adminState) => {
       this.adminLogged = adminState;
-    } );
+    });
   }
 
   sidenavSwitch(): void {
@@ -79,7 +81,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
   }
 
   hamburgerClick() {
-    this.hamburger = !this.hamburger
+    this.hamburger = !this.hamburger;
   }
 
   @HostListener('window:resize', ['$event'])
@@ -87,16 +89,16 @@ export class NavbarComponent implements OnInit,OnDestroy {
     let screenWidth = window.innerWidth;
     if (screenWidth > 992) {
       this.mobile = false;
-    }else{
+    } else {
       this.mobile = true;
     }
   }
 
-  logout(){
-    this.authService.logout()
+  logout() {
+    this.authService.logout();
   }
 
   ngOnDestroy() {
-    this.authServiceSubscription.unsubscribe()
+    this.authServiceSubscription.unsubscribe();
   }
 }

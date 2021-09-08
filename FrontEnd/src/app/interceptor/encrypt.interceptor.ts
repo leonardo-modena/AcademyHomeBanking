@@ -36,17 +36,16 @@ export class EncryptInterceptor implements HttpInterceptor {
       });
 
       return next.handle(cloneReq);
+    } else if (request.url.includes('signin')) {
+      pswNotEncrypted = body.password;
+      let cloneReq = request.clone({
+        body: {
+          username: body.username,
+          password: sha256(pswNotEncrypted),
+        },
+      });
+      return next.handle(cloneReq);
     }
-     else if (request.url.includes('signin')) {
-       pswNotEncrypted = body.password;
-       let cloneReq = request.clone({
-         body: {
-           username: body.username,
-           password: sha256(pswNotEncrypted),
-         },
-       });
-       return next.handle(cloneReq);
-     }
 
     return next.handle(request);
   }

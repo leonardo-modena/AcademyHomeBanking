@@ -1,6 +1,7 @@
 <div class="backdrop" (click)="sidenavSwitch()" *ngIf="sidenav"></div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
   <a class="navbar-brand">
     <img
       [routerLink]="['/']"
@@ -22,8 +23,8 @@
         </a>
       </li>
     </ul>
-    <div class="not-collapse d-flex">
 
+    <div class="not-collapse d-flex">
       <div class="nav-item hamburger-button pointer"><i *ngIf="hamburger" class="bi bi-x" id="hamburger-close" (click)="hamburgerClick()"></i><i *ngIf="!hamburger" class="bi bi-list" (click)="hamburgerClick()"></i></div>
     </div>
 
@@ -34,6 +35,7 @@
       <i (click)="sidenavSwitch()" class="bi bi-three-dots-vertical"></i>
     </a>
   </div>
+
 </nav>
 
 <div class="sidenav-container" [@triggerSidenav]="sidenav ? 'open' : 'closed'">

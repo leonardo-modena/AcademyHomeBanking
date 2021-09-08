@@ -7,45 +7,57 @@ import { AdminService } from 'src/app/services/admin.service';
 @Component({
   selector: 'app-account-list-item',
   templateUrl: './account-list-item.component.html',
-  styleUrls: ['./account-list-item.component.css']
+  styleUrls: ['./account-list-item.component.css'],
 })
 export class AccountListItemComponent implements OnInit {
-
-  @Input() pendingRegistration!:boolean;
+  @Input() pendingRegistration!: boolean;
 
   @Input() account!: BankAccount;
-  @Input() index!: number;
 
-  @Output() confirmAccountClick = new EventEmitter()
-  @Output() confirmDeleteClick = new EventEmitter()
+  @Output() confirmAccountClick = new EventEmitter();
+  @Output() confirmDeleteClick = new EventEmitter();
 
+  constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
-  constructor(private adminService: AdminService, public dialog: MatDialog ) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-  
-  activateClick(): void{
-    this.dialog.open(DialogComponent, {closeOnNavigation: true , data: {message: `Confermare l'apertura dell' account n.${this.account.id}`}}).afterClosed().subscribe( data => {
-      if (data) {
-        this.adminService.confirmRegistration(this.account).subscribe( (res) => {
-          this.confirmAccountClick.emit();
-        } )
-      }
-    } )
-  
-    }
-
-    deleteClick(): void{
-      this.dialog.open(DialogComponent, {closeOnNavigation: true, data: { message: `confermare la chiusura dell' account n.${this.account.id}`}}).afterClosed().subscribe(
-        data => {
-          if (data) {            
-            this.adminService.confirmDeleteAccount(this.account).subscribe( (res) => {
-              this.confirmDeleteClick.emit();
-            } )
-          }
+  activateClick(): void {
+    this.dialog
+      .open(DialogComponent, {
+        closeOnNavigation: true,
+        data: {
+          message: `Confermare l'apertura dell' account n.${this.account.id}`,
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this.adminService
+            .confirmRegistration(this.account)
+            .subscribe((res) => {
+              this.confirmAccountClick.emit();
+            });
         }
-      )
-  
-    }
+      });
+  }
+
+  deleteClick(): void {
+    this.dialog
+      .open(DialogComponent, {
+        closeOnNavigation: true,
+        data: {
+          message: `confermare la chiusura dell' account n.${this.account.id}`,
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this.adminService
+            .confirmDeleteAccount(this.account)
+            .subscribe((res) => {
+              this.confirmDeleteClick.emit();
+            });
+        }
+      });
+  }
 }

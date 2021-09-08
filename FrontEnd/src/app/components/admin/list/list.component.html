@@ -13,29 +13,29 @@
         </div>
         <app-user-list [userList]='allUsers'></app-user-list>
       </div>
-    </div>
-    <div *ngIf="operation" class="list-content">
-        <mat-tab-group>
-            <mat-tab label="Nuove Registrazioni">
-              <div class="list-items">
-                <div class="list-items-title">
-                  <div class="item-title"><span>N. conto</span></div>
-                  <div class="item-title"><span>Nome</span></div>
-                  <div class="item-title"><span>Cognome</span></div>
-                </div>
-                <app-account-list [accountList]='newRegistration' [newRegistrationMode]="true" (confirmAcountEvent)="passConfirmAccountList()"></app-account-list>
-              </div>
-            </mat-tab>
-            <mat-tab label="Conti da Eliminare">
-              <div  class="list-items">
-                <div class="list-items-title">
-                  <div class="item-title"><span>N. conto</span></div>
-                  <div class="item-title"><span>Nome</span></div>
-                  <div class="item-title"><span>Cognome</span></div>
-                </div>
-                <app-account-list [accountList]='toDeleteAccounts'  [newRegistrationMode]="false" (confirmDeleteEvent)="passConfirmDeleteList()"></app-account-list>
-              </div>
-            </mat-tab>
-          </mat-tab-group>
-    </div>
   </div>
+  <div *ngIf="operation" class="list-content">
+      <mat-tab-group>
+          <mat-tab label="Nuove Registrazioni">
+            <div class="list-items">
+              <div class="list-items-title">
+                <div class="item-title"><span>N. conto</span></div>
+                <div class="item-title"><span>Nome</span></div>
+                <div class="item-title"><span>Cognome</span></div>
+              </div>
+              <app-account-list [accountList]='newRegistration' [newRegistrationMode]="true" (confirmAcountEvent)="passConfirmAccountList()"></app-account-list>
+            </div>
+          </mat-tab>
+          <mat-tab label="Conti da Eliminare">
+            <div  class="list-items">
+              <div class="list-items-title">
+                <div class="item-title"><span>N. conto</span></div>
+                <div class="item-title"><span>Nome</span></div>
+                <div class="item-title"><span>Cognome</span></div>
+              </div>
+              <app-account-list [accountList]='toDeleteAccounts'  [newRegistrationMode]="false" (confirmDeleteEvent)="passConfirmDeleteList()"></app-account-list>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+  </div>
+</div>
