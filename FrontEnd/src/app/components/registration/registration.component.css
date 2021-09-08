@@ -33,7 +33,6 @@
 
 .description-img{
   display: none;
-  width: 35rem;
 }
 
 .info-item{
@@ -81,6 +80,12 @@
   font-size: 1.6rem;
 }
 
+.form-container{
+  background-color: #4C956C;
+  color: white;
+  border-radius: 20px
+}
+
 
 @media (min-width: 768px) {
   .description{
@@ -90,6 +95,7 @@
 
   .description-img{
     display: block;
+    width: 22rem !important;
   }
 
   .info-item{
@@ -121,10 +127,13 @@
   }
  }
 
-.form-container{
-  background-color: #4C956C;
-  color: white;
-  border-radius: 20px
-}
+
+
+@media (min-width: 992px) {
+  .description-img{
+    width: 35rem !important;
+  }
+ }
+
 
 
