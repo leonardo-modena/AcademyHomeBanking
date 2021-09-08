@@ -1,5 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/app/model/BankAccount';
 import { User } from 'src/app/model/user';
