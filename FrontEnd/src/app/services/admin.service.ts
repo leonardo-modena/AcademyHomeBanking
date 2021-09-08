@@ -14,9 +14,7 @@ const apiUrl = environment.api_url;
 })
 export class AdminService {
   //Admin Subject & Observable
-  private adminSubject = new BehaviorSubject<{ nome: string; cognome: string }>(
-    { nome: 'mario', cognome: 'rossi' }
-  );
+  private adminSubject = new BehaviorSubject<any>('');
   actualAdmin = this.adminSubject.asObservable();
 
   //Data Subject & Observable
@@ -34,9 +32,16 @@ export class AdminService {
   //constructor
   constructor(private httpService: HttpClient) {}
 
-  //method to set the actual user
-  changeAdmin(admin: { nome: string; cognome: string }): void {
-    this.adminSubject.next(admin);
+  //method to get and change user
+  getUser(id: number) {
+
+    this.httpService.get<User>(`${apiUrl}/profile/${id}`).subscribe( (usr) => {
+      this.changeUser(usr)
+    } )
+  }
+
+  changeUser(newUser: any){
+    this.adminSubject.next(newUser)
   }
 
   //Data getter

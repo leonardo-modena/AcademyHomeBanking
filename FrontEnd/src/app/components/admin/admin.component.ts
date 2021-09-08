@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/app/model/BankAccount';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { DownloadService } from 'src/app/services/download.service';
 
 @Component({
@@ -14,7 +15,8 @@ import { DownloadService } from 'src/app/services/download.service';
 export class AdminComponent implements OnInit, OnDestroy {
   adminSubscription: Subscription[] = [];
 
-  adminInfo!: { nome: string; cognome: string };
+  adminInfo!: User;
+  adminId!: number;
 
   allUsers!: User[];
   allNewRagistration!: BankAccount[];
@@ -31,7 +33,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   constructor(
     private adminService: AdminService,
     private downloadService: DownloadService,
-    private titleService: Title
+    private titleService: Title,
+    private authService: AuthService
   ) {
     this.responsiveSection();
   }
@@ -39,15 +42,20 @@ export class AdminComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pageLoading = true;
 
-    this.adminSubscription.push(
-      this.adminService.actualAdmin.subscribe((admin) => {
-        this.adminInfo = admin;
-        //set Title
-        this.titleService.setTitle(
-          `${this.adminInfo.nome.toLocaleUpperCase()} | Admin-Dashboard`
-        );
-      })
-    );
+    this.authService.actualId.subscribe( (id) => {
+      this.adminId = id;
+        this.adminService.getUser(this.adminId)
+    })
+
+    this.adminService.actualAdmin.subscribe((admin) => {
+      this.adminInfo = admin;
+      //set Title
+      this.titleService.setTitle(
+        `${this.adminInfo.firstName.toLocaleUpperCase()} | Admin-Dashboard`
+      );
+    })
+
+    
     this.adminService.getAllData();
     this.adminSubscription.push(
       this.adminService.allNewRegistration.subscribe((newRegistratios) => {
