@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -7,24 +7,30 @@ import {ErrorService} from "../../../services/error.service";
 import {User} from "../../../model/user";
 import {AuthService} from "../../../services/auth.service";
 import {BankAccount} from "../../../model/BankAccount";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   user!: User;
+  userSubcription!:Subscription;
+
   bankAccounts!: BankAccount[];
-  dataDiNascita!: Date;
+  bankAccountsSubscription!: Subscription;
+
+  dateOfBirth!: Date;
+
   isDeleting = false;
   isCreatingNew = false;
 
   selectedBill: number = 0;
   deletingBill!: number;
 
-  maxAmount = 0;
+  maxAmount = 5000000;
 
   constructor(private userService: UserService, private authService: AuthService, public dialog: MatDialog, private errorService: ErrorService) {
   }
@@ -32,20 +38,21 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.user.subscribe((user: User) => {
       this.user = user;
-      this.dataDiNascita = new Date(this.user.dateOfBirth);
+      this.dateOfBirth = new Date(this.user.dateOfBirth);
       this.deletingBill = user.bankAccounts[0];
       this.userService.getBalance(this.user.bankAccounts[this.selectedBill]).subscribe((balance) => {
         this.maxAmount = balance;
       });
     });
 
-    /*this.userService.bankAccounts.subscribe((bankAccounts) => {
+    this.userService.bankAccounts.subscribe((bankAccounts) => {
       this.bankAccounts = bankAccounts;
-      console.log(this.selectedBill);
-      console.log(this.bankAccounts);
-      this.maxAmount = bankAccounts[this.selectedBill].balance;
-      console.log(this.bankAccounts);
-    })*/
+    })
+  }
+
+  ngOnDestroy() {
+    this.userSubcription.unsubscribe();
+    this.bankAccountsSubscription.unsubscribe();
   }
 
   changeBill() {

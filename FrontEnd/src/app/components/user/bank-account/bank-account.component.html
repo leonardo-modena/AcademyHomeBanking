@@ -1,11 +1,11 @@
-<div  class="container">
+<div  class="container mb-3">
   <div class="row gx-5">
     <div class="col-12 col-lg-10 m-auto mb-4">
       <h1>Bentornat{{user.gender === 'M' ? 'o' : 'a'}}, {{user.firstName | titlecase}} {{user.lastName | titlecase}}</h1>
       <p>In questa pagina puoi visualizzare i tuoi conti e le operazioni che sono state effettuate.<br>
       Per poter gestire i tuoi conti, cancellarli o creare nuovi conti visita il tuo <a routerLink="profilo">profilo</a>.</p>
     </div>
-    <div class="col-12 col-md-10 m-auto mt-3" *ngIf="bankAccounts">
+    <div class="col-12 col-lg-10 m-auto mt-3" *ngIf="bankAccounts">
       <div class="row gx-5">
         <div class="col-12 col-md-6 m-auto">
           <div class="row">
@@ -18,10 +18,7 @@
               </form>
               <div class="row">
                 <div class="col-12 col-lg-8 m-auto">
-                  <div *ngIf="isLoadingBalance">
-                    <app-spinner></app-spinner>
-                  </div>
-                  <div *ngIf="!isLoadingBalance" class="green-background mt-3 py-4 p-3">
+                  <div class="green-background mt-3 py-4 p-3">
                     <h1 class="text-end">€ {{bankAccounts[selectedBill].balance | number:'0.2' | noComma}}</h1>
                     <span>Saldo del conto {{ bankAccounts[selectedBill].id |  number:'6.0' | noComma}}</span>
                   </div>

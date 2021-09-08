@@ -3,6 +3,7 @@ import {Operation} from "../../../model/operation";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../model/user";
 import {BankAccount} from "../../../model/BankAccount";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-bank-account',
@@ -13,45 +14,53 @@ export class BankAccountComponent implements OnInit {
 
 
   user!: User;
+  userSubscriptions!: Subscription;
+
   bankAccounts!: BankAccount[];
-  balance: number = 0;
+  bankAccountsSubscription!: Subscription;
+
   operations!: Operation[];
+  operationsSubscription!: Subscription;
+
+  balance: number = 0;
+
 
   operationString = 'Stai visualizzando le ultime 10 operazioni.'
 
-
   isLoadingOperations: boolean = false;
-  isLoadingBalance = false;
+  loadingOperationsSubscription!: Subscription;
 
   selectedBill: number = 0;
 
   constructor(private userService: UserService) { }
 
-  private onGetBalance() {
-    this.isLoadingBalance = false;
-    this.userService.getBalance(this.selectedBill).subscribe((balance) => {
-      this.balance = balance;
-    }, () => { this.isLoadingBalance = false;});
-  }
-
   ngOnInit(): void {
 
-    this.userService.user.subscribe((user) => {
+    this.userSubscriptions = this.userService.user.subscribe((user) => {
       this.user = user;
     });
-    this.userService.bankAccounts.subscribe((bankAccounts) => {
+
+    this.bankAccountsSubscription = this.userService.bankAccounts.subscribe((bankAccounts) => {
       this.bankAccounts = bankAccounts;
     });
+
     this.isLoadingOperations = true;
-    this.userService.operations.subscribe((operations) => {
+    this.operationsSubscription = this.userService.operations.subscribe((operations) => {
       this.operations = operations;
     });
 
-    this.userService.operationsSpinner.subscribe((loading) => {
+    this.loadingOperationsSubscription = this.userService.operationsSpinner.subscribe((loading) => {
       this.isLoadingOperations = loading;
     })
 
   }
+
+  ngOnDestroy() {
+    this.userSubscriptions.unsubscribe();
+    this.bankAccountsSubscription.unsubscribe();
+    this.operationsSubscription.unsubscribe();
+    this.loadingOperationsSubscription.unsubscribe();
+}
 
   onSearchFunction(event: string) {
     this.operationString = event;
