@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {animate, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../services/auth.service";
 import { Router} from "@angular/router";
 import {AlertService} from "../../services/alert.service";
 import { Title } from '@angular/platform-browser';
+import { fadeAnimation } from 'src/app/animation/animations';
 
 
 @Component({
@@ -12,15 +12,7 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
   animations: [
-    trigger('fade', [
-      transition('void => *', [
-        style({opacity: 0}),
-        animate(500, style({opacity: 1}))
-      ]),
-      transition('* => void', [
-        animate(1500, style({opacity: 0}))
-      ])
-    ])
+   fadeAnimation
   ]
 })
 export class RegistrationComponent implements OnInit {

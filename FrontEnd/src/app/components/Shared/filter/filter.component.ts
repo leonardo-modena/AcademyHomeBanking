@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../model/user";
-import {BehaviorSubject, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 
 
 @Component({

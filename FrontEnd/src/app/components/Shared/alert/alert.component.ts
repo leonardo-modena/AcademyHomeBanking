@@ -1,21 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
-import {animate, style, transition, trigger} from "@angular/animations";
+import { fadeAnimation } from 'src/app/animation/animations';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css'],
   animations: [
-    trigger('fade', [
-      transition('void => *', [
-        style({opacity: 0}),
-        animate(500, style({opacity: 1}))
-      ]),
-      transition('* => void', [
-        animate(1500, style({opacity: 0}))
-      ])
-    ])
+    fadeAnimation
   ]
 })
 export class AlertComponent implements OnInit {

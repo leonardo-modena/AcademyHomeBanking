@@ -1,10 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { fadeAnimation } from 'src/app/animation/animations';
 import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-error',
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.css'],
+  animations: [
+    fadeAnimation
+  ]
 })
 export class ErrorComponent implements OnInit, OnDestroy {
   errorMessage!: string;

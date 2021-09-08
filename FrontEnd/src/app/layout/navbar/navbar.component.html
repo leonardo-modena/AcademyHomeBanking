@@ -13,7 +13,7 @@
 
   <div class="ms-auto d-flex" *ngIf="!authorized">
 
-    <ul class="navbar-nav hamburger-menu" *ngIf="mobile ? hamburger : true" [@fadeIn]>
+    <ul class="navbar-nav hamburger-menu" *ngIf="mobile ? hamburger : true" [@fade]>
       <li class="nav-item">
         <a class="nav-link pointer newAccountLink" [routerLink]="['/registrazione']" (click)="hamburgerClick()"><i class="fas fa-running"></i> Nuovo Conto</a>
       </li>
