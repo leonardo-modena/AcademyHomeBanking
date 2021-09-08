@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../model/user";
 import {Operation} from "../model/operation";
@@ -27,9 +27,10 @@ export class UserService {
   private operationSpinnerSubject = new BehaviorSubject<boolean>(false);
   operationsSpinner = this.operationSpinnerSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.getUser(2);
-  }
+  private inactiveUserSubject = new BehaviorSubject<boolean>(false);
+  inactiveUser = this.inactiveUserSubject.asObservable();
+
+  constructor(private http: HttpClient) { }
 
   // GET REQUESTS
 
@@ -49,7 +50,11 @@ export class UserService {
 
         const bankAccounts: BankAccount[] = userInfo.bankAccounts.map((bill) => {
           return {...bill, holder: user}
-      })
+      });
+
+        if(bankAccounts.length === 1 && bankAccounts[0].account_status === 'INACTIVE') {
+          this.inactiveUserSubject.next(true);
+        }
       this.bankAccountsSubject.next(bankAccounts);
 
       this.getOperationList(this.userSubject.getValue().bankAccounts[0], {type: 'lastTen', startDate: 0, endDate: 0})

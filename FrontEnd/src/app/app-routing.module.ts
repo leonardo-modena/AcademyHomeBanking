@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'registrazione', component: RegistrationComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'user', pathMatch: 'full' ,  loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},
-  { path: 'admin',pathMatch: 'full', component: AdminComponent, /* canActivate: [AdminGuard],*/ loadChildren: () => import('./module/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'admin',pathMatch: 'full', component: AdminComponent,  canActivate: [AdminGuard], loadChildren: () => import('./module/admin/admin.module').then(m => m.AdminModule) },
   { path: '**', component: NotFoundComponent }
 ];
 

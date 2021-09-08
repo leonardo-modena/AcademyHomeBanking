@@ -1,7 +1,4 @@
 <app-loading-page *ngIf="pageLoading" [imageUrl]="'../../../assets/img/Illustration/User-loading-amico.png'"></app-loading-page>
-<div *ngIf="inactive" class="container">
-  <p>Il tuo conto non è ancora stato attivato, non appena sarà attivo potrai effettuare le operazioni.</p></div>
-<div [class]="inactive ? 'inactive-account' : ''">
+<div [class]="'mt-5 mb-4 ' + (inactive ? 'inactive-account' : '')">
   <router-outlet *ngIf="!pageLoading"></router-outlet>
 </div>
-

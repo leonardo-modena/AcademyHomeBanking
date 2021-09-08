@@ -35,7 +35,7 @@ export class AuthService {
 
   registerUser(firstName: string, lastName: string, email: string, password: string,dateOfBirth: number,gender: string){
 
-    return this.http.post(this.url + "/registrazione",{
+    return this.http.post(this.url + "/signup",{
       firstName,
       lastName,
       email,

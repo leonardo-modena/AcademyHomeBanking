@@ -33,7 +33,7 @@ import { DialogComponent } from './components/Shared/dialog/dialog.component';
     NotFoundComponent,
     ErrorComponent,
     AlertComponent,
-    DialogComponent
+    DialogComponent,
   ],
   imports: [
     SharedModule,

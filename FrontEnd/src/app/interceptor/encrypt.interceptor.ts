@@ -21,7 +21,7 @@ export class EncryptInterceptor implements HttpInterceptor {
 
     let body: any = request.body;
 
-    if (request.url.includes('registrazione')) {
+    if (request.url.includes('signup')) {
       pswNotEncrypted = body.password;
 
       let cloneReq = request.clone({

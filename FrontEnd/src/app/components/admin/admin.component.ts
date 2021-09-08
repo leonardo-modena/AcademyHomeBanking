@@ -44,18 +44,19 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     this.authService.actualId.subscribe( (id) => {
       this.adminId = id;
-        this.adminService.getUser(this.adminId)
+        this.adminService.getUser(this.adminId);
     })
 
     this.adminService.actualAdmin.subscribe((admin) => {
       this.adminInfo = admin;
       //set Title
+      console.log(admin);
       this.titleService.setTitle(
         `${this.adminInfo.firstName.toLocaleUpperCase()} | Admin-Dashboard`
       );
     })
 
-    
+
     this.adminService.getAllData();
     this.adminSubscription.push(
       this.adminService.allNewRegistration.subscribe((newRegistratios) => {

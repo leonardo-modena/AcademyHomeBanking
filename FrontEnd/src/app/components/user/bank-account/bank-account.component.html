@@ -1,4 +1,4 @@
-<div  class="container mb-3">
+<div  class="container">
   <div class="row gx-5">
     <div class="col-12 col-lg-10 m-auto mb-4">
       <h1>Bentornat{{user.gender === 'M' ? 'o' : 'a'}}, {{user.firstName | titlecase}} {{user.lastName | titlecase}}</h1>
@@ -17,7 +17,7 @@
                 </select>
               </form>
               <div class="row">
-                <div class="col-12 col-lg-8 m-auto">
+                <div class="col-12 col-lg-9 col-xl-8 m-auto">
                   <div class="green-background mt-3 py-4 p-3">
                     <h1 class="text-end">€ {{bankAccounts[selectedBill].balance | number:'0.2' | noComma}}</h1>
                     <span>Saldo del conto {{ bankAccounts[selectedBill].id |  number:'6.0' | noComma}}</span>
@@ -27,13 +27,13 @@
             </div>
             <div class="col-12 mt-4">
               <h3>Le operazioni del tuo conto {{bankAccounts[selectedBill].id  |  number:'6.0' | noComma}}</h3>
+              <p>Per poter effettuare una nuova operazione vai alla sezione dedicata. <a routerLink="operazioni">Opera sul tuo conto</a></p>
               <app-filter [selectedBill]="selectedBill" (filterString)="onSearchFunction($event)" ></app-filter>
-
               <div *ngIf="isLoadingOperations">
                 <app-spinner></app-spinner>
               </div>
               <div *ngIf="!isLoadingOperations">
-                <p>{{operationString}}</p>
+                <span>{{operationString}}</span>
                 <app-operation-list *ngIf="operations.length !== 0" [operationsList]="operations"></app-operation-list>
                 <p *ngIf="operations.length === 0">Non sono presenti operazioni nel periodo indicato.<br>Seleziona un altro periodo.</p>
               </div>

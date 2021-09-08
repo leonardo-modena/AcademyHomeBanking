@@ -1,5 +1,7 @@
 <div class="container" *ngIf="user != null">
   <div class="row justify-content-center">
+    <app-inactive-message *ngIf="inactive"></app-inactive-message>
+    <h2 class=""></h2>
     <div class="col-12 col-md-5 col-lg-4">
       <h2>Dati personali</h2>
       <table class="table table-borderless table-fit">
@@ -26,12 +28,14 @@
     <div class="col-12 col-md-5 col-lg-4">
       <h2>Gestisci i tuoi conti</h2>
       <div class="orange-background p-4">
-        <form class="form">
-          <label class="form-label">Seleziona il conto da eliminare</label>
-          <select class="form-select" [(ngModel)]="deletingBill" name="deletingBill">
-            <option *ngFor="let bill of user.bankAccounts" [value]="bill" [selected]="deletingBill === bill">{{bill | number: '6.0' | noComma }}</option>
-          </select>
-          <div *ngIf="user.bankAccounts.length === 1" class="error mt-2">Attenzione! È presente un solo conto, dopo la chiusura l'account verrà eliminato. Verrà eseguito un log out automatico.</div> <!-- Solo se vi è un conto solo -->
+        <form class="form row gx-5">
+          <div class="form-group col-12">
+            <label class="form-label">Seleziona il conto da eliminare</label>
+            <select class="form-select" [(ngModel)]="deletingBill" name="deletingBill">
+              <option *ngFor="let bill of user.bankAccounts" [value]="bill" [selected]="deletingBill === bill">{{bill | number: '6.0' | noComma }}</option>
+            </select>
+            <div *ngIf="user.bankAccounts.length === 1" class="error mt-2">Attenzione! È presente un solo conto, dopo la chiusura l'account verrà eliminato. Verrà eseguito un log out automatico.</div> <!-- Solo se vi è un conto solo -->
+          </div>
           <div class="d-flex justify-content-end mt-2">
             <button class="btn btn-primary" (click)="onCloseBill()">Chiudi</button>
           </div>

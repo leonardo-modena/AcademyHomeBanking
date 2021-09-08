@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -15,6 +15,9 @@ import {Subscription} from "rxjs";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
+
+  inactiveSubscription!:Subscription;
+  inactive!:boolean;
 
   user!: User;
   userSubcription!:Subscription;
@@ -47,12 +50,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.userService.bankAccounts.subscribe((bankAccounts) => {
       this.bankAccounts = bankAccounts;
+    });
+
+    this.inactiveSubscription = this.userService.inactiveUser.subscribe((inactive) => {
+      this.inactive = inactive;
     })
   }
 
   ngOnDestroy() {
-    this.userSubcription.unsubscribe();
-    this.bankAccountsSubscription.unsubscribe();
+    /*this.userSubcription.unsubscribe();
+    this.bankAccountsSubscription.unsubscribe();*/
   }
 
   changeBill() {

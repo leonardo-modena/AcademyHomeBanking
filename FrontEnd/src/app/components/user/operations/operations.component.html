@@ -1,11 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 col-lg-8 m-auto">
+      <h2 class="text-center">Opera sul tuo conto</h2>
+    </div>
+    <div class="col-12 col-md-10 col-lg-8 m-auto">
       <mat-tab-group mat-align-tabs="start" animationDuration="1000ms">
         <mat-tab [disabled]="isLoading" label="Versamento" >
           <div class="container ">
             <div class="row">
-              <h4 class="my-3 col-12 col-md-10 m-auto">Per fare un versamento compila il form sottostante.</h4>
+              <h3 class="mt-3 col-12 col-md-10 m-auto">Per fare un versamento compila il form sottostante.</h3>
+              <p class="mb-3 mt-1 col-12 col-md-10 m-auto">Ricorda: è possibile versare un massimo di € 5000.</p>
               <div class="col-12 col-md-10 green-background p-4 m-auto">
                 <h3 class="text-center">Versamento</h3>
                 <app-operation-form (isLoading)="isLoading = $event" op_type="DEPOSIT"></app-operation-form>
@@ -16,7 +20,8 @@
         <mat-tab [disabled]="isLoading" label="Prelievo" >
           <div class="container ">
             <div class="row">
-              <h4 class="my-3 col-12 col-md-10 m-auto">Per fare un prelievo compila il form sottostante.</h4>
+              <h3 class="mt-3 col-12 col-md-10 m-auto">Per fare un prelievo compila il form sottostante.</h3>
+              <p class="mb-3 mt-1 col-12 col-md-10 m-auto">Ricorda: non è possibile prelevare più del sldo del conto selezionato.</p>
               <div class="col-12 col-md-10 orange-background p-4 m-auto">
                 <h3 class="text-center">Prelievo</h3>
                 <app-operation-form op_type="WITHDRAWAL"></app-operation-form>
