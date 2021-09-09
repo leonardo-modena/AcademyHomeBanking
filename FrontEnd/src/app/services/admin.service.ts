@@ -15,13 +15,23 @@ const apiUrl = environment.api_url;
 })
 export class AdminService {
   //Admin Subject & Observable
-  private adminSubject = new BehaviorSubject<User>({firstName: 'Nome', lastName: 'Cognome', dateOfBirth: 1630936744610, email: 'prova@gmail.com', gender: 'F', id: '1', role: 'ROLE_C', bankAccounts: [], password: 'hdf' });
+  private adminSubject = new BehaviorSubject<User>({
+    firstName: 'Nome',
+    lastName: 'Cognome',
+    dateOfBirth: 1630936744610,
+    email: 'prova@gmail.com',
+    gender: 'F',
+    id: '1',
+    role: 'ROLE_C',
+    bankAccounts: [],
+    password: 'hdf',
+  });
   actualAdmin = this.adminSubject.asObservable();
 
   //Data Subject & Observable
   private allUsersSubject = new BehaviorSubject<User[]>([]);
   allUsers = this.allUsersSubject.asObservable();
-  private allNewRegistrationSubject = new BehaviorSubject<BankAccount[]>([]);
+  private allNewRegistrationSubject = new BehaviorSubject<any[]>([]);
   allNewRegistration = this.allNewRegistrationSubject.asObservable();
   private allToDeleteAccountsSubject = new BehaviorSubject<BankAccount[]>([]);
   allToDeleteAccounts = this.allToDeleteAccountsSubject.asObservable();
@@ -31,15 +41,18 @@ export class AdminService {
   loadingState = this.loadingSubject.asObservable();
 
   //constructor
-  constructor(private httpService: HttpClient, private authService: AuthService) {}
+  constructor(
+    private httpService: HttpClient,
+    private authService: AuthService
+  ) {}
 
   //method Get and Change user
   getUser(id: number): Observable<User> {
-    return this.httpService.get<User>(`${apiUrl}/customer/profile/${id}`)
+    return this.httpService.get<User>(`${apiUrl}/customer/profile/${id}`);
   }
 
-  changeUser(newUser: User){
-    this.adminSubject.next(newUser)
+  changeUser(newUser: User) {
+    this.adminSubject.next(newUser);
   }
 
   //Data getter
@@ -77,17 +90,17 @@ export class AdminService {
           this.checkLoading();
         }
       );
-      this.authService.actualId.subscribe( (id) => {
-        this.getUser(id).subscribe( 
+      this.authService.actualId.subscribe((id) => {
+        this.getUser(id).subscribe(
           (user) => {
-          this.changeUser(user)
-          this.checkLoading();
+            this.changeUser(user);
+            this.checkLoading();
           },
           (err) => {
             this.checkLoading();
           }
-        )
-      })
+        );
+      });
     }, 2643);
   }
 
@@ -97,7 +110,7 @@ export class AdminService {
     this.allUsersSubject.next(users);
   }
 
-  nextNewRegistration(newRegistration: BankAccount[]): void {
+  nextNewRegistration(newRegistration: any[]): void {
     this.allNewRegistrationSubject.next(newRegistration);
   }
 
@@ -124,8 +137,8 @@ export class AdminService {
     return this.httpService.get<User[]>(`${apiUrl}/admin/listSortedCustomer`);
   }
 
-  getNewRegistration(): Observable<BankAccount[]> {
-    return this.httpService.get<BankAccount[]>(
+  getNewRegistration(): Observable<any[]> {
+    return this.httpService.get<any[]>(
       `${apiUrl}/admin/listInactiveAccounts`
     );
   }

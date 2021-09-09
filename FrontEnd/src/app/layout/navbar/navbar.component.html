@@ -67,9 +67,9 @@
         <span>Conto</span>
       </div>
     </div>
-    <div class="sidenav-item exit-button pointer">
+    <div class="sidenav-item exit-button pointer" (click)="logout(); sidenavSwitch()">
       <i class="bi bi-box-arrow-left"></i>
-      <span (click)="logout(); sidenavSwitch()">Logout</span>
+      <span >Logout</span>
     </div>
   </div>
 </div>

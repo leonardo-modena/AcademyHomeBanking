@@ -42,17 +42,16 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.adminService.actualAdmin.subscribe((admin) => {
       this.adminInfo = admin;
       //set Title
-      console.log(admin);
       this.titleService.setTitle(
         `${this.adminInfo.firstName.toLocaleUpperCase()} | Admin-Dashboard`
       );
-    })
-
+    });
 
     this.adminService.getAllData();
     this.adminSubscription.push(
-      this.adminService.allNewRegistration.subscribe((newRegistratios) => {
-        this.allNewRagistration = newRegistratios;
+      this.adminService.allNewRegistration.subscribe((newRegistrations) => {
+        console.log(newRegistrations)
+        this.allNewRagistration = newRegistrations;
       })
     );
     this.adminSubscription.push(
