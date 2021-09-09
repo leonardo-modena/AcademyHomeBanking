@@ -13,7 +13,7 @@ import { AuthService } from '../services/auth.service';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
-  token = this.authService.token;
+  token = sessionStorage.getItem('token');
 
   intercept(request: HttpRequest<unknown>,next: HttpHandler): Observable<HttpEvent<unknown>> {
 
