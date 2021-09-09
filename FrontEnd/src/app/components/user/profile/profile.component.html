@@ -4,6 +4,7 @@
     <h1 class="col-12 col-md-10 col-lg-8 text-center m-auto">Il tuo profilo</h1>
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <app-inactive-message *ngIf="inactive"></app-inactive-message>
+      <p *ngIf="closing">Il tuo account è in fase di chiusura.</p>
     </div>
   </div>
   <div [class]="'row justify-content-center ' + (inactive ? 'inactive' : '')">
@@ -51,7 +52,7 @@
       </div>
     </div>
   </div>
-  <div [class]="'row ' + (inactive ? 'inactive' : '')">
+  <div [class]="'row ' + (inactive || closing ? 'inactive' : '')">
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Aggiungi un nuovo conto</h2>
       <div class="container my-3">

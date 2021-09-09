@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../../services/user.service";
-import {ErrorService} from "../../../../services/error.service";
 import {User} from "../../../../model/user";
 import {Subscription} from "rxjs";
 
@@ -26,7 +25,7 @@ export class OperationFormComponent implements OnInit, OnDestroy {
 
   @Output() isLoading = new EventEmitter<boolean>(false);
 
-  constructor(private userService: UserService, private errorService: ErrorService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
 
@@ -44,7 +43,7 @@ export class OperationFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
-    this.timer.reset();
+    clearTimeout(this.timer)
   }
 
   onChangeBill() {
@@ -61,18 +60,16 @@ export class OperationFormComponent implements OnInit, OnDestroy {
     this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
     if (this.op_type === 'DEPOSIT') {
       this.userService.doDeposit(this.operationForm.value.bill, this.operationForm.value.amount, this.operationForm.controls.reason.value ).subscribe(() => {
-        this.operation_ok = true;
-        this.operationForm.reset();
+        this.operationDoneCorrectly();
       }, () => {
-        this.errorService.newError('L\'operazione non è andata a buon fine. Riprova');
+        this.isLoading.emit(false);
       });
     }
     else {
       this.userService.doWithdrawal(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value, this.operationForm.controls.reason.value ).subscribe(() => {
-        this.operation_ok = true;
-        this.operationForm.reset();
+        this.operationDoneCorrectly();
       }, () => {
-        this.errorService.newError('L\'operazione non è andata a buon fine. Riprova');
+        this.isLoading.emit(false);
       });
     }
 
@@ -80,4 +77,12 @@ export class OperationFormComponent implements OnInit, OnDestroy {
       this.operation_ok = false;
     }, 5000);
   }
+
+  private operationDoneCorrectly() {
+    this.userService.getUser(parseInt(this.user.id));
+    this.operation_ok = true;
+    this.isLoading.emit(false);
+    this.operationForm.reset({'bill': this.user.bankAccounts[0]});
+  }
+
 }

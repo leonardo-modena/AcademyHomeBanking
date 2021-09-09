@@ -20,6 +20,9 @@ export class AuthService {
   private isAdmin = new BehaviorSubject(false);
   actualAdmin = this.isAdmin.asObservable();
 
+  tokenSubject = new BehaviorSubject<string>('');
+
+
   url: string = environment.api_url;
   isUser: boolean = false;
   token !: string;
@@ -30,12 +33,14 @@ export class AuthService {
   constructor(private http: HttpClient,private route: Router) {
       if (sessionStorage.getItem('token')){
         this.nextAuth(true);
-  
+
         let tokenDecoded: any ;
 
-        let token= sessionStorage.getItem('token')
-        
+        let token= sessionStorage.getItem('token');
+
+
         if (token) {
+          this.tokenSubject.next(token);
           tokenDecoded = jwtDecode(token);
           this.passId(tokenDecoded.id);
           if(tokenDecoded.role == 'ROLE_C'){
@@ -45,7 +50,7 @@ export class AuthService {
             this.nextAdmin(true)
           }
         }
-       
+
       }
   }
 
@@ -71,6 +76,7 @@ export class AuthService {
       this.tokenDecoded = jwtDecode(resData.token);
 
       this.token = resData.token;
+      this.tokenSubject.next(resData.token);
       sessionStorage.setItem('token', resData.token);
 
       this.tokenExpiration = this.tokenDecoded.expiration;

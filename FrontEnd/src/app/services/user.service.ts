@@ -30,13 +30,13 @@ export class UserService {
   private inactiveUserSubject = new BehaviorSubject<boolean>(false);
   inactiveUser = this.inactiveUserSubject.asObservable();
 
-
-  private operationDoneSubject = new BehaviorSubject<boolean>(false);
-  operationDone = this.operationDoneSubject.asObservable();
+  private closingAccountSubject = new BehaviorSubject<boolean>(false);
+  closingAccount = this.closingAccountSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
   // GET REQUESTS
+
 
   getUser(id: number) {
 
@@ -47,7 +47,8 @@ export class UserService {
       dateOfBirth: number;
       gender: string;
       role: string;
-      bankAccounts: BankAccount[]}>(`${this.apiUrlCustomer}/profile/${id}`).subscribe((userInfo) => {
+      bankAccounts: BankAccount[]}
+      >(`${this.apiUrlCustomer}/profile/${id}`).subscribe((userInfo) => {
         const user: User = {id: userInfo.id, firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email, dateOfBirth: userInfo.dateOfBirth, role: userInfo.role, gender: userInfo.gender, bankAccounts: userInfo.bankAccounts.map((bill) => { return parseInt(bill.id)})  }
 
         this.userSubject.next(user);
@@ -55,6 +56,11 @@ export class UserService {
         const bankAccounts: BankAccount[] = userInfo.bankAccounts.map((bill) => {
           return {...bill, holder: user}
       });
+
+        if (bankAccounts.length === 0) {
+          // Conto in fase di chiusura
+          this.closingAccountSubject.next(true);
+        }
 
         if(bankAccounts.length === 1 && bankAccounts[0].account_status === 'INACTIVE') {
           this.inactiveUserSubject.next(true);
@@ -104,7 +110,7 @@ export class UserService {
 
   // Prelievo dal conto
   doWithdrawal(bill: number, amount: number, causal: string) {
-    return this.http.post<any>(`${this.apiUrlBankAccount}/withdrawal/${amount}/${causal}/${bill}`, {});
+     return this.http.post<any>(`${this.apiUrlBankAccount}/withdrawal/${amount}/${causal}/${bill}`, {});
   }
 
   //DELETE REQUESTS

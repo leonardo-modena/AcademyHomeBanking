@@ -8,6 +8,7 @@ import {User} from "../../../model/user";
 import {AuthService} from "../../../services/auth.service";
 import {BankAccount} from "../../../model/BankAccount";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   inactiveSubscription!:Subscription;
   inactive:boolean = false;
+
+  closingAccountSubscription!:Subscription;
+  closing: boolean = false;
 
   user!: User;
   userSubcription!:Subscription;
@@ -35,7 +39,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   maxAmount = 5000000;
 
-  constructor(private userService: UserService, private authService: AuthService, public dialog: MatDialog, private errorService: ErrorService) {
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService,
+    public dialog: MatDialog,
+    private errorService: ErrorService) {
   }
 
   ngOnInit(): void {
@@ -54,6 +63,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.inactiveSubscription = this.userService.inactiveUser.subscribe((inactive) => {
       this.inactive = inactive;
+    });
+
+    this.closingAccountSubscription = this.userService.closingAccount.subscribe((closing) => {
+      this.closing = closing;
     });
   }
 
@@ -86,7 +99,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (result) {
         this.isDeleting = true;
         this.userService.deleteBill(this.deletingBill).subscribe(() => {
-          this.userService.getUser(parseInt(this.user.id));
+          if (this.user.bankAccounts.length > 1) {
+            this.userService.getUser(parseInt(this.user.id));
+
+          }
+          else {
+            this.authService.logout();
+          }
           this.isDeleting = false;
         }, () => {
           this.errorService.newError('Non è stato possibile cancellare il conto. Riprova.')
