@@ -20,6 +20,7 @@ import { AdminModule } from "./module/admin/admin.module";
 import { SharedModule } from "./module/shared/shared.module";
 import { NoCommaPipe } from './pipes/no-comma.pipe';
 import { DialogComponent } from './components/Shared/dialog/dialog.component';
+import {TokenInterceptor} from "./interceptor/token.interceptor";
 
 
 @NgModule({
@@ -57,7 +58,7 @@ import { DialogComponent } from './components/Shared/dialog/dialog.component';
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: EncryptInterceptor,
+      useClass: TokenInterceptor,
       multi: true
     },
   ],
