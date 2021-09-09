@@ -25,7 +25,6 @@ public class BankAccount {
 
 	@ManyToOne()
 	@JoinColumn(name = "holder", nullable = false)
-	@JsonIgnore
 	private Customer holder;
 	public BankAccount() {
 
