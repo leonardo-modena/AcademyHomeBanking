@@ -4,5 +4,6 @@ export interface BankAccount{
     id: string,
     account_status: string,
     balance: number,
-    holder: User
+    firstName?: string,
+    lastName?: string
 }
