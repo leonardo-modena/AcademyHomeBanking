@@ -67,12 +67,11 @@ export class RegistrationComponent implements OnInit {
     this.passwordError = true;
 
     let date = form.value.date;
-    let msDate = Date.parse(date); //SOSTITUIRE CON new Date(date) E PROVARE
-    console.log(msDate)
+    let msDate = Date.parse(date);
+
     const sex = form.value.sesso;
 
     this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {
-      console.log(resData);
       this.router.navigate(['/login']);
       this.alert.newAllert('Registrazione effettuata con successo! Procedi col login.')
     });
