@@ -12,6 +12,8 @@ import {Subscription} from "rxjs";
 })
 export class BankAccountComponent implements OnInit {
 
+  inactiveSubscription!:Subscription;
+  inactive:boolean = false;
 
   user!: User;
   userSubscriptions!: Subscription;
@@ -51,7 +53,11 @@ export class BankAccountComponent implements OnInit {
 
     this.loadingOperationsSubscription = this.userService.operationsSpinner.subscribe((loading) => {
       this.isLoadingOperations = loading;
-    })
+    });
+
+    this.inactiveSubscription = this.userService.inactiveUser.subscribe((inactive) => {
+      this.inactive = inactive;
+    });
 
   }
 
@@ -60,6 +66,7 @@ export class BankAccountComponent implements OnInit {
     this.bankAccountsSubscription.unsubscribe();
     this.operationsSubscription.unsubscribe();
     this.loadingOperationsSubscription.unsubscribe();
+    this.inactiveSubscription.unsubscribe();
 }
 
   onSearchFunction(event: string) {

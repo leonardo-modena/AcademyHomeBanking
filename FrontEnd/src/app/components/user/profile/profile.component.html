@@ -1,7 +1,12 @@
 <div class="container" *ngIf="user != null">
-  <div class="row justify-content-center">
-    <app-inactive-message *ngIf="inactive"></app-inactive-message>
-    <h2 class=""></h2>
+
+  <div class="row">
+    <h1 class="col-12 col-md-10 col-lg-8 text-center m-auto">Il tuo profilo</h1>
+    <div class="col-12 col-md-10 col-lg-8 m-auto">
+      <app-inactive-message *ngIf="inactive"></app-inactive-message>
+    </div>
+  </div>
+  <div [class]="'row justify-content-center ' + (inactive ? 'inactive' : '')">
     <div class="col-12 col-md-5 col-lg-4">
       <h2>Dati personali</h2>
       <table class="table table-borderless table-fit">
@@ -46,7 +51,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div [class]="'row ' + (inactive ? 'inactive' : '')">
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Aggiungi un nuovo conto</h2>
       <div class="container my-3">

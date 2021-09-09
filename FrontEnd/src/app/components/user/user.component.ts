@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
-import {Subscription} from "rxjs";
 import {AuthService} from "../../services/auth.service";
 
 @Component({
@@ -10,9 +9,6 @@ import {AuthService} from "../../services/auth.service";
 })
 export class UserComponent implements OnInit {
   pageLoading: boolean = false;
-  inactive:boolean = false;
-  inactiveSubscription!:Subscription;
-
   userId!: number;
 
   constructor(private userService: UserService, private authService:AuthService) { }
@@ -25,16 +21,10 @@ export class UserComponent implements OnInit {
     });
     this.pageLoading = true;
 
-    this.userService.bankAccounts.subscribe((bankAccounts) => {
+    this.userService.bankAccounts.subscribe(() => {
       setTimeout(() => {
         this.pageLoading = false;
       }, 1000);
-      this.inactive = bankAccounts.length === 1 && bankAccounts[0].account_status === 'INACTIVE';
-    });
-
-    this.inactiveSubscription = this.userService.inactiveUser.subscribe((inactive) => {
-
-      this.inactive = inactive;
     });
   }
 }

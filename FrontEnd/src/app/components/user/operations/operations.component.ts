@@ -1,21 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from "rxjs";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-operations',
   templateUrl: './operations.component.html',
   styleUrls: ['./operations.component.css']
 })
-export class OperationsComponent implements OnInit {
+export class OperationsComponent implements OnInit, OnDestroy {
 
-  operations: any[] = [];
+  inactiveSubscription!:Subscription;
+  inactive:boolean = false;
 
   isLoading: boolean = false;
 
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-
+    this.inactiveSubscription = this.userService.inactiveUser.subscribe((inactive) => {
+      this.inactive = inactive;
+    });
   }
 
+  ngOnDestroy() {
+    this.inactiveSubscription.unsubscribe();
+  }
 }

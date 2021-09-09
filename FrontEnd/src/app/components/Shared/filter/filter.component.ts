@@ -96,8 +96,8 @@ export class FilterComponent implements OnInit, OnDestroy {
     if (selectedChoiceValue.value === 'betweenTwoDates' && !this.invalidDate) {
       //Get between dates
 
-      const startDate = new Date(this.filterForm.controls.startDate.value + ' 02:00:00');
-      const endDate = new Date(this.filterForm.controls.endDate.value + ' 02:00:00');
+      const startDate = new Date(this.filterForm.controls.startDate.value + ' 00:00:00');
+      const endDate = new Date(this.filterForm.controls.endDate.value + ' 23:59:00');
       const startDateMillisec = startDate.getTime();
       const endDateMillisec = endDate.getTime();
 
