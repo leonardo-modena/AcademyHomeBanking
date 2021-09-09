@@ -54,7 +54,12 @@ import { DialogComponent } from './components/Shared/dialog/dialog.component';
       provide: HTTP_INTERCEPTORS,
       useClass: EncryptInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: EncryptInterceptor,
+      multi: true
+    },
   ],
   exports: [
     ErrorComponent,
