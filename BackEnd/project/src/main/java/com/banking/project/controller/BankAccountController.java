@@ -35,7 +35,7 @@ public class BankAccountController {
 	@PostMapping("/newBankAccount")
 	public BankAccount newAccount(@RequestBody BankAccount bankAccount){
 		bankAccount.setId(0);
-
+		
 		bankAccountRepository.save(bankAccount);
 
 		return bankAccount;
@@ -69,6 +69,12 @@ public class BankAccountController {
 	public List<BankAccount> getInactive() {
 		return bankAccountRepository.findInactive();
 	}
+
+	@PutMapping(value = "/accounts/inactive/{accountId}")
+	public void activeAccount(@PathVariable int accountId) {
+		bankAccountRepository.activeAccount(accountId);
+	}
+
 
 	/**
 	 * Metodo che ritorna tutti gli account che devono essere disattivati dal

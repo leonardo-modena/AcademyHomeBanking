@@ -41,15 +41,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	
+    	http.csrf().disable();
     	http.authorizeRequests()
 		.antMatchers("/").permitAll()
-        .antMatchers("/registrazione").permitAll()
-		.antMatchers("/user").hasRole("C")
-		.antMatchers("/admin").hasRole("D")
-        .antMatchers("/home/bankAccount/accounts/**").hasRole("D")
-        .antMatchers("/home/bankAccount/accounts/inactive").hasRole("D")
+		.antMatchers("/registrazione").permitAll()
+		.antMatchers("/users").permitAll()
+		.antMatchers("/user").permitAll()
+		.antMatchers("/admin").permitAll()
+        .antMatchers("/home/bankAccount/accounts/**").permitAll()
+        .antMatchers("/home/bankAccount/accounts/inactive/**").permitAll()
         .antMatchers("/home/bankAccount/accounts/closing").hasRole("D")
-        .antMatchers("/home/bankAccount/myAccount/**").hasRole("C")
+        .antMatchers("/home/bankAccount/myAccount/**").permitAll()
         .antMatchers("/account/**").hasAnyRole("D","C")
 		.and()
 		.formLogin().permitAll();

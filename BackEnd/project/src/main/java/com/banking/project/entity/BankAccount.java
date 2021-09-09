@@ -18,7 +18,7 @@ public class BankAccount {
 	@Column(name = "account_status")
 	private String account_status;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "holder", nullable = false)
 
 	private Customer holder;
@@ -27,11 +27,10 @@ public class BankAccount {
 
 	}
 
-	public BankAccount(BigDecimal balance, String account_status, Customer holder) {
+	public BankAccount(BigDecimal balance, String account_status) {
 
 		this.balance = balance;
 		this.account_status = account_status;
-		this.holder = holder;
 	}
 
 	public int getId() {
@@ -64,6 +63,8 @@ public class BankAccount {
 
 	public void setHolder(Customer holder) {
 		this.holder = holder;
+		holder.getId();
 	}
+	
 
 }

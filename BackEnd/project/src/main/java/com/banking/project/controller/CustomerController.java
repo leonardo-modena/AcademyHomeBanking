@@ -1,5 +1,7 @@
 package com.banking.project.controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,12 +12,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import javax.annotation.Resource;
 import com.banking.project.dao.CustomerRepository;
+import com.banking.project.entity.BankAccount;
 import com.banking.project.entity.Customer;
 import com.banking.project.exception.UserNotFoundException;
 
@@ -54,16 +54,25 @@ public class CustomerController {
 	}
 
 	/**
-	 * Registrazione di un nuovo utente
+	 * Registrazione di un nuovo utente e del suo nuovo conto
 	 */
 	@PostMapping("/registrazione")
 	public Customer addCustomer(@RequestBody Customer theCustomer) {
 
 		theCustomer.setId(0);
- 		//theCustomer.setBankAccounts(null);
+		List<BankAccount> bAccount=new ArrayList<>();
+		BankAccount bankAccount = new BankAccount();
+		bankAccount.setId(0);
+		bankAccount.setBalance(new BigDecimal(0.0));
+		bankAccount.setAccount_status("INACTIVE");
+		bankAccount.setHolder(theCustomer);
+		bAccount.add(bankAccount);
+		
+		theCustomer.setBankAccounts(bAccount);
 		customerRepository.save(theCustomer);
-//		bankAccountRepository.insertFirstAccount(theCustomer.getId());
-
+		bankAccountRepository.save(bankAccount);
+		
+		
 		return theCustomer;
 	}
 
