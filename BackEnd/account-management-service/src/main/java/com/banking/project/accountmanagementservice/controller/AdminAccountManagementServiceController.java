@@ -35,7 +35,7 @@ public class AdminAccountManagementServiceController {
     }
 
     @GetMapping(value = "listClosingAccounts")
-    public List<BankAccount> getClosing(){
+    public List<Customer> getClosing(){
         return bankAccountRepository.findClosing();
     }
 

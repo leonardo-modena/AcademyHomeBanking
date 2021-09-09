@@ -18,7 +18,7 @@ public interface BankAccountRepository extends JpaRepository<BankAccount,Integer
     List<Customer> findInactive();
 
 	@Query(value = "select c from Customer c inner join BankAccount b on c=b.holder where b.account_status='CLOSING'")
-    List<BankAccount> findClosing();
+    List<Customer> findClosing();
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
