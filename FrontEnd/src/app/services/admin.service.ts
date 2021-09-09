@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { User } from '../model/user';
 import { BankAccount } from '../model/BankAccount';
+import { AuthService } from './auth.service';
 
 const apiUrl = environment.api_url;
 
@@ -14,7 +15,7 @@ const apiUrl = environment.api_url;
 })
 export class AdminService {
   //Admin Subject & Observable
-  private adminSubject = new BehaviorSubject<any>('');
+  private adminSubject = new BehaviorSubject<User>({firstName: 'Nome', lastName: 'Cognome', dateOfBirth: 1630936744610, email: 'prova@gmail.com', gender: 'F', id: '1', role: 'ROLE_C', bankAccounts: [], password: 'hdf' });
   actualAdmin = this.adminSubject.asObservable();
 
   //Data Subject & Observable
@@ -30,17 +31,14 @@ export class AdminService {
   loadingState = this.loadingSubject.asObservable();
 
   //constructor
-  constructor(private httpService: HttpClient) {}
+  constructor(private httpService: HttpClient, private authService: AuthService) {}
 
-  //method to get and change user
-  getUser(id: number) {
-
-    this.httpService.get<User>(`${apiUrl}/profile/${id}`).subscribe( (usr) => {
-      this.changeUser(usr)
-    } )
+  //method Get and Change user
+  getUser(id: number): Observable<User> {
+    return this.httpService.get<User>(`${apiUrl}/customer/profile/${id}`)
   }
 
-  changeUser(newUser: any){
+  changeUser(newUser: User){
     this.adminSubject.next(newUser)
   }
 
@@ -79,6 +77,17 @@ export class AdminService {
           this.checkLoading();
         }
       );
+      this.authService.actualId.subscribe( (id) => {
+        this.getUser(id).subscribe( 
+          (user) => {
+          this.changeUser(user)
+          this.checkLoading();
+          },
+          (err) => {
+            this.checkLoading();
+          }
+        )
+      })
     }, 2643);
   }
 
@@ -103,7 +112,7 @@ export class AdminService {
   }
 
   checkLoading(): void {
-    if (this.loadingCounter === 2) {
+    if (this.loadingCounter === 3) {
       this.changeLoadingState(false);
     }
     this.loadingCounter = this.loadingCounter + 1;
