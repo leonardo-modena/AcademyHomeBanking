@@ -28,7 +28,6 @@ export class RegistrationComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, private alert: AlertService, private titleService: Title) {}
 
   ngOnInit(): void {
-    //set Title
     this.titleService.setTitle(`AcademyBank | Apertura-Conto`)
 
     this.today = new Date().toLocaleDateString();
