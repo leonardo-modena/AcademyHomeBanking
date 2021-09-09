@@ -28,9 +28,25 @@ export class AuthService {
   tokenDecoded!: any;
 
   constructor(private http: HttpClient,private route: Router) {
-    if (sessionStorage.getItem('token')){
-      this.nextAuth(true);
-    }
+      if (sessionStorage.getItem('token')){
+        this.nextAuth(true);
+  
+        let tokenDecoded: any ;
+
+        let token= sessionStorage.getItem('token')
+        
+        if (token) {
+          tokenDecoded = jwtDecode(token);
+          this.passId(tokenDecoded.id);
+          if(tokenDecoded.role == 'ROLE_C'){
+            this.isUser = true;
+          }
+          if (tokenDecoded.role == 'ROLE_D'){
+            this.nextAdmin(true)
+          }
+        }
+       
+      }
   }
 
   registerUser(firstName: string, lastName: string, email: string, password: string,dateOfBirth: number,gender: string){
@@ -80,7 +96,7 @@ export class AuthService {
     this.nextAdmin(false);
     this.isUser = false;
     sessionStorage.removeItem('token');
-    this.route.navigate(['']);
+    this.route.navigate(['/']);
   }
 
   autoLogout(): void{

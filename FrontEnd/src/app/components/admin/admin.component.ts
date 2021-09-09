@@ -31,7 +31,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   constructor(
     private adminService: AdminService,
     private titleService: Title,
-    private authService: AuthService
   ) {
     this.responsiveSection();
   }
@@ -50,7 +49,6 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.adminService.getAllData();
     this.adminSubscription.push(
       this.adminService.allNewRegistration.subscribe((newRegistrations) => {
-        console.log(newRegistrations)
         this.allNewRagistration = newRegistrations;
       })
     );

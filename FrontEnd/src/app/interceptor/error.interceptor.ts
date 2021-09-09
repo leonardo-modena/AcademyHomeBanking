@@ -19,6 +19,8 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let errorString: string;
 
+        console.log(error)
+
         if (error.error instanceof ErrorEvent) {
           errorString = `Error: ${error.error.message}`;
         } else {
