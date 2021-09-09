@@ -12,8 +12,7 @@ export class OperationsComponent implements OnInit, OnDestroy {
   inactiveSubscription!:Subscription;
   inactive:boolean = false;
 
-  isLoading: boolean = false;
-
+  isLoading!: boolean;
 
   constructor(private userService: UserService) { }
 
@@ -26,4 +25,6 @@ export class OperationsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.inactiveSubscription.unsubscribe();
   }
+
+
 }

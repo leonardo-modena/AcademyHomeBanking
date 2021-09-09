@@ -69,6 +69,10 @@ export class BankAccountComponent implements OnInit {
     this.inactiveSubscription.unsubscribe();
 }
 
+  onChangeBill() {
+    this.userService.getOperationList(parseInt(this.bankAccounts[this.selectedBill].id), {type: 'lastTen', startDate: 0, endDate: 0} )
+  }
+
   onSearchFunction(event: string) {
     this.operationString = event;
   }

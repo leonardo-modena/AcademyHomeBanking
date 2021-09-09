@@ -71,7 +71,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onNewBill(form: NgForm): void{
     this.isCreatingNew = true;
-    console.log(this.bankAccounts[form.controls.selectedBill.value].id);
     this.userService.createNewBill(form.controls.amount.value, this.bankAccounts[form.controls.selectedBill.value].id).subscribe(() => {
       this.isCreatingNew = false;
       this.userService.getUser(parseInt(this.user.id));

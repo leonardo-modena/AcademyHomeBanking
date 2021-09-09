@@ -6,7 +6,6 @@
     </div>
   </div>
   <div [class]="'row ' + (inactive ? 'inactive' : '')">
-
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <mat-tab-group mat-align-tabs="start" animationDuration="1000ms">
         <mat-tab [disabled]="isLoading" label="Versamento" >
@@ -25,7 +24,7 @@
           <div class="container ">
             <div class="row">
               <h3 class="mt-3 col-12 col-md-10 m-auto">Per fare un prelievo compila il form sottostante.</h3>
-              <p class="mb-3 mt-1 col-12 col-md-10 m-auto">Ricorda: non è possibile prelevare più del sldo del conto selezionato.</p>
+              <p class="mb-3 mt-1 col-12 col-md-10 m-auto">Ricorda: non è possibile prelevare più del saldo del conto selezionato.</p>
               <div class="col-12 col-md-10 orange-background p-4 m-auto">
                 <h3 class="text-center">Prelievo</h3>
                 <app-operation-form op_type="WITHDRAWAL"></app-operation-form>
