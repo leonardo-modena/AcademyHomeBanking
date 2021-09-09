@@ -16,7 +16,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>,next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    if (request.url == 'urldacontrollare') {
+    if (!request.url.includes('/signin') && !request.url.includes('/signup')) {
       const cloneReq = request.clone(
         {
           setHeaders: {
