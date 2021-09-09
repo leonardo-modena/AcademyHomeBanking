@@ -15,17 +15,17 @@ export class TokenInterceptor implements HttpInterceptor {
 
   token = sessionStorage.getItem('token');
 
-  intercept(request: HttpRequest<unknown>,next: HttpHandler): Observable<HttpEvent<unknown>> {
-
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     const headers = new HttpHeaders({
-      'Authorization': `${this.token}`,
+      Authorization: `${this.token}`,
     });
 
-    if (!request.url.includes('/signin') && !request.url.includes('/signup')) {
-      const cloneReq = request.clone(
-        {headers}
-      )
-      return next.handle(cloneReq)
+    if (request.url.includes('/customer') && request.url.includes('/admin') && request.url.includes('/bankAccount')) {
+      const cloneReq = request.clone({ headers });
+      return next.handle(cloneReq);
     }
 
     return next.handle(request);

@@ -14,12 +14,13 @@ import { ErrorService } from '../services/error.service';
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(private errorService: ErrorService) {}
 
-  intercept(request: HttpRequest<unknown>,next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorString: string;
-
-        console.log(error)
 
         if (error.error instanceof ErrorEvent) {
           errorString = `Error: ${error.error.message}`;
