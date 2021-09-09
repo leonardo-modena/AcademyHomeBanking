@@ -16,8 +16,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   adminSubscription: Subscription[] = [];
 
   adminInfo!: User;
-  adminId!: number;
-
   allUsers!: User[];
   allNewRagistration!: BankAccount[];
   allToDeleteAccounts!: BankAccount[];
@@ -32,7 +30,6 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   constructor(
     private adminService: AdminService,
-    private downloadService: DownloadService,
     private titleService: Title,
     private authService: AuthService
   ) {
@@ -41,11 +38,6 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.pageLoading = true;
-
-    this.authService.actualId.subscribe( (id) => {
-      this.adminId = id;
-        this.adminService.getUser(this.adminId);
-    })
 
     this.adminService.actualAdmin.subscribe((admin) => {
       this.adminInfo = admin;
