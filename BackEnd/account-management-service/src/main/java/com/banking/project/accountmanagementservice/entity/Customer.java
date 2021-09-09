@@ -11,6 +11,7 @@ import java.util.List;
 @Table(name = "users")
 public class Customer {
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -38,8 +39,8 @@ public class Customer {
 	@Column(name = "role")
 	private String role;
 
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "holder")
+
+	@OneToMany( mappedBy = "holder")
 	private List<BankAccount> bankAccounts;
 
 	/**
@@ -56,7 +57,7 @@ public class Customer {
 				bAccounts.add(b);
 		}
 		return bAccounts;
-	};
+	}
 
 	public Customer() {
 

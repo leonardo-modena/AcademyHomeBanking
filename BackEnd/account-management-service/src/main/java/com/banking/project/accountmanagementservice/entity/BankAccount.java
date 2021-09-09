@@ -23,10 +23,11 @@ public class BankAccount {
 	private String account_status;
 
 
-
+    @JsonIgnore
 	@ManyToOne()
-	@JoinColumn(name = "holder", nullable = false)
+	@JoinColumn(name = "holder", referencedColumnName = "id",nullable = false)
 	private Customer holder;
+
 	public BankAccount() {
 
 	}

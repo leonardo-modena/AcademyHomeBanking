@@ -25,7 +25,7 @@ public class AdminAccountManagementServiceController {
 
 
     @GetMapping(value = "/listInactiveAccounts")
-    public List<BankAccount> getInactive() {
+    public List<Customer> getInactive() {
         return bankAccountRepository.findInactive();
     }
 
@@ -39,11 +39,19 @@ public class AdminAccountManagementServiceController {
         return bankAccountRepository.findClosing();
     }
 
-    @DeleteMapping(value = "close/{accountId}")
-    public void closeAccount(@PathVariable int accountId){
-        bankAccountRepository.deleteAccount(accountId);
-    }
 
+
+    @DeleteMapping(value = "close/{accountId}")
+    public void closeAccount(@PathVariable int accountId) {
+        BankAccount bankAccount = bankAccountRepository.getById(accountId);
+        Customer customer = bankAccount.getHolder();
+        if (bankAccountRepository.count(customer) == 1) {
+            bankAccountRepository.deleteAccount(accountId);
+            customerRepository.deleteAccount(customer);
+        } else {
+            bankAccountRepository.deleteAccount(accountId);
+        }
+    }
 
     @GetMapping(value = "/listSortedCustomer")
     public List<Customer> getListCustomerSort() {
