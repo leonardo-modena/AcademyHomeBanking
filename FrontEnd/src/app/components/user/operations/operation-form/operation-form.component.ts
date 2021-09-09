@@ -15,13 +15,16 @@ export class OperationFormComponent implements OnInit, OnDestroy {
   user!: User;
   userSubscription!: Subscription;
 
-  @Input() op_type!: 'DEPOSIT' | 'WITHDRAWAL';
   operation_ok = false;
+  timer:any;
+
+  @Input() op_type!: 'DEPOSIT' | 'WITHDRAWAL';
+
   operationForm!:FormGroup;
   maxAmount: number = 5000000;
   selectedBill!: number;
 
-  @Output() isLoading = new EventEmitter<boolean>();
+  @Output() isLoading = new EventEmitter<boolean>(false);
 
   constructor(private userService: UserService, private errorService: ErrorService) { }
 
@@ -41,6 +44,7 @@ export class OperationFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
+    this.timer.reset();
   }
 
   onChangeBill() {
@@ -57,20 +61,23 @@ export class OperationFormComponent implements OnInit, OnDestroy {
     this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
     if (this.op_type === 'DEPOSIT') {
       this.userService.doDeposit(this.operationForm.value.bill, this.operationForm.value.amount, this.operationForm.controls.reason.value ).subscribe(() => {
-        this.isLoading.emit(false);
+        this.operation_ok = true;
+        this.operationForm.reset();
       }, () => {
-        this.isLoading.emit(false);
         this.errorService.newError('L\'operazione non è andata a buon fine. Riprova');
       });
     }
     else {
       this.userService.doWithdrawal(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value, this.operationForm.controls.reason.value ).subscribe(() => {
-        this.isLoading.emit(false);
+        this.operation_ok = true;
+        this.operationForm.reset();
       }, () => {
-        this.isLoading.emit(false);
         this.errorService.newError('L\'operazione non è andata a buon fine. Riprova');
       });
     }
-  }
 
+    this.timer = setTimeout(() => {
+      this.operation_ok = false;
+    }, 5000);
+  }
 }

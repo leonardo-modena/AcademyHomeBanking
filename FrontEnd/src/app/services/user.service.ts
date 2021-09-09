@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../model/user";
 import {Operation} from "../model/operation";
@@ -29,6 +29,10 @@ export class UserService {
 
   private inactiveUserSubject = new BehaviorSubject<boolean>(false);
   inactiveUser = this.inactiveUserSubject.asObservable();
+
+
+  private operationDoneSubject = new BehaviorSubject<boolean>(false);
+  operationDone = this.operationDoneSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 

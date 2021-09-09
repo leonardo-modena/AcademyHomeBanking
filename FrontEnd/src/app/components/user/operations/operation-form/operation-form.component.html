@@ -1,8 +1,8 @@
-<div class="alert" *ngIf="operation_ok">L'operazione è andata a buon fine</div>
+<p *ngIf="operation_ok" class="light-green-background rounded m-3 p-3">L'operazione è andata a buon fine.</p>
 <form class="form row gx-5" [formGroup]="operationForm" (ngSubmit)="onSubmit()">
   <div class="form-group col-12 col-md-6 mt-3">
     <label class="form-label">Conto</label>
-    <select class="form-select" formControlName="bill" (change)="onChangeBill()" [(ngModel)]="selectedBill">
+    <select class="form-select" formControlName="bill" (change)="onChangeBill()"  >
       <option *ngFor="let bill of user.bankAccounts;" [value]="bill">{{bill | number:'6.0' | noComma}}</option>
     </select>
   </div>
