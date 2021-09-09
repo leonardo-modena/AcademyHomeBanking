@@ -26,7 +26,7 @@ export class AccountListItemComponent implements OnInit {
       .open(DialogComponent, {
         closeOnNavigation: true,
         data: {
-          message: `Confermare l'apertura dell' account n.${this.account.id}`,
+          message: `Confermare la convalida dell' account n.${this.account.id}`,
         },
       })
       .afterClosed()
@@ -46,7 +46,7 @@ export class AccountListItemComponent implements OnInit {
       .open(DialogComponent, {
         closeOnNavigation: true,
         data: {
-          message: `confermare la chiusura dell' account n.${this.account.id}`,
+          message: `Confermare la chiusura dell' account n.${this.account.id}`,
         },
       })
       .afterClosed()
