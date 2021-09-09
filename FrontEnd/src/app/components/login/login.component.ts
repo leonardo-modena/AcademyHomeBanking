@@ -23,8 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private route: Router, private alert: AlertService, private titleService: Title) {}
 
   ngOnInit(): void {
-    //set Title
-    this.titleService.setTitle(`AcademyBank | Login`)
+    this.titleService.setTitle(`AcademyBank | Login`);
   }
 
   onSubmit(form: NgForm): void {
