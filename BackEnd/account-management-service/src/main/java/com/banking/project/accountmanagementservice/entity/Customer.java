@@ -38,6 +38,7 @@ public class Customer {
 	@Column(name = "role")
 	private String role;
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "holder")
 	private List<BankAccount> bankAccounts;
 

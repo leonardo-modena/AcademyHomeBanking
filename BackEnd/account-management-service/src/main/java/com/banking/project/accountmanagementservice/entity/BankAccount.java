@@ -23,6 +23,7 @@ public class BankAccount {
 	private String account_status;
 
 
+
 	@ManyToOne()
 	@JoinColumn(name = "holder", nullable = false)
 	private Customer holder;
