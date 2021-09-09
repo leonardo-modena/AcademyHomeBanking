@@ -1,7 +1,9 @@
 package com.banking.project.accountmanagementservice.controller;
 
 import com.banking.project.accountmanagementservice.entity.BankAccount;
+import com.banking.project.accountmanagementservice.entity.BankAccountDTO;
 import com.banking.project.accountmanagementservice.entity.Customer;
+import com.banking.project.accountmanagementservice.repository.BankAccountDTORepository;
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,13 @@ public class AdminAccountManagementServiceController {
    @Autowired
    private CustomerRepository customerRepository;
 
+   @Autowired
+   private BankAccountDTORepository bankAccountDTORepository;
+
 
     @GetMapping(value = "/listInactiveAccounts")
-    public List<Customer> getInactive() {
-        return bankAccountRepository.findInactive();
+    public List<BankAccountDTO> getInactive() {
+        return bankAccountDTORepository.findInactive();
     }
 
     @PutMapping(value = "/activeAccount/{accountId}")
@@ -35,8 +40,8 @@ public class AdminAccountManagementServiceController {
     }
 
     @GetMapping(value = "listClosingAccounts")
-    public List<Customer> getClosing(){
-        return bankAccountRepository.findClosing();
+    public List<BankAccountDTO> getClosing(){
+        return bankAccountDTORepository.findClosing();
     }
 
 

@@ -40,6 +40,7 @@ public class Customer {
 	private String role;
 
 
+    @JsonIgnore
 	@OneToMany( mappedBy = "holder")
 	private List<BankAccount> bankAccounts;
 
@@ -49,15 +50,7 @@ public class Customer {
 	 * 
 	 * @return
 	 */
-	public List<BankAccount> bankAccounts_modified() {
-		List<BankAccount> bAccounts = new ArrayList<>();
-		for (BankAccount b : bankAccounts) {
-			// non voglio che mi vengano mostrati i conti chiusi
-			if (!(b.getAccount_status().equals("CLOSING")))
-				bAccounts.add(b);
-		}
-		return bAccounts;
-	}
+
 
 	public Customer() {
 
@@ -139,7 +132,7 @@ public class Customer {
 	}
 
 	public List<BankAccount> getBankAccounts() {
-		return bankAccounts_modified();
+		return bankAccounts;
 
 	}
 

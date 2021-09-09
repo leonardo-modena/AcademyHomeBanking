@@ -3,6 +3,8 @@ package com.banking.project.accountmanagementservice.controller;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import com.banking.project.accountmanagementservice.entity.CustomerDTO;
+import com.banking.project.accountmanagementservice.repository.CustomerDTORepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.project.accountmanagementservice.entity.BankAccount;
-import com.banking.project.accountmanagementservice.entity.Customer;
 import com.banking.project.accountmanagementservice.exception.ApiBankException;
 import com.banking.project.accountmanagementservice.exception.NotFoundException;
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
@@ -28,6 +29,9 @@ public class CustomerAccountManagementServiceController {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+
+	@Autowired
+	private CustomerDTORepository customerDTORepository;
 
 	/**
 	 * Metodo che richiede la chiusura del conto da parte dell'utente, setta lo
@@ -49,9 +53,9 @@ public class CustomerAccountManagementServiceController {
 	 */
 
 	@GetMapping("/profile/{customerId}")
-	public Optional<Customer> getCustomer(@PathVariable int customerId) {
+	public Optional<CustomerDTO> getCustomer(@PathVariable int customerId) {
 
-		return customerRepository.findById(customerId);
+		return customerDTORepository.findById(customerId);
 
 	}
 
