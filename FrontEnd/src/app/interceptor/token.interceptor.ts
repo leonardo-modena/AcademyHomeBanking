@@ -23,8 +23,9 @@ export class TokenInterceptor implements HttpInterceptor {
       Authorization: `${this.token}`,
     });
 
-    if (request.url.includes('/customer') && request.url.includes('/admin') && request.url.includes('/bankAccount')) {
-      const cloneReq = request.clone({ headers });
+    console.log(request.url);
+    if (request.url.includes('/customer') || request.url.includes('/admin') || request.url.includes('/bankAccount')) {
+      const cloneReq = request.clone({headers});
       return next.handle(cloneReq);
     }
 
