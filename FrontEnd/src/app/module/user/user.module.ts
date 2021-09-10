@@ -5,7 +5,7 @@ import { ProfileComponent } from "../../components/user/profile/profile.componen
 import { OperationsComponent } from "../../components/user/operations/operations.component";
 import { RouterModule } from "@angular/router";
 import { OperationListComponent } from "../../components/user/operation-list/operation-list.component";
-import { OpertationItemComponent } from "../../components/user/operation-list/opertation-item/opertation-item.component";
+import { OperationItemComponent } from "../../components/user/operation-list/opertation-item/operation-item.component";
 import { BankAccountComponent } from "../../components/user/bank-account/bank-account.component";
 import { ConfirmDialogComponent } from "../../components/user/profile/confirm-dialog/confirm-dialog.component";
 import { DownloadComponent } from "../../components/user/download/download.component";
@@ -23,7 +23,7 @@ import {AlertMessage} from "../../components/user/alert-message/alert-message";
     ProfileComponent,
     OperationsComponent,
     OperationListComponent,
-    OpertationItemComponent,
+    OperationItemComponent,
     OperationFormComponent,
     ConfirmDialogComponent,
     BankAccountComponent,

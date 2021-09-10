@@ -15,7 +15,7 @@ export class UserService {
   apiUrlCustomer =`${environment.api_url}/customer`;
   apiUrlBankAccount =`${environment.api_url}/bankAccount`;
 
-  private userSubject = new BehaviorSubject<User>({firstName: 'Nome', lastName: 'Cognome', dateOfBirth: 1630936744610, email: 'prova@gmail.com', gender: 'F', id: '1', role: 'ROLE_C', bankAccounts: [], password: 'hdf' });
+  private userSubject = new BehaviorSubject<User>({firstName: '', lastName: '', dateOfBirth: 0, email: '', gender: '', id: '', role: 'ROLE_C', bankAccounts: [], password: '' });
   user = this.userSubject.asObservable();
 
   private bankAccountsSubject = new BehaviorSubject<BankAccount[]>([]);
@@ -37,8 +37,7 @@ export class UserService {
 
   // GET REQUESTS
 
-
-  getUser(id: number) {
+  getUser(id: number): void {
 
     this.http.get<{id: string;
       firstName: string;
@@ -81,11 +80,15 @@ export class UserService {
 
   // Restituisce la lista delle operazioni che
   // sono state fatte nel periodo specificato
-  getOperationList(bill: number, filterInfo: {type: 'lastTen' | 'lastThreeMonths' | 'betweenTwoDates', startDate: number, endDate: number}) {
+  getOperationList(bill: number, filterInfo: {type: 'lastTen' | 'lastThreeMonths' | 'betweenTwoDates', startDate: number, endDate: number}): void {
     this.operationSpinnerSubject.next(true);
-    this.http.get<Operation[]>(`${this.apiUrlBankAccount}/transactions/${bill}/${filterInfo.type}/${filterInfo.startDate}/${filterInfo.endDate}`)
+    this.http.get<{id: number, type:  'WITHDRAWAL' | 'DEPOSIT', causal: string, amount: number, dateTransaction: number, id_account: {id: number, balance: number, account_status: string}}[]>(`${this.apiUrlBankAccount}/transactions/${bill}/${filterInfo.type}/${filterInfo.startDate}/${filterInfo.endDate}`)
       .subscribe((operations) => {
-        this.operationsSubject.next(operations);
+        console.log(operations);
+        let operationsList: Operation[] = operations.map((op) => {
+          return {causal: op.causal, type: op.type, amount: op.amount, dateTransaction: op.dateTransaction, idAccount: op.id_account.id, idTransaction: op.id, }
+        })
+        this.operationsSubject.next(operationsList);
         this.operationSpinnerSubject.next(false);
       }, () => {
         this.operationSpinnerSubject.next(false);
@@ -100,11 +103,9 @@ export class UserService {
   //POST REQUESTS
 
   //Creazione di un nuovo conto
-  createNewBill(initialAmount: number, startBillNumber: string) {
+  createNewBill(initialAmount: number, startBillNumber: string): Observable<BankAccount> {
     return this.http.post<BankAccount>(`${this.apiUrlCustomer}/new/${startBillNumber}/${initialAmount}`, {});
   }
-
-
 
   // Versamento sul conto
   doDeposit(bill: number, amount: number, causal: string) {

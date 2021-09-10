@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   private id = new BehaviorSubject(0);
@@ -19,7 +20,7 @@ export class AuthService {
 
   private isAdmin = new BehaviorSubject(false);
   actualAdmin = this.isAdmin.asObservable();
-
+  
   url: string = environment.api_url;
   isUser: boolean = false;
   token !: string;
@@ -30,7 +31,7 @@ export class AuthService {
   constructor(private http: HttpClient,private route: Router) {
       if (sessionStorage.getItem('token')){
         this.nextAuth(true);
-        let relodedTokenDecoded: any ;
+        let relodedTokenDecoded: any;
         let relodedToken= sessionStorage.getItem('token');
 
         if (relodedToken) {
@@ -61,11 +62,10 @@ export class AuthService {
 
   loginUser(username: string, password: string): void{
 
-    this.http.post<any>( this.url + '/auth/signin',{
+    this.http.post<{ token: string }>( this.url + '/auth/signin',{
       username,
       password
     }).subscribe(resData => {
-
       this.tokenDecoded = jwtDecode(resData.token);
 
       this.token = resData.token;
