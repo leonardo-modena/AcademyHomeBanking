@@ -20,6 +20,7 @@ export class OperationsComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+
     this.inactiveSubscription = this.userService.inactiveUser.subscribe((inactive) => {
       this.inactive = inactive;
     });
