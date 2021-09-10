@@ -1,16 +1,14 @@
 package com.banking.project.signUpservice.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
+
 public class CustomerAlreadyExistException extends RuntimeException {
 
-	private static final long serialVersionUID = 1885653349235601203L;
+	private static final long serialVersionUID = -7806029002430564887L;
 
-	public CustomerAlreadyExistException(String message) {
-		super(message);
-	}
+	private HttpStatus errorCode;
+	private String errorMessage;
 
 	public CustomerAlreadyExistException(Throwable throwable) {
 		super(throwable);
@@ -20,4 +18,36 @@ public class CustomerAlreadyExistException extends RuntimeException {
 		super(msg, throwable);
 	}
 
+	public CustomerAlreadyExistException(String msg) {
+		super(msg);
+	}
+
+	public CustomerAlreadyExistException(String message, HttpStatus errorCode) {
+		super();
+		this.errorCode = errorCode;
+		this.errorMessage = message;
+	}
+
+	
+
+	public HttpStatus getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(HttpStatus errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+	@Override
+	public String toString() {
+		return "Errore : " + this.errorCode + ", " + "message: " + this.errorMessage;
+	}
 }
