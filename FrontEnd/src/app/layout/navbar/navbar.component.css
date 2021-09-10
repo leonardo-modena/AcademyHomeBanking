@@ -98,14 +98,6 @@ nav {
   border: 2px solid var(--white-yellow);
 }
 
-.sidenav-user-text {
-  margin-top: 1rem;
-  font-size: 1rem;
-  color: var(--white-yellow);
-  font-weight: 100;
-  letter-spacing: 0.17rem;
-}
-
 .sidenav-close-icon i {
   padding-right: 2rem;
   font-size: 1.5rem;
