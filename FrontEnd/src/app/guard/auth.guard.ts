@@ -14,8 +14,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (sessionStorage.getItem('token')){
-      this.alert.newAllert("Sei già autenticato!")
-      return this.route.navigate(['**']);
+      this.alert.newAllert("Accesso non autorizzato.")
+      return this.route.navigate(['/']);
     }
     return true;
 

@@ -30,6 +30,7 @@
   color: white;
   margin-bottom: 3rem;
   padding-right: 4rem;
+  font-size: 19.2px !important;
 }
 
 .container-description-img {
@@ -123,7 +124,7 @@
   }
 
   .description-keypoint{
-    font-size: 1.2rem !important;
+    font-size: 1.3rem !important;
   }
 
   .info-item {
@@ -162,8 +163,10 @@
     bottom: 0 !important;
     right: 0 !important;
   }
+
+  .description-keypoint{
+  font-size: 19.2px !important;
+  }
 }
 
-.size-font{
-  font-size: 19.2px !important;
-}
+

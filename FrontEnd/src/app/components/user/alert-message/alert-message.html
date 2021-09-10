@@ -1,3 +1,6 @@
-<p class="orange-background p-4 m-5" [innerHTML]="type === 'closing' ? closingString : inactiveString">
-
-</p>
+<div class="orange-background p-4 m-5" >
+<p [innerHTML]="type === 'closing' ? closingString : inactiveString"></p>
+<div class="d-flex  justify-content-end">
+  <button (click)="onLogout()" class="btn btn-primary">Logout</button>
+</div>
+</div>
