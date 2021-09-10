@@ -61,7 +61,7 @@ export class AuthService {
 
   loginUser(username: string, password: string): void{
 
-    this.http.post<string>( this.url + '/auth/signin',{
+    this.http.post<any>( this.url + '/auth/signin',{
       username,
       password
     }).subscribe(resData => {
