@@ -7,12 +7,8 @@ import com.banking.project.accountmanagementservice.repository.BankAccountDTORep
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-
-import javax.persistence.OrderBy;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,7 +36,8 @@ public class AdminAccountManagementServiceController {
     }
 
     @GetMapping(value = "listClosingAccounts")
-    public List<BankAccountDTO> getClosing(){
+    public List<BankAccountDTO> getClosing(String message ){
+        System.out.println(message);
         return bankAccountDTORepository.findClosing();
     }
 

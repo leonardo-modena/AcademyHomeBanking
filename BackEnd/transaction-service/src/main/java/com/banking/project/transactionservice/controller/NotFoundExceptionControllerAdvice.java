@@ -13,6 +13,7 @@ import com.banking.project.transactionservice.exception.NotFoundResponse;
 
 @ControllerAdvice
 public class NotFoundExceptionControllerAdvice {
+
 	@ExceptionHandler(NotFoundException.class)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.NOT_FOUND)

@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import com.banking.project.accountmanagementservice.entity.CustomerDTO;
+import com.banking.project.accountmanagementservice.rabbitConfig.MQConfig;
 import com.banking.project.accountmanagementservice.repository.CustomerDTORepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,6 @@ import com.banking.project.accountmanagementservice.entity.BankAccount;
 import com.banking.project.accountmanagementservice.exception.ApiBankException;
 import com.banking.project.accountmanagementservice.exception.NotFoundException;
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
-import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 
 @RestController
 @RequestMapping("/customer")
@@ -30,6 +31,8 @@ public class CustomerAccountManagementServiceController {
 	@Autowired
 	private CustomerDTORepository customerDTORepository;
 
+	@Autowired
+	private RabbitTemplate template;
 	/**
 	 * Metodo che richiede la chiusura del conto da parte dell'utente, setta lo
 	 * stato a "CLOSING"
@@ -37,9 +40,13 @@ public class CustomerAccountManagementServiceController {
 	 * @param accountId
 	 */
 
+
 	@PutMapping(value = "/closingRequest/{accountId}")
 	public void closingAccount(@PathVariable int accountId) {
+		String message="Closing request from "+accountId;
+		template.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY,message);
 		bankAccountRepository.closingRequest(accountId);
+
 	}
 
 	/**
