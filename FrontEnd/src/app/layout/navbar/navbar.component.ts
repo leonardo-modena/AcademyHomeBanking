@@ -25,9 +25,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   authorized!: boolean;
 
   adminLogged!: boolean;
-
-  userInfo = { nome: 'Mario', cognome: 'Rossi' };
-
   constructor(private authService: AuthService) {
     this.hamburgerResponsive();
   }
