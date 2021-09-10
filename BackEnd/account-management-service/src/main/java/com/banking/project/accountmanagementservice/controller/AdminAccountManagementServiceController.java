@@ -3,12 +3,12 @@ package com.banking.project.accountmanagementservice.controller;
 import com.banking.project.accountmanagementservice.entity.BankAccount;
 import com.banking.project.accountmanagementservice.entity.BankAccountDTO;
 import com.banking.project.accountmanagementservice.entity.Customer;
-import com.banking.project.accountmanagementservice.repository.BankAccountDTORepository;
 import com.banking.project.accountmanagementservice.repository.BankAccountRepository;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,13 +21,22 @@ public class AdminAccountManagementServiceController {
    @Autowired
    private CustomerRepository customerRepository;
 
-   @Autowired
-   private BankAccountDTORepository bankAccountDTORepository;
+
 
 
     @GetMapping(value = "/listInactiveAccounts")
     public List<BankAccountDTO> getInactive() {
-        return bankAccountDTORepository.findInactive();
+        List<BankAccount> bankAccounts=bankAccountRepository.findInactive();
+        List<BankAccountDTO> bankAccountDTOS=new ArrayList<>();
+        BankAccountDTO bankAccountDTO=new BankAccountDTO();
+        for(BankAccount i:bankAccounts ){
+            bankAccountDTO.setId(i.getId());
+            bankAccountDTO.setBalance(i.getBalance());
+            bankAccountDTO.setAccount_status(i.getAccount_status());
+            bankAccountDTO.setHolder(i.getHolder());
+            bankAccountDTOS.add(bankAccountDTO);
+        }
+        return bankAccountDTOS;
     }
 
     @PutMapping(value = "/activeAccount/{accountId}")
@@ -35,10 +44,21 @@ public class AdminAccountManagementServiceController {
         bankAccountRepository.activeAccount(accountId);
     }
 
-    @GetMapping(value = "listClosingAccounts")
-    public List<BankAccountDTO> getClosing(String message ){
-        System.out.println(message);
-        return bankAccountDTORepository.findClosing();
+    @GetMapping(value = "/listClosingAccounts")
+    public List<BankAccountDTO> getClosing(){
+
+        List<BankAccount> bankAccounts=bankAccountRepository.findClosing();
+        List<BankAccountDTO>  bankAccount_DTOS=new ArrayList<>();
+        BankAccountDTO bankAccountDTO=new BankAccountDTO();
+
+        for(BankAccount i:bankAccounts ){
+            bankAccountDTO.setId(i.getId());
+            bankAccountDTO.setBalance(i.getBalance());
+            bankAccountDTO.setAccount_status(i.getAccount_status());
+            bankAccountDTO.setHolder(i.getHolder());
+            bankAccount_DTOS.add(bankAccountDTO);
+        }
+        return bankAccount_DTOS;
     }
 
 

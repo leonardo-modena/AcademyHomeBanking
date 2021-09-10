@@ -6,42 +6,25 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Entity
-@Table(name = "users")
 public class CustomerDTO {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+
     private int id;
 
-    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "email")
     private String email;
 
-    @JsonIgnore
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "dateofbirth")
     private long dateOfBirth;
 
-    @Column(name = "gender")
     private String gender;
 
-    @Column(name = "role")
     private String role;
 
 
-
-    @OneToMany( mappedBy = "holder")
     private List<BankAccount> bankAccounts;
 
     /**
@@ -64,12 +47,11 @@ public class CustomerDTO {
 
     }
 
-    public CustomerDTO(String firstName, String lastName, String email, String password, long dateOfBirth, String gender,
+    public CustomerDTO(String firstName, String lastName, String email, long dateOfBirth, String gender,
                        String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.role = role;
@@ -106,14 +88,6 @@ public class CustomerDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public long getDateOfBirth() {

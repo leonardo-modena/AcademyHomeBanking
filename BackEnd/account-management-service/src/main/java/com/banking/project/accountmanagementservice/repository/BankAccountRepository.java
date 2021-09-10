@@ -1,6 +1,7 @@
 package com.banking.project.accountmanagementservice.repository;
 
 import com.banking.project.accountmanagementservice.entity.BankAccount;
+import com.banking.project.accountmanagementservice.entity.BankAccountDTO;
 import com.banking.project.accountmanagementservice.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,8 +13,11 @@ import java.util.List;
 
 public interface BankAccountRepository extends JpaRepository<BankAccount,Integer> {
 
+    @Query(value = "select b from BankAccount b inner join Customer c on c=b.holder where b.account_status='INACTIVE'")
+    List<BankAccount> findInactive();
 
-
+    @Query(value = "select b from BankAccount b inner join Customer c on c=b.holder where b.account_status='CLOSING'")
+    List<BankAccount> findClosing();
 
 	@Transactional
 	@Modifying(clearAutomatically = true)

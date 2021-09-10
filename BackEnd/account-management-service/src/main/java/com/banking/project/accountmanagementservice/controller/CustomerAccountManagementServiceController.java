@@ -3,9 +3,10 @@ package com.banking.project.accountmanagementservice.controller;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import com.banking.project.accountmanagementservice.entity.Customer;
 import com.banking.project.accountmanagementservice.entity.CustomerDTO;
 import com.banking.project.accountmanagementservice.rabbitConfig.MQConfig;
-import com.banking.project.accountmanagementservice.repository.CustomerDTORepository;
+import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,9 @@ public class CustomerAccountManagementServiceController {
 	private BankAccountRepository bankAccountRepository;
 
 	@Autowired
-	private CustomerDTORepository customerDTORepository;
+
+	private CustomerRepository customerRepository;
+
 
 	@Autowired
 	private RabbitTemplate template;
@@ -57,9 +60,21 @@ public class CustomerAccountManagementServiceController {
 	 */
 
 	@GetMapping("/profile/{customerId}")
-	public Optional<CustomerDTO> getCustomer(@PathVariable int customerId) {
+	public CustomerDTO getCustomer(@PathVariable int customerId) {
 
-		return customerDTORepository.findById(customerId);
+	Customer customer= customerRepository.getById(customerId);
+		CustomerDTO customerDTO=new CustomerDTO();
+
+		customerDTO.setId(customer.getId());
+		customerDTO.setFirstName(customer.getFirstName());
+		customerDTO.setLastName(customer.getLastName());
+		customerDTO.setEmail(customer.getEmail());
+		customerDTO.setDateOfBirth(customer.getDateOfBirth());
+		customerDTO.setGender(customer.getGender());
+		customerDTO.setRole(customer.getRole());
+		customerDTO.setDateOfBirth(customer.getDateOfBirth());
+		customerDTO.setBankAccounts(customer.getBankAccounts());
+		return customerDTO;
 
 	}
 

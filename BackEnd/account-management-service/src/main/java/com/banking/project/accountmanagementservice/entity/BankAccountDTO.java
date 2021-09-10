@@ -1,30 +1,16 @@
 package com.banking.project.accountmanagementservice.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "bank_account")
 public class BankAccountDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private int id;
 
-	@Column(name = "balance")
 	private BigDecimal balance;
 
-	@Column(name = "account_status")
 	private String account_status;
 
-
-
-	@ManyToOne()
-	@JoinColumn(name = "holder", referencedColumnName = "id",nullable = false)
 	private Customer holder;
 
 	public BankAccountDTO() {

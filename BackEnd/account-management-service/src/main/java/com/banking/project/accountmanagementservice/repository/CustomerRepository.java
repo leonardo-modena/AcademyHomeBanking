@@ -17,7 +17,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 
 
-
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query(value = "DELETE Customer c where c=:customer")
