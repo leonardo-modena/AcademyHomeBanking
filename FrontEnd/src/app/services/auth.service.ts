@@ -106,7 +106,7 @@ export class AuthService {
   }
 
   autoLogout(): void{
-    setTimeout(this.logout,this.tokenExpiration);
+    setTimeout( () => {this.logout} ,this.tokenExpiration);
   }
 
   passId(id: number): void{
