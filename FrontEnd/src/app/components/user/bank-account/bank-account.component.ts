@@ -4,6 +4,7 @@ import {UserService} from "../../../services/user.service";
 import {User} from "../../../model/user";
 import {BankAccount} from "../../../model/BankAccount";
 import {Subscription} from "rxjs";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-bank-account',
@@ -37,12 +38,15 @@ export class BankAccountComponent implements OnInit {
 
   selectedBill: number = 0;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private titleService: Title) { }
 
   ngOnInit(): void {
 
     this.userSubscriptions = this.userService.user.subscribe((user) => {
       this.user = user;
+      this.titleService.setTitle(
+        `IL TUO CONTO | ${this.user.firstName} ${this.user.lastName}`
+      );
     });
 
     this.bankAccountsSubscription = this.userService.bankAccounts.subscribe((bankAccounts) => {
