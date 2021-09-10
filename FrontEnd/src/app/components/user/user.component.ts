@@ -12,7 +12,6 @@ export class UserComponent implements OnInit, OnDestroy {
   pageLoading: boolean = false;
   userId!: number;
 
-
   idSubscription!: Subscription;
   loadingSubscription!: Subscription;
 
