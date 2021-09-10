@@ -16,15 +16,14 @@ const apiUrl = environment.api_url;
 export class AdminService {
   //Admin Subject & Observable
   private adminSubject = new BehaviorSubject<User>({
-    firstName: 'Nome',
-    lastName: 'Cognome',
-    dateOfBirth: 1630936744610,
-    email: 'prova@gmail.com',
-    gender: 'F',
-    id: '1',
-    role: 'ROLE_C',
-    bankAccounts: [],
-    password: 'hdf',
+    firstName: '',
+    lastName: '',
+    dateOfBirth: 0,
+    email: '',
+    gender: '',
+    id: '',
+    role: '',
+    bankAccounts: []
   });
   actualAdmin = this.adminSubject.asObservable();
 
@@ -51,7 +50,7 @@ export class AdminService {
     return this.httpService.get<User>(`${apiUrl}/customer/profile/${id}`);
   }
 
-  changeUser(newUser: User) {
+  changeUser(newUser: User): void {
     this.adminSubject.next(newUser);
   }
 
