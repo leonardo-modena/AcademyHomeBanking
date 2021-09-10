@@ -2,10 +2,11 @@
   <div class="row">
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h1 class="text-center">Opera sul tuo conto</h1>
-      <app-inactive-message *ngIf="inactive"></app-inactive-message>
+      <app-alert-message type="inactive" *ngIf="inactive"></app-alert-message>
+      <app-alert-message type="closing" *ngIf="closing"></app-alert-message>
     </div>
   </div>
-  <div [class]="'row ' + (inactive ? 'inactive' : '')">
+  <div [class]="'row ' + (inactive || closing ? 'inactive' : '')">
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <mat-tab-group mat-align-tabs="start" animationDuration="1000ms">
         <mat-tab [disabled]="isLoading" label="Versamento" >

@@ -31,8 +31,10 @@ export class OperationFormComponent implements OnInit, OnDestroy {
 
     this.userSubscription = this.userService.user.subscribe((user) => {
       this.user = user;
-      this.selectedBill = this.user.bankAccounts[0];
-      this.getBalance();
+      if (user.bankAccounts.length > 0) {
+        this.selectedBill = this.user.bankAccounts[0];
+        this.getBalance();
+      }
     });
     this.operationForm = new FormGroup({
       'bill': new FormControl(this.user.bankAccounts[0], Validators.required),
@@ -57,7 +59,7 @@ export class OperationFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.isLoading.emit(true); // Nella subscribe this.isLoading.emit(false)
+    this.isLoading.emit(true);
     if (this.op_type === 'DEPOSIT') {
       this.userService.doDeposit(this.operationForm.value.bill, this.operationForm.value.amount, this.operationForm.controls.reason.value ).subscribe(() => {
         this.operationDoneCorrectly();

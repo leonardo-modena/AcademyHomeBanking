@@ -52,9 +52,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.user = user;
       this.dateOfBirth = new Date(this.user.dateOfBirth);
       this.deletingBill = user.bankAccounts[0];
-      this.userService.getBalance(this.user.bankAccounts[this.selectedBill]).subscribe((balance) => {
-        this.maxAmount = balance;
-      });
+      if (user.bankAccounts.length > 0) {
+        this.userService.getBalance(this.user.bankAccounts[this.selectedBill]).subscribe((balance) => {
+          this.maxAmount = balance;
+        });
+      }
     });
 
     this.bankAccountsSubscription = this.userService.bankAccounts.subscribe((bankAccounts) => {
@@ -74,6 +76,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userSubcription.unsubscribe();
     this.bankAccountsSubscription.unsubscribe();
     this.inactiveSubscription.unsubscribe();
+    this.closingAccountSubscription.unsubscribe();
   }
 
   changeBill() {
