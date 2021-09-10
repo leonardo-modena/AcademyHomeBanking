@@ -23,9 +23,9 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 @RestController
 @RequestMapping("/signup")
-public class RegisterServiceController {
+public class SignupServiceController {
 
-	private Logger logger = LoggerFactory.getLogger(RegisterServiceController.class);
+	private Logger logger = LoggerFactory.getLogger(SignupServiceController.class);
 
 	@Autowired
 	private RabbitTemplate template;

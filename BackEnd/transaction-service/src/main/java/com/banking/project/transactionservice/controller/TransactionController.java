@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bankAccount")
-public class transactionController {
+public class TransactionController {
 
 	@Autowired
 	BankAccountRepository bankAccountRepository;
