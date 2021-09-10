@@ -9,6 +9,7 @@ import {AuthService} from "../../../services/auth.service";
 import {BankAccount} from "../../../model/BankAccount";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-profile',
@@ -46,12 +47,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     public dialog: MatDialog,
-    private errorService: ErrorService) {
+    private errorService: ErrorService,
+    private titleService: Title) {
   }
 
   ngOnInit(): void {
+
     this.userSubcription = this.userService.user.subscribe((user: User) => {
       this.user = user;
+      this.titleService.setTitle(
+        `PROFILO | ${this.user.firstName} ${this.user.lastName}`
+      );
       this.dateOfBirth = new Date(this.user.dateOfBirth);
       this.deletingBill = user.bankAccounts[0];
       if (user.bankAccounts.length > 0) {

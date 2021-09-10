@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../../services/user.service";
 import {User} from "../../../../model/user";
 import {Subscription} from "rxjs";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-operation-form',
@@ -25,12 +26,17 @@ export class OperationFormComponent implements OnInit, OnDestroy {
 
   @Output() isLoading = new EventEmitter<boolean>(false);
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private titleService: Title) { }
 
   ngOnInit(): void {
 
     this.userSubscription = this.userService.user.subscribe((user) => {
       this.user = user;
+
+      this.titleService.setTitle(
+        `OPERA SUL CONTO | ${this.user.firstName} ${this.user.lastName}`
+      );
+
       if (user.bankAccounts.length > 0) {
         this.selectedBill = this.user.bankAccounts[0];
         this.getBalance();
