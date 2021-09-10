@@ -3,11 +3,11 @@
   <div class="row">
     <h1 class="col-12 col-md-10 col-lg-8 text-center m-auto">Il tuo profilo</h1>
     <div class="col-12 col-md-10 col-lg-8 m-auto">
-      <app-inactive-message *ngIf="inactive"></app-inactive-message>
-      <p *ngIf="closing">Il tuo account è in fase di chiusura.</p>
+      <app-alert-message type="inactive" *ngIf="inactive"></app-alert-message>
+      <app-alert-message type="closing" *ngIf="closing"></app-alert-message>
     </div>
   </div>
-  <div [class]="'row justify-content-center ' + (inactive ? 'inactive' : '')">
+  <div [class]="'row justify-content-center ' + (inactive || closing ? 'inactive' : '')">
     <div class="col-12 col-md-5 col-lg-4">
       <h2>Dati personali</h2>
       <table class="table table-borderless table-fit">

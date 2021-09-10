@@ -4,9 +4,13 @@
       <h1>Bentornat{{user.gender === 'M' ? 'o' : 'a'}}, {{user.firstName | titlecase}} {{user.lastName | titlecase}}</h1>
       <p>In questa pagina puoi visualizzare i tuoi conti e le operazioni che sono state effettuate.<br>
       Per poter gestire i tuoi conti, cancellarli o creare nuovi conti visita il tuo <a routerLink="profilo">profilo</a>.</p>
-      <app-inactive-message *ngIf="inactive"></app-inactive-message>
+      <app-alert-message type="inactive" *ngIf="inactive"></app-alert-message>
+      <app-alert-message type="closing" *ngIf="closing"></app-alert-message>
     </div>
-    <div [class]="'col-12 col-lg-10 m-auto mt-3 ' + (inactive ? 'inactive' : '')" *ngIf="bankAccounts">
+    <div *ngIf="closing" class="img-container d-flex justify-content-center">
+      <img class="big-img" [src]="'../../../../assets/img/Illustration/' + (user.gender === 'M' ? 'Finance%20app-rafiki.png' : 'Finance app-pana.png')" alt="Bank account">
+    </div>
+    <div  [class]="'col-12 col-lg-10 m-auto mt-3 ' + (inactive ? 'inactive' : '')" *ngIf="!closing">
       <div class="row gx-5">
         <div class="col-12 col-md-6 m-auto">
           <div class="row">
@@ -44,10 +48,11 @@
         </div>
         <div class="d-none d-md-flex justify-content-center col-12 col-md-6  p-0">
           <div class="img-container d-flex justify-content-center green-background">
-            <img class="big-img" src="../../../../assets/img/Illustration/Finance%20app-rafiki.png" alt="Bank account">
+            <img class="big-img" [src]="'../../../../assets/img/Illustration/' + (user.gender === 'M' ? 'Finance%20app-rafiki.png' : 'Finance app-pana.png')" alt="Bank account">
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+

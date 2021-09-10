@@ -13,8 +13,7 @@ import { OperationFormComponent } from "../../components/user/operations/operati
 import { SharedModule } from "../shared/shared.module";
 import {UserComponent} from "../../components/user/user.component";
 import {UserGuard} from "../../guard/user.guard";
-import {AppModule} from "../../app.module";
-import {InactiveMessageComponent} from "../../components/user/inactive-message/inactive-message.component";
+import {AlertMessage} from "../../components/user/alert-message/alert-message";
 
 @NgModule({
   declarations: [
@@ -28,7 +27,7 @@ import {InactiveMessageComponent} from "../../components/user/inactive-message/i
     OperationFormComponent,
     ConfirmDialogComponent,
     BankAccountComponent,
-    InactiveMessageComponent
+    AlertMessage
   ],
   imports: [
     CommonModule,
