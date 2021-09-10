@@ -28,9 +28,6 @@ public class CustomerAccountManagementServiceController {
 	private BankAccountRepository bankAccountRepository;
 
 	@Autowired
-	private CustomerRepository customerRepository;
-
-	@Autowired
 	private CustomerDTORepository customerDTORepository;
 
 	/**
@@ -105,7 +102,7 @@ public class CustomerAccountManagementServiceController {
 
 		} else {
 
-			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
+			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_ACCEPTABLE);
 		}
 
 		return new ResponseEntity<>(newBankAccount,HttpStatus.OK);
