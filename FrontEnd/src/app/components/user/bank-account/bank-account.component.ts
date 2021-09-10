@@ -15,6 +15,9 @@ export class BankAccountComponent implements OnInit {
   inactiveSubscription!:Subscription;
   inactive:boolean = false;
 
+  closingSubscription!: Subscription;
+  closing: boolean = false;
+
   user!: User;
   userSubscriptions!: Subscription;
 
@@ -59,6 +62,9 @@ export class BankAccountComponent implements OnInit {
       this.inactive = inactive;
     });
 
+    this.closingSubscription = this.userService.closingAccount.subscribe((closing) => {
+      this.closing = closing;
+    });
   }
 
   ngOnDestroy() {
@@ -67,6 +73,7 @@ export class BankAccountComponent implements OnInit {
     this.operationsSubscription.unsubscribe();
     this.loadingOperationsSubscription.unsubscribe();
     this.inactiveSubscription.unsubscribe();
+    this.closingSubscription.unsubscribe();
 }
 
   onChangeBill() {

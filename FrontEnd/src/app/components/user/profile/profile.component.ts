@@ -33,11 +33,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   isDeleting = false;
   isCreatingNew = false;
+  deleteOk = false;
 
   selectedBill: number = 0;
   deletingBill!: number;
 
   maxAmount = 5000000;
+  private timer!: any;
 
   constructor(
     private router: Router,
@@ -52,9 +54,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.user = user;
       this.dateOfBirth = new Date(this.user.dateOfBirth);
       this.deletingBill = user.bankAccounts[0];
-      this.userService.getBalance(this.user.bankAccounts[this.selectedBill]).subscribe((balance) => {
-        this.maxAmount = balance;
-      });
+      if (user.bankAccounts.length > 0) {
+        this.userService.getBalance(this.user.bankAccounts[this.selectedBill]).subscribe((balance) => {
+          this.maxAmount = balance;
+        });
+      }
     });
 
     this.bankAccountsSubscription = this.userService.bankAccounts.subscribe((bankAccounts) => {
@@ -74,6 +78,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userSubcription.unsubscribe();
     this.bankAccountsSubscription.unsubscribe();
     this.inactiveSubscription.unsubscribe();
+    this.closingAccountSubscription.unsubscribe();
+    clearTimeout(this.timer);
   }
 
   changeBill() {
@@ -99,12 +105,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (result) {
         this.isDeleting = true;
         this.userService.deleteBill(this.deletingBill).subscribe(() => {
-          if (this.user.bankAccounts.length > 1) {
+          this.deleteOk = true;
+          this.timer = setTimeout(() => {
+            this.deleteOk = false;
+          }, 5000)
+          if (this.user.bankAccounts.length > 0) {
             this.userService.getUser(parseInt(this.user.id));
-
-          }
-          else {
-            this.authService.logout();
           }
           this.isDeleting = false;
         }, () => {

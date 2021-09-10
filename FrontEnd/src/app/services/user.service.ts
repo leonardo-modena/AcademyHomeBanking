@@ -61,13 +61,16 @@ export class UserService {
           // Conto in fase di chiusura
           this.closingAccountSubject.next(true);
         }
+        else {
 
-        if(bankAccounts.length === 1 && bankAccounts[0].account_status === 'INACTIVE') {
-          this.inactiveUserSubject.next(true);
+          if(bankAccounts.length === 1 && bankAccounts[0].account_status === 'INACTIVE') {
+            this.inactiveUserSubject.next(true);
+          }
+          this.bankAccountsSubject.next(bankAccounts);
+
+          this.getOperationList(this.userSubject.getValue().bankAccounts[0], {type: 'lastTen', startDate: 0, endDate: 0});
         }
-      this.bankAccountsSubject.next(bankAccounts);
 
-      this.getOperationList(this.userSubject.getValue().bankAccounts[0], {type: 'lastTen', startDate: 0, endDate: 0})
     });
   }
 
