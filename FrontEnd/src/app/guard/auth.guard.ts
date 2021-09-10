@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
     if (sessionStorage.getItem('token')){
       this.alert.newAllert("Sei già autenticato!")
-      return this.route.navigate(['**']);
+      return this.route.navigate(['/']);
     }
     return true;
 
