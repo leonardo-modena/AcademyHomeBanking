@@ -12,20 +12,17 @@ import { AuthService } from '../services/auth.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  token!: string;
+  token!: string | null;
 
-  constructor(private authService: AuthService) {
-    this.authService.tokenSubject.subscribe((token) => {
-      this.token = token;
-    })
-  }
+  constructor(private authService: AuthService) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
 
-    while (!request.url.includes('/signup') && !request.url.includes('/signin')) {
+    this.token = sessionStorage.getItem(`token`)
+
       if (this.token) {
         const headers = new HttpHeaders({
           Authorization: `${this.token}`,
@@ -36,7 +33,7 @@ export class TokenInterceptor implements HttpInterceptor {
           return next.handle(cloneReq);
         }
       }
-    }
+
 
     return next.handle(request);
   }
