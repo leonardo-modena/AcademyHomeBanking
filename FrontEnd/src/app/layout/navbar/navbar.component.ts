@@ -36,7 +36,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authServiceSubscription = this.authService.actualAuth.subscribe(
       (state) => {
         this.authorized = state;
-        console.log(state);
       }
     );
 
@@ -47,7 +46,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   sidenavSwitch(): void {
     this.sidenav = !this.sidenav;
-    console.log(this.sidenav);
   }
 
   hamburgerClick() {
