@@ -104,6 +104,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.createNewBill(form.controls.amount.value, this.bankAccounts[form.controls.selectedBill.value].id).subscribe(() => {
       this.isCreatingNew = false;
       this.userService.getUser(parseInt(this.user.id));
+      form.resetForm({selectedBill: 0})
     }, () => {
       this.isCreatingNew = false;
     });
