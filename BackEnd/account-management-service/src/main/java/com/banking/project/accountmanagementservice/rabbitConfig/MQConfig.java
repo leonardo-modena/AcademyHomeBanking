@@ -19,7 +19,7 @@ public class MQConfig {
 
     @Bean
     public Queue queue() {
-        return  new Queue(QUEUE);
+        return new Queue(QUEUE);
     }
 
     @Bean
@@ -37,14 +37,14 @@ public class MQConfig {
 
     @Bean
     public MessageConverter messageConverter() {
-        return  new Jackson2JsonMessageConverter();
+        return new Jackson2JsonMessageConverter();
     }
 
     @Bean
     public AmqpTemplate template(ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.setMessageConverter(messageConverter());
-        return  template;
+        return template;
     }
 
 }

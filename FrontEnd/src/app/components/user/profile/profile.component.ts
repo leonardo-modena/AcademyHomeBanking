@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
 import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component";
 import {ErrorService} from "../../../services/error.service";
 import {User} from "../../../model/user";
 import {AuthService} from "../../../services/auth.service";
@@ -12,6 +11,7 @@ import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {DownloadService} from "../../../services/download.service";
 import {Operation} from "../../../model/operation";
+import {DialogComponent} from "../../Shared/dialog/dialog.component";
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   closing: boolean = false;
 
   user!: User;
-  userSubcription!:Subscription;
+  userSubscription!:Subscription;
 
   bankAccounts!: BankAccount[];
   bankAccountsSubscription!: Subscription;
@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.userSubcription = this.userService.user.subscribe((user: User) => {
+    this.userSubscription = this.userService.user.subscribe((user: User) => {
       this.user = user;
       this.titleService.setTitle(
         `PROFILO | ${this.user.firstName} ${this.user.lastName}`
@@ -86,7 +86,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubcription.unsubscribe();
+    this.userSubscription.unsubscribe();
     this.bankAccountsSubscription.unsubscribe();
     this.inactiveSubscription.unsubscribe();
     this.closingAccountSubscription.unsubscribe();
@@ -111,25 +111,32 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onCloseBill() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.isDeleting = true;
-        this.userService.deleteBill(this.deletingBill).subscribe(() => {
-          this.deleteOk = true;
-          this.timer = setTimeout(() => {
-            this.deleteOk = false;
-          }, 5000)
-          if (this.user.bankAccounts.length > 0) {
-            this.userService.getUser(parseInt(this.user.id));
-          }
-          this.isDeleting = false;
-        }, () => {
-          this.errorService.newError('Non è stato possibile cancellare il conto. Riprova.')
-          this.isDeleting = false
-        });
-      }
-    });
+    this.dialog
+      .open(DialogComponent, {
+        closeOnNavigation: true,
+        data: {
+          message: `Sei sicuro di voler eliminare il conto  n. ${this.deletingBill.toString().padStart(6, '0')}?`,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.isDeleting = true;
+          this.userService.deleteBill(this.deletingBill).subscribe(() => {
+            this.deleteOk = true;
+            this.timer = setTimeout(() => {
+              this.deleteOk = false;
+            }, 5000)
+            if (this.user.bankAccounts.length > 0) {
+              this.userService.getUser(parseInt(this.user.id));
+            }
+            this.isDeleting = false;
+          }, () => {
+            this.errorService.newError('Non è stato possibile cancellare il conto. Riprova.')
+            this.isDeleting = false
+          });
+        }
+      });
   }
 
   onDownloadAllOperations() {

@@ -21,20 +21,14 @@ public class BankAccount {
 	@Column(name = "account_status")
 	private String account_status;
 
-
-
 	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name = "holder", nullable = false)
 	private Customer holder;
 
-
-
-
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "idAccount")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "idAccount")
 	private List<Transaction> transactions;
-
 
 	public BankAccount() {
 

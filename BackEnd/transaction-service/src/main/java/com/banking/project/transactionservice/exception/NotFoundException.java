@@ -5,8 +5,6 @@ import org.springframework.http.HttpStatus;
 /**
  * Eccezione custom che viene lanciata quando il conto non viene trovato
  * terminata
- * 
- * @author sonia
  *
  */
 public class NotFoundException extends RuntimeException {
@@ -51,6 +49,6 @@ public class NotFoundException extends RuntimeException {
 
 	@Override
 	public String toString() {
-		return "Errore : " + this.errorCode + ", " +"message: " + this.errorMessage;
+		return "Error : " + this.errorCode + ", " +"message: " + this.errorMessage;
 	}
 }

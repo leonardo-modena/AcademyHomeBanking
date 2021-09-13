@@ -5,7 +5,6 @@ import {UserService} from "../../../services/user.service";
 import {User} from "../../../model/user";
 import {Subscription} from "rxjs";
 
-
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -23,7 +22,6 @@ import {Subscription} from "rxjs";
   ]
 })
 export class FilterComponent implements OnInit, OnDestroy {
-
   selectionChoicesValues = [
     {value: 'lastTen', description: 'Ultime 10 operazioni'},
     {value: 'lastThreeMonths', description: 'Ultimi 3 mesi'},
@@ -33,10 +31,8 @@ export class FilterComponent implements OnInit, OnDestroy {
   user!: User;
   userSubscription!: Subscription;
 
-  // @Input() onSearchFunction:any;
   @Input() selectedBill: number = 0;
   @Output() filterString = new EventEmitter<string>();
-
 
   dateSelection:boolean = false;
   selectedChoice = this.selectionChoicesValues[0].value;
@@ -66,14 +62,11 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.isVisible = !this.isVisible;
   }
 
-
   onChangeChoice(event: any) {
-    console.log(event.target.value);
     this.selectedChoice = event.target.value.substring(3);
   }
 
   onChangeVisualization() {
-
     const selectedChoiceValue = this.filterForm.controls.selectedChoice;
 
     if (selectedChoiceValue.value === 'betweenTwoDates') {

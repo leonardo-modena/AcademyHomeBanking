@@ -1,34 +1,25 @@
-package com.banking.project.signUpservice.entity;
+package com.banking.project.accountmanagementservice.DTO;
+
+import com.banking.project.accountmanagementservice.entity.Customer;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "bank_account")
-public class BankAccount {
+public class BankAccountDTO {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "balance")
     private BigDecimal balance;
 
-    @Column(name = "account_status")
     private String account_status;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "holder", nullable = false)
 
     private Customer holder;
 
-    public BankAccount() {
+    public BankAccountDTO() {
 
     }
 
-    public BankAccount(BigDecimal balance, String account_status) {
+    public BankAccountDTO(BigDecimal balance, String account_status) {
 
         this.balance = balance;
         this.account_status = account_status;

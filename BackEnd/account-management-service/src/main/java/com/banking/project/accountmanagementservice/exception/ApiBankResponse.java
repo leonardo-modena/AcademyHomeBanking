@@ -4,39 +4,38 @@ import org.springframework.http.HttpStatus;
 
 /**
  * Entità di risposta personalizzata
- * 
- * @author sonia
  *
+ * @author sonia
  */
 public class ApiBankResponse {
 
-	private HttpStatus typeofError;
-	private String error;
+    private HttpStatus typeofError;
+    private String error;
 
-	public ApiBankResponse() {
+    public ApiBankResponse() {
 
-	}
+    }
 
-	public ApiBankResponse(HttpStatus typeofError, String error) {
+    public ApiBankResponse(HttpStatus typeofError, String error) {
 
-		this.typeofError = typeofError;
-		this.error = error;
-	}
+        this.typeofError = typeofError;
+        this.error = error;
+    }
 
-	public HttpStatus getTypeofError() {
-		return typeofError;
-	}
+    public HttpStatus getTypeofError() {
+        return typeofError;
+    }
 
-	public void setTypeofError(HttpStatus typeofError) {
-		this.typeofError = typeofError;
-	}
+    public void setTypeofError(HttpStatus typeofError) {
+        this.typeofError = typeofError;
+    }
 
-	public String getError() {
-		return error;
-	}
+    public String getError() {
+        return error;
+    }
 
-	public void setError(String error) {
-		this.error = error;
-	}
+    public void setError(String error) {
+        this.error = error;
+    }
 
 }

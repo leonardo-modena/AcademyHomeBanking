@@ -1,13 +1,10 @@
-package com.banking.project.accountmanagementservice.entity;
+package com.banking.project.accountmanagementservice.DTO;
+import com.banking.project.accountmanagementservice.entity.BankAccount;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDTO {
-
 
 
     private int id;

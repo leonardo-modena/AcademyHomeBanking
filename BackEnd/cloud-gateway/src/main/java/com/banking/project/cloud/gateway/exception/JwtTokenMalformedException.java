@@ -1,6 +1,7 @@
 package com.banking.project.cloud.gateway.exception;
 
 import javax.naming.AuthenticationException;
+
 /**
  * Classe che lancia l'eccezione di token malformato
  *
