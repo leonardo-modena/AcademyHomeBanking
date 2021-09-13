@@ -1,7 +1,7 @@
 package com.banking.project.accountmanagementservice.controller;
 
 import com.banking.project.accountmanagementservice.entity.BankAccount;
-import com.banking.project.accountmanagementservice.entity.BankAccountDTO;
+import com.banking.project.accountmanagementservice.DTO.BankAccountDTO;
 import com.banking.project.accountmanagementservice.entity.Customer;
 import com.banking.project.accountmanagementservice.exception.NotFoundException;
 import com.banking.project.accountmanagementservice.exception.NotFoundResponse;
@@ -31,7 +31,12 @@ public class AdminAccountManagementServiceController {
 
 
 
-
+    /**
+     * Metodo per recuperare la lista dei conto in stato "INACTIVE"
+     *
+     * @param
+     * @return
+     */
     @Operation(summary="Lista di conti con stato inattivo")
     @GetMapping(value = "/listInactiveAccounts")
     public List<BankAccountDTO> getInactive() {
@@ -48,7 +53,12 @@ public class AdminAccountManagementServiceController {
         }
         return bankAccountDTOS;
     }
-
+    /**
+     * Metodo per l'Attivazione di un conto dato l'Id conto
+     * stato conto="ACTIVE"
+     * @param
+     * @return
+     */
     @Operation(summary="Attivazione conto ", description="Dato un id conto viene attivato il conto ")
     @ApiResponses(value= {
             @ApiResponse(responseCode= "200", description = "Id valido, stato conto attivo "),
@@ -66,6 +76,12 @@ public class AdminAccountManagementServiceController {
 
     }
 
+    /**
+     * Metodo per recuperare la lista dei conto in stato "CLOSING"
+     *
+     * @param
+     * @return
+     */
     @Operation(summary="Lista di conti con stato in chiusura")
     @GetMapping(value = "/listClosingAccounts")
     public List<BankAccountDTO> getClosing(){
@@ -85,6 +101,14 @@ public class AdminAccountManagementServiceController {
         return bankAccount_DTOS;
     }
 
+
+
+    /**
+     * Metodo per la chiusura di un conto dato in Id conto
+     *
+     * @param
+     * @return
+     */
 
     @Operation(summary="Chiusura definitiva del conto ", description="Dato un id conto che è in stato di chiusura viene eliminato il conto ")
     @ApiResponses(value= {
@@ -111,6 +135,11 @@ public class AdminAccountManagementServiceController {
             throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Metodo per recuperare la lista dei correntisti in ordine alfabetico
+     * @param
+     * @return
+     */
     @Operation(summary="Lista di correntisti ordinati in alfabetico")
     @GetMapping(value = "/listSortedCustomer")
     public List<Customer> getListCustomerSort() {

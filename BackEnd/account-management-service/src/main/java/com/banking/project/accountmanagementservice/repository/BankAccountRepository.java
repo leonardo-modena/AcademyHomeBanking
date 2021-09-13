@@ -1,7 +1,6 @@
 package com.banking.project.accountmanagementservice.repository;
 
 import com.banking.project.accountmanagementservice.entity.BankAccount;
-import com.banking.project.accountmanagementservice.entity.BankAccountDTO;
 import com.banking.project.accountmanagementservice.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

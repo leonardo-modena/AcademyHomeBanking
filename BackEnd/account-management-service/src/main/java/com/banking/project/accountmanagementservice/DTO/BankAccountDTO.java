@@ -1,4 +1,6 @@
-package com.banking.project.accountmanagementservice.entity;
+package com.banking.project.accountmanagementservice.DTO;
+
+import com.banking.project.accountmanagementservice.entity.Customer;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

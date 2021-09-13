@@ -4,9 +4,8 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import com.banking.project.accountmanagementservice.entity.Customer;
-import com.banking.project.accountmanagementservice.entity.CustomerDTO;
+import com.banking.project.accountmanagementservice.DTO.CustomerDTO;
 import com.banking.project.accountmanagementservice.exception.NotFoundResponse;
-import com.banking.project.accountmanagementservice.rabbitConfig.MQConfig;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -102,6 +101,12 @@ public class CustomerAccountManagementServiceController {
     }
 
 
+    /**
+     * Metodo per recuperare le informazioni di un conto dato 'id
+     *
+     * @param
+     * @return
+     */
     @Operation(summary = "Dettaglio conto ", description = "Dato un id conto, va a restituire i dettaglio del conto ")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ritorna il conto", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class))}),
