@@ -22,6 +22,16 @@ public class MessageListener {
     @Autowired
     CustomerRepository customerRepository;
 
+
+
+    /**
+     * Metodo che rimane in attesa sulla coda
+     * aspettando che arrivi un oggetto di tipo Customer
+     * per completare la registrazione e l'attivazione di un nuovo conto
+     * stato a "CLOSING"
+     *
+     * @param theCustomer
+     */
     @RabbitListener(queues = MQConfig.QUEUE)
     public void listener(Customer theCustomer) {
 

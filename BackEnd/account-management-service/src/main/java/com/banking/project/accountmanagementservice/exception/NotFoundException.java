@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
  * Eccezione custom che viene lanciata quando il conto non viene trovato
  * terminata
  *
- * @author sonia
  */
 public class NotFoundException extends RuntimeException {
 
