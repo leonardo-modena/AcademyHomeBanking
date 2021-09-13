@@ -19,7 +19,6 @@ export class OperationItemComponent implements OnInit {
 
   downloadItem() {
     const date = new Date(this.operation.dateTransaction);
-    console.log(this.operation.type);
     const body = `
                 <h2 style="margin-bottom: 20px">Dettagli dell'operazione n. ${this.operation.idTransaction}</h2>
                 <p>CAUSALE: ${this.operation.causal}</p>

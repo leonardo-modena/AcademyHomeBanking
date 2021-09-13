@@ -63,7 +63,6 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   onChangeChoice(event: any) {
-    console.log(event.target.value);
     this.selectedChoice = event.target.value.substring(3);
   }
 
