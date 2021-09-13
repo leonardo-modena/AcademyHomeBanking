@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface BankAccountRepository extends JpaRepository<BankAccount,Integer> {
+public interface BankAccountRepository extends JpaRepository<BankAccount, Integer> {
 
     @Query(value = "select b from BankAccount b where b.account_status='INACTIVE'")
     List<BankAccount> findInactive();
@@ -19,24 +19,26 @@ public interface BankAccountRepository extends JpaRepository<BankAccount,Integer
     @Query(value = "select b from BankAccount b where b.account_status='CLOSING'")
     List<BankAccount> findClosing();
 
-	@Transactional
-	@Modifying(clearAutomatically = true)
+    @Transactional
+    @Modifying(clearAutomatically = true)
     @Query("update BankAccount b set b.account_status= 'ACTIVE' where b.id=:accountId")
-    void activeAccount(@Param("accountId")int accountId);
+    void activeAccount(@Param("accountId") int accountId);
 
-	 /** Query che cancella l'account indicato dall'id
-	 * @param accountId
-	 */
+    /**
+     * Query che cancella l'account indicato dall'id
+     *
+     * @param accountId
+     */
 
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("delete BankAccount b where b.id=:accountId and b.account_status='CLOSING'")
-    void deleteAccount(@Param("accountId")int accountId);
+    void deleteAccount(@Param("accountId") int accountId);
 
-    @Transactional 
+    @Transactional
     @Modifying(clearAutomatically = true)
     @Query("update BankAccount b set b.account_status= 'CLOSING' where b.id=:accountId")
-    void closingRequest(@Param("accountId")int accountId);
+    void closingRequest(@Param("accountId") int accountId);
 
     @Query("select count(b) from BankAccount b where b.holder=:customer")
     long count(@Param("customer") Customer customer);

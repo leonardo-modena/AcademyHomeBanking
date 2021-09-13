@@ -5,52 +5,51 @@ import org.springframework.http.HttpStatus;
 /**
  * Eccezione custom che viene lanciata quando il conto non viene trovato
  * terminata
- * 
- * @author sonia
  *
+ * @author sonia
  */
 public class NotFoundException extends RuntimeException {
 
-	private static final long serialVersionUID = -7806029002430564887L;
+    private static final long serialVersionUID = -7806029002430564887L;
 
-	private HttpStatus errorCode;
-	private String errorMessage;
+    private HttpStatus errorCode;
+    private String errorMessage;
 
-	public NotFoundException(Throwable throwable) {
-		super(throwable);
-	}
+    public NotFoundException(Throwable throwable) {
+        super(throwable);
+    }
 
-	public NotFoundException(String msg, Throwable throwable) {
-		super(msg, throwable);
-	}
+    public NotFoundException(String msg, Throwable throwable) {
+        super(msg, throwable);
+    }
 
-	public NotFoundException(String msg) {
-		super(msg);
-	}
+    public NotFoundException(String msg) {
+        super(msg);
+    }
 
-	public NotFoundException(String message, HttpStatus errorCode) {
-		this.errorCode = errorCode;
-		this.errorMessage = message;
-	}
+    public NotFoundException(String message, HttpStatus errorCode) {
+        this.errorCode = errorCode;
+        this.errorMessage = message;
+    }
 
-	public HttpStatus getErrorCode() {
-		return errorCode;
-	}
+    public HttpStatus getErrorCode() {
+        return errorCode;
+    }
 
-	public void setErrorCode(HttpStatus errorCode) {
-		this.errorCode = errorCode;
-	}
+    public void setErrorCode(HttpStatus errorCode) {
+        this.errorCode = errorCode;
+    }
 
-	public String getErrorMessage() {
-		return errorMessage;
-	}
+    public String getErrorMessage() {
+        return errorMessage;
+    }
 
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
-	@Override
-	public String toString() {
-		return "Errore : " + this.errorCode + ", " +"message: " + this.errorMessage;
-	}
+    @Override
+    public String toString() {
+        return "Errore : " + this.errorCode + ", " + "message: " + this.errorMessage;
+    }
 }

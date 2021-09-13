@@ -4,6 +4,11 @@ import com.banking.project.signUpservice.entity.Customer;
 import com.banking.project.signUpservice.rabbitConfig.MQConfig;
 import com.banking.project.signUpservice.repository.CustomerRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -25,7 +30,16 @@ public class SignupServiceController {
 	@Autowired
 	private CustomerRepository customerRepository;
 
+
 	@PostMapping("")
+	@Operation(summary="Registrazione Correntista ", description="Compilazione dati correntista")
+	@ApiResponses(value= {
+			@ApiResponse(responseCode= "200", description = "Request Body Customer",content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Boolean.class)) }),
+			@ApiResponse(responseCode="400", description = "Email già registrata",content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Boolean.class)) }),
+	})
+
 	public boolean registerCustomer(@RequestBody Customer theCustomer) {
 
 		logger.info("Register Customer");
