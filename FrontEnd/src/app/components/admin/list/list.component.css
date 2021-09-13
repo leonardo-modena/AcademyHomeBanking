@@ -12,3 +12,7 @@
 #print-icon:hover {
   color: var(--primary-green) !important;
 }
+
+.scrollable{
+  overflow-y: scroll;
+}
