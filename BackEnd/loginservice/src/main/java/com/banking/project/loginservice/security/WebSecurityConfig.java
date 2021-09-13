@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authorizeRequests().antMatchers("/auth/**").permitAll()
 				.antMatchers("/swagger-ui.html").permitAll()
-				//da commentare anyRequest quando si vuole accedere a swagger
+				//da commentare ".anyRequest().authenticated()" quando si vuole accedere a swagger
 				.anyRequest().authenticated();
 			   
 		
