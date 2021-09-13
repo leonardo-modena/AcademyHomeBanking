@@ -10,9 +10,7 @@ import { AuthService } from './auth.service';
 
 const apiUrl = environment.api_url;
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AdminService {
   //Admin Subject & Observable
   private adminSubject = new BehaviorSubject<User>({

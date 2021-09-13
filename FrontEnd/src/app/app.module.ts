@@ -19,7 +19,6 @@ import { AlertComponent } from './components/Shared/alert/alert.component';
 import { AdminModule } from "./module/admin/admin.module";
 import { SharedModule } from "./module/shared/shared.module";
 import { NoCommaPipe } from './pipes/no-comma.pipe';
-import { DialogComponent } from './components/Shared/dialog/dialog.component';
 import {TokenInterceptor} from "./interceptor/token.interceptor";
 
 
@@ -34,7 +33,6 @@ import {TokenInterceptor} from "./interceptor/token.interceptor";
     NotFoundComponent,
     ErrorComponent,
     AlertComponent,
-    DialogComponent,
   ],
   imports: [
     SharedModule,

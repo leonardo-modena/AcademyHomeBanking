@@ -8,12 +8,14 @@ import { MatButtonModule } from "@angular/material/button";
 import { LoadingPageComponent } from 'src/app/components/Shared/loading-page/loading-page.component';
 import {NoCommaPipe} from "../../pipes/no-comma.pipe";
 import { MatDialogModule } from "@angular/material/dialog";
+import { DialogComponent } from 'src/app/components/Shared/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     SpinnerComponent,
     LoadingPageComponent,
     NoCommaPipe,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     FormsModule,
     ReactiveFormsModule,
     NoCommaPipe,
-    MatDialogModule
+    MatDialogModule,
+    DialogComponent
   ]
 })
 export class SharedModule { }
