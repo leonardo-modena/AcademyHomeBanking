@@ -4,40 +4,39 @@ import org.springframework.http.HttpStatus;
 
 /**
  * Entità di risposta personalizzata per la NotFoundException
- * @author sonia
  *
  */
 
 public class NotFoundResponse {
-	
-	private HttpStatus typeofError;
-	private String error;
 
-	public NotFoundResponse() {
+    private HttpStatus typeofError;
+    private String error;
 
-	}
+    public NotFoundResponse() {
 
-	public NotFoundResponse(HttpStatus typeofError, String error) {
+    }
 
-		this.typeofError = typeofError;
-		this.error = error;
-	}
+    public NotFoundResponse(HttpStatus typeofError, String error) {
 
-	public HttpStatus getTypeofError() {
-		return typeofError;
-	}
+        this.typeofError = typeofError;
+        this.error = error;
+    }
 
-	public void setTypeofError(HttpStatus typeofError) {
-		this.typeofError = typeofError;
-	}
+    public HttpStatus getTypeofError() {
+        return typeofError;
+    }
 
-	public String getError() {
-		return error;
-	}
+    public void setTypeofError(HttpStatus typeofError) {
+        this.typeofError = typeofError;
+    }
 
-	public void setError(String error) {
-		this.error = error;
-	}
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
 
 }
 

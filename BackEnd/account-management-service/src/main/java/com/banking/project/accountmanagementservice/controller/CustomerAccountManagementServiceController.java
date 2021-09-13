@@ -32,148 +32,146 @@ import com.banking.project.accountmanagementservice.repository.BankAccountReposi
 @RestController
 @RequestMapping("/customer")
 public class CustomerAccountManagementServiceController {
-	@Autowired
-	private BankAccountRepository bankAccountRepository;
+    @Autowired
+    private BankAccountRepository bankAccountRepository;
 
-	@Autowired
+    @Autowired
 
-	private CustomerRepository customerRepository;
-
-
-	@Autowired
-	private RabbitTemplate template;
-	/**
-	 * Metodo che richiede la chiusura del conto da parte dell'utente, setta lo
-	 * stato a "CLOSING"
-	 *
-	 * @param accountId
-	 */
+    private CustomerRepository customerRepository;
 
 
-	@Operation(summary="Richiesta di chiusura conto", description="Invio  richiesta di chiusura del conto alla sede amministrativa")
-	@ApiResponses(value= {
-			@ApiResponse(responseCode= "200", description = "Id valido, stato conto in chiusura "),
-			@ApiResponse(responseCode="404", description = "Id conto non valido",content = {
-							@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) }),
-	})
+    @Autowired
+    private RabbitTemplate template;
 
-	@PutMapping(value = "/closingRequest/{accountId}")
-	public void closingAccount(@PathVariable int accountId) {
-		if(bankAccountRepository.existsById(accountId)) {
-			bankAccountRepository.closingRequest(accountId);
-		}
-		else
-			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
-	}
-
-	/**
-	 * Metodo per recuperare le informazioni di un cliente dato 'id
-	 *
-	 * @param
-	 * @return
-	 */
-	@Operation(summary = "Profilo utente", description = "Dato un id Correntista restituisce il suo profile")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Ritorna il saldo", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = CustomerDTO.class)) }),
-			@ApiResponse(responseCode = "404", description = "Id Correntista non trovato", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
-
-	})
-	@GetMapping("/profile/{customerId}")
-	public CustomerDTO getCustomer(@PathVariable int customerId) {
-
-		if(customerRepository.existsById(customerId)) {
-			Customer customer = customerRepository.getById(customerId);
-			CustomerDTO customerDTO = new CustomerDTO();
-
-			customerDTO.setId(customer.getId());
-			customerDTO.setFirstName(customer.getFirstName());
-			customerDTO.setLastName(customer.getLastName());
-			customerDTO.setEmail(customer.getEmail());
-			customerDTO.setDateOfBirth(customer.getDateOfBirth());
-			customerDTO.setGender(customer.getGender());
-			customerDTO.setRole(customer.getRole());
-			customerDTO.setDateOfBirth(customer.getDateOfBirth());
-			customerDTO.setBankAccounts(customer.getBankAccounts());
-			return customerDTO;
-		}
-		else
-			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
-
-	}
+    /**
+     * Metodo che richiede la chiusura del conto da parte dell'utente, setta lo
+     * stato a "CLOSING"
+     *
+     * @param accountId
+     */
 
 
+    @Operation(summary = "Richiesta di chiusura conto", description = "Invio  richiesta di chiusura del conto alla sede amministrativa")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Id valido, stato conto in chiusura "),
+            @ApiResponse(responseCode = "404", description = "Id conto non valido", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class))}),
+    })
 
-	@Operation(summary = "Dettaglio conto ", description = "Dato un id conto, va a restituire i dettaglio del conto ")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Ritorna il conto", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
-			@ApiResponse(responseCode = "404", description = "Id conto non trovato", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
+    @PutMapping(value = "/closingRequest/{accountId}")
+    public void closingAccount(@PathVariable int accountId) {
+        if (bankAccountRepository.existsById(accountId)) {
+            bankAccountRepository.closingRequest(accountId);
+        } else
+            throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
+    }
 
-	})
-	@GetMapping("/profile/bankAccount/{myBankAccountId}")
-	public Optional<BankAccount> getMyBankAccount(@PathVariable int myBankAccountId) {
+    /**
+     * Metodo per recuperare le informazioni di un cliente dato 'id
+     *
+     * @param
+     * @return
+     */
+    @Operation(summary = "Profilo utente", description = "Dato un id Correntista restituisce il suo profile")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ritorna il saldo", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = CustomerDTO.class))}),
+            @ApiResponse(responseCode = "404", description = "Id Correntista non trovato", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class))})
 
-		if(bankAccountRepository.existsById(myBankAccountId)) {
-			Optional<BankAccount> theBankAccount = bankAccountRepository.findById(myBankAccountId);
+    })
+    @GetMapping("/profile/{customerId}")
+    public CustomerDTO getCustomer(@PathVariable int customerId) {
 
-			return theBankAccount;
-		}
-		else
-			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
-	}
+        if (customerRepository.existsById(customerId)) {
+            Customer customer = customerRepository.getById(customerId);
+            CustomerDTO customerDTO = new CustomerDTO();
 
-	/**
-	 * Metodo che, dato un id conto e l'importo della ricarica da effettuare, permette di creare un secondo conto
-	 * @param id
-	 * @param balance
-	 * @return
-	 */
+            customerDTO.setId(customer.getId());
+            customerDTO.setFirstName(customer.getFirstName());
+            customerDTO.setLastName(customer.getLastName());
+            customerDTO.setEmail(customer.getEmail());
+            customerDTO.setDateOfBirth(customer.getDateOfBirth());
+            customerDTO.setGender(customer.getGender());
+            customerDTO.setRole(customer.getRole());
+            customerDTO.setDateOfBirth(customer.getDateOfBirth());
+            customerDTO.setBankAccounts(customer.getBankAccounts());
+            return customerDTO;
+        } else
+            throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
 
-	@Operation(summary = "Apertura nuovo conto ", description = "Dato  id conto appartenente allo stesso correntista e un " +
-			"importo che sia valido va a restituire un nuovo conto ")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Ritorna il conto", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
-			@ApiResponse(responseCode = "404", description = "Id conto non trovato", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
+    }
 
-	})
-	@PostMapping("/new/{id}/{balance}")
-	public ResponseEntity<BankAccount> newAccount(@PathVariable int id, @PathVariable BigDecimal balance) {
 
-		BankAccount newBankAccount = new BankAccount();
+    @Operation(summary = "Dettaglio conto ", description = "Dato un id conto, va a restituire i dettaglio del conto ")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ritorna il conto", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class))}),
+            @ApiResponse(responseCode = "404", description = "Id conto non trovato", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class))})
 
-		if (bankAccountRepository.existsById(id)) {
+    })
+    @GetMapping("/profile/bankAccount/{myBankAccountId}")
+    public Optional<BankAccount> getMyBankAccount(@PathVariable int myBankAccountId) {
 
-			BankAccount bankAccount = bankAccountRepository.getById(id);
-			BigDecimal balanceOld=bankAccount.getBalance();
-			if (((balanceOld.compareTo(balance))>=0) && bankAccount.getAccount_status().equals("ACTIVE")) {
+        if (bankAccountRepository.existsById(myBankAccountId)) {
+            Optional<BankAccount> theBankAccount = bankAccountRepository.findById(myBankAccountId);
 
-				BigDecimal newOldBalance = bankAccount.getBalance().subtract(balance);
+            return theBankAccount;
+        } else
+            throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
+    }
 
-				bankAccount.setBalance(newOldBalance);
+    /**
+     * Metodo che, dato un id conto e l'importo della ricarica da effettuare, permette di creare un secondo conto
+     *
+     * @param id
+     * @param balance
+     * @return
+     */
 
-				newBankAccount.setId(0);
+    @Operation(summary = "Apertura nuovo conto ", description = "Dato  id conto appartenente allo stesso correntista e un " +
+            "importo che sia valido va a restituire un nuovo conto ")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Ritorna il conto", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class))}),
+            @ApiResponse(responseCode = "404", description = "Id conto non trovato", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class))})
 
-				newBankAccount.setBalance(balance);
+    })
+    @PostMapping("/new/{id}/{balance}")
+    public ResponseEntity<BankAccount> newAccount(@PathVariable int id, @PathVariable BigDecimal balance) {
 
-				newBankAccount.setAccount_status("ACTIVE");
+        BankAccount newBankAccount = new BankAccount();
 
-				newBankAccount.setHolder(bankAccount.getHolder());
+        if (bankAccountRepository.existsById(id)) {
 
-				bankAccountRepository.save(newBankAccount);
-				
-			} else {
+            BankAccount bankAccount = bankAccountRepository.getById(id);
+            BigDecimal balanceOld = bankAccount.getBalance();
+            if (((balanceOld.compareTo(balance)) >= 0) && bankAccount.getAccount_status().equals("ACTIVE")) {
 
-				throw new ApiBankException("Disponibilità terminata o conto non attivo sul conto n."+id,HttpStatus.BAD_REQUEST);
-			}
+                BigDecimal newOldBalance = bankAccount.getBalance().subtract(balance);
 
-		} else {
+                bankAccount.setBalance(newOldBalance);
 
-			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
-		}
+                newBankAccount.setId(0);
 
-		return new ResponseEntity<>(newBankAccount,HttpStatus.OK);
-	}
+                newBankAccount.setBalance(balance);
+
+                newBankAccount.setAccount_status("ACTIVE");
+
+                newBankAccount.setHolder(bankAccount.getHolder());
+
+                bankAccountRepository.save(newBankAccount);
+
+            } else {
+
+                throw new ApiBankException("Disponibilità terminata o conto non attivo sul conto n." + id, HttpStatus.BAD_REQUEST);
+            }
+
+        } else {
+
+            throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(newBankAccount, HttpStatus.OK);
+    }
 
 }

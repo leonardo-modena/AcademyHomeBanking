@@ -23,11 +23,11 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminAccountManagementServiceController {
 
-   @Autowired
-   private BankAccountRepository bankAccountRepository;
+    @Autowired
+    private BankAccountRepository bankAccountRepository;
 
-   @Autowired
-   private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
 
 
