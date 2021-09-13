@@ -41,7 +41,7 @@ public class TransactionController {
 	@Autowired
 	CustomerRepository customerRepository;
 
-	@Operation(summary = "Saldo del conto", description = "Saldo", tags = "Saldo")
+	@Operation(summary = "Saldo del conto", description = "Dato un conto restituisce il suo saldo", tags = "Saldo")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Ritorna il saldo", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = BigDecimal.class)) }),
 			@ApiResponse(responseCode = "404", description = "Conto non trovato", content = {
@@ -55,7 +55,7 @@ public class TransactionController {
 		} else
 			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
 	}
-	@Operation(summary = "Prelievo", description = "Prelievo denaro", tags = "Prelievo")
+	@Operation(summary = "Prelievo", description = "Dato un importo, una causale e un numero di conto effettua un prelievo di denaro", tags = "Prelievo")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Effettua un prelievo sul conto", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
 			@ApiResponse(responseCode = "400", description = "Disponibilità terminata", content = {
@@ -108,7 +108,15 @@ public class TransactionController {
 		transaction.setDateTransaction(date.getTime());
 		transactionRepository.save(transaction);
 	}
-
+	@Operation(summary = "Deposito", description = "Dato un importo, una causale e un numero di conto effettua un deposito di denaro", tags = "Deposito")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Effettua un deposito sul conto", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
+			@ApiResponse(responseCode = "400", description = "Range di ricarica errato", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiBankResponse.class)) }),
+			@ApiResponse(responseCode = "404", description = "Conto non trovato", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
+	
+	})
 	@PostMapping("/deposit/{amount}/{causal}/{bankAccountId}")
 	public ResponseEntity<BankAccount> deposit(@PathVariable BigDecimal amount, @PathVariable String causal,
 			@PathVariable int bankAccountId) {
@@ -135,7 +143,15 @@ public class TransactionController {
 		}
 
 	}
-
+	@Operation(summary = "Transazioni", description = "Dato un conto, un filtro date ed opzionalmente una data di inizio e fine, restituisce le transazioni effettuate", tags = "Transazioni per data")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Elenco transazioni ", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
+			@ApiResponse(responseCode = "400", description = "Range di ricarica errato", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiBankResponse.class)) }),
+			@ApiResponse(responseCode = "404", description = "Conto non trovato", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
+	
+	})
 	@GetMapping("/transactions/{idAccount}/{type}/{startDate}/{endDate}")
 	public List<Transaction> getTransactionByIdAccount(@PathVariable int idAccount, @PathVariable String type,
 			@PathVariable long startDate, @PathVariable long endDate) {
