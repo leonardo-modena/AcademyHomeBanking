@@ -3,9 +3,7 @@ package com.banking.project.transactionservice.exception;
 import org.springframework.http.HttpStatus;
 
 /**
- * Entità di risposta personalizzata
- * 
- * @author sonia
+ * Entità di risposta personalizzata per ApiBankException
  *
  */
 public class ApiBankResponse {

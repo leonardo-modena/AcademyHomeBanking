@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.banking.project.transactionservice.exception.NotFoundException;
 import com.banking.project.transactionservice.exception.NotFoundResponse;
 
-
-
+/**
+ * ControllerAdvice per NotFoundException
+ */
 @ControllerAdvice
 public class NotFoundExceptionControllerAdvice {
 

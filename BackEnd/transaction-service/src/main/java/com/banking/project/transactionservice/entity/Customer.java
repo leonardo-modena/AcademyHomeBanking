@@ -3,8 +3,6 @@ package com.banking.project.transactionservice.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -41,23 +39,16 @@ public class Customer {
 	@Column(name = "role")
 	private String role;
 
-
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "holder")
-	private List <BankAccount> bankAccounts;
-
-	/**
-	 * Metodo per estrarre l'id filtrando così i dati che non servono del conto corrente
-	 * @return
-	 */
-
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "holder")
+	private List<BankAccount> bankAccounts;
 
 	public Customer() {
 
 	}
-	
-	public Customer(String firstName, String lastName, String email, String password, Long dateOfBirth,
-                    String gender, String role) {
+
+	public Customer(String firstName, String lastName, String email, String password, Long dateOfBirth, String gender,
+			String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -138,6 +129,5 @@ public class Customer {
 	public void setBankAccounts(List<BankAccount> bankAccounts) {
 		this.bankAccounts = bankAccounts;
 	}
-	
 
 }

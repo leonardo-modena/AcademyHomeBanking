@@ -5,8 +5,6 @@ import org.springframework.http.HttpStatus;
 /**
  * Eccezione custom che viene lanciata quando la disponibilità sul conto è
  * terminata
- * 
- * @author sonia
  *
  */
 public class ApiBankException extends RuntimeException {
@@ -34,8 +32,6 @@ public class ApiBankException extends RuntimeException {
 		this.errorMessage = message;
 	}
 
-	
-
 	public HttpStatus getErrorCode() {
 		return errorCode;
 	}
@@ -54,6 +50,6 @@ public class ApiBankException extends RuntimeException {
 
 	@Override
 	public String toString() {
-		return "Errore : " + this.errorCode + ", " + "message: " + this.errorMessage;
+		return "Error : " + this.errorCode + ", " + "message: " + this.errorMessage;
 	}
 }
