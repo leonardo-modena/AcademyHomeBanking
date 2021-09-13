@@ -1,5 +1,7 @@
 
-<div *ngIf="showText">
+<app-spinner *ngIf="spinner" class="mt-5" [@fade]></app-spinner>
+
+<div *ngIf="showText && !spinner">
     <div class="background shadow-sm">
       <div class="description">
         <div class="description-text">
@@ -61,7 +63,7 @@
     </div>
 
 
-    <div *ngIf="showForm" [@fade] class="mt-5">
+    <div *ngIf="showForm && !spinner" [@fade] class="mt-5">
       <div class="container shadow-sm mt-2 form-container">
 
         <div class="row">

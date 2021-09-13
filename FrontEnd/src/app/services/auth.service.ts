@@ -20,7 +20,7 @@ export class AuthService {
 
   private isAdmin = new BehaviorSubject(false);
   actualAdmin = this.isAdmin.asObservable();
-  
+
   url: string = environment.api_url;
   isUser: boolean = false;
   token !: string;

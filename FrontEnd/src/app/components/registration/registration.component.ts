@@ -24,6 +24,7 @@ export class RegistrationComponent implements OnInit {
   today!:string;
   showText: boolean = true;
   showForm: boolean = false;
+  spinner: boolean = false;
 
   constructor(private auth: AuthService, private router: Router, private alert: AlertService, private titleService: Title) {}
 
@@ -71,7 +72,10 @@ export class RegistrationComponent implements OnInit {
 
     const sex = form.value.sesso;
 
+    this.spinner = true;
+
     this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {
+      this.spinner = false;
       this.router.navigate(['/login']);
       this.alert.newAllert('Registrazione effettuata con successo! Procedi col login.')
     });
