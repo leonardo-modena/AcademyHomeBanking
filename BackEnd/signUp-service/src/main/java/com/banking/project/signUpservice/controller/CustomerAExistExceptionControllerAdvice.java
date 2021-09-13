@@ -12,14 +12,14 @@ import com.banking.project.signUpservice.exception.CustomerAlreadyExistResponse;
 @ControllerAdvice
 public class CustomerAExistExceptionControllerAdvice {
 
-		@ExceptionHandler(CustomerAlreadyExistException.class)
-		@ResponseBody
-		@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-		public CustomerAlreadyExistResponse handleApiBankException(CustomerAlreadyExistException e) {
-			CustomerAlreadyExistResponse response = new CustomerAlreadyExistResponse(e.getErrorCode(),
-					e.getErrorMessage());
-			return response;
-		}
-	}
+    @ExceptionHandler(CustomerAlreadyExistException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public CustomerAlreadyExistResponse handleApiBankException(CustomerAlreadyExistException e) {
+        CustomerAlreadyExistResponse response = new CustomerAlreadyExistResponse(e.getErrorCode(),
+                e.getErrorMessage());
+        return response;
+    }
+}
 
 

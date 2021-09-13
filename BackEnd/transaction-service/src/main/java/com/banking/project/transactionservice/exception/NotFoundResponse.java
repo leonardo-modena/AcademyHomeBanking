@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 
 /**
  * Entità di risposta personalizzata per la NotFoundException
- * @author sonia
  *
  */
 

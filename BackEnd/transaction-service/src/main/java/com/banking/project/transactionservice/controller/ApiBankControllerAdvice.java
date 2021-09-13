@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.banking.project.transactionservice.exception.ApiBankException;
 import com.banking.project.transactionservice.exception.ApiBankResponse;
-
+/**
+ * ControllerAdvice per ApiBankException
+ */
 @ControllerAdvice
 public class ApiBankControllerAdvice {
 

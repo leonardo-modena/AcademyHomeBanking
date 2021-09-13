@@ -57,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authorizeRequests().antMatchers("/auth/**").permitAll()
-				.antMatchers("/swagger-ui.html").permitAll()
+				.antMatchers("/swagger-ui.html").permitAll();
 				//da commentare ".anyRequest().authenticated()" quando si vuole accedere a swagger
-				.anyRequest().authenticated();
+				//.anyRequest().authenticated();
 			   
 		
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

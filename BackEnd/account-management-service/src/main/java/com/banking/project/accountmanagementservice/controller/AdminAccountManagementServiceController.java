@@ -37,6 +37,7 @@ public class AdminAccountManagementServiceController {
      * @param
      * @return
      */
+
     @Operation(summary="Lista di conti con stato inattivo")
     @GetMapping(value = "/listInactiveAccounts")
     public List<BankAccountDTO> getInactive() {

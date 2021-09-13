@@ -16,24 +16,35 @@ import io.jsonwebtoken.*;
 @Component
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-	//recupero i dati del token dall'application properties con @Value
+	// recupero i dati del token dall'application properties con @Value
 	@Value("${security.jwt.secret}")
 	private String secret;
 
 	@Value("${security.jwt.expirationMs}")
 	private int expirationMs;
 
+	/**
+	 * Metodo che genera il token
+	 * 
+	 * @param authentication
+	 */
 	public String generateJwtToken(Authentication authentication) {
 
 		MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
-		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
-		//non mi serve la lista di ruoli ma solo il primo
+		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+				.collect(Collectors.toList());
+		// non mi serve la lista di ruoli ma solo il primo
 		String role = roles.get(0);
-		//codifico nel token l'id, il ruolo e la sua durata
-		return Jwts.builder().setSubject(userDetails.getUsername()).claim("id", userDetails.getId()).claim("role",role).claim("expiration",expirationMs)
-				.signWith(SignatureAlgorithm.HS512, secret).compact();
+		// codifico nel token l'id, il ruolo e la sua durata
+		return Jwts.builder().setSubject(userDetails.getUsername()).claim("id", userDetails.getId()).claim("role", role)
+				.claim("expiration", expirationMs).signWith(SignatureAlgorithm.HS512, secret).compact();
 	}
 
+	/**
+	 * Metodo che recupera lo user dal token
+	 * 
+	 * @param token
+	 */
 	public String getUserNameFromJwtToken(String token) {
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
 	}

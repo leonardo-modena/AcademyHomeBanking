@@ -1,8 +1,6 @@
 package com.banking.project.loginservice.controller;
 
-import java.math.BigDecimal;
-
-import javax.servlet.http.HttpServletResponse;
+import javax.naming.AuthenticationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException.Unauthorized;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.banking.project.loginservice.dao.CustomerRepository;
 import com.banking.project.loginservice.encoder.Sha256Encoder;
-import com.banking.project.loginservice.security.jwt.AuthEntryPointJwt;
 import com.banking.project.loginservice.security.jwt.JwtUtils;
 import com.banking.project.loginservice.springjwt.payload.request.LoginRequest;
 import com.banking.project.loginservice.springjwt.payload.response.JwtResponse;
@@ -61,7 +57,7 @@ public class AuthController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Autenticazione utente avvenuta, token generato", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseEntity.class)) }),
 			@ApiResponse(responseCode = "401", description = "Utente non trovato/Utente non autorizzato", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = Unauthorized.class)) })
+			@Content(mediaType = "application/json", schema = @Schema(implementation = AuthenticationException.class)) })
 	
 	})
 	//Rimosso @Valid prima di @RequestBody in quanto la validazione non è accettata sul browser

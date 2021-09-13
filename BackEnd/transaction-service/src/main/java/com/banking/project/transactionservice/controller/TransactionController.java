@@ -40,7 +40,12 @@ public class TransactionController {
 
 	@Autowired
 	CustomerRepository customerRepository;
-
+	
+	/**
+	 * Metodo che, dato un conto, restituisce il suo saldo
+	 * @param bankAccountId
+	 * @return balance
+	 */
 	@Operation(summary = "Saldo del conto", description = "Dato un conto restituisce il suo saldo", tags = "Saldo")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Ritorna il saldo", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = BigDecimal.class)) }),
@@ -55,6 +60,13 @@ public class TransactionController {
 		} else
 			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
 	}
+	/**
+	 * Metodo che, dato un importo, una causale e un numero di conto, effettua un prelievo di denaro
+	 * @param amount
+	 * @param causal
+	 * @param bankAccountId
+	 * @return BankAccount
+	 */
 	@Operation(summary = "Prelievo", description = "Dato un importo, una causale e un numero di conto effettua un prelievo di denaro", tags = "Prelievo")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Effettua un prelievo sul conto", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
@@ -92,7 +104,13 @@ public class TransactionController {
 
 		}
 	}
-
+	/**
+	 * Metodo che, dato un importo, un conto, un tipo di operazione (0=WITHDRAWAL) e una causale, salva la transazione 
+	 * @param amount
+	 * @param bankAccount
+	 * @param op
+	 * @param causal
+	 */
 	private void saveTransaction(BigDecimal amount, BankAccount bankAccount, int op, String causal) {
 
 		Transaction transaction = new Transaction();
@@ -108,6 +126,13 @@ public class TransactionController {
 		transaction.setDateTransaction(date.getTime());
 		transactionRepository.save(transaction);
 	}
+	/**
+	 * Metodo che, dato un importo, una causale e un numero di conto, effettua un deposito di denaro
+	 * @param amount
+	 * @param causal
+	 * @param bankAccountId
+	 * @return ResponseEntity<BankAccount>
+	 */
 	@Operation(summary = "Deposito", description = "Dato un importo, una causale e un numero di conto effettua un deposito di denaro", tags = "Deposito")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Effettua un deposito sul conto", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
@@ -143,6 +168,14 @@ public class TransactionController {
 		}
 
 	}
+	/**
+	 * Metodo che, dato un conto, un filtro date e due valori interi di inizio e fine per la data, restituisce le transazioni effettuate
+	 * @param idAccount
+	 * @param type
+	 * @param startDate
+	 * @param endDate
+	 * @return List<Transaction>
+	 */
 	@Operation(summary = "Transazioni per data", description = "Dato un conto, un filtro date (lastTen,lastThreeMonths,betweenTwoDates) "
 			+ "e due valori interi di inizio e fine per la data ( da settare a 0 per lastTen e lastThreeMonths), "
 			+ "restituisce le transazioni effettuate", tags = "Transazioni per data")
@@ -174,6 +207,14 @@ public class TransactionController {
 		throw new NotFoundException("Errore di filtro date", HttpStatus.NOT_FOUND);
 
 	}
+	/**
+	 * Metodo che, dato l'id di un utente, restituisce la lista delle transazioni effettuate su tutti i conti
+	 * @param idAccount
+	 * @param type
+	 * @param startDate
+	 * @param endDate
+	 * @return List<Transaction>
+	 */
 	@Operation(summary = "Transazioni dell'utente", description = "Dato l'id di un utente, restituisce la lista delle transazioni effettuate su tutti i conti"
 			,tags = "Transazioni per utente")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Elenco transazioni", content = {

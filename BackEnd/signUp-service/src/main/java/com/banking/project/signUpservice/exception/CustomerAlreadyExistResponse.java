@@ -4,33 +4,33 @@ import org.springframework.http.HttpStatus;
 
 public class CustomerAlreadyExistResponse {
 
-	private HttpStatus typeofError;
-	private String error;
+    private HttpStatus typeofError;
+    private String error;
 
-	public CustomerAlreadyExistResponse() {
+    public CustomerAlreadyExistResponse() {
 
-	}
+    }
 
-	public CustomerAlreadyExistResponse(HttpStatus typeofError, String error) {
+    public CustomerAlreadyExistResponse(HttpStatus typeofError, String error) {
 
-		this.typeofError = typeofError;
-		this.error = error;
-	}
+        this.typeofError = typeofError;
+        this.error = error;
+    }
 
-	public HttpStatus getTypeofError() {
-		return typeofError;
-	}
+    public HttpStatus getTypeofError() {
+        return typeofError;
+    }
 
-	public void setTypeofError(HttpStatus typeofError) {
-		this.typeofError = typeofError;
-	}
+    public void setTypeofError(HttpStatus typeofError) {
+        this.typeofError = typeofError;
+    }
 
-	public String getError() {
-		return error;
-	}
+    public String getError() {
+        return error;
+    }
 
-	public void setError(String error) {
-		this.error = error;
-	}
+    public void setError(String error) {
+        this.error = error;
+    }
 
 }

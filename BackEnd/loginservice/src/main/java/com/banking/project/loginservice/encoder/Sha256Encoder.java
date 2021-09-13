@@ -8,14 +8,13 @@ import com.google.common.hash.Hashing;
 
 /**
  * Encoder custom per codificare in sha256
- * 
- * @author sonia
  *
  */
 public class Sha256Encoder implements PasswordEncoder {
 
 	/**
 	 * Metodo che ritorna una stringa codificata in sha256
+	 * 
 	 */
 	@Override
 	public String encode(CharSequence rawPassword) {
@@ -27,6 +26,7 @@ public class Sha256Encoder implements PasswordEncoder {
 
 	/**
 	 * Metodo che controlla se la password coincide con la stringa codificata
+	 * 
 	 */
 	@Override
 	public boolean matches(CharSequence rawPassword, String encodedPassword) {
