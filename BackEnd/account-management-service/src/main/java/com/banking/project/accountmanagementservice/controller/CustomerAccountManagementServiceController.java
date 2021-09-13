@@ -5,8 +5,14 @@ import java.util.Optional;
 
 import com.banking.project.accountmanagementservice.entity.Customer;
 import com.banking.project.accountmanagementservice.entity.CustomerDTO;
+import com.banking.project.accountmanagementservice.exception.NotFoundResponse;
 import com.banking.project.accountmanagementservice.rabbitConfig.MQConfig;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,12 +50,20 @@ public class CustomerAccountManagementServiceController {
 	 */
 
 
+	@Operation(summary="Richiesta di chiusura conto", description="Invio  richiesta di chiusura del conto alla sede amministrativa")
+	@ApiResponses(value= {
+			@ApiResponse(responseCode= "200", description = "Id valido, stato conto in chiusura "),
+			@ApiResponse(responseCode="404", description = "Id conto non valido",content = {
+							@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) }),
+	})
+
 	@PutMapping(value = "/closingRequest/{accountId}")
 	public void closingAccount(@PathVariable int accountId) {
-		String message="Closing request from "+accountId;
-		template.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY,message);
-		bankAccountRepository.closingRequest(accountId);
-
+		if(bankAccountRepository.existsById(accountId)) {
+			bankAccountRepository.closingRequest(accountId);
+		}
+		else
+			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
 	}
 
 	/**
@@ -58,32 +72,55 @@ public class CustomerAccountManagementServiceController {
 	 * @param
 	 * @return
 	 */
+	@Operation(summary = "Profilo utente", description = "Dato un id Correntista restituisce il suo profile")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Ritorna il saldo", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = CustomerDTO.class)) }),
+			@ApiResponse(responseCode = "404", description = "Id Correntista non trovato", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
 
+	})
 	@GetMapping("/profile/{customerId}")
 	public CustomerDTO getCustomer(@PathVariable int customerId) {
 
-	Customer customer= customerRepository.getById(customerId);
-		CustomerDTO customerDTO=new CustomerDTO();
+		if(customerRepository.existsById(customerId)) {
+			Customer customer = customerRepository.getById(customerId);
+			CustomerDTO customerDTO = new CustomerDTO();
 
-		customerDTO.setId(customer.getId());
-		customerDTO.setFirstName(customer.getFirstName());
-		customerDTO.setLastName(customer.getLastName());
-		customerDTO.setEmail(customer.getEmail());
-		customerDTO.setDateOfBirth(customer.getDateOfBirth());
-		customerDTO.setGender(customer.getGender());
-		customerDTO.setRole(customer.getRole());
-		customerDTO.setDateOfBirth(customer.getDateOfBirth());
-		customerDTO.setBankAccounts(customer.getBankAccounts());
-		return customerDTO;
+			customerDTO.setId(customer.getId());
+			customerDTO.setFirstName(customer.getFirstName());
+			customerDTO.setLastName(customer.getLastName());
+			customerDTO.setEmail(customer.getEmail());
+			customerDTO.setDateOfBirth(customer.getDateOfBirth());
+			customerDTO.setGender(customer.getGender());
+			customerDTO.setRole(customer.getRole());
+			customerDTO.setDateOfBirth(customer.getDateOfBirth());
+			customerDTO.setBankAccounts(customer.getBankAccounts());
+			return customerDTO;
+		}
+		else
+			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
 
 	}
 
-	@GetMapping("/profile/bankAccount/{myBankAccount}")
-	public Optional<BankAccount> getMyBankAccount(@PathVariable int myBankAccount) {
 
-		Optional<BankAccount> theBankAccount = bankAccountRepository.findById(myBankAccount);
 
-		return theBankAccount;
+	@Operation(summary = "Dettaglio conto ", description = "Dato un id conto, va a restituire i dettaglio del conto ")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Ritorna il conto", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
+			@ApiResponse(responseCode = "404", description = "Id conto non trovato", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
+
+	})
+	@GetMapping("/profile/bankAccount/{myBankAccountId}")
+	public Optional<BankAccount> getMyBankAccount(@PathVariable int myBankAccountId) {
+
+		if(bankAccountRepository.existsById(myBankAccountId)) {
+			Optional<BankAccount> theBankAccount = bankAccountRepository.findById(myBankAccountId);
+
+			return theBankAccount;
+		}
+		else
+			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
 	}
 
 	/**
@@ -92,6 +129,15 @@ public class CustomerAccountManagementServiceController {
 	 * @param balance
 	 * @return
 	 */
+
+	@Operation(summary = "Apertura nuovo conto ", description = "Dato  id conto appartenente allo stesso correntista e un " +
+			"importo che sia valido va a restituire un nuovo conto ")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Ritorna il conto", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
+			@ApiResponse(responseCode = "404", description = "Id conto non trovato", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
+
+	})
 	@PostMapping("/new/{id}/{balance}")
 	public ResponseEntity<BankAccount> newAccount(@PathVariable int id, @PathVariable BigDecimal balance) {
 
@@ -119,12 +165,12 @@ public class CustomerAccountManagementServiceController {
 				
 			} else {
 
-				throw new ApiBankException("Disponibilità terminata sul conto n."+id,HttpStatus.BAD_REQUEST);
+				throw new ApiBankException("Disponibilità terminata o conto non attivo sul conto n."+id,HttpStatus.BAD_REQUEST);
 			}
 
 		} else {
 
-			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_ACCEPTABLE);
+			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
 		}
 
 		return new ResponseEntity<>(newBankAccount,HttpStatus.OK);

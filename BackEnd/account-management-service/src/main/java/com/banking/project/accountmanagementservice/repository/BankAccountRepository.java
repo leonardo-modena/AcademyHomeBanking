@@ -13,10 +13,10 @@ import java.util.List;
 
 public interface BankAccountRepository extends JpaRepository<BankAccount,Integer> {
 
-    @Query(value = "select b from BankAccount b inner join Customer c on c=b.holder where b.account_status='INACTIVE'")
+    @Query(value = "select b from BankAccount b where b.account_status='INACTIVE'")
     List<BankAccount> findInactive();
 
-    @Query(value = "select b from BankAccount b inner join Customer c on c=b.holder where b.account_status='CLOSING'")
+    @Query(value = "select b from BankAccount b where b.account_status='CLOSING'")
     List<BankAccount> findClosing();
 
 	@Transactional
