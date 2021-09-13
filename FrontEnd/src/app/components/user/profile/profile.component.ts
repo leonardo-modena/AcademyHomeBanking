@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   closing: boolean = false;
 
   user!: User;
-  userSubcription!:Subscription;
+  userSubscription!:Subscription;
 
   bankAccounts!: BankAccount[];
   bankAccountsSubscription!: Subscription;
@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.userSubcription = this.userService.user.subscribe((user: User) => {
+    this.userSubscription = this.userService.user.subscribe((user: User) => {
       this.user = user;
       this.titleService.setTitle(
         `PROFILO | ${this.user.firstName} ${this.user.lastName}`
@@ -86,7 +86,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubcription.unsubscribe();
+    this.userSubscription.unsubscribe();
     this.bankAccountsSubscription.unsubscribe();
     this.inactiveSubscription.unsubscribe();
     this.closingAccountSubscription.unsubscribe();
