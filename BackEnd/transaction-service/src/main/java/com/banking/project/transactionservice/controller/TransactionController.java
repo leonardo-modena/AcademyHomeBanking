@@ -143,12 +143,12 @@ public class TransactionController {
 		}
 
 	}
-	@Operation(summary = "Transazioni", description = "Dato un conto, un filtro date ed opzionalmente una data di inizio e fine, restituisce le transazioni effettuate", tags = "Transazioni per data")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Elenco transazioni ", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = BankAccount.class)) }),
-			@ApiResponse(responseCode = "400", description = "Range di ricarica errato", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiBankResponse.class)) }),
-			@ApiResponse(responseCode = "404", description = "Conto non trovato", content = {
+	@Operation(summary = "Transazioni per data", description = "Dato un conto, un filtro date (lastTen,lastThreeMonths,betweenTwoDates) "
+			+ "e due valori interi di inizio e fine per la data ( da settare a 0 per lastTen e lastThreeMonths), "
+			+ "restituisce le transazioni effettuate", tags = "Transazioni per data")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Elenco transazioni filtrate per data", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Transaction.class)) }),
+			@ApiResponse(responseCode = "404", description = "Errore nome filtro date", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class)) })
 	
 	})
@@ -174,7 +174,11 @@ public class TransactionController {
 		throw new NotFoundException("Errore di filtro date", HttpStatus.NOT_FOUND);
 
 	}
-
+	@Operation(summary = "Transazioni dell'utente", description = "Dato l'id di un utente, restituisce la lista delle transazioni effettuate su tutti i conti"
+			,tags = "Transazioni per utente")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Elenco transazioni", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Transaction.class)) })
+	})
 	@GetMapping("/operation/{idCustomer}")
 	public List<Transaction> getTransactionByIdCustomer(@PathVariable int idCustomer) {
 		Customer customer = customerRepository.getById(idCustomer);

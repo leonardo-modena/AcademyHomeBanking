@@ -7,7 +7,6 @@ import { RouterModule } from "@angular/router";
 import { OperationListComponent } from "../../components/user/operation-list/operation-list.component";
 import { OperationItemComponent } from "../../components/user/operation-list/opertation-item/operation-item.component";
 import { BankAccountComponent } from "../../components/user/bank-account/bank-account.component";
-import { ConfirmDialogComponent } from "../../components/user/profile/confirm-dialog/confirm-dialog.component";
 import { DownloadComponent } from "../../components/user/download/download.component";
 import { OperationFormComponent } from "../../components/user/operations/operation-form/operation-form.component";
 import { SharedModule } from "../shared/shared.module";
@@ -25,7 +24,6 @@ import {AlertMessage} from "../../components/user/alert-message/alert-message";
     OperationListComponent,
     OperationItemComponent,
     OperationFormComponent,
-    ConfirmDialogComponent,
     BankAccountComponent,
     AlertMessage
   ],
