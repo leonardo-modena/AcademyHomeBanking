@@ -84,4 +84,20 @@
       </div>
     </div>
   </div>
+  <div [class]="'row ' + (inactive || closing ? 'inactive' : '')">
+    <div class="col-12 col-md-10 col-lg-8 m-auto">
+      <h2>Scarica le operazioni</h2>
+      <div class="container my-3">
+        <div [class]="'row gx-5 green-background p-3 '">
+          <p class="col-12">Scarica le operazioni di tutti i tuoi conti.</p>
+            <div class="col-12 d-flex flex-column align-items-end">
+              <button type="submit" class="btn btn-primary" (click)="onDownloadAllOperations()">Scarica</button>
+            </div>
+        </div>
+        <div>
+          <app-spinner *ngIf="isCreatingNew || isDownloading"></app-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

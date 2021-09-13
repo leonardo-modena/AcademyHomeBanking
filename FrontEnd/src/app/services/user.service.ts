@@ -84,7 +84,6 @@ export class UserService {
     this.operationSpinnerSubject.next(true);
     this.http.get<{id: number, type:  'WITHDRAWAL' | 'DEPOSIT', causal: string, amount: number, dateTransaction: number, id_account: {id: number, balance: number, account_status: string}}[]>(`${this.apiUrlBankAccount}/transactions/${bill}/${filterInfo.type}/${filterInfo.startDate}/${filterInfo.endDate}`)
       .subscribe((operations) => {
-        console.log(operations);
         let operationsList: Operation[] = operations.map((op) => {
           return {causal: op.causal, type: op.type, amount: op.amount, dateTransaction: op.dateTransaction, idAccount: op.id_account.id, idTransaction: op.id, }
         })
@@ -93,6 +92,24 @@ export class UserService {
       }, () => {
         this.operationSpinnerSubject.next(false);
       });
+  }
+
+  // Restituisce tutte le operazioni di un utente di tutti i conti
+  getAllOperations(id: number): Observable<
+        {amount: number,
+        causal: string,
+        dateTransaction: number,
+        id: number,
+        id_account: {id: number, balance: number, account_status: string},
+        type: 'DEPOSIT' | 'WITHDRAWAL'}[]> {
+    return this.http.get<
+      {amount: number,
+      causal: string,
+      dateTransaction: number,
+      id: number,
+      id_account: {id: number, balance: number, account_status: string},
+      type: 'DEPOSIT' | 'WITHDRAWAL'}[]
+      >(`${this.apiUrlBankAccount}/operation/${id}`);
   }
 
   // Restituisce i dati del conto

@@ -22,11 +22,11 @@ export class DownloadComponent implements OnInit {
 
     let list =``;
     console.log(this.downloadData);
-    let toPDF = `<div><h3 style="margin-bottom: 20px">Movimenti del conto: ${this.downloadData[0].idAccount.toString().padStart(6, '0')} </h3>`
+    let toPDF = `<div><h3 style="margin-bottom: 20px">Movimenti del conto: ${this.downloadData[0].idAccount.toString().padStart(6, '0')} </h3><table style="" class='green'>`
 
     this.downloadData.map((operation: any) => {
       const date = new Date(operation.dateTransaction);
-      list += `<table style="" class='green'>
+      list += `
       <tr class='row'>
         <td style="text-align:left; border: none;">
           <h4>${operation.causal}</h4>
@@ -37,37 +37,10 @@ export class DownloadComponent implements OnInit {
           <h3 style="text-align: right; color: ${operation.type === 'DEPOSIT' ? '#2c6e49' : '#d68c45'}" ">€ ${operation.type === 'DEPOSIT' ? '' : '-'} ${operation.amount}</h3>
           </div>
         </td>
-      </tr>
-    </table>`
-    //     `
-    // <table style="">
-    //   <tr>
-    //     <td style="text-align:center">
-    //       <p>${operation.causal}</p>
-    //       <p>${operation.dateTransaction.getDate().toString().padStart(2, '0')}/${(operation.dateTransaction.getMonth() + 1).toString().padStart(2, '0')}/${operation.dateTransaction.getFullYear()} - ${operation.dateTransaction.getHours().toString().padStart(2, '0')}:${operation.dateTransaction.getMinutes().toString().padStart(2, '0')}</p>
-    //     </td>
-    //     <td>
-    //       <div>
-    //       <p style="text-align: right; color: ${operation.type === 'DEPOSIT' ? 'green' : 'red'}" ">${(operation.type === 'WITHDRAWAL' ? '-' : '')}${operation.importo}</p>
-    //       </div>
-    //     </td>
-    //   </tr>
-    // </table>`
+      </tr>`
     });
 
-    //`
-    //         <div style="display: flex; justify-content: space-between; margin-bottom: 10px; border-radius: 5px; padding: 10px; border: 1px solid green">
-    //           <div>
-    //             <h4>${operation.causal}</h4>
-    //             <p>${operation.dateTransaction.getDate().toString().padStart(2, '0')}/${(operation.dateTransaction.getMonth() + 1).toString().padStart(2, '0')}/${operation.dateTransaction.getFullYear()} - ${operation.dateTransaction.getHours().toString().padStart(2, '0')}:${operation.dateTransaction.getMinutes().toString().padStart(2, '0')}</p>
-    //           </div>
-    //           <div>
-    //             <p style="text-align: right; color: ${operation.type === 'prelievo' ? 'red' : 'green'}" ">${(operation.type === 'WITHDRAWAL' ? '-' : '')}${operation.importo}</p>
-    //           </div>
-    //         </div>`
-
-
-    toPDF += list + '</div>';
+    toPDF += list + '</table></div>';
     this.downloadService.downloadAsPDF(toPDF, [this.downloadData[0].idAccount]);
   }
 }

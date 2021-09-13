@@ -10,6 +10,8 @@ import {BankAccount} from "../../../model/BankAccount";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
+import {DownloadService} from "../../../services/download.service";
+import {Operation} from "../../../model/operation";
 
 @Component({
   selector: 'app-profile',
@@ -39,6 +41,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   selectedBill: number = 0;
   deletingBill!: number;
 
+  isDownloading = false;
+
   maxAmount = 5000000;
   private timer!: any;
 
@@ -47,6 +51,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     public dialog: MatDialog,
+    private downloadService: DownloadService,
     private errorService: ErrorService,
     private titleService: Title) {
   }
@@ -105,7 +110,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onCloseBill() {
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -124,6 +128,40 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.isDeleting = false
         });
       }
+    });
+  }
+
+  onDownloadAllOperations() {
+    this.isDownloading = true;
+    this.userService.getAllOperations(parseInt(this.user.id)).subscribe((operations) => {
+      let operationsList: Operation[] = operations.map((op) => {
+        return {causal: op.causal, type: op.type, amount: op.amount, dateTransaction: op.dateTransaction, idAccount: op.id_account.id, idTransaction: op.id, }
+      });
+
+      let downloadData = '<table style="" class=\'green\'>';
+
+      operationsList.map((operation) => {
+        const date = new Date(operation.dateTransaction);
+        downloadData += `
+      <tr class='row'>
+        <td style="text-align:left; border: none; vertical-align: middle">
+            <h6>${operation.idAccount.toString().padStart(6, '0')}</h6>
+        </td>
+        <td style="text-align:left; border: none;">
+          <h4>${operation.causal}</h4>
+          <p>${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}</p>
+        </td>
+        <td style="border: none">
+          <div>
+          <h3 style="text-align: right; color: ${operation.type === 'DEPOSIT' ? '#2c6e49' : '#d68c45'}" ">€ ${operation.type === 'DEPOSIT' ? '' : '-'} ${operation.amount}</h3>
+          </div>
+        </td>
+      </tr>
+    `
+      });
+      downloadData += '</table>'
+      this.downloadService.downloadAsPDF(downloadData, this.user.bankAccounts);
+      this.isDownloading = false;
     });
   }
 }
