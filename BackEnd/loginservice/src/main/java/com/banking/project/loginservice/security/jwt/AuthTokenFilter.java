@@ -31,6 +31,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		try {
+			//recupero il jwt da Authorization
 			String jwt = parseJwt(request);
 			//controllo del jwt
 			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
@@ -52,7 +53,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
 	private String parseJwt(HttpServletRequest request) {
 		String headerAuth = request.getHeader("Authorization");
-		// il token è di tipo Bearer, controllo che lo sia
 			return headerAuth;
 		
 	}
