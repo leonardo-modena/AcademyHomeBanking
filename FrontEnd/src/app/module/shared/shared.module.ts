@@ -9,6 +9,10 @@ import { LoadingPageComponent } from 'src/app/components/Shared/loading-page/loa
 import {NoCommaPipe} from "../../pipes/no-comma.pipe";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DialogComponent } from 'src/app/components/Shared/dialog/dialog.component';
+import { ErrorComponent } from 'src/app/components/Shared/error/error.component';
+import { AlertComponent } from 'src/app/components/Shared/alert/alert.component';
+import { ErrorService } from 'src/app/services/error.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +20,8 @@ import { DialogComponent } from 'src/app/components/Shared/dialog/dialog.compone
     LoadingPageComponent,
     NoCommaPipe,
     DialogComponent,
+    ErrorComponent,
+    AlertComponent,
   ],
   imports: [
     CommonModule,
@@ -29,12 +35,18 @@ import { DialogComponent } from 'src/app/components/Shared/dialog/dialog.compone
   exports: [
     SpinnerComponent,
     LoadingPageComponent,
+    DialogComponent,
+    AlertComponent,
+    ErrorComponent,
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
     NoCommaPipe,
     MatDialogModule,
-    DialogComponent
+  ],
+  providers: [
+    ErrorService,
+    AlertService
   ]
 })
 export class SharedModule { }
