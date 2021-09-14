@@ -13,6 +13,7 @@ import { ErrorComponent } from 'src/app/components/Shared/error/error.component'
 import { AlertComponent } from 'src/app/components/Shared/alert/alert.component';
 import { ErrorService } from 'src/app/services/error.service';
 import { AlertService } from 'src/app/services/alert.service';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AlertService } from 'src/app/services/alert.service';
     FormsModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   exports: [
     SpinnerComponent,
