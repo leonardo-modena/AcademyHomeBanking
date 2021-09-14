@@ -13,10 +13,6 @@
   padding: 10px
 }
 
-h3 {
-  word-break: break-all;
-}
-
 p {
   white-space: nowrap;
 }
