@@ -1,3 +1,17 @@
 .email-item {
-  font-size: 0.9rem !important;
+  font-size: 0.7rem !important;
 }
+
+
+
+@media (min-width: 992px) {
+  .email-item{
+    font-size: 0.7rem !important;
+  }
+ }
+
+ @media (min-width: 1200px) {
+  .email-item{
+    font-size: 0.9rem !important;
+  }
+ }
