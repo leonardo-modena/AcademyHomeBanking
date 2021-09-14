@@ -5,6 +5,7 @@ import { Router} from "@angular/router";
 import {AlertService} from "../../services/alert.service";
 import { Title } from '@angular/platform-browser';
 import { fadeAnimation } from 'src/app/animation/animations';
+import {ErrorService} from "../../services/error.service";
 
 
 @Component({
@@ -26,7 +27,7 @@ export class RegistrationComponent implements OnInit {
   showForm: boolean = false;
   spinner: boolean = false;
 
-  constructor(private auth: AuthService, private router: Router, private alert: AlertService, private titleService: Title) {}
+  constructor(private auth: AuthService, private router: Router, private alert: AlertService, private titleService: Title, private error: ErrorService) {}
 
   ngOnInit(): void {
     this.titleService.setTitle(`AcademyBank | Apertura-Conto`)
@@ -78,7 +79,7 @@ export class RegistrationComponent implements OnInit {
 
       if (resData == false){
         this.spinner = false;
-        this.alert.newAllert('Esiste già un utente registrato con questa email')
+        this.error.newError('Esiste già un utente registrato con questa email')
         return;
       }
 
