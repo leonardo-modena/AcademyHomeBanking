@@ -75,6 +75,13 @@ export class RegistrationComponent implements OnInit {
     this.spinner = true;
 
     this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {
+
+      if (resData == false){
+        this.spinner = false;
+        this.alert.newAllert('Esiste già un utente registrato con questa email')
+        return;
+      }
+
       this.spinner = false;
       this.router.navigate(['/login']);
       this.alert.newAllert('Registrazione effettuata con successo! Procedi col login.')
