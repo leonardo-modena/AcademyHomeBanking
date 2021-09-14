@@ -37,3 +37,8 @@
   text-decoration: none !important;
   font-size: 20px;
 }
+
+.btn:hover{
+  color: #2c6e49 !important;
+  box-shadow: 0 0 11px rgba(33,33,33,.2) !important;
+}

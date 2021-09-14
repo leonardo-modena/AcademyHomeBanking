@@ -15,7 +15,6 @@ import { ErrorComponent } from './components/Shared/error/error.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
 import { UserModule } from "./module/user/user.module";
-import { AlertComponent } from './components/Shared/alert/alert.component';
 import { AdminModule } from "./module/admin/admin.module";
 import { SharedModule } from "./module/shared/shared.module";
 import { NoCommaPipe } from './pipes/no-comma.pipe';
@@ -31,8 +30,6 @@ import {TokenInterceptor} from "./interceptor/token.interceptor";
     RegistrationComponent,
     FooterComponent,
     NotFoundComponent,
-    ErrorComponent,
-    AlertComponent,
   ],
   imports: [
     SharedModule,
@@ -61,7 +58,6 @@ import {TokenInterceptor} from "./interceptor/token.interceptor";
     },
   ],
   exports: [
-    ErrorComponent,
     NoCommaPipe
   ],
   bootstrap: [AppComponent]
