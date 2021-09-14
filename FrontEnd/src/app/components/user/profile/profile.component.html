@@ -1,7 +1,7 @@
 <div class="container" *ngIf="user != null">
 
   <div class="row">
-    <h1 class="col-12 col-md-10 col-lg-8 text-center m-auto">Il tuo profilo</h1>
+    <h1 class="col-12 col-md-10 col-lg-8 text-center m-auto mb-3">Il tuo profilo</h1>
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <app-alert-message type="inactive" *ngIf="inactive"></app-alert-message>
       <app-alert-message type="closing" *ngIf="closing"></app-alert-message>
@@ -57,7 +57,9 @@
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Aggiungi un nuovo conto</h2>
       <div class="container my-3">
+        <p *ngIf="createdNew" class="light-green-background rounded m-3 p-3">Il nuovo conto è stato creato con successo.</p>
         <form (ngSubmit)="onNewBill(form)" #form="ngForm" [class]="'row gx-5 green-background p-3 ' + (isCreatingNew ? 'disabledForm' : '')">
+
           <div class="form-group col-12 col-md-6">
             <label class="form-label" for="selectedBill">Seleziona il conto</label>
             <select id="selectedBill" required class="form-select" aria-label="Seleziona il conto" name="selectedBill" [(ngModel)]="selectedBill" (change)="changeBill()"> <!-- (change)="maxAmount=bills[selectedBill].amount"-->
