@@ -21,7 +21,6 @@ export class DownloadComponent implements OnInit {
   download(): void {
 
     let list =``;
-    console.log(this.downloadData);
     let toPDF = `<div><h3 style="margin-bottom: 20px">Movimenti del conto: ${this.downloadData[0].idAccount.toString().padStart(6, '0')} </h3><table style="" class='green'>`
 
     this.downloadData.map((operation: any) => {

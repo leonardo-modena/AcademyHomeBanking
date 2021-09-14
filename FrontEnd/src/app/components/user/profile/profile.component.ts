@@ -44,7 +44,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   isDownloading = false;
 
   maxAmount = 5000000;
-  private timer!: any;
+  private deletedTimer!: any;
+
+  createdNew = false;
+  private createdNewTimer!: any;
 
   constructor(
     private router: Router,
@@ -90,7 +93,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.bankAccountsSubscription.unsubscribe();
     this.inactiveSubscription.unsubscribe();
     this.closingAccountSubscription.unsubscribe();
-    clearTimeout(this.timer);
+    clearTimeout(this.deletedTimer);
+    clearTimeout(this.createdNewTimer);
   }
 
   changeBill() {
@@ -104,6 +108,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.createNewBill(form.controls.amount.value, this.bankAccounts[form.controls.selectedBill.value].id).subscribe(() => {
       this.isCreatingNew = false;
       this.userService.getUser(parseInt(this.user.id));
+      this.createdNew = true;
+      this.createdNewTimer = setTimeout(() => {
+        this.createdNew = false;
+      }, 5000);
       form.resetForm({selectedBill: 0})
     }, () => {
       this.isCreatingNew = false;
@@ -124,7 +132,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.isDeleting = true;
           this.userService.deleteBill(this.deletingBill).subscribe(() => {
             this.deleteOk = true;
-            this.timer = setTimeout(() => {
+            this.deletedTimer = setTimeout(() => {
               this.deleteOk = false;
             }, 5000)
             if (this.user.bankAccounts.length > 0) {
