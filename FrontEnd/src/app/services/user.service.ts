@@ -33,12 +33,11 @@ export class UserService {
   private closingAccountSubject = new BehaviorSubject<boolean>(false);
   closingAccount = this.closingAccountSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {  }
 
   // GET REQUESTS
 
   getUser(id: number): void {
-
     this.http.get<{id: string;
       firstName: string;
       lastName: string;
@@ -48,28 +47,30 @@ export class UserService {
       role: string;
       bankAccounts: BankAccount[]}
       >(`${this.apiUrlCustomer}/profile/${id}`).subscribe((userInfo) => {
-        const user: User = {id: userInfo.id, firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email, dateOfBirth: userInfo.dateOfBirth, role: userInfo.role, gender: userInfo.gender, bankAccounts: userInfo.bankAccounts.map((bill) => { return parseInt(bill.id)})  }
+      const user: User = {id: userInfo.id, firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email, dateOfBirth: userInfo.dateOfBirth, role: userInfo.role, gender: userInfo.gender, bankAccounts: userInfo.bankAccounts.map((bill) => { return parseInt(bill.id)})  }
 
-        this.userSubject.next(user);
+      this.userSubject.next(user);
 
-        const bankAccounts: BankAccount[] = userInfo.bankAccounts.map((bill) => {
-          return {...bill, holder: user}
+      const bankAccounts: BankAccount[] = userInfo.bankAccounts.map((bill) => {
+        return {...bill, holder: user}
       });
+      this.bankAccountsSubject.next(bankAccounts);
 
-        if (bankAccounts.length === 0) {
-          // Conto in fase di chiusura
-          this.closingAccountSubject.next(true);
+      if (bankAccounts.length === 0) {
+        // Conto in fase di chiusura
+        this.closingAccountSubject.next(true);
+      }
+      else {
+        this.closingAccountSubject.next(false);
+
+        if(bankAccounts.length === 1 && bankAccounts[0].account_status === 'INACTIVE') {
+          this.inactiveUserSubject.next(true);
         }
         else {
-
-          if(bankAccounts.length === 1 && bankAccounts[0].account_status === 'INACTIVE') {
-            this.inactiveUserSubject.next(true);
-          }
-          this.bankAccountsSubject.next(bankAccounts);
-
-          this.getOperationList(this.userSubject.getValue().bankAccounts[0], {type: 'lastTen', startDate: 0, endDate: 0});
+          this.inactiveUserSubject.next(false);
         }
-
+        this.getOperationList(this.userSubject.getValue().bankAccounts[0], {type: 'lastTen', startDate: 0, endDate: 0});
+      }
     });
   }
 
@@ -96,19 +97,19 @@ export class UserService {
 
   // Restituisce tutte le operazioni di un utente di tutti i conti
   getAllOperations(id: number): Observable<
-        {amount: number,
-        causal: string,
-        dateTransaction: number,
-        id: number,
-        id_account: {id: number, balance: number, account_status: string},
-        type: 'DEPOSIT' | 'WITHDRAWAL'}[]> {
-    return this.http.get<
-      {amount: number,
+    {amount: number,
       causal: string,
       dateTransaction: number,
       id: number,
       id_account: {id: number, balance: number, account_status: string},
-      type: 'DEPOSIT' | 'WITHDRAWAL'}[]
+      type: 'DEPOSIT' | 'WITHDRAWAL'}[]> {
+    return this.http.get<
+      {amount: number,
+        causal: string,
+        dateTransaction: number,
+        id: number,
+        id_account: {id: number, balance: number, account_status: string},
+        type: 'DEPOSIT' | 'WITHDRAWAL'}[]
       >(`${this.apiUrlBankAccount}/operation/${id}`);
   }
 
@@ -131,7 +132,7 @@ export class UserService {
 
   // Prelievo dal conto
   doWithdrawal(bill: number, amount: number, causal: string) {
-     return this.http.post<any>(`${this.apiUrlBankAccount}/withdrawal/${amount}/${causal}/${bill}`, {});
+    return this.http.post<any>(`${this.apiUrlBankAccount}/withdrawal/${amount}/${causal}/${bill}`, {});
   }
 
   //DELETE REQUESTS

@@ -18,6 +18,9 @@ export class UserComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService, private authService:AuthService) { }
 
   ngOnInit() {
+    if (this.userId) {
+      this.userService.getUser(this.userId);
+    }
     this.pageLoading = true;
     this.idSubscription = this.authService.actualId.subscribe((id) => {
       this.userId = id;
