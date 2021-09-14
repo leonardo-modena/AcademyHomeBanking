@@ -79,23 +79,22 @@ nav {
   margin-top: 2.5rem;
 }
 
-.sidenav-user-img {
-  width: 12rem;
-  border-radius: 20px;
-  border: 2px solid transparent;
+.sidenav-user-icon {
+  margin-top: 2rem;
+  font-size: 8rem !important;
   transition: border 0.3s ease-out;
 }
 
-.sidenav-user-img:hover {
-  border: 2px solid var(--white-yellow);
+.sidenav-user-icon:hover {
+  color:  var(--white-yellow);
 }
 
-.sidenav-user-img:focus {
+.sidenav-user-icon:focus {
   outline: none !important;
 }
 
-.sidenav-user-img_active {
-  border: 2px solid var(--white-yellow);
+.sidenav-user-icon_active {
+  color:  var(--white-yellow);
 }
 
 .sidenav-close-icon i {

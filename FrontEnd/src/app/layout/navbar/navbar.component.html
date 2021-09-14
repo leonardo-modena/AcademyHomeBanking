@@ -44,9 +44,10 @@
       <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
     </div>
     <div class="user-items" [ngClass]="{ slide: sidenav } " >
+      
       <div class="sidenav-user-info" >
-          <img (click)="sidenavSwitch()" class="sidenav-user-img img-fluid pointer" src="../../../assets/img/usr/usr1.jpg" alt="Immagine profilo utente" [routerLink]=" adminLogged ? ['/admin'] : ['/user/profilo']" routerLinkActive="sidenav-user-img_active" [routerLinkActiveOptions]="{exact:
-            true}">
+        <i class="fas fa-user-tie sidenav-user-icon pointer" [routerLink]=" adminLogged ? ['/admin'] : ['/user/profilo']" routerLinkActive="sidenav-user-icon_active" [routerLinkActiveOptions]="{exact:
+          true}"></i>
       </div>
       <div class="sidenav-item pointer" *ngIf="!adminLogged" id="first-sidenav-item" (click)="sidenavSwitch()" [routerLink]="['/user/profilo']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
         true}">
