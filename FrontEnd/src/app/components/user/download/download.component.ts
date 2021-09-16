@@ -23,6 +23,9 @@ export class DownloadComponent implements OnInit {
     let list =``;
     let toPDF = `<div><h3 style="margin-bottom: 20px">Movimenti del conto: ${this.downloadData[0].idAccount.toString().padStart(6, '0')} </h3><table style="" class='green'>`
 
+    if ( this.downloadData.length === 0){
+      list = 'Non sono presenti operazioni.';
+    }
     this.downloadData.map((operation: any) => {
       const date = new Date(operation.dateTransaction);
       list += `

@@ -28,9 +28,6 @@ export class BankAccountComponent implements OnInit {
   operations!: Operation[];
   operationsSubscription!: Subscription;
 
-  balance: number = 0;
-
-
   operationString = 'Stai visualizzando le ultime 10 operazioni.'
 
   isLoadingOperations: boolean = false;
@@ -69,6 +66,8 @@ export class BankAccountComponent implements OnInit {
     this.closingSubscription = this.userService.closingAccount.subscribe((closing) => {
       this.closing = closing;
     });
+
+    this.userService.getOperationList(parseInt(this.bankAccounts[this.selectedBill].id), {type: 'lastTen', startDate: 0, endDate: 0});
   }
 
   ngOnDestroy() {
