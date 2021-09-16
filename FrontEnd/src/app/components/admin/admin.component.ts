@@ -1,12 +1,9 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { stat } from 'fs';
 import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/app/model/BankAccount';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/services/admin.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { DownloadService } from 'src/app/services/download.service';
 
 @Component({
   selector: 'app-admin',
