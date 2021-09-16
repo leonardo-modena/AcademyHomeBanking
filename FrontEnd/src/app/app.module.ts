@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './layout/navbar/navbar.component';
-import { HomepageComponent } from './components/homepage/homepage.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { NotFoundComponent } from './layout/not-found/not-found.component';
-import { ErrorInterceptor } from './interceptor/error.interceptor';
-import { EncryptInterceptor } from './interceptor/encrypt.interceptor';
+
+import { AppRoutingModule } from './app-routing.module';
 import { UserModule } from "./module/user/user.module";
 import { AdminModule } from "./module/admin/admin.module";
 import { SharedModule } from "./module/shared/shared.module";
+
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { NotFoundComponent } from './layout/not-found/not-found.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+
 import { NoCommaPipe } from './pipes/no-comma.pipe';
-import {TokenInterceptor} from "./interceptor/token.interceptor";
+
+import { HttpInterceptorProviders } from './interceptor/provider.interceptor';
 
 
 @NgModule({
@@ -39,21 +39,7 @@ import {TokenInterceptor} from "./interceptor/token.interceptor";
     BrowserAnimationsModule,
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: EncryptInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
+    HttpInterceptorProviders
   ],
   exports: [
     NoCommaPipe
