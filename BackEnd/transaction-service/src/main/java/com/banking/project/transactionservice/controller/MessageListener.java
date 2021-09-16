@@ -28,7 +28,7 @@ public class MessageListener {
 		transaction.setType("DEPOSIT");
 		transaction.setDateTransaction(System.currentTimeMillis());
 		transaction.setAmount(theBankAccount.getBalance());
-		transaction.setCausal("Apertura nuovo conto");
+		transaction.setCausal("Deposito iniziale");
 		transaction.setId_account(theBankAccount);
 		transactionRepository.save(transaction);
 
