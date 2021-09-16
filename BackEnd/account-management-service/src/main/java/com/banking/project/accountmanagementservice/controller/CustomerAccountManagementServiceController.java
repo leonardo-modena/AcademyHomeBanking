@@ -6,7 +6,11 @@ import java.util.Optional;
 import com.banking.project.accountmanagementservice.entity.Customer;
 import com.banking.project.accountmanagementservice.DTO.CustomerDTO;
 import com.banking.project.accountmanagementservice.exception.NotFoundResponse;
+import com.banking.project.accountmanagementservice.rabbitConfig.MQConfigTransaction;
 import com.banking.project.accountmanagementservice.repository.CustomerRepository;
+import com.banking.project.accountmanagementservice.repository.TransactionRepository;
+import com.banking.project.accountmanagementservice.entity.Transaction;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,10 +41,14 @@ public class CustomerAccountManagementServiceController {
     @Autowired
 
     private CustomerRepository customerRepository;
+    
+    @Autowired
+    private TransactionRepository transactionRepository;
 
-
+    
     @Autowired
     private RabbitTemplate template;
+    
 
     /**
      * Metodo che richiede la chiusura del conto da parte dell'utente, setta lo
@@ -155,6 +163,20 @@ public class CustomerAccountManagementServiceController {
                 BigDecimal newOldBalance = bankAccount.getBalance().subtract(balance);
 
                 bankAccount.setBalance(newOldBalance);
+                
+                Transaction transaction = new Transaction();
+                
+    	    	transaction.setType("WITHDRAWAL");
+    	    	
+    	    	transaction.setDateTransaction(System.currentTimeMillis());
+    	    	
+    	    	transaction.setAmount(balance);
+    	    	
+    	    	transaction.setCausal("Prelievo per apertura nuovo conto");
+    	    	
+    	    	transaction.setId_account(bankAccount);
+    	    	
+    	    	transactionRepository.save(transaction);
 
                 newBankAccount.setId(0);
 
@@ -165,6 +187,8 @@ public class CustomerAccountManagementServiceController {
                 newBankAccount.setHolder(bankAccount.getHolder());
 
                 bankAccountRepository.save(newBankAccount);
+                
+                template.convertAndSend(MQConfigTransaction.EXCHANGE, MQConfigTransaction.ROUTING_KEY,newBankAccount);
 
             } else {
 

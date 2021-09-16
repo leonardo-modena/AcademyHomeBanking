@@ -22,8 +22,6 @@ public class MessageListener {
     @Autowired
     CustomerRepository customerRepository;
 
-
-
     /**
      * Metodo che rimane in attesa sulla coda
      * aspettando che arrivi un oggetto di tipo Customer
