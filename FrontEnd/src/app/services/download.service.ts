@@ -26,8 +26,6 @@ export class DownloadService {
   downloadAsXLSX(data: { firstName: string, lastName: string, email: string}[]): void {
     const filename = 'file';
 
-    // let { sheetName, fileName } = XLSX.getFileName(name);
-
     var wb = XLSX.utils.book_new();
     var ws = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(wb, ws, filename);
