@@ -1,5 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { stat } from 'fs';
 import { Subscription } from 'rxjs';
 import { BankAccount } from 'src/app/model/BankAccount';
 import { User } from 'src/app/model/user';
@@ -25,9 +26,12 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   pageLoading!: boolean;
   loadingTimeout!: any;
+  cardsLoading: boolean = false;
+
+  firstLoading!: boolean;
 
   responsive!: boolean;
-
+  
   constructor(
     private adminService: AdminService,
     private titleService: Title,
@@ -36,6 +40,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.firstLoading = true;
     this.pageLoading = true;
 
     this.adminService.actualAdmin.subscribe((admin) => {
@@ -64,9 +69,13 @@ export class AdminComponent implements OnInit, OnDestroy {
     );
     this.adminSubscription.push(
       this.adminService.loadingState.subscribe((state) => {
-        this.pageLoading = state;
+        this.pageLoading ? this.firstLoading = true : this.firstLoading = false;
+        this.firstLoading ? this.pageLoading = state : this.cardsLoading = state
+
       })
     );
+    
+    
   }
 
   userSectionClick(): void {

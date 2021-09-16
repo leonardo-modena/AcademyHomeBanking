@@ -18,6 +18,8 @@ export class ListComponent implements OnInit {
   @Input() allUsers!: User[];
 
   @Input() newRegistration!: BankAccount[];
+
+  @Input() loading!: boolean;
   
   @Output() confirmAccountEventList = new EventEmitter();
   @Output() confirmDeleteEventList = new EventEmitter();

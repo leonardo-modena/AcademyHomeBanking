@@ -19,13 +19,13 @@
     
     <div class="col-12 col-md-9 col-lg-6 col-xl-5 m-auto" *ngIf="userSection">
       <div class="admin-card">
-        <app-list [allUsers]='allUsers' class="admin-list" [operation]="false"></app-list>
+        <app-list [loading]="cardsLoading" [allUsers]='allUsers' class="admin-list" [operation]="false"></app-list>
       </div>
     </div>
     
     <div class="col-12 col-md-9 col-lg-6 col-xl-5 m-auto" *ngIf="operationSection">
       <div class="admin-card">
-        <app-list [toDeleteAccounts]='allToDeleteAccounts' [newRegistration]='allNewRagistration' class="admin-list" [operation]="true" (confirmAccountEventList)="confirmAccountEventCallback()" (confirmDeleteEventList)="confirmDeleteEventCallback()"></app-list>
+        <app-list [loading]="cardsLoading" [toDeleteAccounts]='allToDeleteAccounts' [newRegistration]='allNewRagistration' class="admin-list" [operation]="true" (confirmAccountEventList)="confirmAccountEventCallback()" (confirmDeleteEventList)="confirmDeleteEventCallback()"></app-list>
       </div>
     </div>
   </div>

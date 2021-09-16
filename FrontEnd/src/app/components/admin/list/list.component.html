@@ -4,7 +4,8 @@
     <span class="list-title">{{ !operation ? 'lista correntisti' : 'operazioni' | titlecase}}</span><button id="print-icon" *ngIf="allUsers" class="pointer transparent-button" [class]="fillIcon ? 'bi bi-printer-fill' : 'bi bi-printer'" aria-label="Download lista utenti PDF" (mouseenter)="iconSwitch()" (mouseleave)="iconSwitch()" (click)="downloadExcel()"></button>
   </div>
   <div *ngIf="!operation" class="list-content scrollable">
-      <div  class="list-items">
+    <app-spinner *ngIf="loading"></app-spinner>
+      <div  class="list-items" *ngIf="!loading">
         <div class="list-items-title">
           <div class="item-title"><span>Id</span></div>
           <div class="item-title"><span>Nome</span></div>
@@ -15,7 +16,8 @@
       </div>
   </div>
   <div *ngIf="operation" class="list-content scrollable" >
-      <mat-tab-group>
+    <app-spinner *ngIf="loading"></app-spinner>
+      <mat-tab-group *ngIf="!loading">
           <mat-tab label="Nuove Registrazioni">
             <div class="list-items">
               <div class="list-items-title">
