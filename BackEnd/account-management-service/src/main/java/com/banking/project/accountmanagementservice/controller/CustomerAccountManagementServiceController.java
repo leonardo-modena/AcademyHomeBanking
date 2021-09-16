@@ -172,7 +172,7 @@ public class CustomerAccountManagementServiceController {
     	    	
     	    	transaction.setAmount(balance);
     	    	
-    	    	transaction.setCausal("Prelievo per apertura nuovo conto");
+    	    	transaction.setCausal("Apertura nuovo conto");
     	    	
     	    	transaction.setId_account(bankAccount);
     	    	
