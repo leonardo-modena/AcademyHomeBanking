@@ -77,7 +77,7 @@ export class RegistrationComponent implements OnInit {
 
     this.auth.registerUser(username, lastName, email, password, msDate,sex ).subscribe(resData => {
 
-      if (resData == false){
+      if (!resData){
         this.spinner = false;
         this.error.newError('Esiste già un utente registrato con questa email')
         return;
