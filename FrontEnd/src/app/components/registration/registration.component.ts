@@ -85,7 +85,7 @@ export class RegistrationComponent implements OnInit {
 
       this.spinner = false;
       this.router.navigate(['/login']);
-      this.alert.newAllert('Registrazione effettuata con successo! Procedi col login.')
+      this.alert.newAllert('Registrazione effettuata con successo!')
     },error => (this.spinner = false));
 
   }

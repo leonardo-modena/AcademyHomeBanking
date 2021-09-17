@@ -41,4 +41,8 @@ export class AlertComponent implements OnInit {
     clearTimeout(this.visibilityTimeout);
   }
 
+  clear(): void{
+    setTimeout(() => {this.visible = false}, 100)
+  }
+
 }
