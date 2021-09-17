@@ -130,7 +130,6 @@ button.btn-primary{
 button.btn-primary:hover{
   cursor: pointer !important;
   color: var(--primary-green) !important;
-  background-color: transparent!important
 }
 
 .btn-secondary {
@@ -142,6 +141,10 @@ button.btn-primary:hover{
 .btn-secondary:hover {
   border: 1px solid #888888;
   color: #888888
+}
+
+.orange-background button.btn-primary:hover {
+  color: var(--secondary-orange) !important;
 }
 
 button.btn-danger{
