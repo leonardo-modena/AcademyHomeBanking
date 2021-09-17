@@ -5,6 +5,7 @@ import { environment } from "../../environments/environment";
 import {BehaviorSubject} from "rxjs";
 import jwtDecode from "jwt-decode";
 import {Router} from "@angular/router";
+import {AlertService} from "./alert.service";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class AuthService {
   roleUser !: string;
   tokenDecoded!: any;
 
-  constructor(private http: HttpClient,private route: Router) {
+  constructor(private http: HttpClient,private route: Router, private alert: AlertService) {
       if (sessionStorage.getItem('token')){
         this.nextAuth(true);
         let relodedTokenDecoded: any;
@@ -50,7 +51,7 @@ export class AuthService {
 
   registerUser(firstName: string, lastName: string, email: string, password: string,dateOfBirth: number,gender: string){
 
-    return this.http.post(this.url + "/signup",{
+    return this.http.post<boolean>(this.url + "/signup",{
       firstName,
       lastName,
       email,
@@ -95,6 +96,7 @@ export class AuthService {
     this.isUser = false;
     sessionStorage.removeItem('token');
     this.route.navigate(['/']);
+    this.alert.newAllert('Hai effettuato il logout!')
   }
 
   autoLogout(): void{
