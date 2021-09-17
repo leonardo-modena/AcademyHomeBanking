@@ -85,7 +85,7 @@
                 <label for="cognome" class="form-label">Cognome</label>
                 <input type="text"
                        [ngClass]="numberCognomeError == false ? 'form-control' : 'form-control is-invalid'"
-                       class="form-control" id="cognome" name="cognome" required ngModel minlength="4">
+                       class="form-control" id="cognome" name="cognome" required ngModel minlength="3">
                 <div [@fade] *ngIf="numberCognomeError" style="font-weight: bold" class="alert-danger"> Inserisci un cognome valido! </div>
               </div>
 
