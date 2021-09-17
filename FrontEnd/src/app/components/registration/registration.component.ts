@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit {
       this.numberNameError = true;
       return;
     }
-      const username = form.value.username;
+      const username = form.value.username.trim();
       this.numberNameError = false;
 
 
@@ -55,12 +55,12 @@ export class RegistrationComponent implements OnInit {
       this.numberCognomeError = true;
       return;
     }
-    const lastName = form.value.cognome;
+    const lastName = form.value.cognome.trim();
     this.numberCognomeError = false;
 
-    const email = form.value.email;
-    const password = form.value.password;
-    const confermaPassword = form.value.confermaPassword;
+    const email = form.value.email.trim();
+    const password = form.value.password.trim();
+    const confermaPassword = form.value.confermaPassword.trim();
 
     if(password != confermaPassword ){
       this.passwordError = false;
