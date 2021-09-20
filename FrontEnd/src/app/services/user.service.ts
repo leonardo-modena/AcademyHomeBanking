@@ -12,8 +12,8 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class UserService {
-  apiUrlCustomer =`${environment.api_url}/customer`;
-  apiUrlBankAccount =`${environment.api_url}/bankAccount`;
+  apiUrlCustomer =`${environment.api_url}/account-management-service/customer`;
+  apiUrlBankAccount =`${environment.api_url}/transaction-service/bankAccount`;
 
   private userSubject = new BehaviorSubject<User>({firstName: '', lastName: '', dateOfBirth: 0, email: '', gender: '', id: '', role: 'ROLE_C', bankAccounts: [], password: '' });
   user = this.userSubject.asObservable();
