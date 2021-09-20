@@ -45,7 +45,7 @@ export class AdminService {
 
   //method Get and Change user
   getUser(id: number): Observable<User> {
-    return this.httpService.get<User>(`${apiUrl}/customer/profile/${id}`);
+    return this.httpService.get<User>(`${apiUrl}account-management-service/customer/profile/${id}`);
   }
 
   changeUser(newUser: User): void {
@@ -131,18 +131,18 @@ export class AdminService {
   //get request
 
   getAllUser(): Observable<User[]> {
-    return this.httpService.get<User[]>(`${apiUrl}/admin/listSortedCustomer`);
+    return this.httpService.get<User[]>(`${apiUrl}account-management-service/admin/listSortedCustomer`);
   }
 
   getNewRegistration(): Observable<any[]> {
     return this.httpService.get<any[]>(
-      `${apiUrl}/admin/listInactiveAccounts`
+      `${apiUrl}account-management-service/admin/listInactiveAccounts`
     );
   }
 
   getPendingAccount(): Observable<BankAccount[]> {
     return this.httpService.get<BankAccount[]>(
-      `${apiUrl}/admin/listClosingAccounts`
+      `${apiUrl}account-management-service/admin/listClosingAccounts`
     );
   }
 
@@ -150,7 +150,7 @@ export class AdminService {
 
   confirmRegistration(accountSelected: BankAccount): Observable<BankAccount> {
     return this.httpService.put<BankAccount>(
-      `${apiUrl}/admin/activeAccount/${accountSelected.id}`,
+      `${apiUrl}account-management-service/admin/activeAccount/${accountSelected.id}`,
       {}
     );
   }
@@ -159,7 +159,7 @@ export class AdminService {
 
   confirmDeleteAccount(accountSelected: BankAccount): Observable<BankAccount> {
     return this.httpService.delete<BankAccount>(
-      `${apiUrl}/admin/close/${accountSelected.id}`,
+      `${apiUrl}account-management-service/admin/close/${accountSelected.id}`,
       {}
     );
   }
