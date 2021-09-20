@@ -51,7 +51,7 @@ export class AuthService {
 
   registerUser(firstName: string, lastName: string, email: string, password: string,dateOfBirth: number,gender: string){
 
-    return this.http.post<boolean>(this.url + "signup-service/signup",{
+    return this.http.post<boolean>(this.url + "/signup-service/signup",{
       firstName,
       lastName,
       email,
@@ -63,7 +63,7 @@ export class AuthService {
 
   loginUser(username: string, password: string): void{
 
-    this.http.post<{ token: string }>( this.url + 'login-service/auth/signin',{
+    this.http.post<{ token: string }>( this.url + '/login-service/auth/signin',{
       username,
       password
     }).subscribe(resData => {
