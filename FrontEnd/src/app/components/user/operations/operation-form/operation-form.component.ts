@@ -45,8 +45,22 @@ export class OperationFormComponent implements OnInit, OnDestroy {
     this.operationForm = new FormGroup({
       'bill': new FormControl(this.user.bankAccounts[0], Validators.required),
       'amount': new FormControl('', Validators.required),
-      'reason': new FormControl('', [Validators.required, Validators.maxLength(100)])
+      'reason': new FormControl(''),
+      'recipient': new FormControl(''),
+      'telephone': new FormControl('')
     });
+
+    if (this.operationForm) {
+      if (this.op_type === 'DEPOSIT') {
+        this.operationForm.controls["reason"].setValidators([Validators.required, Validators.maxLength(100)]);
+      }
+      else {
+        this.operationForm.controls["recipient"].setValidators([Validators.required, Validators.maxLength(100)]);
+        this.operationForm.controls["telephone"].setValidators([Validators.required, Validators.pattern("[0-9 ]{11}")]);
+      }
+    }
+
+
   }
 
   ngOnDestroy() {
@@ -75,7 +89,8 @@ export class OperationFormComponent implements OnInit, OnDestroy {
       });
     }
     else {
-      this.userService.doWithdrawal(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value, this.operationForm.controls.reason.value ).subscribe(() => {
+      const reason = `Ricarica cellulare ${this.operationForm.controls.recipient.value.trim()} n. ${this.operationForm.controls.telephone.value}`;
+      this.userService.doWithdrawal(this.operationForm.controls.bill.value, this.operationForm.controls.amount.value, reason ).subscribe(() => {
         this.operationDoneCorrectly();
       }, () => {
         this.isLoading.emit(false);
