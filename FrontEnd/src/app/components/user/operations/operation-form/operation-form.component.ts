@@ -54,7 +54,8 @@ export class OperationFormComponent implements OnInit, OnDestroy {
     clearTimeout(this.timer)
   }
 
-  onChangeBill() {
+  onChangeBill(event: any) {
+    this.selectedBill = this.user.bankAccounts[event.target.options.selectedIndex];
    this.getBalance();
   }
 
