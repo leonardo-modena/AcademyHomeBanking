@@ -1,4 +1,6 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Location } from '@angular/common';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import {Subscription} from "rxjs";
 import {UserService} from "../../../services/user.service";
@@ -21,12 +23,17 @@ export class OperationsComponent implements OnInit, OnDestroy {
   isLoading!: boolean;
 
 
-  constructor(private userService: UserService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
 
     this.route.params.subscribe( (params) => {
-      this.selectedOperation = (params['operationType'] === 'versamento') ? 0 : 1;
+      if (params['operationType'] === 'versamento') {
+        this.selectedOperation = 0;
+      }else {
+        this.selectedOperation = 1;
+        this.location.replaceState('/user/operazioni/ricarica')
+      }
     })
 
     this.inactiveSubscription = this.userService.inactiveUser.subscribe((inactive) => {
@@ -36,6 +43,10 @@ export class OperationsComponent implements OnInit, OnDestroy {
     this.closingSubscription = this.userService.closingAccount.subscribe((closing) => {
       this.closing = closing;
     });
+  }
+
+  changeUrl($event: MatTabChangeEvent){
+    this.location.replaceState(`/user/operazioni/${$event.tab.textLabel.toLocaleLowerCase()}`)
   }
 
   ngOnDestroy() {
