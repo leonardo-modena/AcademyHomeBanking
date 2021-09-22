@@ -32,11 +32,15 @@ nav {
 
 .newAccountLink i {
   margin-right: 0.5rem;
-  font-size: 1.4rem;
+  font-size: 1.4rem !important;
 }
 
 .newAccountLink:hover {
   color: var(--primary-green) !important;
+}
+
+.login-link{
+  font-weight: 400 !important;
 }
 
 .toggle-sidenav i {
