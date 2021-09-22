@@ -105,10 +105,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  onChangeForm(amount: string) {
-    this.moreThanAmountError = parseInt(amount) > this.maxAmount;
-  }
-
   onNewBill(form: NgForm): void{
     this.isCreatingNew = true;
     this.userService.createNewBill(form.controls.amount.value, this.bankAccounts[form.controls.selectedBill.value].id).subscribe(() => {
@@ -160,7 +156,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         return {causal: op.causal, type: op.type, amount: op.amount, dateTransaction: op.dateTransaction, idAccount: op.id_account.id, idTransaction: op.id, }
       });
 
-      let downloadData = '<table style="" class=\'green\'>';
+      operationsList.sort((op1, op2) => {
+        return op2.dateTransaction - op1.dateTransaction;
+      });
+
+      let downloadData = '<h2>Movimenti di tutti i tuoi conti</h2><table style="" class=\'green\'>';
 
       operationsList.map((operation) => {
         const date = new Date(operation.dateTransaction);
@@ -175,7 +175,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         </td>
         <td style="border: none">
           <div>
-          <h3 style="text-align: right; color: ${operation.type === 'DEPOSIT' ? '#2c6e49' : '#d68c45'}" ">€ ${operation.type === 'DEPOSIT' ? '' : '-'} ${operation.amount}</h3>
+          <h3 style="text-align: right; color: ${operation.type === 'DEPOSIT' ? '#2c6e49' : '#d68c45'}" ">€ ${operation.type === 'DEPOSIT' ? '' : '-'} ${operation.amount.toFixed(2).toLocaleString()}</h3>
           </div>
         </td>
       </tr>
