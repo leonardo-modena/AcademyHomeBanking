@@ -72,8 +72,11 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">€</span>
               </div>
-              <input type="number" class="form-control" id="amount" name="amount" required min="0.01" [max]="maxAmount"  step="0.01" ngModel>
-              <div class="error w-100">Inserire un importo valido</div>
+              <input (ngModelChange)="moreThanAmountError = $event > this.maxAmount;" type="number" class="form-control" id="amount" name="amount" required min="0.01" [max]="maxAmount"  step="0.01" ngModel>
+              <div class="error w-100">
+                <span *ngIf="!moreThanAmountError">Inserire un importo valido.</span>
+                <span *ngIf="moreThanAmountError">Importo troppo elevato.</span>
+              </div>
             </div>
           </div>
           <div class="col-12 mt-4 d-flex justify-content-end">

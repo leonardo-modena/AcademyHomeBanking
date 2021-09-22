@@ -49,6 +49,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   createdNew = false;
   private createdNewTimer!: any;
 
+  moreThanAmountError = false;
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -101,6 +103,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.getBalance(this.user.bankAccounts[this.selectedBill]).subscribe((balance) => {
       this.maxAmount = balance;
     });
+  }
+
+  onChangeForm(amount: string) {
+    this.moreThanAmountError = parseInt(amount) > this.maxAmount;
   }
 
   onNewBill(form: NgForm): void{

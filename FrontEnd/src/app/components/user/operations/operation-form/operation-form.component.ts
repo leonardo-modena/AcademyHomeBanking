@@ -23,6 +23,7 @@ export class OperationFormComponent implements OnInit, OnDestroy {
   operationForm!:FormGroup;
   maxAmount: number = 5000000;
   selectedBill!: number;
+  moreThanAmountError = false;
 
   @Output() isLoading = new EventEmitter<boolean>(false);
 
@@ -50,6 +51,10 @@ export class OperationFormComponent implements OnInit, OnDestroy {
       'telephone': new FormControl('')
     });
 
+    if (this.op_type === 'DEPOSIT') {
+      this.maxAmount = 5000;
+    }
+
     if (this.operationForm) {
       if (this.op_type === 'DEPOSIT') {
         this.operationForm.controls["reason"].setValidators([Validators.required, Validators.maxLength(100)]);
@@ -76,6 +81,7 @@ export class OperationFormComponent implements OnInit, OnDestroy {
   private getBalance() {
     this.userService.getBalance(this.selectedBill).subscribe((balance) => {
       this.maxAmount = balance;
+      this.moreThanAmountError = this.operationForm.controls.amount.value > balance;
     });
   }
 
