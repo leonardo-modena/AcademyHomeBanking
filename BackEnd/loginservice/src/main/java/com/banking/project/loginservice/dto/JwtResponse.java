@@ -1,4 +1,4 @@
-package com.banking.project.loginservice.springjwt.payload.response;
+package com.banking.project.loginservice.dto;
 /**
  * Classe che si occupa di restituire il token
  *

@@ -1,4 +1,4 @@
-package com.banking.project.loginservice.springjwt.payload.request;
+package com.banking.project.loginservice.dto;
 
 public class LoginRequest {
 	
