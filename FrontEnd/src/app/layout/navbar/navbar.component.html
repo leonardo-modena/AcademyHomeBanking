@@ -54,10 +54,18 @@
         <i class="bi bi-person "></i>
         <span  >Profilo</span>
       </div>
-      <div class="sidenav-item pointer" *ngIf="!adminLogged" (click)="sidenavSwitch()" [routerLink]="['/user/operazioni']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
-        true}">
-        <i class="bi bi-cash"></i>
-        <span >Operazioni</span>
+      <div class="sidenav-item pointer" *ngIf="!adminLogged" (click)="operationMenuSwitch()">
+        <div class="container_operation-menu"><i class="bi bi-cash"></i><span >Operazioni</span><i class="bi bi-chevron-down icon_operation-menu"></i></div>
+      </div>
+      <div class="operation-menu" *ngIf="operationMenu">
+        <div class="sidenav-item pointer" *ngIf="!adminLogged" (click)="sidenavSwitch()" [routerLink]="['/user/operazioni/versamento']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+          true}">
+          <span >Versamento</span>
+        </div>
+        <div class="sidenav-item pointer" *ngIf="!adminLogged" (click)="sidenavSwitch()" [routerLink]="['/user/operazioni/ricarica']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+          true}">
+          <span >Ricarica</span>
+        </div>
       </div>
       <div class="sidenav-item pointer" *ngIf="!adminLogged" (click)="sidenavSwitch()" [routerLink]="['/user']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
         true}">

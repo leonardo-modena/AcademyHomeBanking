@@ -35,7 +35,7 @@ import {AlertMessage} from "../../components/user/alert-message/alert-message";
         path: 'user',  canActivate: [UserGuard], component: UserComponent, children: [
           {path: '', component: BankAccountComponent, pathMatch: 'full'},
           {path: 'profilo', component: ProfileComponent, pathMatch: 'full'},
-          {path: 'operazioni', component: OperationsComponent, pathMatch: 'full'}
+          {path: 'operazioni/:operationType', component: OperationsComponent, pathMatch: 'full'}
         ]
       }
     ]),

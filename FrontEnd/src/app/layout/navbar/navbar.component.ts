@@ -14,9 +14,11 @@ import { Subscription } from 'rxjs';
   ],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  hamburger: boolean = false;
+  
   sidenav: boolean = false;
 
-  hamburger: boolean = false;
+  operationMenu: boolean = false;
 
   authServiceSubscription!: Subscription;
 
@@ -43,12 +45,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   sidenavSwitch(): void {
     this.sidenav = !this.sidenav;
+    this.sidenav === false ? this.operationMenu = false : false
   }
+
+  operationMenuSwitch(): void {
+    this.operationMenu = !this.operationMenu;
+  }
+
 
   hamburgerClick() {
     this.hamburger = !this.hamburger;
   }
 
+  logout() {
+    this.authService.logout();
+  }
+  
   @HostListener('window:resize', ['$event'])
   hamburgerResponsive(event?: any) {
     let screenWidth = window.innerWidth;
@@ -57,10 +69,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     } else {
       this.mobile = true;
     }
-  }
-
-  logout() {
-    this.authService.logout();
   }
 
   ngOnDestroy() {

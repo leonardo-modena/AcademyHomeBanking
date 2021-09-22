@@ -1,4 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {Subscription} from "rxjs";
 import {UserService} from "../../../services/user.service";
 
@@ -8,6 +9,8 @@ import {UserService} from "../../../services/user.service";
   styleUrls: ['./operations.component.css']
 })
 export class OperationsComponent implements OnInit, OnDestroy {
+  
+  selectedOperation!: number;
 
   inactiveSubscription!:Subscription;
   inactive:boolean = false;
@@ -17,9 +20,14 @@ export class OperationsComponent implements OnInit, OnDestroy {
 
   isLoading!: boolean;
 
-  constructor(private userService: UserService) { }
+
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.route.params.subscribe( (params) => {
+      this.selectedOperation = (params['operationType'] === 'versamento') ? 0 : 1;
+    })
 
     this.inactiveSubscription = this.userService.inactiveUser.subscribe((inactive) => {
       this.inactive = inactive;

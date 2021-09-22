@@ -8,7 +8,7 @@
   </div>
   <div [class]="'row ' + (inactive || closing ? 'inactive' : '')">
     <div class="col-12 col-md-10 col-lg-8 m-auto">
-      <mat-tab-group mat-align-tabs="start" animationDuration="1000ms">
+      <mat-tab-group [selectedIndex]="selectedOperation" mat-align-tabs="start" animationDuration="1000ms">
         <mat-tab [disabled]="isLoading" label="Versamento" >
           <div class="container ">
             <div class="row">

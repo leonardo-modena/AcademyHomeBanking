@@ -32,7 +32,7 @@
             </div>
             <div class="col-12 mt-4">
               <h3>Le operazioni del tuo conto {{bankAccounts[selectedBill].id  |  number:'6.0' | noDot}}</h3>
-              <p>Per poter effettuare una nuova operazione vai alla sezione dedicata. <a routerLink="operazioni">Opera sul tuo conto</a></p>
+              <p>Per poter effettuare una nuova operazione vai alla sezione dedicata. <a routerLink="operazioni/versamento">Opera sul tuo conto</a></p>
               <app-filter [selectedBill]="selectedBill" (filterString)="onSearchFunction($event)" ></app-filter>
               <div *ngIf="isLoadingOperations">
                 <app-spinner></app-spinner>
