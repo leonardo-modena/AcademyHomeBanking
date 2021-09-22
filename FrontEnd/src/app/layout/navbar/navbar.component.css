@@ -47,13 +47,13 @@ nav {
 .sidenav-container {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
+  transform: translateX(-30rem);
   width: 27rem;
   height: 100vh;
   background-color: var(--primary-green);
   z-index: 3;
   transform-origin: right;
-  transform: translateX(30rem);
   box-shadow: none;
 }
 
@@ -64,7 +64,7 @@ nav {
 }
 
 .user-items {
-  transform: translateX(20px);
+  transform: translateX(-20px);
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
   transition-delay: 0.4s;

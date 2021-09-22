@@ -12,17 +12,17 @@ export const fadeAnimation = trigger('fade', [
 
 export const sidenavSlide = trigger('triggerSidenav', [
   state(
+    'closed',
+    style({
+      transform: 'translateX(-30rem)',
+      boxShadow: 'none',
+    })
+  ),
+  state(
     'open',
     style({
       transform: 'translateX(0rem)',
       boxShadow: '-3px 0px 7px 1px #00000069',
-    })
-  ),
-  state(
-    'closed',
-    style({
-      transform: 'translateX(30rem)',
-      boxShadow: 'none',
     })
   ),
   transition('* <=> *', [animate('0.3s')]),
