@@ -6,7 +6,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { LoadingPageComponent } from 'src/app/components/Shared/loading-page/loading-page.component';
-import {NoCommaPipe} from "../../pipes/no-comma.pipe";
+import {NoDotPipe} from "../../pipes/no-comma.pipe";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DialogComponent } from 'src/app/components/Shared/dialog/dialog.component';
 import { ErrorComponent } from 'src/app/components/Shared/error/error.component';
@@ -19,7 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
   declarations: [
     SpinnerComponent,
     LoadingPageComponent,
-    NoCommaPipe,
+    NoDotPipe,
     DialogComponent,
     ErrorComponent,
     AlertComponent,
@@ -43,7 +43,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
-    NoCommaPipe,
+    NoDotPipe,
     MatDialogModule,
   ],
   providers: [

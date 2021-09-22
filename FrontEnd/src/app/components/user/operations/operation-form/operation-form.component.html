@@ -3,12 +3,11 @@
   <div class="form-group col-12 col-md-6 mt-3">
     <label class="form-label">Conto</label>
     <select class="form-select" formControlName="bill" (change)="onChangeBill($event)"  >
-      <option *ngFor="let bill of user.bankAccounts;" [value]="bill">{{bill | number:'6.0' | noComma}}</option>
+      <option *ngFor="let bill of user.bankAccounts;" [value]="bill">{{bill | number:'6.0' | noDot}}</option>
     </select>
   </div>
   <div class="form-group col-12 col-md-6 mt-3">
     <label class="form-label">Importo</label>
-
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">€</span>

@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'noComma'
+  name: 'noDot'
 })
-export class NoCommaPipe implements PipeTransform {
+export class NoDotPipe implements PipeTransform {
 
   transform(value: string | null): string {
     if (value === null)
@@ -11,7 +11,7 @@ export class NoCommaPipe implements PipeTransform {
     else {
       let support = '';
       for (let c of value) {
-        if (c !== ',')
+        if (c !== '.')
           support += c;
       }
       return support;

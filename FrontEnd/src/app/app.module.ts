@@ -15,7 +15,7 @@ import { NotFoundComponent } from './layout/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
-import { NoCommaPipe } from './pipes/no-comma.pipe';
+import { NoDotPipe } from './pipes/no-comma.pipe';
 
 import { HttpInterceptorProviders } from './interceptor/provider.interceptor';
 
@@ -42,7 +42,7 @@ import { HttpInterceptorProviders } from './interceptor/provider.interceptor';
     HttpInterceptorProviders
   ],
   exports: [
-    NoCommaPipe
+    NoDotPipe
   ],
   bootstrap: [AppComponent]
 })

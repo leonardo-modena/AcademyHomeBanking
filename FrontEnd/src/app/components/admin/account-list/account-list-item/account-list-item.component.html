@@ -1,7 +1,7 @@
 <div class="d-flex" *ngIf="account.holder">
-    <p class="list-item">{{account.id | number: '6.0' | noComma}}</p>
+    <p class="list-item">{{account.id | number: '6.0' | noDot}}</p>
     <p class="list-item">{{account.holder.firstName}}</p>
     <p class="list-item">{{account.holder.lastName}}</p>
-    <div class="action-button list-item "*ngIf="pendingRegistration"><i  class="bi bi-check-square action-icon" id="activate-button" aria-label="attiva conto" (click)="activateClick()"></i></div>
-    <div class="action-button list-item "*ngIf="!pendingRegistration" ><i class="bi bi-check-square action-icon" id="delete-button"  aria-label="elimina conto" (click)="deleteClick()"></i></div>
+    <div class="action-button list-item " *ngIf="pendingRegistration"><i  class="bi bi-check-square action-icon" id="activate-button" aria-label="attiva conto" (click)="activateClick()"></i></div>
+    <div class="action-button list-item " *ngIf="!pendingRegistration" ><i class="bi bi-check-square action-icon" id="delete-button"  aria-label="elimina conto" (click)="deleteClick()"></i></div>
 </div>

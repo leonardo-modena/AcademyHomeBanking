@@ -18,20 +18,20 @@
               <form class="form-inline d-flex align-items-center">
                 <label class="form-label">Seleziona il conto:</label>
                 <select [(ngModel)]="selectedBill" [ngModelOptions]="{standalone: true}" class="ms-2 form-select w-auto" name="bill" (change)="onChangeBill()">
-                  <option *ngFor="let bill of user.bankAccounts; let i = index"  [value]="i">{{bill |  number:'6.0' | noComma}}</option>
+                  <option *ngFor="let bill of user.bankAccounts; let i = index"  [value]="i">{{bill |  number:'6.0' | noDot}}</option>
                 </select>
               </form>
               <div class="row">
                 <div class="col-12 col-lg-9 col-xl-8 m-auto">
                   <div class="green-background mt-3 py-4 p-3">
-                    <h1 class="text-end">€ {{bankAccounts[selectedBill].balance | number:'0.2' | noComma}}</h1>
-                    <span>Saldo del conto {{ bankAccounts[selectedBill].id |  number:'6.0' | noComma}}</span>
+                    <h1 class="text-end">€ {{bankAccounts[selectedBill].balance | currency:'EUR':'':'0.2-2'}}</h1>
+                    <span>Saldo del conto {{ bankAccounts[selectedBill].id |  number:'6.0' | noDot}}</span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-12 mt-4">
-              <h3>Le operazioni del tuo conto {{bankAccounts[selectedBill].id  |  number:'6.0' | noComma}}</h3>
+              <h3>Le operazioni del tuo conto {{bankAccounts[selectedBill].id  |  number:'6.0' | noDot}}</h3>
               <p>Per poter effettuare una nuova operazione vai alla sezione dedicata. <a routerLink="operazioni">Opera sul tuo conto</a></p>
               <app-filter [selectedBill]="selectedBill" (filterString)="onSearchFunction($event)" ></app-filter>
               <div *ngIf="isLoadingOperations">
