@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.project.loginservice.dao.CustomerRepository;
+import com.banking.project.loginservice.dto.JwtResponse;
+import com.banking.project.loginservice.dto.LoginRequest;
 import com.banking.project.loginservice.encoder.Sha256Encoder;
 import com.banking.project.loginservice.security.jwt.JwtUtils;
-import com.banking.project.loginservice.springjwt.payload.request.LoginRequest;
-import com.banking.project.loginservice.springjwt.payload.response.JwtResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
