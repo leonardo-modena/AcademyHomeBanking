@@ -44,7 +44,6 @@
       <i (click)="sidenavSwitch()" class="bi bi-x-lg pointer"></i>
     </div>
     <div class="user-items" [ngClass]="{ slide: sidenav } " >
-      
       <div class="sidenav-user-info" >
         <i class="fas fa-user-tie sidenav-user-icon pointer" [routerLink]=" adminLogged ? ['/admin'] : ['/user/profilo']" routerLinkActive="sidenav-user-icon_active" [routerLinkActiveOptions]="{exact:
           true}"></i>
@@ -58,11 +57,11 @@
         <div class="container_operation-menu"><i class="bi bi-cash"></i><span >Operazioni</span><i class="bi bi-chevron-down icon_operation-menu"></i></div>
       </div>
       <div class="operation-menu" *ngIf="operationMenu">
-        <div class="sidenav-item pointer" *ngIf="!adminLogged" (click)="sidenavSwitch()" [routerLink]="['/user/operazioni/versamento']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+        <div class="sidenav-item submenu-item pointer" *ngIf="!adminLogged" (click)="sidenavSwitch()" [routerLink]="['/user/operazioni/versamento']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
           true}">
           <span >Versamento</span>
         </div>
-        <div class="sidenav-item pointer" *ngIf="!adminLogged" (click)="sidenavSwitch()" [routerLink]="['/user/operazioni/ricarica']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
+        <div class="sidenav-item submenu-item pointer" *ngIf="!adminLogged" (click)="sidenavSwitch()" [routerLink]="['/user/operazioni/ricarica']" routerLinkActive="sidenav-item_active" [routerLinkActiveOptions]="{exact:
           true}">
           <span >Ricarica</span>
         </div>

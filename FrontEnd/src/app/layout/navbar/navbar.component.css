@@ -131,6 +131,20 @@ nav {
   margin-right: 1.5rem;
 }
 
+.submenu-item{
+  padding: 1rem  0rem 1rem 3rem !important;
+  background-color: var(--secondary-green);
+  border: none;
+}
+
+.submenu-item:last-child{
+  box-shadow: inset 0px -2px 6px -4px var(--gray);
+}
+
+.submenu-item:hover{
+  background-color: var(--primary-green) !important;
+}
+
 .exit-button {
   margin-top: 4rem;
   transition: all 0.3s ease-out;
