@@ -31,7 +31,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-12 col-md-5 col-lg-4">
+    <div [class]="'col-12 col-md-5 col-lg-4 ' + (inactive || closing ? 'inactive' : '')">
       <h2>Gestisci i tuoi conti</h2>
       <p *ngIf="deleteOk" class="light-green-background rounded m-3 p-3">La richiesta di chiusura è stata inoltrata alla banca.</p>
       <div class="orange-background p-4">
@@ -41,7 +41,7 @@
             <select class="form-select" [(ngModel)]="deletingBill" name="deletingBill">
               <option *ngFor="let bill of user.bankAccounts" [value]="bill" [selected]="deletingBill === bill">{{bill | number: '6.0' | noDot }}</option>
             </select>
-            <div *ngIf="user.bankAccounts.length === 1" class="error mt-2">Attenzione! È presente un solo conto, dopo la chiusura l'account verrà eliminato. Verrà eseguito un log out automatico.</div> <!-- Solo se vi è un conto solo -->
+            <div *ngIf="user.bankAccounts.length === 1" class="error mt-2">Attenzione! È presente un solo conto, dopo la chiusura l'account verrà eliminato.</div> <!-- Solo se vi è un conto solo -->
           </div>
           <div class="d-flex justify-content-end mt-2">
             <button class="btn btn-primary" (click)="onCloseBill()">Chiudi</button>
