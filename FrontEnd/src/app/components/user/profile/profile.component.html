@@ -1,13 +1,13 @@
 <div class="container" *ngIf="user != null">
 
-  <div class="row">
+  <div class="row mb-5">
     <h1 class="col-12 col-md-10 col-lg-8 text-center m-auto mb-3">Il tuo profilo</h1>
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <app-alert-message type="inactive" *ngIf="inactive"></app-alert-message>
       <app-alert-message type="closing" *ngIf="closing"></app-alert-message>
     </div>
   </div>
-  <div [class]="'row justify-content-center mb-4' + (inactive || closing ? 'inactive' : '')">
+  <div [class]="'row justify-content-center mb-5' + (inactive || closing ? 'inactive' : '')">
     <div class="col-12 col-md-5 col-lg-4">
       <h2>Dati personali</h2>
       <table class="table table-borderless table-fit">
@@ -53,7 +53,7 @@
       </div>
     </div>
   </div>
-  <div [class]="'row ' + (inactive || closing ? 'inactive' : '')">
+  <div [class]="'row mb-5 ' + (inactive || closing ? 'inactive' : '')">
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Aggiungi un nuovo conto</h2>
       <div class="container my-3">
@@ -89,7 +89,7 @@
       </div>
     </div>
   </div>
-  <div [class]="'row ' + (inactive || closing ? 'inactive' : '')">
+  <div [class]="'row mb-5 ' + (inactive || closing ? 'inactive' : '')">
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Scarica le operazioni</h2>
       <div class="container my-3">
