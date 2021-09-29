@@ -1,0 +1,10 @@
+input.ng-valid + .error, input.ng-untouched + .error {
+  display: none;
+}
+input.ng-invalid.ng-touched + .error {
+  display: block;
+}
+
+.light-green-background {
+  color: var(--gray);
+}

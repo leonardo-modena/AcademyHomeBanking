@@ -1,0 +1,332 @@
+/*sans-serif font*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+
+:root{
+  --gray: #2f2f2f;
+  --light-gray: rgb(232, 232, 232);
+  --white-yellow: #fefee3;
+  --primary-green: #2c6e49;
+  --secondary-green: #4c956c;
+  --light-green: #d2e8db;
+  --secondary-orange: #d68c45;
+  --secondary-red: #6E312C;
+}
+
+/* ===== Scrollbar CSS credit: https://codepen.io/stephenpaton-tech/full/JjRvGmY===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: var(--gray) #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--gray);
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }
+
+
+html{
+  font-size: 12px;
+}
+
+html, body{
+  transition: font-size 0.4s ease-out, width 0.4s ease-out;
+  height: 100%;
+
+}
+
+body{
+  margin: 0;
+}
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  font-size: 3.3rem !important;
+}
+
+h2{
+  font-size: 2.3rem !important;
+}
+
+h3{
+  font-size: 1.8rem !important;
+}
+
+p, table {
+  font-size: 1.5rem !important;
+}
+label {
+  font-size: 1.4rem;
+}
+a {
+  color: var(--primary-green);
+}
+
+a:hover {
+  color: var(--secondary-green);
+}
+button {
+  font-size: 1.5rem!important;
+  padding: 0.5rem 1.5rem!important;
+  cursor: pointer !important;
+}
+
+button.btn-outline-primary{
+  color: var(--primary-green) !important;
+  border: 2px solid var(--primary-green) !important;
+  cursor: pointer !important;
+}
+
+button.btn-outline-primary:hover, button.btn-outline-primary:active{
+  color: var(--white-yellow) !important;
+  cursor: pointer !important;
+  background-color: var(--primary-green)!important;
+}
+
+
+button.btn-outline-primary[disabled],  button.btn-outline-danger[disabled], button.btn-primary[disabled]{
+  color: #c2c2c2;
+  border: 1px solid #888888;
+  cursor: not-allowed;
+}
+
+button.btn-outline-danger{
+  color: var(--secondary-orange) !important;
+  cursor: pointer !important;
+  border: 2px solid var(--secondary-orange) !important;
+}
+
+button.btn-outline-danger:hover, button.btn-outline-danger:active{
+  color: var(--white-yellow) !important;
+  cursor: pointer !important;
+  background-color: var(--secondary-orange)!important;
+}
+
+button.btn-primary{
+  cursor: pointer !important;
+
+  background-color: var(--white-yellow) !important;
+  border-color: var(--white-yellow) !important;
+  color: var(--gray) !important;
+}
+
+button.btn-primary:hover{
+  cursor: pointer !important;
+  color: var(--primary-green) !important;
+}
+
+.btn-secondary {
+  background: var(--white-yellow) !important;
+  color: #888888;
+  border: 1px solid var(--white-yellow);
+}
+
+.btn-secondary:hover {
+  border: 1px solid #888888;
+  color: #888888
+}
+
+.orange-background button.btn-primary:hover {
+  color: var(--secondary-orange) !important;
+}
+
+button.btn-danger{
+  cursor: pointer !important;
+
+  background-color: var(--secondary-orange) !important;
+  border-color: var(--secondary-orange) !important;
+  color: var(--white-yellow) !important;
+}
+
+button.btn-danger:hover{
+  border: 1px solid #888888 !important;
+}
+
+.btn-small {
+  font-size: 1.2rem!important;
+}
+
+button:focus, textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+  box-shadow: none!important;
+}
+
+
+
+/*LIST UI START*/
+
+.list-container{
+  width: 100%;
+  overflow: hidden;
+}
+
+.list-header{
+  padding-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-title{
+  font-size: 1.8rem;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.list-content{
+  background-color: var(--light-gray);
+  height: 43rem;
+  padding: 1rem 3rem;
+}
+
+.list-items-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 1rem 0;
+  padding-bottom: .5rem;
+  border-bottom: 0.4px solid #44444459;
+}
+
+.list-item, .item-title{
+  width: 25%;
+}
+
+.list-item{
+  font-size: 1rem !important;
+}
+
+
+.item-title span{
+  color: #444444;
+  font-size: 1.2rem;
+}
+
+/*LIST UI END*/
+
+/* UTILITY CLASS START */
+.justify-center{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.inline{
+  display: inline;
+}
+
+.green-background {
+  background-color:  var(--secondary-green);
+  border-radius: 5px;
+  color: var(--white-yellow);
+}
+
+.orange-background {
+  background-color:  var(--secondary-orange);
+  border-radius: 5px;
+  color: var(--gray);
+}
+
+.light-green-background {
+  background-color: var(--light-green)
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.transparent-button{
+  border: none;
+  background-color: transparent;
+}
+
+.inactive {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+
+/* UTILITY CLASS END  */
+
+
+/* MODIFICHE ANGULAR MATERIAL START */
+
+.mat-tab-labels {
+  justify-content: center !important;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: var(--secondary-green);
+}
+
+.mat-tab-body-content {
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+}
+
+/* MODIFICHE ANGULAR MATERIAL END */
+
+/* UI ELEMENT START */
+
+.horizontal-divider{
+  height: 1px;
+  background-color: rgb(215 215 215);
+  box-shadow: 0 1px 3px 0 #0000006e;
+  margin-top: 2rem !important;
+}
+
+
+/* UI ELEMENT END */
+
+
+
+@media (min-width: 576px) {
+
+  html{
+    font-size: 85%;
+  }
+ }
+
+@media (min-width: 768px) {
+  html{
+    font-size: 80% !important;
+  }
+  .list-item{
+    font-size: 1.4rem !important;
+  }
+ }
+
+@media (min-width: 992px) {
+  html{
+    font-size: 70%;
+  }
+ }
+
+@media (min-width: 1200px) {
+
+ }

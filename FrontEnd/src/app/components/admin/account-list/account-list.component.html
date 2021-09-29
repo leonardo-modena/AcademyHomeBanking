@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-12 col-md-12">
+         <app-account-list-item 
+            *ngFor="let account of accountList; index as i"
+            [account]="account"
+            [pendingRegistration]="newRegistrationMode"
+            (confirmAccountClick)="passConfirmAccountEvent()"
+            (confirmDeleteClick)="passConfirmDeleteEvent()"
+         ></app-account-list-item>
+    </div>
+</div>

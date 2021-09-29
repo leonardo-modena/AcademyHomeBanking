@@ -1,0 +1,43 @@
+
+<div class="list-container">
+  <div class="list-header">
+    <span class="list-title">{{ !operation ? 'lista correntisti' : 'operazioni' | titlecase}}</span><button id="print-icon" *ngIf="allUsers" class="pointer transparent-button" [class]="fillIcon ? 'bi bi-printer-fill' : 'bi bi-printer'" aria-label="Download lista utenti PDF" (mouseenter)="iconSwitch()" (mouseleave)="iconSwitch()" (click)="downloadExcel()"></button>
+  </div>
+  <div *ngIf="!operation" class="list-content scrollable">
+    <app-spinner *ngIf="loading"></app-spinner>
+      <div  class="list-items" *ngIf="!loading">
+        <div class="list-items-title">
+          <div class="item-title"><span>Id</span></div>
+          <div class="item-title"><span>Nome</span></div>
+          <div class="item-title"><span>Cognome</span></div>
+          <div class="item-title"><span>E-Mail</span></div>
+        </div>
+        <app-user-list [userList]='allUsers'></app-user-list>
+      </div>
+  </div>
+  <div *ngIf="operation" class="list-content scrollable" >
+    <app-spinner *ngIf="loading"></app-spinner>
+      <mat-tab-group *ngIf="!loading">
+          <mat-tab label="Nuove Registrazioni">
+            <div class="list-items">
+              <div class="list-items-title">
+                <div class="item-title"><span>N. conto</span></div>
+                <div class="item-title"><span>Nome</span></div>
+                <div class="item-title"><span>Cognome</span></div>
+              </div>
+              <app-account-list [accountList]='newRegistration' [newRegistrationMode]="true" (confirmAcountEvent)="passConfirmAccountList()"></app-account-list>
+            </div>
+          </mat-tab>
+          <mat-tab label="Conti da Eliminare">
+            <div  class="list-items">
+              <div class="list-items-title">
+                <div class="item-title"><span>N. conto</span></div>
+                <div class="item-title"><span>Nome</span></div>
+                <div class="item-title"><span>Cognome</span></div>
+              </div>
+              <app-account-list [accountList]='toDeleteAccounts'  [newRegistrationMode]="false" (confirmDeleteEvent)="passConfirmDeleteList()"></app-account-list>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<app-loading-page *ngIf="pageLoading" [imageUrl]="'../../../assets/img/Illustration/Admin-bro.png'"></app-loading-page>
+<div *ngIf="!pageLoading" class="container-fluid mt-4 mb-lg-5">
+
+  <div class="row">
+    <div class="col-11 col-md-11 m-auto px-4">
+      <h2>Dashboard Amministrativa</h2>
+      <span class="inline" >Accesso effettuato da: </span> <h4 class="inline">{{ adminInfo.firstName | titlecase }}</h4>
+    </div>
+    <div class="col-11 col-md-11  m-auto horizontal-divider"></div>
+  </div>
+
+  <div class="row mt-5" [ngClass]="{'responsive-admin-card': responsive}">
+ 
+    <div class="smartphone-section-selector" *ngIf="responsive">
+      <i class="bi bi-people-fill" [ngClass]="{'active': userSection}" (click)="userSectionClick()"></i>
+      <i class="bi bi-check2-square" [ngClass]="{'active': operationSection}" (click)="operationSectionClick()"></i>
+    
+    </div>
+    
+    <div class="col-12 col-md-9 col-lg-6 col-xl-5 m-auto" *ngIf="userSection">
+      <div class="admin-card">
+        <app-list [loading]="cardsLoading" [allUsers]='allUsers' class="admin-list" [operation]="false"></app-list>
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-9 col-lg-6 col-xl-5 m-auto" *ngIf="operationSection">
+      <div class="admin-card">
+        <app-list [loading]="cardsLoading" [toDeleteAccounts]='allToDeleteAccounts' [newRegistration]='allNewRagistration' class="admin-list" [operation]="true" (confirmAccountEventList)="confirmAccountEventCallback()" (confirmDeleteEventList)="confirmDeleteEventCallback()"></app-list>
+      </div>
+    </div>
+  </div>
+</div>
+
