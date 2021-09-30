@@ -28,8 +28,8 @@ table tr td {
 }
 
 input.ng-valid + .error, input.ng-untouched + .error {
-  display: none;
+  opacity: 1;
 }
 input.ng-invalid.ng-touched + .error {
-  display: block;
+  opacity: 0;
 }
