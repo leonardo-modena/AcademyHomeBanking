@@ -1,7 +1,8 @@
 
 <div class="list-container">
   <div class="list-header">
-    <span class="list-title">{{ !operation ? 'lista correntisti' : 'operazioni' | titlecase}}</span><button id="print-icon" *ngIf="allUsers" class="pointer transparent-button" [class]="fillIcon ? 'bi bi-printer-fill' : 'bi bi-printer'" aria-label="Download lista utenti PDF" (mouseenter)="iconSwitch()" (mouseleave)="iconSwitch()" (click)="downloadExcel()"></button>
+    <span class="list-title">{{ !operation ? 'lista correntisti' : 'operazioni' | titlecase}}</span>
+     <button id="print-icon" *ngIf="allUsers" class="btn btn-outline-primary ms-auto pointer" aria-label="Download lista utenti PDF" (click)="downloadExcel()"><i class="bi-file-earmark-arrow-down"></i> Scarica</button>
   </div>
   <div *ngIf="!operation" class="list-content scrollable">
     <app-spinner *ngIf="loading"></app-spinner>

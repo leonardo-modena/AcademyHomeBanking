@@ -8,6 +8,7 @@ const htmlToPdfmake = require("html-to-pdfmake");
 import * as XLSX from 'xlsx';
 import {UserService} from "./user.service";
 import {Subscription} from "rxjs";
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +24,28 @@ export class DownloadService {
     });
   }
 
-  downloadAsXLSX(data: { firstName: string, lastName: string, email: string}[]): void {
-    const filename = 'file';
+  downloadAsXLSX(data: User[]): void {
+    const today = new Date();
+    const todayString =`${today.getFullYear()}-${today.getMonth()}-${today.getDay()}`
+    const filename = `Correntisti_${todayString}`;
+
+    let displayData: {}[] = [];
+
+    data.forEach(user => {
+      let displayElement = {
+        'Id': user.id,
+        'Nome': user.firstName,
+        'Cognome': user.lastName,
+        'E-mail': user.email,
+        'Data di Nascita': new Date(user.dateOfBirth)
+      }
+
+      displayData.push(displayElement)
+    });
+    
 
     var wb = XLSX.utils.book_new();
-    var ws = XLSX.utils.json_to_sheet(data);
+    var ws = XLSX.utils.json_to_sheet(displayData);
     XLSX.utils.book_append_sheet(wb, ws, filename);
     XLSX.writeFile(wb, `${filename}.xlsx`);
 
