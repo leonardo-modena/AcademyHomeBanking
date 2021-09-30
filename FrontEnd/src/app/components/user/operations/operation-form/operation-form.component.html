@@ -1,29 +1,37 @@
 <p *ngIf="operation_ok" class="light-green-background rounded m-3 p-3">L'operazione è andata a buon fine.</p>
-<form class="form row gx-5" [formGroup]="operationForm" (ngSubmit)="onSubmit()">
-  <div class="form-group col-12 col-md-6 mt-3">
-    <label class="form-label">Conto</label>
-    <select class="form-select" formControlName="bill" (change)="onChangeBill($event)"  >
-      <option *ngFor="let bill of user.bankAccounts;" [value]="bill">{{bill | number:'6.0' | noDot}}</option>
-    </select>
-  </div>
-  <div class="form-group col-12 col-md-6 mt-3">
-    <label class="form-label">Importo</label>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">€</span>
+
+<form class="form" [formGroup]="operationForm" (ngSubmit)="onSubmit()">
+  <div class="row gx-5 align-items-end">
+    <div class="form-group col-12 col-md-6 mt-3 ">
+      <label class="form-label">Conto</label>
+      <select class="form-select" formControlName="bill" (change)="onChangeBill($event)"  >
+        <option *ngFor="let bill of user.bankAccounts;" [value]="bill">{{bill | number:'6.0' | noDot}}</option>
+      </select>
+      <div class="error">
+        Seleziona un conto.
       </div>
-      <input type="number" (ngModelChange)="moreThanAmountError = $event > maxAmount" class="form-control" min="0.01" [max]="(op_type === 'WITHDRAWAL' ? maxAmount : '5000')"  step="0.01" formControlName="amount">
-      <div class="error w-100">
-        <span *ngIf="!moreThanAmountError">Inserire un importo valido.</span>
-        <span *ngIf="moreThanAmountError">Importo troppo elevato. {{op_type === 'WITHDRAWAL' ? '' : ' Importo massimo € 5000'}}</span></div>
     </div>
+    <div class="form-group col-12 col-md-6 mt-3">
+      <label class="form-label row align-items-end"><div class="col col-md-4">Importo</div><div class="col text-end mini">Importo massimo: <b class="text-nowrap">€ {{(op_type === 'WITHDRAWAL' ? maxAmount : '5000') | currency:'EUR':'':'0.2-2'}}</b></div></label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">€</span>
+        </div>
+        <input type="number" (ngModelChange)="moreThanAmountError = $event > maxAmount" class="form-control" min="0.01" [max]="(op_type === 'WITHDRAWAL' ? maxAmount : '5000')"  step="0.01" formControlName="amount">
+        <div class="error w-100">
+          <span *ngIf="!moreThanAmountError">Inserire un importo valido.<br></span>
+          <span *ngIf="moreThanAmountError">Importo troppo elevato.</span></div>
+      </div>
+    </div>
+
   </div>
-  <div class="form-group col-12 mt-3" *ngIf="op_type === 'DEPOSIT'">
-    <label class="form-label">Causale</label>
-    <input class="form-control" type="text" formControlName="reason">
-    <div class="error">Inserire una causale con massimo 100 caratteri.</div>
-  </div>
-  <div class="col-12 mt-3" *ngIf="op_type !== 'DEPOSIT'">
+  <div class="row gx-5 d-flex">
+    <div class="form-group col-12 mt-3" *ngIf="op_type === 'DEPOSIT'">
+      <label class="form-label">Causale</label>
+      <input class="form-control" type="text" formControlName="reason">
+      <div class="error">Inserire una causale con massimo 100 caratteri.</div>
+    </div>
+    <div class="col-12 mt-3" *ngIf="op_type !== 'DEPOSIT'">
     <div class="row gx-5">
       <div class="form-group col-12 col-md-6 mt-3">
         <label class="form-label">Destinatario</label>
@@ -45,6 +53,7 @@
 
       </div>
     </div>
+  </div>
   </div>
   <div class="form-group col-12 mt-3 d-flex">
     <button class="btn btn-primary ms-auto" [disabled]="!operationForm.valid">Conferma</button>

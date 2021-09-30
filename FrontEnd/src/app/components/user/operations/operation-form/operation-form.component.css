@@ -1,4 +1,4 @@
-input.ng-valid + .error, input.ng-untouched + .error {
+input.ng-valid + .error, input.ng-untouched + .error, select.ng-valid + .error, select.ng-untouched + .error {
   opacity: 0;
 }
 input.ng-invalid.ng-touched + .error {
@@ -7,4 +7,8 @@ input.ng-invalid.ng-touched + .error {
 
 .light-green-background {
   color: var(--gray);
+}
+
+.mini {
+  font-size: small;
 }

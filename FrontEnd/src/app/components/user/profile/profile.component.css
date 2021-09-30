@@ -27,9 +27,13 @@ table tr td {
   opacity: 0.5;
 }
 
-input.ng-valid + .error, input.ng-untouched + .error {
-  opacity: 1;
+input.ng-valid + .error, input.ng-untouched + .error, select.ng-valid + .error, select.ng-untouched + .error {
+  opacity: 0;
 }
 input.ng-invalid.ng-touched + .error {
-  opacity: 0;
+  opacity: 1;
+}
+
+.mini {
+  font-size: small;
 }
