@@ -66,13 +66,17 @@ public class CustomerAccountManagementServiceController {
     })
 
     @PutMapping(value = "/closingRequest/{accountId}")
-    public void closingAccount(@PathVariable int accountId) {
-        if (bankAccountRepository.existsById(accountId)) {
-            bankAccountRepository.closingRequest(accountId);
-        } else
-            throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
-    }
-
+	public void closingAccount(@PathVariable int accountId) {
+		BankAccount bAccount = bankAccountRepository.getById(accountId);
+		if (bankAccountRepository.existsById(accountId)) {
+			if (bAccount.getBalance().compareTo(BigDecimal.ZERO)==0) {
+				bankAccountRepository.closingRequest(accountId);
+			} else {
+				throw new ApiBankException("Saldo superiore a 0", HttpStatus.NOT_ACCEPTABLE);
+			}
+		} else
+			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);
+	}
     /**
      * Metodo per recuperare le informazioni di un cliente dato 'id
      *
