@@ -72,7 +72,7 @@ public class CustomerAccountManagementServiceController {
 			if (bAccount.getBalance().compareTo(BigDecimal.ZERO)==0) {
 				bankAccountRepository.closingRequest(accountId);
 			} else {
-				throw new ApiBankException("Saldo superiore a 0", HttpStatus.NOT_ACCEPTABLE);
+				throw new ApiBankException("Non è stato possibile cancellare il conto: il saldo deve essere 0.", HttpStatus.NOT_ACCEPTABLE);
 			}
 		} else
 			throw new NotFoundException("Conto non trovato", HttpStatus.NOT_FOUND);

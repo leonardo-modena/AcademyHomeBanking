@@ -4,6 +4,7 @@ import {UserService} from "../../../../services/user.service";
 import {User} from "../../../../model/user";
 import {Subscription} from "rxjs";
 import {Title} from "@angular/platform-browser";
+import {AlertService} from "../../../../services/alert.service";
 
 @Component({
   selector: 'app-operation-form',
@@ -15,8 +16,6 @@ export class OperationFormComponent implements OnInit, OnDestroy {
   user!: User;
   userSubscription!: Subscription;
 
-  operation_ok = false;
-  timer:any;
 
   @Input() op_type!: 'DEPOSIT' | 'WITHDRAWAL';
 
@@ -29,7 +28,7 @@ export class OperationFormComponent implements OnInit, OnDestroy {
 
   @Output() isLoading = new EventEmitter<boolean>(false);
 
-  constructor(private userService: UserService, private titleService: Title) { }
+  constructor(private userService: UserService, private titleService: Title, private alertService: AlertService, ) { }
 
   ngOnInit(): void {
 
@@ -72,7 +71,6 @@ export class OperationFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
-    clearTimeout(this.timer)
   }
 
   onChangeBill(event: any) {
@@ -104,15 +102,11 @@ export class OperationFormComponent implements OnInit, OnDestroy {
         this.isLoading.emit(false);
       });
     }
-
-    this.timer = setTimeout(() => {
-      this.operation_ok = false;
-    }, 5000);
   }
 
   private operationDoneCorrectly() {
     this.userService.getUser(parseInt(this.user.id));
-    this.operation_ok = true;
+    this.alertService.newAllert('L\'operazione è andata a buon fine.');
     this.isLoading.emit(false);
     this.operationForm.reset({'bill': this.user.bankAccounts[0]});
   }

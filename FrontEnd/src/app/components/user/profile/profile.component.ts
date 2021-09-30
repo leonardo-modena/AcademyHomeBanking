@@ -12,6 +12,7 @@ import {Title} from "@angular/platform-browser";
 import {DownloadService} from "../../../services/download.service";
 import {Operation} from "../../../model/operation";
 import {DialogComponent} from "../../Shared/dialog/dialog.component";
+import {AlertService} from "../../../services/alert.service";
 
 @Component({
   selector: 'app-profile',
@@ -36,7 +37,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   isDeleting = false;
   isCreatingNew = false;
-  deleteOk = false;
 
   selectedBill: number = 0;
   deletingBill!: number;
@@ -44,10 +44,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   isDownloading = false;
 
   maxAmount = 5000000;
-  private deletedTimer!: any;
+
 
   createdNew = false;
-  private createdNewTimer!: any;
 
   moreThanAmountError = false;
 
@@ -56,6 +55,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     public dialog: MatDialog,
+    private alertService: AlertService,
     private downloadService: DownloadService,
     private errorService: ErrorService,
     private titleService: Title) {
@@ -95,8 +95,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.bankAccountsSubscription.unsubscribe();
     this.inactiveSubscription.unsubscribe();
     this.closingAccountSubscription.unsubscribe();
-    clearTimeout(this.deletedTimer);
-    clearTimeout(this.createdNewTimer);
   }
 
   changeBill() {
@@ -110,10 +108,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.createNewBill(form.controls.amount.value, this.bankAccounts[form.controls.selectedBill.value].id).subscribe(() => {
       this.isCreatingNew = false;
       this.userService.getUser(parseInt(this.user.id));
-      this.createdNew = true;
-      this.createdNewTimer = setTimeout(() => {
-        this.createdNew = false;
-      }, 5000);
+      this.alertService.newAllert('Il nuovo conto è stato creato con successo');
       form.resetForm({selectedBill: 0})
     }, () => {
       this.isCreatingNew = false;
@@ -133,16 +128,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
         if (result) {
           this.isDeleting = true;
           this.userService.deleteBill(this.deletingBill).subscribe(() => {
-            this.deleteOk = true;
-            this.deletedTimer = setTimeout(() => {
-              this.deleteOk = false;
-            }, 5000)
+            this.alertService.newAllert('La richiesta di chiusura è stata inoltrata alla banca con successo.');
             if (this.user.bankAccounts.length > 0) {
               this.userService.getUser(parseInt(this.user.id));
             }
             this.isDeleting = false;
           }, () => {
-            this.errorService.newError('Non è stato possibile cancellare il conto. Riprova.')
             this.isDeleting = false
           });
         }

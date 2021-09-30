@@ -33,7 +33,6 @@
     </div>
     <div [class]="'col-12 col-md-5 col-lg-4 ' + (inactive || closing ? 'inactive' : '')">
       <h2>Gestisci i tuoi conti</h2>
-      <p *ngIf="deleteOk" class="light-green-background rounded m-3 p-3">La richiesta di chiusura è stata inoltrata alla banca.</p>
       <div class="orange-background p-4">
         <form class="form row gx-5">
           <div class="form-group col-12">
@@ -57,7 +56,6 @@
     <div class="col-12 col-md-10 col-lg-8 m-auto">
       <h2>Aggiungi un nuovo conto</h2>
       <div class="container my-3">
-        <p *ngIf="createdNew" class="light-green-background rounded m-3 p-3">Il nuovo conto è stato creato con successo.</p>
         <form (ngSubmit)="onNewBill(form)" #form="ngForm" [class]="'green-background p-3 ' + (isCreatingNew ? 'disabledForm' : '')">
           <div class="row gx-5 align-items-end">
             <div class="form-group col-12 col-md-6">
