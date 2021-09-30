@@ -223,7 +223,6 @@ input[type=number]:focus,
 
 .error {
   color: var(--white-yellow);
-  background-color: var(--secondary-red);
 }
 
 
@@ -233,6 +232,27 @@ input[type=number]:focus,
 }
 
 /*LIST UI END*/
+.error {
+  color: var(--white-yellow);
+}
+
+input.ng-valid + .error, input.ng-untouched + .error, select.ng-valid + .error, select.ng-untouched + .error {
+  opacity: 0;
+}
+input.ng-invalid.ng-touched + .error {
+  opacity: 1;
+}
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+  border: 1px solid red;
+  background-color: #F8D7DA;
+}
+
+.light-green-background {
+  color: var(--gray);
+}
+/* INPUT ERROR LABEL */
+
+/* INPUT ERROR LABEL END*/
 
 /* UTILITY CLASS START */
 .justify-center{

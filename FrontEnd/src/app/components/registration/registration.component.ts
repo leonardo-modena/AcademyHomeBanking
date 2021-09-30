@@ -21,11 +21,14 @@ export class RegistrationComponent implements OnInit {
   touch: boolean = false;
   numberNameError: boolean = false;
   numberCognomeError: boolean = false;
-  passwordError: boolean = true;
+  passwordError: boolean = false;
   today!:string;
   showText: boolean = true;
   showForm: boolean = false;
   spinner: boolean = false;
+
+  psw: string = '';
+  confermaPsw: string = '';
 
   constructor(private auth: AuthService, private router: Router, private alert: AlertService, private titleService: Title, private error: ErrorService) {}
 
@@ -33,6 +36,7 @@ export class RegistrationComponent implements OnInit {
     this.titleService.setTitle(`AcademyBank | Apertura-Conto`)
 
     this.today = new Date().toLocaleDateString();
+    console.log(this.passwordError);
   }
     setTouch(){
     this.touch = true;
@@ -93,6 +97,11 @@ export class RegistrationComponent implements OnInit {
   showLoader(){
     this.showText = false;
     this.showForm = true;
+  }
+
+  setPsw(event: any) {
+    this.touch = false;
+    this.psw = event.target.value;
   }
 
 }

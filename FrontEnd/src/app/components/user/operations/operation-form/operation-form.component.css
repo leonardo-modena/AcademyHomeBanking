@@ -1,13 +1,17 @@
-input.ng-valid + .error, input.ng-untouched + .error, select.ng-valid + .error, select.ng-untouched + .error {
+/*input.ng-valid + .error, input.ng-untouched + .error, select.ng-valid + .error, select.ng-untouched + .error {
   opacity: 0;
 }
 input.ng-invalid.ng-touched + .error {
   opacity: 1;
 }
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+  background-color: #F8D7DA;
+}
 
 .light-green-background {
   color: var(--gray);
-}
+} */
 
 .mini {
   font-size: small;
