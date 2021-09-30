@@ -78,7 +78,7 @@
                 <input type="text"
                        [ngClass]="numberNameError == false ? 'form-control' : 'form-control is-invalid'"
                        id="username" name="username" required ngModel minlength="4" pattern="^\s*\S+\s*$">
-                <div [@fade] *ngIf="numberNameError" style="font-weight: bold" class="alert-danger"> Inserisci un nome valido! </div>
+                <div [@fade] *ngIf="numberNameError"> Inserisci un nome valido! </div>
               </div>
 
               <div class="col-md-6 mt-3 form-group">
@@ -86,7 +86,7 @@
                 <input type="text"
                        [ngClass]="numberCognomeError == false ? 'form-control' : 'form-control is-invalid'"
                        class="form-control" id="cognome" name="cognome" required ngModel minlength="3">
-                <div [@fade] *ngIf="numberCognomeError" style="font-weight: bold" class="alert-danger"> Inserisci un cognome valido! </div>
+                <div [@fade] *ngIf="numberCognomeError"> Inserisci un cognome valido! </div>
               </div>
 
               <div class="col-12 form-group mt-3">
