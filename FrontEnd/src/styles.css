@@ -135,7 +135,7 @@ button.btn-primary:hover{
   border: 1px solid var(--white-yellow);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover, .btn-secondary:focus {
   border: 1px solid #888888;
   color: #888888
 }
