@@ -13,6 +13,7 @@ import {DownloadService} from "../../../services/download.service";
 import {Operation} from "../../../model/operation";
 import {DialogComponent} from "../../Shared/dialog/dialog.component";
 import {AlertService} from "../../../services/alert.service";
+import {formatCurrency} from "@angular/common";
 
 @Component({
   selector: 'app-profile',
@@ -151,7 +152,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         return op2.dateTransaction - op1.dateTransaction;
       });
 
-      let downloadData = '<h2>Movimenti di tutti i tuoi conti</h2><table style="" class=\'green\'>';
+      let downloadData = '<h2>Movimenti di tutti i tuoi conti</h2><table style="" class=\'green\'><thead"><tr><th style="border: none; background-color: transparent">Conto</th><th style="border: none; background-color: transparent">Descrizione</th><th style="border: none; background-color: transparent; text-align: center">Importo</th></tr></thead>';
 
       operationsList.map((operation) => {
         const date = new Date(operation.dateTransaction);
@@ -166,7 +167,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         </td>
         <td style="border: none">
           <div>
-          <h3 style="text-align: right; color: ${operation.type === 'DEPOSIT' ? '#2c6e49' : '#d68c45'}" ">€ ${operation.type === 'DEPOSIT' ? '' : '-'} ${operation.amount.toFixed(2).toLocaleString()}</h3>
+          <h3 style="text-align: right; color: ${operation.type === 'DEPOSIT' ? '#2c6e49' : '#d68c45'}" ">€ ${operation.type === 'DEPOSIT' ? '' : '-'} ${formatCurrency(operation.amount, 'it-IT', '', '', '0.2-2')}</h3>
           </div>
         </td>
       </tr>

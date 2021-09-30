@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DownloadService} from "../../../services/download.service";
 import {Operation} from "../../../model/operation";
+import {formatCurrency} from "@angular/common";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class DownloadComponent implements OnInit {
         </td>
         <td style="border: none">
           <div>
-          <h3 style="text-align: right; color: ${operation.type === 'DEPOSIT' ? '#2c6e49' : '#d68c45'}" ">€ ${operation.type === 'DEPOSIT' ? '' : '-'} ${operation.amount}</h3>
+          <h3 style="text-align: right; color: ${operation.type === 'DEPOSIT' ? '#2c6e49' : '#d68c45'}" ">€ ${operation.type === 'DEPOSIT' ? '' : '-'} ${formatCurrency(operation.amount, 'it-IT', '', '', '0.2-2')}</h3>
           </div>
         </td>
       </tr>`
