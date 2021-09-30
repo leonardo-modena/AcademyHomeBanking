@@ -2,16 +2,17 @@
 .cursor{
   cursor: pointer !important;
 }
-
 @media (min-width: 992px ) {
   .allert {
     padding: 20px;
     width: 550px;
-    background-color: lightskyblue;
-    color: white;
+    right: 0 !important;
+    background-color: var(--light-green);
+    color: gray;
     border-radius: 10px;
     position: absolute !important;
-    z-index: 2 !important;
+    z-index: 5 !important;
+    opacity: 1 !important;
   }
 }
 
@@ -24,8 +25,8 @@
     text-align: center;
     position: absolute !important;
     padding: 15px;
-    background-color: lightskyblue;
-    color: white;
+    background-color: var(--light-green);
+    color: gray;
     border-radius: 10px;
   }
 }
