@@ -1,3 +1,8 @@
+
+.cursor{
+  cursor: pointer !important;
+}
+
 @media (min-width: 992px ) {
   .allert {
     padding: 20px;

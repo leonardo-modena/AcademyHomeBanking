@@ -34,7 +34,7 @@ export class AlertComponent implements OnInit {
     this.visible = true;
     this.visibilityTimeout = setTimeout(() => {
       this.visible = false;
-    }, 4000);
+    }, 6000);
   }
 
   ngOnDestroy(): void {
