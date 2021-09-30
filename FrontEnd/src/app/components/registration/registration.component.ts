@@ -19,14 +19,12 @@ import {ErrorService} from "../../services/error.service";
 export class RegistrationComponent implements OnInit {
 
   touch: boolean = false;
-  numberNameError: boolean = false;
-  numberCognomeError: boolean = false;
   passwordError: boolean = false;
   today!:string;
   showText: boolean = true;
   showForm: boolean = false;
   spinner: boolean = false;
-
+  passwordCorrect!: boolean;
   psw: string = '';
   confermaPsw: string = '';
 
@@ -34,43 +32,31 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle(`AcademyBank | Apertura-Conto`)
-
+    this.passwordCorrect = true;
     this.today = new Date().toLocaleDateString();
-    console.log(this.passwordError);
   }
-    setTouch(){
+    setTouch($event: any){
     this.touch = true;
+      this.psw = $event.target.value;
     }
+
+  checkPsw($event: any){
+    this.passwordCorrect = this.psw == $event.target.value;
+  }
 
   onSubmit(form: NgForm){
     this.touch = false;
-    let nameContainNumber = /\d/.test(form.value.username);
-    let cognomeContainNumber = /\d/.test(form.value.cognome);
 
-    if (nameContainNumber){
-      this.numberNameError = true;
-      return;
-    }
-      const username = form.value.username.trim();
-      this.numberNameError = false;
-
-
-    if (cognomeContainNumber){
-      this.numberCognomeError = true;
-      return;
-    }
+    const username = form.value.username.trim();
     const lastName = form.value.cognome.trim();
-    this.numberCognomeError = false;
 
     const email = form.value.email.trim();
     const password = form.value.password.trim();
     const confermaPassword = form.value.confermaPassword.trim();
 
     if(password != confermaPassword ){
-      this.passwordError = false;
       return;
     }
-    this.passwordError = true;
 
     let date = form.value.date;
     let msDate = Date.parse(date);

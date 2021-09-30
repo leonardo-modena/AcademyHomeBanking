@@ -76,19 +76,16 @@
               <div class="col-md-6 form-group mt-3">
                 <label for="username" class="form-label">Nome</label>
                 <input type="text"
-                       [ngClass]="numberNameError == false ? 'form-control' : 'form-control is-invalid'"
-                       id="username" name="username" required ngModel minlength="4" pattern="^\s*\S+\s*$">
+                        class="form-control"
+                       id="username" name="username" required ngModel minlength="4" pattern="[a-zA-Z]+$">
                 <div [@fade] class="error" >Inserisci un nome valido!</div>
-                <div [@fade] *ngIf="numberNameError">Il nome non può contenere numeri!</div>
               </div>
 
               <div class="col-md-6 mt-3 form-group">
                 <label for="cognome" class="form-label">Cognome</label>
                 <input type="text"
-                       [ngClass]="numberCognomeError == false ? 'form-control' : 'form-control is-invalid'"
-                       class="form-control" id="cognome" name="cognome" required ngModel minlength="3">
+                       class="form-control" id="cognome" name="cognome" required ngModel minlength="3" pattern="[a-zA-Z]+">
                 <div [@fade] class="error" >Inserisci un cognome valido!</div>
-                <div [@fade] *ngIf="numberCognomeError"> Il cognome non può contenere numeri! </div>
               </div>
 
               <div class="col-12 form-group mt-3">
@@ -117,8 +114,7 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required ngModel
                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                       (input)="setTouch()" (blur)="setPsw($event)">
-                <div class="error">La password non rispetta i criteri richiesti!</div>
+                       (input)="setTouch($event)" (blur)="setPsw($event)">
                 <div *ngIf="touch" [@fade] class="alert-warning">
                   <ul>
                     <li>Minimo 8 caratteri</li>
@@ -132,8 +128,10 @@
               <div class="col-md-6 form-group mt-3">
                 <label for="confermaPassword" class="form-label">Conferma Password</label>
                 <input type="password" class="form-control" id="confermaPassword" name="confermaPassword" required ngModel
-                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
-                <div class="error">La password non rispetta i criteri richiesti!</div>
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                (input)="checkPsw($event)"
+                >
+                <div *ngIf="!passwordCorrect">Le password non coincidono!</div>
               </div>
 
               <hr class="mt-2">
@@ -142,7 +140,7 @@
                 (ad esempio, se preferisci operare anche attraverso altri canali come cartaceo o telefono)
                 contattando un Family Banker Office, dove potrai sottoscrivere altre tipologie di conto corrente.</div>
               <div class="col-12 mt-4 mb-5">
-                <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-hov">Crea il tuo conto</button>
+                <button type="submit" [disabled]="!form.valid || !passwordCorrect" class="btn btn-primary btn-hov">Crea il tuo conto</button>
               </div>
 
             </form>
