@@ -42,7 +42,7 @@ export class DownloadService {
 
       displayData.push(displayElement)
     });
-    
+
 
     var wb = XLSX.utils.book_new();
     var ws = XLSX.utils.json_to_sheet(displayData);
@@ -67,12 +67,16 @@ export class DownloadService {
       </div>
 `   ;
 
+    let htmlToPdfmakeObject = htmlToPdfmake(html, {imagesByReferences: true});
+
+    if (htmlToPdfmakeObject[0].stack.length === 4) {
+      htmlToPdfmakeObject[0]['stack'][3]['table'] = {...htmlToPdfmakeObject[0]['stack'][3]['table'], headerRows: 1, dontBreakRows: true}
+    }
+
     const docDefinition = {
       content: [
-        htmlToPdfmake(html, {imagesByReferences: true})
-      ],
-      styles: {
-      }
+        htmlToPdfmakeObject
+      ]
     };
 
     pdfMake.createPdf(docDefinition).download('AcademyBankDocument.pdf');

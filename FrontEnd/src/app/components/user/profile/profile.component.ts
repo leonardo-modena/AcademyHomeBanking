@@ -152,7 +152,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         return op2.dateTransaction - op1.dateTransaction;
       });
 
-      let downloadData = '<h2>Movimenti di tutti i tuoi conti</h2><table style="" class=\'green\'><thead"><tr><th style="border: none; background-color: transparent">Conto</th><th style="border: none; background-color: transparent">Descrizione</th><th style="border: none; background-color: transparent; text-align: center">Importo</th></tr></thead>';
+      let downloadData = '<h2>Movimenti di tutti i tuoi conti</h2><table style="" class=\'green\'><thead style="color: #616361"><tr><th style="border: none; background-color: transparent">Conto</th><th style="border: none; background-color: transparent">Descrizione</th><th style="border: none; background-color: transparent; text-align: center">Importo</th></tr></thead>';
 
       operationsList.map((operation) => {
         const date = new Date(operation.dateTransaction);
