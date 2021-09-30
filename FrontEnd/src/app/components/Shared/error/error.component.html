@@ -1,4 +1,3 @@
-<div [@fade] class="error" *ngIf="visible">
-    <div><i (click)="exitClick()" class="bi bi-x-lg pointer"></i></div>
-    <p>{{errorMessage}}</p>
-</div>
+<p *ngIf="visible" [@fade] class="red-alert alert-danger rounded-3 m-auto mt-3 center-block">
+  <i (click)="exitClick()" class="bi bi-x-lg cursor px-3"></i>{{errorMessage}}
+</p>

@@ -1,16 +1,18 @@
-.error{
-    background-color: var(--secondary-orange);
+/*.error{
     padding: 1.5rem 2rem;
     margin-bottom: 2rem;
+  margin-top: 1rem;
     border-radius: .25rem;
+  background-color: white;
+  border: 1px solid red;
+  color: black!important;
+
 }
 
 .error p{
     text-align: center;
     font-family: monospace;
-    text-transform: capitalize;
     font-weight: 400;
-    color: white;
 }
 
 .error div{
@@ -18,4 +20,27 @@
     justify-content: flex-end;
     margin-right: 1rem;
     margin-bottom: 1rem;
+}
+
+*/
+.cursor{
+  cursor: pointer !important;
+}
+
+.red-alert {
+  padding: 20px;
+  position: absolute;
+  z-index: 5;
+  width: 98%;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 991px) {
+  .red-alert {
+    width: 550px;
+  }
 }

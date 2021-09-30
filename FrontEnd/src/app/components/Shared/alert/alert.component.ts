@@ -12,7 +12,7 @@ import { fadeAnimation } from 'src/app/animation/animations';
 })
 export class AlertComponent implements OnInit {
 
-  allertMessage!: string;
+  alertMessage!: string;
 
   visible: boolean = false;
 
@@ -23,7 +23,7 @@ export class AlertComponent implements OnInit {
   ngOnInit(): void {
     this.alertService.actualAllert.subscribe( (msg) => {
       if(msg != ""){
-        this.allertMessage = msg;
+        this.alertMessage = msg;
         this.showMessage()
       }
 

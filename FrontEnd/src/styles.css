@@ -221,6 +221,11 @@ input[type=number]:focus,
   font-size: 1rem !important;
 }
 
+.error {
+  color: var(--white-yellow);
+  background-color: var(--secondary-red);
+}
+
 
 .item-title span{
   color: #444444;
