@@ -1,8 +1,8 @@
 input.ng-valid + .error, input.ng-untouched + .error {
-  display: none;
+  opacity: 0;
 }
 input.ng-invalid.ng-touched + .error {
-  display: block;
+  opacity: 1;
 }
 
 .light-green-background {

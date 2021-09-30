@@ -174,4 +174,9 @@
   box-shadow: 0 0 11px rgba(33,33,33,.2) !important;
 }
 
-
+input.ng-valid + .error, input.ng-untouched + .error {
+  opacity: 0;
+}
+input.ng-invalid.ng-touched + .error {
+  opacity: 1;
+}
