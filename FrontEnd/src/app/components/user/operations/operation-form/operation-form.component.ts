@@ -110,25 +110,4 @@ export class OperationFormComponent implements OnInit, OnDestroy {
     this.isLoading.emit(false);
     this.operationForm.reset({'bill': this.user.bankAccounts[0]});
   }
-
-  formatAmount(amountInput: any) {
-    let amountString = amountInput.target?.value;
-
-    for (let i = 0; i < amountString.length; i++) {
-      if (amountString.charAt(i) !== '.') {
-        if (amountString.charAt(i) === ',') {
-          amountString = amountString.substring(0, i) + '.' + amountString.substring(i+1);
-        }
-      }
-      else {
-        amountString = amountString.substring(0, i) + amountString.substring(i+1);
-      }
-    }
-    if (parseFloat(amountString)) {
-      console.log(parseFloat(amountString + 'dd'));
-    }
-    else {
-
-    }
-  }
 }
